@@ -86,7 +86,7 @@ export default function Dashboard({ user, setActiveTab }) {
         <div className="container">
           <div className={styles.welcomeRow}>
             <div>
-              <h1 className={styles.welcomeTitle}>Welcome back, {user?.full_name || 'Supporter'}!</h1>
+              <h1 className={styles.welcomeTitle}>Welcome back, {user?.first_name || 'Supporter'}!</h1>
               <p className={styles.welcomeSub}>
                 Manage your real-time humanitarian impact and track active registrations.
               </p>
@@ -113,36 +113,52 @@ export default function Dashboard({ user, setActiveTab }) {
           
           {/* Summary Metric Cards */}
           <div className={styles.metricsGrid} id="dashboard-metrics">
-            {/* Metric 1: Total Donations */}
+            {/* Metric 1: Support Value */}
             <div className={styles.metricCard} id="metric-donations">
               <div className={`${styles.metricIconContainer}`} style={{ backgroundColor: 'rgba(13, 148, 136, 0.1)' }}>
                 <CreditCard size={28} color="var(--primary-color)" />
               </div>
               <div>
-                <div className={styles.metricValue}>${totalContributed.toLocaleString()}</div>
-                <div className={styles.metricLabel}>Total Personal Support</div>
+                <div className={styles.metricValue}>${(user?.support || 0).toLocaleString()}</div>
+                <div className={styles.metricLabel}>Total Support Value</div>
               </div>
             </div>
 
-            {/* Metric 2: Earned Badges */}
+            {/* Metric 2: Badges from User Table */}
             <div className={styles.metricCard} id="metric-badges">
               <div className={`${styles.metricIconContainer}`} style={{ backgroundColor: 'rgba(249, 115, 22, 0.1)' }}>
                 <Award size={28} color="var(--secondary-color)" />
               </div>
               <div>
-                <div className={styles.metricValue}>{earnedBadges.length} Earned</div>
+                <div className={styles.metricValue}>
+                  {(() => {
+                    try {
+                      const badgeList = JSON.parse(user?.badges || '[]');
+                      return badgeList.length;
+                    } catch {
+                      return 0;
+                    }
+                  })()} Earned
+                </div>
                 <div className={styles.metricLabel}>Custom Supporter Badges</div>
                 <div className={styles.badgeGrid} id="dashboard-earned-badges">
-                  {earnedBadges.map((badge, idx) => (
-                    <span 
-                      className={styles.earnedBadge} 
-                      key={idx}
-                      style={{ borderColor: badge.color, color: badge.color }}
-                      id={`earned-badge-${idx}`}
-                    >
-                      {badge.name}
-                    </span>
-                  ))}
+                  {(() => {
+                    try {
+                      const badgeList = JSON.parse(user?.badges || '[]');
+                      return badgeList.map((badge, idx) => (
+                        <span 
+                          className={styles.earnedBadge} 
+                          key={idx}
+                          style={{ borderColor: badge.color || '#666', color: badge.color || '#666' }}
+                          id={`earned-badge-${idx}`}
+                        >
+                          {badge.name}
+                        </span>
+                      ));
+                    } catch {
+                      return null;
+                    }
+                  })()}
                 </div>
               </div>
             </div>

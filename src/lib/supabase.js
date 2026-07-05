@@ -87,37 +87,74 @@ class LocalDBService {
   
   async signUp(email, password, fullName = 'Supporter') {
     if (supabase) {
-      // Real Supabase implementation
-      const { data, error } = await supabase.auth.signUp({
-        email,
-        password,
-        options: {
-          data: { full_name: fullName }
-        }
-      });
-      return { data, error };
+      // Real Supabase implementation - use custom users table
+      await new Promise(resolve => setTimeout(resolve, 600)); // Simulate network latency
+      
+      // Split full name into first and last name
+      const nameParts = fullName.trim().split(' ');
+      const firstName = nameParts[0] || 'User';
+      const lastName = nameParts.slice(1).join(' ') || '';
+      
+      // Check if user exists
+      const { data: existingUsers, error: checkError } = await supabase
+        .from('users')
+        .select('id')
+        .eq('email', email.toLowerCase())
+        .single();
+      
+      if (existingUsers) {
+        return { data: null, error: { message: 'A user with this email already exists.' } };
+      }
+
+      // Create new user in custom users table
+      const { data: newUser, error } = await supabase
+        .from('users')
+        .insert([
+          {
+            email: email.toLowerCase(),
+            password, // Note: In production, hash this password!
+            first_name: firstName,
+            last_name: lastName,
+            support: 0,
+            badges: '[]'
+          }
+        ])
+        .select();
+
+      if (error) {
+        return { data: null, error };
+      }
+
+      // Auto log in after signup
+      const user = newUser[0];
+      this.currentSession = { user };
+      this._set('worlify_session', this.currentSession);
+      return { data: this.currentSession, error: null };
     }
 
     // Mock Implementation
-    await new Promise(resolve => setTimeout(resolve, 600)); // Simulate network latency
+    await new Promise(resolve => setTimeout(resolve, 600));
     const users = this._get('worlify_users');
     
     if (users.some(u => u.email.toLowerCase() === email.toLowerCase())) {
       return { data: null, error: { message: 'A user with this email already exists.' } };
     }
 
+    const nameParts = fullName.trim().split(' ');
     const newUser = {
       id: 'usr_' + Math.random().toString(36).substr(2, 9),
       email: email.toLowerCase(),
-      password, // Note: Purely for local preview mock testing, stored in plain text
-      full_name: fullName,
+      password,
+      first_name: nameParts[0] || 'User',
+      last_name: nameParts.slice(1).join(' ') || '',
+      support: 0,
+      badges: [],
       created_at: new Date().toISOString()
     };
 
     users.push(newUser);
     this._set('worlify_users', users);
 
-    // Auto log in after signup
     this.currentSession = { user: newUser };
     this._set('worlify_session', this.currentSession);
     return { data: this.currentSession, error: null };
@@ -125,12 +162,27 @@ class LocalDBService {
 
   async signIn(email, password) {
     if (supabase) {
-      // Real Supabase implementation
-      const { data, error } = await supabase.auth.signInWithPassword({
-        email,
-        password
-      });
-      return { data, error };
+      // Real Supabase implementation - query custom users table
+      await new Promise(resolve => setTimeout(resolve, 600));
+      
+      const { data: users, error } = await supabase
+        .from('users')
+        .select('*')
+        .eq('email', email.toLowerCase());
+
+      if (error || !users || users.length === 0) {
+        return { data: null, error: { message: 'Invalid email or password.' } };
+      }
+
+      const user = users[0];
+      // Simple password comparison (in production, use bcrypt or similar)
+      if (user.password !== password) {
+        return { data: null, error: { message: 'Invalid email or password.' } };
+      }
+
+      this.currentSession = { user };
+      this._set('worlify_session', this.currentSession);
+      return { data: this.currentSession, error: null };
     }
 
     // Mock Implementation

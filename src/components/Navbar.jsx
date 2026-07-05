@@ -18,17 +18,6 @@ export default function Navbar({ activeTab, setActiveTab, user, onLogout, isLoca
   return (
     <header className={styles.navbar} id="main-header">
       {/* Informative ribbon explaining Supabase local mock mode */}
-      {isLocalMode && (
-        <div className={styles.localModeRibbon} id="local-mode-ribbon">
-          <button 
-            className={styles.ribbonLink} 
-            onClick={onOpenKeysModal}
-            id="open-keys-modal-btn"
-          >
-            How to connect Supabase database
-          </button>
-        </div>
-      )}
 
       <div className={styles.navContainer}>
         {/* Brand Logo matching mockup */}

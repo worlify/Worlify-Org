@@ -1,0 +1,401 @@
+/* Clean, High-Fidelity Header Navigation Styles matching mockup */
+
+.navbar {
+  background-color: #ffffff;
+  border-bottom: 1px solid #f1f5f9;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.03);
+}
+
+.navContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 64px; /* Modern compact header height */
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* Brand Logo (Left) */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 22px;
+  font-weight: 800;
+  color: #0056d2; /* Clean, bold royal blue brand */
+  cursor: pointer;
+  letter-spacing: -0.5px;
+  user-select: none;
+}
+
+.logoIcon {
+  color: #0056d2;
+  transition: transform 0.3s ease;
+}
+
+.logo:hover .logoIcon {
+  transform: scale(1.08);
+}
+
+.logoText {
+  color: #0056d2;
+  font-weight: 800;
+}
+
+/* Centered Desktop Navigation (Middle) */
+.desktopNav {
+  display: flex;
+  align-items: center;
+}
+
+.navLinks {
+  display: flex;
+  align-items: center;
+  gap: 32px; /* Generous clean spacing on desktop */
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navLink {
+  font-size: 14.5px;
+  font-weight: 500;
+  color: #475569; /* Neutral slate gray */
+  cursor: pointer;
+  padding: 20px 4px; /* Expands hover area */
+  position: relative;
+  transition: all 0.15s ease-in-out;
+  display: flex;
+  align-items: center;
+}
+
+.navLink:hover {
+  color: #0056d2;
+}
+
+.activeNavLink {
+  color: #0056d2;
+  font-weight: 600;
+}
+
+/* Elegant thin underline indicator for active tab */
+.activeNavLink::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #0056d2;
+  border-radius: 2px;
+}
+
+/* Action Group - Buttons (Right) */
+.authGroup {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* Flat clean login text button */
+.loginBtn {
+  background-color: transparent;
+  color: #475569;
+  border: none;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 9999px;
+  transition: all 0.15s ease;
+}
+
+.loginBtn:hover {
+  color: #0056d2;
+  background-color: #f8fafc;
+}
+
+/* Compact dashboard badge if user is logged in */
+.userBadge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #0f172a;
+  background-color: #f1f5f9;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  border: 1px solid #e2e8f0;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.userBadge:hover {
+  background-color: #e2e8f0;
+  color: #0056d2;
+}
+
+.logoutBtn {
+  background-color: transparent;
+  color: #ef4444;
+  border: 1px solid #fee2e2;
+  padding: 6px 12px;
+  font-size: 13px;
+  font-weight: 500;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.logoutBtn:hover {
+  background-color: #fef2f2;
+  border-color: #fca5a5;
+}
+
+/* Solid Blue Pill-shaped Donate CTA */
+.donateBtn {
+  background-color: #0056d2;
+  color: #ffffff;
+  border: none;
+  padding: 9px 22px;
+  font-weight: 600;
+  font-size: 13.5px;
+  border-radius: 9999px; /* Absolute pill shape */
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 86, 210, 0.12);
+  transition: all 0.15s ease-in-out;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.donateBtn:hover {
+  background-color: #0047b3;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 14px rgba(0, 86, 210, 0.2);
+}
+
+.donateBtn:active {
+  transform: translateY(0);
+}
+
+/* Local fallback warning ribbon - flat and clean */
+.localModeRibbon {
+  background-color: #eff6ff;
+  border-bottom: 1px solid #dbeafe;
+  color: #1e40af;
+  text-align: center;
+  font-size: 12.5px;
+  padding: 8px 24px;
+  font-weight: 500;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.ribbonLink {
+  background: none;
+  border: none;
+  text-decoration: underline;
+  font-weight: 700;
+  color: #1d4ed8;
+  cursor: pointer;
+  margin-left: 4px;
+  padding: 0;
+}
+
+.ribbonLink:hover {
+  color: #1e40af;
+}
+
+/* Responsive Hamburger Toggle Button */
+.hamburger {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #334155;
+  padding: 6px;
+  border-radius: 8px;
+  transition: all 0.15s ease;
+}
+
+.hamburger:hover {
+  background-color: #f1f5f9;
+}
+
+@keyframes slideDownMenu {
+  from { transform: translateY(-8px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* --- Media Queries --- */
+
+/* Tablet & Smaller Laptops Optimization: prevent menu wrapping, scale spacing */
+@media (max-width: 1024px) {
+  .navLinks {
+    gap: 20px; /* Tighter links gap on medium screens */
+  }
+  .navLink {
+    font-size: 13.5px;
+  }
+  .logo {
+    font-size: 20px;
+  }
+  .authGroup {
+    gap: 10px;
+  }
+  .donateBtn {
+    padding: 8px 18px;
+    font-size: 13px;
+  }
+  .loginBtn {
+    padding: 6px 12px;
+    font-size: 13px;
+  }
+}
+
+/* Mobile Screen view limits (768px matches tablet breakpoint from user request) */
+@media (max-width: 768px) {
+  .desktopNav {
+    display: none; /* Hide standard nav on mobile */
+  }
+  
+  .authGroup {
+    display: none; /* Hide desktop auth actions */
+  }
+  
+  .hamburger {
+    display: block; /* Show hamburger toggle */
+  }
+
+  /* Compact mobile full-width drawer menu */
+  .mobileMenu {
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+    border-top: 1px solid #f1f5f9;
+    border-bottom: 1px solid #f1f5f9;
+    padding: 24px;
+    box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    z-index: 99;
+    animation: slideDownMenu 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .mobileNavLinks {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .mobileNavLink {
+    font-size: 15px;
+    font-weight: 500;
+    color: #475569;
+    cursor: pointer;
+    padding: 8px 0;
+    transition: all 0.15s ease;
+  }
+
+  .mobileNavLink:hover, 
+  .activeMobileNavLink {
+    color: #0056d2;
+    font-weight: 600;
+  }
+
+  .mobileAuthDivider {
+    height: 1px;
+    background-color: #f1f5f9;
+    margin: 16px 0;
+  }
+
+  .mobileAuthGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .mobileUserBadge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #0f172a;
+    background-color: #f8fafc;
+    padding: 10px;
+    border-radius: 9999px;
+    border: 1px solid #e2e8f0;
+  }
+
+  .mobileLogoutBtn {
+    background-color: transparent;
+    color: #ef4444;
+    border: 1px solid #fee2e2;
+    padding: 10px;
+    font-weight: 500;
+    border-radius: 9999px;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.15s ease;
+  }
+
+  .mobileLogoutBtn:hover {
+    background-color: #fef2f2;
+  }
+
+  .mobileLoginBtn {
+    background-color: transparent;
+    color: #475569;
+    border: 1px solid #cbd5e1;
+    padding: 10px;
+    font-weight: 600;
+    border-radius: 9999px;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.15s ease;
+  }
+
+  .mobileLoginBtn:hover {
+    background-color: #f8fafc;
+    color: #0056d2;
+  }
+
+  .mobileDonateBtn {
+    background-color: #0056d2;
+    color: white;
+    border: none;
+    padding: 12px;
+    font-weight: 600;
+    border-radius: 9999px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: 0 4px 12px rgba(0, 86, 210, 0.15);
+    transition: all 0.15s ease;
+  }
+
+  .mobileDonateBtn:hover {
+    background-color: #0047b3;
+  }
+}

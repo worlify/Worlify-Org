@@ -1,0 +1,449 @@
+/* Causes CSS Module */
+
+.causesWrapper {
+  background-color: var(--bg-color);
+  padding-bottom: 96px;
+}
+
+/* Header Hero */
+.headerHero {
+  padding: 80px 0 60px 0;
+  background-color: var(--bg-card);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.heroCenter {
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.heroTag {
+  background-color: rgba(6, 182, 212, 0.1);
+  color: #06b6d4;
+  padding: 6px 14px;
+  font-size: 11px;
+  font-weight: 700;
+  border-radius: 50px;
+  letter-spacing: 1.5px;
+  display: inline-block;
+  margin-bottom: 20px;
+}
+
+.heroTitle {
+  font-family: var(--font-display);
+  font-size: 42px;
+  font-weight: 700;
+  color: var(--text-main);
+  line-height: 1.15;
+  margin-bottom: 20px;
+  letter-spacing: -1px;
+}
+
+.heroTitle .highlight {
+  color: var(--primary-color);
+}
+
+.heroDesc {
+  font-size: 15.5px;
+  line-height: 1.6;
+  color: var(--text-muted);
+  margin-bottom: 32px;
+}
+
+.scrollAnchorBtn {
+  background-color: transparent;
+  color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+  padding: 10px 24px;
+  font-weight: 600;
+  font-size: 14px;
+  border-radius: var(--radius-sm);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: var(--transition-fast);
+}
+
+.scrollAnchorBtn:hover {
+  background-color: rgba(13, 148, 136, 0.04);
+  transform: translateY(1px);
+}
+
+/* Focused Pillar Card Grid */
+.focusGridSection {
+  padding: 48px 0;
+}
+
+.focusGrid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+}
+
+@media (max-width: 992px) {
+  .focusGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 576px) {
+  .focusGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.focusCard {
+  position: relative;
+  height: 160px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  cursor: pointer;
+  border: 2px solid transparent;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition-normal);
+}
+
+.focusCardImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.cardOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to top, rgba(15, 23, 42, 0.75) 0%, rgba(15, 23, 42, 0.1) 80%);
+  z-index: 1;
+}
+
+.cardTexts {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  right: 16px;
+  z-index: 2;
+}
+
+.cardTag {
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--primary-color);
+  letter-spacing: 1px;
+  margin-bottom: 4px;
+  display: block;
+}
+
+.cardTitle {
+  font-size: 15px;
+  color: white;
+  font-weight: 700;
+}
+
+.focusCard:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.focusCard:hover .focusCardImg {
+  transform: scale(1.05);
+}
+
+.activeFocusCard {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 15px rgba(13, 148, 136, 0.25);
+}
+
+.activeFocusCard .cardOverlay {
+  background: linear-gradient(to top, rgba(13, 148, 136, 0.8) 0%, rgba(15, 23, 42, 0.2) 85%);
+}
+
+/* Dynamic Pillar Detailed Breakdown */
+.pillarDetailSection {
+  padding: 32px 0 64px 0;
+}
+
+.detailCard {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 48px;
+  box-shadow: var(--shadow-md);
+}
+
+@media (max-width: 576px) {
+  .detailCard {
+    padding: 24px;
+  }
+}
+
+.detailGrid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 48px;
+  align-items: center;
+}
+
+@media (max-width: 992px) {
+  .detailGrid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+}
+
+.detailTextCol {
+  display: flex;
+  flex-direction: column;
+}
+
+.detailTag {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--primary-color);
+  letter-spacing: 1.5px;
+  margin-bottom: 16px;
+}
+
+.detailHeading {
+  font-size: 30px;
+  color: var(--text-main);
+  margin-bottom: 16px;
+}
+
+.detailDesc {
+  font-size: 15px;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-bottom: 28px;
+}
+
+/* Statistics row */
+.detailStatsRow {
+  display: flex;
+  gap: 36px;
+  margin-bottom: 32px;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 20px;
+}
+
+.detailStatBox {
+  display: flex;
+  flex-direction: column;
+}
+
+.detailStatVal {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text-main);
+  line-height: 1.1;
+}
+
+.detailStatLabel {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--text-light);
+  letter-spacing: 1px;
+  margin-top: 4px;
+}
+
+/* Feature list entries */
+.featureList {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 36px;
+}
+
+.featureItem {
+  display: flex;
+  gap: 16px;
+}
+
+.featureIconContainer {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background-color: var(--primary-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.featureTitle {
+  font-size: 15px;
+  color: var(--text-main);
+  margin-bottom: 4px;
+  font-weight: 600;
+}
+
+.featureText {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.donateToCauseBtn {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 12px 28px;
+  font-weight: 600;
+  font-size: 14px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: var(--transition-fast);
+  align-self: flex-start;
+}
+
+.donateToCauseBtn:hover {
+  background-color: var(--primary-hover);
+  transform: translateY(-1px);
+}
+
+/* Right Visual column with floating badge */
+.detailVisualCol {
+  display: flex;
+  justify-content: center;
+}
+
+.visualWrapper {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+}
+
+.pillarMainImage {
+  width: 100%;
+  height: 440px;
+  object-fit: cover;
+}
+
+.floatingQuoteCard {
+  position: absolute;
+  bottom: 24px;
+  left: 24px;
+  right: 24px;
+  background-color: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-sm);
+  padding: 20px;
+  color: white;
+  z-index: 5;
+}
+
+.impactIndicator {
+  font-size: 9px;
+  font-weight: 700;
+  color: #10b981;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.floatingQuoteText {
+  font-size: 13.5px;
+  font-style: italic;
+  color: #f1f5f9;
+  line-height: 1.5;
+  margin-bottom: 8px;
+}
+
+.floatingQuoteAuthor {
+  font-size: 11px;
+  color: #94a3b8;
+  font-weight: 600;
+}
+
+/* Commitment to transparency section */
+.transparencySection {
+  padding: 48px 0;
+}
+
+.transparencyCard {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 48px;
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+}
+
+@media (max-width: 576px) {
+  .transparencyCard {
+    padding: 24px;
+  }
+}
+
+.transparencyContent {
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.transparencyTitle {
+  font-size: 28px;
+  color: var(--text-main);
+  margin-bottom: 12px;
+}
+
+.transparencyDesc {
+  font-size: 15px;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-bottom: 32px;
+}
+
+.transparencyBtns {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.solidDarkBtn {
+  background-color: var(--text-main);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: var(--transition-fast);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.solidDarkBtn:hover {
+  background-color: #0f172a;
+  transform: translateY(-1px);
+}
+
+.outlineBtn {
+  background-color: transparent;
+  color: var(--text-main);
+  border: 1px solid var(--border-color);
+  padding: 12px 24px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.outlineBtn:hover {
+  background-color: var(--border-color);
+  transform: translateY(-1px);
+}

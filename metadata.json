@@ -1,0 +1,6 @@
+{
+  "name": "Worlify",
+  "description": "A beautiful, transparent multi-cause global NGO platform specializing in Education, Healthcare, Child Welfare, Women Empowerment, and Environment with Supabase-backed donor dashboards.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

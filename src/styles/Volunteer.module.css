@@ -1,0 +1,667 @@
+/* Get Involved - High Fidelity Styles matching Mockup */
+
+.volunteerContainer {
+  background-color: #ffffff;
+  overflow: hidden;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+/* 1. Hero Cover Banner */
+.heroSection {
+  position: relative;
+  height: 520px;
+  background-image: url('https://images.unsplash.com/photo-1532375810709-75b1da00537c?auto=format&fit=crop&q=80&w=1600');
+  background-size: cover;
+  background-position: center;
+  color: white;
+  display: flex;
+  align-items: center;
+}
+
+.heroOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(15, 23, 42, 0.45);
+  z-index: 1;
+}
+
+.heroContentContainer {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+}
+
+.heroInner {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 24px;
+  text-align: center;
+}
+
+.heroTitle {
+  font-size: 52px;
+  font-weight: 800;
+  line-height: 1.15;
+  color: white;
+  margin-bottom: 16px;
+  letter-spacing: -1.5px;
+}
+
+.heroSubtitle {
+  font-size: 16px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.95);
+  margin-bottom: 32px;
+  max-width: 620px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.heroBtns {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+}
+
+.startVolBtn {
+  background-color: #0056d2;
+  color: white;
+  border: none;
+  padding: 13px 32px;
+  font-weight: 600;
+  font-size: 14px;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.startVolBtn:hover {
+  background-color: #0047b3;
+  transform: translateY(-1px);
+}
+
+.partnerBtn {
+  background-color: rgba(255, 255, 255, 0.12);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(4px);
+  padding: 13px 32px;
+  font-weight: 600;
+  font-size: 14px;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.partnerBtn:hover {
+  background-color: rgba(255, 255, 255, 0.25);
+  border-color: white;
+  transform: translateY(-1px);
+}
+
+@media (max-width: 576px) {
+  .heroTitle {
+    font-size: 36px;
+  }
+  .heroBtns {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+/* 2. Why Volunteer With Us Section */
+.whySection {
+  padding: 80px 24px;
+  background-color: #f8fafc;
+  text-align: center;
+}
+
+.sectionHeader {
+  max-width: 650px;
+  margin: 0 auto 56px auto;
+}
+
+.sectionTitle {
+  font-size: 32px;
+  font-weight: 800;
+  color: #0f172a;
+  margin-bottom: 12px;
+  letter-spacing: -0.5px;
+}
+
+.sectionSubtitle {
+  color: #64748b;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.featuresGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .featuresGrid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}
+
+.featureCard {
+  background-color: #ffffff;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  padding: 40px 32px;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.02);
+  text-align: center;
+  transition: transform 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.featureCard:hover {
+  transform: translateY(-2px);
+}
+
+.iconWrapper {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+
+.blueIcon {
+  background-color: #eff6ff;
+  color: #0056d2;
+}
+
+.greenIcon {
+  background-color: #ecfdf5;
+  color: #059669;
+}
+
+.purpleIcon {
+  background-color: #f5f3ff;
+  color: #7c3aed;
+}
+
+.cardTitle {
+  font-size: 18px;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 12px;
+}
+
+.cardText {
+  font-size: 13.5px;
+  color: #64748b;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* 3. Form and Info Split Section */
+.applySection {
+  padding: 80px 24px;
+  background-color: #ffffff;
+}
+
+.applyGrid {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 56px;
+  max-width: 1100px;
+  margin: 0 auto;
+  align-items: center;
+}
+
+@media (max-width: 992px) {
+  .applyGrid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+
+.infoCol {
+  padding-right: 16px;
+}
+
+@media (max-width: 992px) {
+  .infoCol {
+    padding-right: 0;
+  }
+}
+
+.applyTag {
+  font-size: 11px;
+  font-weight: 700;
+  color: #0056d2;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  display: block;
+}
+
+.applyTitle {
+  font-size: 36px;
+  font-weight: 800;
+  color: #0f172a;
+  line-height: 1.2;
+  margin-bottom: 20px;
+  letter-spacing: -0.8px;
+}
+
+.applyDesc {
+  font-size: 15px;
+  color: #475569;
+  line-height: 1.6;
+  margin-bottom: 32px;
+}
+
+.checklist {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.checkItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #334155;
+}
+
+.checkIcon {
+  color: #0056d2;
+  flex-shrink: 0;
+}
+
+/* Clean Form Card styling */
+.formCard {
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 40px;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.01);
+}
+
+@media (max-width: 576px) {
+  .formCard {
+    padding: 24px;
+  }
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+@media (max-width: 576px) {
+  .formGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.fullWidthGroup {
+  grid-column: span 2;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+@media (max-width: 576px) {
+  .fullWidthGroup {
+    grid-column: span 1;
+  }
+}
+
+.label {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #334155;
+}
+
+.input, .select {
+  width: 100%;
+  padding: 11px 16px;
+  border: 1px solid #e2e8f0;
+  background-color: #ffffff;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #0f172a;
+  outline: none;
+  transition: all 0.15s ease;
+}
+
+.input:focus, .select:focus, .textarea:focus {
+  border-color: #0056d2;
+  box-shadow: 0 0 0 3px rgba(0, 86, 210, 0.08);
+}
+
+.textarea {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid #e2e8f0;
+  background-color: #ffffff;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #0f172a;
+  outline: none;
+  min-height: 120px;
+  resize: vertical;
+  transition: all 0.15s ease;
+  font-family: inherit;
+}
+
+.submitBtn {
+  width: 100%;
+  background-color: #0056d2;
+  color: #ffffff;
+  border: none;
+  padding: 13px;
+  font-size: 14.5px;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  margin-top: 16px;
+}
+
+.submitBtn:hover {
+  background-color: #0047b3;
+  transform: translateY(-0.5px);
+}
+
+.submitBtn:disabled {
+  background-color: #94a3b8;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Success Card */
+.successCard {
+  background-color: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 12px;
+  padding: 40px;
+  text-align: center;
+}
+
+.successIcon {
+  color: #10b981;
+  margin: 0 auto 20px auto;
+}
+
+.successTitle {
+  font-size: 22px;
+  font-weight: 800;
+  color: #0f172a;
+  margin-bottom: 12px;
+}
+
+.successText {
+  font-size: 14px;
+  color: #64748b;
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+
+.successActions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.viewStatusBtn {
+  background-color: #0056d2;
+  color: white;
+  border: none;
+  padding: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.viewStatusBtn:hover {
+  background-color: #0047b3;
+}
+
+.anotherAppBtn {
+  background-color: transparent;
+  color: #64748b;
+  border: 1px solid #cbd5e1;
+  padding: 11px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.anotherAppBtn:hover {
+  background-color: #f8fafc;
+  color: #0f172a;
+}
+
+/* 4. Corporate & CSR Partnerships Horizontal Bento Grid */
+.corporateSection {
+  padding: 40px 24px 80px 24px;
+  background-color: #ffffff;
+}
+
+.corporateCard {
+  background-color: #0f172a; /* Deep elegant slate navy */
+  border-radius: 20px;
+  overflow: hidden;
+  max-width: 1100px;
+  margin: 0 auto;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+}
+
+.corporateGrid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  align-items: stretch;
+}
+
+@media (max-width: 860px) {
+  .corporateGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.corporateLeft {
+  padding: 64px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+@media (max-width: 576px) {
+  .corporateLeft {
+    padding: 32px 24px;
+  }
+}
+
+.corpTitle {
+  font-size: 36px;
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.15;
+  margin-bottom: 20px;
+  letter-spacing: -0.8px;
+}
+
+.corpDesc {
+  font-size: 14px;
+  color: #94a3b8;
+  line-height: 1.6;
+  margin-bottom: 32px;
+  max-width: 500px;
+}
+
+.corpList {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px 24px;
+  margin-bottom: 36px;
+}
+
+@media (max-width: 480px) {
+  .corpList {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+}
+
+.corpItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #f1f5f9;
+}
+
+.corpIcon {
+  color: #38bdf8; /* Soft blue icon */
+  flex-shrink: 0;
+}
+
+.partnerInquiryBtn {
+  align-self: flex-start;
+  background-color: #0056d2;
+  color: white;
+  border: none;
+  padding: 11px 28px;
+  font-weight: 600;
+  font-size: 14px;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.partnerInquiryBtn:hover {
+  background-color: #0047b3;
+  transform: translateY(-1px);
+}
+
+.corporateRight {
+  height: auto;
+  min-height: 380px;
+  position: relative;
+}
+
+@media (max-width: 860px) {
+  .corporateRight {
+    height: 300px;
+    min-height: auto;
+  }
+}
+
+.corpImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 5. Newsletter Signup Banner */
+.newsletterSection {
+  background-color: #0056d2; /* Vibrant royal blue */
+  padding: 60px 24px;
+  color: white;
+  text-align: center;
+}
+
+.newsInner {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.newsTitle {
+  font-size: 28px;
+  font-weight: 800;
+  margin-bottom: 12px;
+  letter-spacing: -0.5px;
+}
+
+.newsDesc {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+
+.newsForm {
+  display: flex;
+  gap: 12px;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+@media (max-width: 480px) {
+  .newsForm {
+    flex-direction: column;
+    gap: 8px;
+  }
+}
+
+.newsInput {
+  flex: 1;
+  padding: 12px 18px;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.12);
+  color: white;
+  font-size: 14px;
+  outline: none;
+  transition: all 0.15s ease;
+}
+
+.newsInput::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.newsInput:focus {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-color: white;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.15);
+}
+
+.newsBtn {
+  background-color: white;
+  color: #0056d2;
+  border: none;
+  padding: 12px 28px;
+  font-weight: 700;
+  font-size: 14px;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.newsBtn:hover {
+  background-color: #f8fafc;
+  transform: translateY(-0.5px);
+}

@@ -1,0 +1,918 @@
+/* High Fidelity Donate Page Styles - Matching Mockup */
+
+.donateContainer {
+  background-color: #ffffff;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  color: #0f172a;
+}
+
+/* 1. Hero Split Section */
+.heroSection {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 60px 24px;
+}
+
+.heroGrid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 48px;
+  align-items: center;
+}
+
+@media (max-width: 992px) {
+  .heroGrid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+
+.heroLeft {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.joinBadge {
+  background-color: #d1fae5;
+  color: #065f46;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 24px;
+  display: inline-block;
+}
+
+.heroTitle {
+  font-size: 48px;
+  font-weight: 800;
+  line-height: 1.15;
+  color: #0f172a;
+  margin-bottom: 20px;
+  letter-spacing: -1.5px;
+}
+
+.heroTitleHighlight {
+  color: #0056d2;
+  font-style: italic;
+  font-weight: 800;
+}
+
+.heroDesc {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #475569;
+  margin-bottom: 32px;
+  max-width: 520px;
+}
+
+.taxBenefitCard {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 16px 24px;
+  max-width: 420px;
+  width: 100%;
+}
+
+.shieldIconWrapper {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #eff6ff;
+  color: #0056d2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.taxTitle {
+  font-size: 14px;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 2px 0;
+}
+
+.taxSub {
+  font-size: 12.5px;
+  color: #64748b;
+  margin: 0;
+}
+
+/* Hero Right: Image with Overlay */
+.heroRight {
+  position: relative;
+}
+
+.imageWrapper {
+  position: relative;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.08);
+  aspect-ratio: 1.15;
+  background-color: #f1f5f9;
+}
+
+.campaignImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Floating overlay on top of campaign image */
+.activeProjectCard {
+  position: absolute;
+  bottom: 24px;
+  left: 24px;
+  right: 24px;
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
+  border-radius: 16px;
+  padding: 16px 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  display: flex;
+  flex-direction: column;
+}
+
+.activeTag {
+  font-size: 10px;
+  font-weight: 700;
+  color: #0056d2;
+  letter-spacing: 1px;
+  margin-bottom: 4px;
+}
+
+.activeRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.projectName {
+  font-size: 16px;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.projectAmount {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #334155;
+  background-color: #f1f5f9;
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+
+.progressBarBg {
+  width: 100%;
+  height: 6px;
+  background-color: #e2e8f0;
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.progressBarFill {
+  height: 100%;
+  background-color: #0056d2;
+  border-radius: 9999px;
+}
+
+/* 2. Interactive Checkout Form Area with Soft Blue Tint BG */
+.checkoutSection {
+  background-color: #f4f7fe;
+  padding: 80px 24px;
+}
+
+.checkoutCard {
+  background-color: #ffffff;
+  border-radius: 24px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 10px 30px rgba(0, 86, 210, 0.03);
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 44px;
+}
+
+@media (max-width: 576px) {
+  .checkoutCard {
+    padding: 24px;
+  }
+}
+
+.cardTopLabel {
+  text-align: center;
+  font-size: 11px;
+  font-weight: 700;
+  color: #64748b;
+  letter-spacing: 1.5px;
+  margin-bottom: 20px;
+}
+
+/* General / Specific Cause Tabs */
+.tabsGroup {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background-color: #eef2ff;
+  border-radius: 12px;
+  padding: 6px;
+  margin-bottom: 24px;
+}
+
+.tabBtn {
+  background: none;
+  border: none;
+  padding: 11px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #475569;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.activeTabBtn {
+  background-color: #ffffff;
+  color: #0056d2;
+  box-shadow: 0 2px 8px rgba(0, 86, 210, 0.06);
+}
+
+/* Specific Cause Select Field */
+.dropdownGroup {
+  animation: slideDown 0.2s ease-out;
+  margin-bottom: 24px;
+}
+
+.dropdownLabel {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: #475569;
+  margin-bottom: 8px;
+}
+
+.causeSelect {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  font-size: 14px;
+  color: #0f172a;
+  outline: none;
+  background-color: #ffffff;
+}
+
+.causeSelect:focus {
+  border-color: #0056d2;
+  box-shadow: 0 0 0 3px rgba(0, 86, 210, 0.06);
+}
+
+/* One-time vs Monthly Switch */
+.frequencyRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.freqText {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #475569;
+  transition: color 0.15s ease;
+}
+
+.freqTextActive {
+  color: #0f172a;
+  font-weight: 700;
+}
+
+/* Custom switch button */
+.switchContainer {
+  width: 50px;
+  height: 26px;
+  background-color: #0056d2;
+  border-radius: 9999px;
+  padding: 3px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  position: relative;
+  transition: background-color 0.2s ease;
+}
+
+.switchKnob {
+  width: 20px;
+  height: 20px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.switchMonthly .switchKnob {
+  transform: translateX(24px);
+}
+
+/* Presets Grid */
+.presetsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+@media (max-width: 576px) {
+  .presetsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.presetBtn {
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 16px 8px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.presetBtn:hover {
+  border-color: #cbd5e1;
+  background-color: #f8fafc;
+}
+
+.activePresetBtn {
+  border-color: #0056d2;
+  background-color: #eff6ff;
+  box-shadow: 0 0 0 1px #0056d2;
+}
+
+.presetVal {
+  font-size: 18px;
+  font-weight: 800;
+  color: #0f172a;
+  margin-bottom: 2px;
+}
+
+.presetLabel {
+  font-size: 11px;
+  color: #64748b;
+}
+
+/* Custom amount prefix block */
+.customInputBlock {
+  position: relative;
+  margin-bottom: 24px;
+}
+
+.rupeeSign {
+  position: absolute;
+  left: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px;
+  font-weight: 600;
+  color: #64748b;
+}
+
+.customInputEl {
+  width: 100%;
+  padding: 14px 16px 14px 38px;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 500;
+  color: #0f172a;
+  outline: none;
+  background-color: #f8fafc;
+  transition: all 0.15s ease;
+}
+
+.customInputEl:focus {
+  border-color: #0056d2;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(0, 86, 210, 0.06);
+}
+
+/* 80G Verification Banner */
+.exemptionBanner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #e6fcf5;
+  border-radius: 10px;
+  padding: 12px 18px;
+  margin-bottom: 32px;
+  font-size: 12.5px;
+  font-weight: 600;
+}
+
+.exemptionText {
+  color: #0ca678;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.verifiedLabel {
+  color: #0ca678;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+/* Selected Summary Row */
+.summaryRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.summaryLabel {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #64748b;
+}
+
+.summaryVal {
+  font-size: 32px;
+  font-weight: 800;
+  color: #0056d2;
+}
+
+/* Main proceed CTA button */
+.proceedBtn {
+  width: 100%;
+  background-color: #0056d2;
+  color: #ffffff;
+  border: none;
+  padding: 15px 24px;
+  font-size: 15px;
+  font-weight: 700;
+  border-radius: 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 8px 20px rgba(0, 86, 210, 0.15);
+  transition: all 0.2s ease-in-out;
+  margin-bottom: 36px;
+}
+
+.proceedBtn:hover {
+  background-color: #0047b3;
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(0, 86, 210, 0.25);
+}
+
+/* Billing Credential Forms (Revealed when Proceed is clicked) */
+.billingFormSection {
+  border-top: 1px dashed #e2e8f0;
+  padding-top: 28px;
+  animation: slideDown 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+@media (max-width: 576px) {
+  .formGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.fullWidthGroup {
+  grid-column: span 2;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+@media (max-width: 576px) {
+  .fullWidthGroup {
+    grid-column: span 1;
+  }
+}
+
+.label {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #334155;
+}
+
+.inputEl {
+  width: 100%;
+  padding: 11px 16px;
+  border: 1px solid #e2e8f0;
+  background-color: #ffffff;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #0f172a;
+  outline: none;
+  transition: all 0.15s ease;
+}
+
+.inputEl:focus {
+  border-color: #0056d2;
+  box-shadow: 0 0 0 3px rgba(0, 86, 210, 0.08);
+}
+
+.creditCardExpiryCvv {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.confirmBtn {
+  width: 100%;
+  background-color: #0056d2;
+  color: #ffffff;
+  border: none;
+  padding: 14px;
+  font-size: 15px;
+  font-weight: 700;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.confirmBtn:hover {
+  background-color: #0047b3;
+}
+
+/* Secure Partners section on bottom of checkout card */
+.partnersContainer {
+  border-top: 1px solid #f1f5f9;
+  padding-top: 24px;
+  text-align: center;
+}
+
+.partnersLabel {
+  font-size: 10px;
+  font-weight: 700;
+  color: #94a3b8;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+}
+
+.partnerIconsRow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  color: #64748b;
+  margin-bottom: 12px;
+}
+
+.partnerIcon {
+  opacity: 0.7;
+  transition: opacity 0.15s ease;
+}
+
+.partnerIcon:hover {
+  opacity: 1;
+}
+
+.secureSSL {
+  font-size: 10px;
+  font-weight: 600;
+  color: #94a3b8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+/* Success Card Form styling */
+.successCard {
+  text-align: center;
+  padding: 12px 0;
+}
+
+.successIcon {
+  color: #10b981;
+  margin: 0 auto 24px auto;
+}
+
+.successTitle {
+  font-size: 24px;
+  font-weight: 800;
+  color: #0f172a;
+  margin-bottom: 12px;
+  letter-spacing: -0.5px;
+}
+
+.successText {
+  font-size: 14.5px;
+  color: #64748b;
+  line-height: 1.6;
+  margin-bottom: 32px;
+}
+
+.successActions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 320px;
+  margin: 0 auto;
+}
+
+.dashboardBtn {
+  background-color: #0056d2;
+  color: white;
+  border: none;
+  padding: 13px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.dashboardBtn:hover {
+  background-color: #0047b3;
+}
+
+.resetBtn {
+  background-color: transparent;
+  color: #64748b;
+  border: 1px solid #cbd5e1;
+  padding: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.resetBtn:hover {
+  background-color: #f8fafc;
+  color: #0f172a;
+}
+
+/* 3. Every Penny Matters Split Section */
+.impactSection {
+  padding: 80px 24px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.impactHeader {
+  text-align: center;
+  margin-bottom: 56px;
+}
+
+.impactTitle {
+  font-size: 36px;
+  font-weight: 800;
+  color: #0f172a;
+  margin-bottom: 12px;
+  letter-spacing: -0.8px;
+}
+
+.impactSubtitle {
+  font-size: 15px;
+  color: #64748b;
+  max-width: 580px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Grid layout for Row 1 */
+.row1Grid {
+  display: grid;
+  grid-template-columns: 1.3fr 0.7fr;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+@media (max-width: 860px) {
+  .row1Grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Sustainability Banner Card */
+.sustainabilityCard {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  height: 380px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+}
+
+.cardBgImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cardDarkOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to top, rgba(15, 23, 42, 0.9) 0%, rgba(15, 23, 42, 0.2) 100%);
+  z-index: 1;
+}
+
+.sustainabilityContent {
+  position: absolute;
+  bottom: 32px;
+  left: 32px;
+  right: 32px;
+  z-index: 2;
+  color: white;
+}
+
+.sustainBadge {
+  background-color: #34d399; /* Mint-green Sustainability */
+  color: #064e3b;
+  font-size: 10px;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 12px;
+  display: inline-block;
+}
+
+.sustainTitle {
+  font-size: 26px;
+  font-weight: 800;
+  margin-bottom: 8px;
+  letter-spacing: -0.5px;
+}
+
+.sustainDesc {
+  font-size: 13.5px;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.5;
+  margin: 0;
+  max-width: 480px;
+}
+
+/* Education Solid Blue Card */
+.educationCard {
+  background-color: #2563eb; /* Royal blue */
+  border-radius: 20px;
+  padding: 36px;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 4px 15px rgba(37, 99, 235, 0.12);
+  min-height: 380px;
+}
+
+.eduIconWrapper {
+  width: 44px;
+  height: 44px;
+  background-color: rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+
+.eduTitle {
+  font-size: 22px;
+  font-weight: 800;
+  margin-bottom: 12px;
+  letter-spacing: -0.5px;
+}
+
+.eduDesc {
+  font-size: 13.5px;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.55;
+  margin-bottom: 32px;
+}
+
+.eduStatBox {
+  margin-top: auto;
+}
+
+.eduStatVal {
+  font-size: 36px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.eduStatLabel {
+  font-size: 10px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.7);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Health and Wellness Horizontal Bar Card (Row 2) */
+.healthBar {
+  background-color: #eef2ff;
+  border-radius: 20px;
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+@media (max-width: 576px) {
+  .healthBar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+.healthLeft {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+@media (max-width: 576px) {
+  .healthLeft {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+.healthThumb {
+  width: 64px;
+  height: 64px;
+  border-radius: 12px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.healthTitle {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1e3a8a;
+  margin-bottom: 4px;
+}
+
+.healthDesc {
+  font-size: 13.5px;
+  color: #475569;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.arrowCircleBtn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  color: #0056d2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 10px rgba(0, 86, 210, 0.05);
+}
+
+.arrowCircleBtn:hover {
+  background-color: #0056d2;
+  color: #ffffff;
+  transform: translateX(2px);
+}
+
+/* Keyframes */
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}

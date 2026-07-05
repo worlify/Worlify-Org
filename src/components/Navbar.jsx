@@ -20,7 +20,6 @@ export default function Navbar({ activeTab, setActiveTab, user, onLogout, isLoca
       {/* Informative ribbon explaining Supabase local mock mode */}
       {isLocalMode && (
         <div className={styles.localModeRibbon} id="local-mode-ribbon">
-          <span>💡 Worlify is running in <strong>Local Fallback Mode</strong> (simulated database & auth using localStorage).</span>
           <button 
             className={styles.ribbonLink} 
             onClick={onOpenKeysModal}
@@ -184,7 +183,7 @@ export default function Navbar({ activeTab, setActiveTab, user, onLogout, isLoca
                   onClick={() => handleNavClick('dashboard')}
                 >
                   <User size={16} />
-                  <span>{user.full_name || user.email}</span>
+                  <span>{user.first_name || user.email}</span>
                 </div>
                 <button 
                   className={styles.mobileLogoutBtn}

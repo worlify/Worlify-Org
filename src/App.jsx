@@ -36,11 +36,14 @@ export default function App() {
 
   // Restore session on application load
   useEffect(() => {
-    async function restoreSession() {
+    function restoreSession() {
       try {
-        const currentUser = await db.getCurrentUser();
+        const currentUser = db.getCurrentUser();
         if (currentUser) {
           setUser(currentUser);
+          console.log('✅ Session restored:', currentUser.email);
+        } else {
+          console.log('No session found, showing home page');
         }
       } catch (e) {
         console.error('Session recovery failed: ', e);

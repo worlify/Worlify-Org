@@ -93,7 +93,7 @@ export default function Navbar({ activeTab, setActiveTab, user, onLogout, isLoca
                 id="nav-link-dashboard"
               >
                 <User size={16} />
-                <span>{user.full_name || user.email}</span>
+                <span>{user.first_name || user.email}</span>
               </div>
               <button 
                 className={styles.logoutBtn} 

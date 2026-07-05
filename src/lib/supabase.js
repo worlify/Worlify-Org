@@ -212,11 +212,27 @@ class LocalDBService {
   }
 
   getCurrentUser() {
-    if (supabase) {
-      // For real Supabase, use the active session or fetch user
-      return supabase.auth.getUser();
+    // First, check if session exists in memory
+    if (this.currentSession && this.currentSession.user) {
+      return this.currentSession.user;
     }
-    return this.currentSession ? this.currentSession.user : null;
+
+    // Try to restore from localStorage
+    try {
+      const sessionData = localStorage.getItem('worlify_session');
+      if (sessionData) {
+        const savedSession = JSON.parse(sessionData);
+        if (savedSession && savedSession.user) {
+          this.currentSession = savedSession;
+          return savedSession.user;
+        }
+      }
+    } catch (err) {
+      console.error('Error parsing saved session:', err);
+    }
+
+    // No session found
+    return null;
   }
 
   // --- DATABASE METHODS ---

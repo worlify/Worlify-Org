@@ -263,231 +263,42 @@ export default function Donate({ user, preloadedCause, clearPreload, setActiveTa
             <div>
               <div className={styles.cardTopLabel}>WHERE SHOULD WE DIRECT YOUR GIFT?</div>
               
-              {/* General Fund vs Cause Selector tabs */}
-              <div className={styles.tabsGroup} id="checkout-fund-routing-tabs">
-                <button
-                  type="button"
-                  className={`${styles.tabBtn} ${directTo === 'general' ? styles.activeTabBtn : ''}`}
-                  onClick={() => setDirectTo('general')}
-                  id="tab-btn-general"
-                >
-                  General Fund
-                </button>
-                <button
-                  type="button"
-                  className={`${styles.tabBtn} ${directTo === 'cause' ? styles.activeTabBtn : ''}`}
-                  onClick={() => setDirectTo('cause')}
-                  id="tab-btn-cause"
-                >
-                  Specific Cause
-                </button>
-              </div>
-
-              {/* Conditionally rendered Cause selection */}
-              {directTo === 'cause' && (
-                <div className={styles.dropdownGroup} id="checkout-cause-dropdown-box">
-                  <label className={styles.dropdownLabel}>Focus Area Preference</label>
-                  <select
-                    className={styles.causeSelect}
-                    value={selectedCause}
-                    onChange={(e) => setSelectedCause(e.target.value)}
-                    id="checkout-specific-cause-selector"
-                  >
-                    <option value="Education">Education Support</option>
-                    <option value="Healthcare">Healthcare Programs</option>
-                    <option value="Child Welfare">Child Welfare Services</option>
-                    <option value="Women Empowerment">Women Empowerment</option>
-                    <option value="Environment">Environmental Preservation</option>
-                  </select>
-                </div>
-              )}
-
-              {/* Frequency Toggle switcher row */}
-              <div className={styles.frequencyRow} id="checkout-frequency-row">
-                <span className={`${styles.freqText} ${frequency === 'one-time' ? styles.freqTextActive : ''}`}>One-time</span>
-                <div 
-                  className={`${styles.switchContainer} ${frequency === 'monthly' ? styles.switchMonthly : ''}`}
-                  onClick={handleFrequencyToggle}
-                  id="frequency-switch-toggle"
-                >
-                  <div className={styles.switchKnob} />
-                </div>
-                <span className={`${styles.freqText} ${frequency === 'monthly' ? styles.freqTextActive : ''}`}>Monthly</span>
-              </div>
-
-              {/* Donation Amount Presets */}
-              <div className={styles.presetsGrid} id="checkout-preset-amount-grids">
-                {presets.map((preset) => (
-                  <button
-                    key={preset.value}
-                    type="button"
-                    className={`${styles.presetBtn} ${selectedAmount === preset.value && !customAmount ? styles.activePresetBtn : ''}`}
-                    onClick={() => {
-                      setSelectedAmount(preset.value);
-                      setCustomAmount('');
-                    }}
-                    id={`preset-btn-${preset.value}`}
-                  >
-                    <span className={styles.presetVal}>{preset.label}</span>
-                    <span className={styles.presetLabel}>{preset.desc}</span>
-                  </button>
-                ))}
-              </div>
-
-              {/* Custom amount field */}
-              <div className={styles.customInputBlock} id="checkout-custom-amount-field-wrapper">
-                <span className={styles.rupeeSign}>₹</span>
-                <input
-                  type="number"
-                  className={styles.customInputEl}
-                  placeholder="Enter custom amount"
-                  value={customAmount}
-                  onChange={(e) => {
-                    setCustomAmount(e.target.value);
-                    setSelectedAmount('');
-                  }}
-                  id="checkout-custom-rupee-input"
-                />
-              </div>
-
-              {/* Exemption details verification badge */}
-              <div className={styles.exemptionBanner} id="tax-verification-exemption-banner">
-                <div className={styles.exemptionText}>
-                  <Check size={16} />
-                  <span>80G Tax Exemption Certificate will be issued.</span>
-                </div>
-                <span className={styles.verifiedLabel}>VERIFIED</span>
-              </div>
-
-              {/* Row highlighting final selected quantity */}
-              <div className={styles.summaryRow} id="checkout-amount-summary-row">
-                <span className={styles.summaryLabel}>Selected Amount</span>
-                <span className={styles.summaryVal}>
-                  ₹{getFinalAmount().toLocaleString('en-IN')}
-                </span>
-              </div>
-
-              {/* Main action proceed button */}
-              {!showBillingForm && (
-                <button
-                  type="button"
-                  className={styles.proceedBtn}
-                  onClick={handleProceedClick}
-                  id="checkout-proceed-to-payment-btn"
-                >
-                  <span>Proceed to Secure Payment</span>
-                  <ArrowRight size={18} />
-                </button>
-              )}
-
-              {/* Interactive billing form shown after proceed */}
-              {showBillingForm && (
-                <form onSubmit={handleCheckoutSubmit} className={styles.billingFormSection} id="billing-form-wrapper">
-                  
-                  {/* Receipt Email Address */}
-                  <div className={styles.inputGroup} style={{ marginBottom: '20px' }}>
-                    <label className={styles.label}>Receipt Email Address *</label>
-                    <input
-                      type="email"
-                      className={styles.inputEl}
-                      placeholder="e.g. supporter@gmail.com"
-                      value={donorEmail}
-                      onChange={(e) => setDonorEmail(e.target.value)}
-                      required
-                      id="billing-email-input"
-                    />
-                  </div>
-
-                  <div className={styles.formGrid}>
-                    {/* Name on Card */}
-                    <div className={styles.inputGroup}>
-                      <label className={styles.label}>Name on Card *</label>
-                      <input
-                        type="text"
-                        className={styles.inputEl}
-                        placeholder="Jane Doe"
-                        value={cardName}
-                        onChange={(e) => setCardName(e.target.value)}
-                        required
-                        id="billing-cardname-input"
-                      />
-                    </div>
-
-                    {/* Card Number */}
-                    <div className={styles.inputGroup}>
-                      <label className={styles.label}>Card Number *</label>
-                      <input
-                        type="text"
-                        className={styles.inputEl}
-                        placeholder="4111 2222 3333 4444"
-                        maxLength={19}
-                        value={cardNumber}
-                        onChange={(e) => setCardNumber(e.target.value)}
-                        required
-                        id="billing-cardnumber-input"
-                      />
-                    </div>
-
-                    {/* Expiration and CVV in split grid */}
-                    <div className={styles.fullWidthGroup}>
-                      <div className={styles.creditCardExpiryCvv}>
-                        <div className={styles.inputGroup}>
-                          <label className={styles.label}>Expiration (MM/YY) *</label>
-                          <input
-                            type="text"
-                            className={styles.inputEl}
-                            placeholder="12/28"
-                            maxLength={5}
-                            value={cardExpiry}
-                            onChange={(e) => setCardExpiry(e.target.value)}
-                            required
-                            id="billing-cardexpiry-input"
-                          />
-                        </div>
-                        <div className={styles.inputGroup}>
-                          <label className={styles.label}>CVV Security Code *</label>
-                          <input
-                            type="password"
-                            className={styles.inputEl}
-                            placeholder="•••"
-                            maxLength={3}
-                            value={cardCvv}
-                            onChange={(e) => setCardCvv(e.target.value)}
-                            required
-                            id="billing-cardcvv-input"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <button
-                    type="submit"
-                    className={styles.confirmBtn}
-                    disabled={isSubmitting}
-                    id="billing-complete-payment-submit-btn"
-                  >
-                    {isSubmitting ? 'Processing SSL Gateway...' : `Complete ₹${getFinalAmount().toLocaleString('en-IN')} Contribution`}
-                  </button>
-
-                </form>
-              )}
-
-              {/* Secure partner safety banner */}
-              <div className={styles.partnersContainer} id="checkout-partner-security-trust-seal">
-                <div className={styles.partnersLabel}>SECURE PAYMENT PARTNERS</div>
-                
-                <div className={styles.partnerIconsRow}>
-                  <CreditCard size={20} className={styles.partnerIcon} />
-                  <Landmark size={20} className={styles.partnerIcon} />
-                  <QrCode size={20} className={styles.partnerIcon} />
-                  <Smartphone size={20} className={styles.partnerIcon} />
-                </div>
-
-                <div className={styles.secureSSL}>
-                  <Lock size={12} />
-                  <span>256-BIT SSL ENCRYPTED CONNECTION</span>
-                </div>
+              {/* Coming Soon Message */}
+              <div 
+                style={{
+                  textAlign: 'center',
+                  padding: '60px 20px',
+                  backgroundColor: 'rgba(13, 148, 136, 0.05)',
+                  borderRadius: 'var(--radius-md)',
+                  border: '2px solid rgba(13, 148, 136, 0.2)',
+                  marginTop: '20px'
+                }}
+                id="donation-coming-soon-banner"
+              >
+                <Gift size={48} style={{ margin: '0 auto 20px', color: 'var(--primary-color)' }} />
+                <h3 style={{ 
+                  fontSize: '22px', 
+                  fontWeight: '700', 
+                  color: '#1a1a1a',
+                  marginBottom: '12px'
+                }}>
+                  Donation Facility Coming Soon
+                </h3>
+                <p style={{
+                  fontSize: '16px',
+                  color: '#666',
+                  lineHeight: '1.6',
+                  marginBottom: '24px'
+                }}>
+                  We're setting up secure payment infrastructure to safely collect your generous contributions. 
+                </p>
+                <p style={{
+                  fontSize: '15px',
+                  color: '#999',
+                  fontStyle: 'italic'
+                }}>
+                  Thank you for your patience and support! 🙏
+                </p>
               </div>
 
             </div>

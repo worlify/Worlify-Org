@@ -259,7 +259,7 @@ class LocalDBService {
   async addDonation(amount, cause, email = null) {
     const user = this.getCurrentUser();
     const donorEmail = email || (user ? user.email : 'anonymous@helper.org');
-    const userId = user ? user.id : 'anonymous';
+    const userId = user ? user.id : null; // Use null instead of 'anonymous' string
 
     if (supabase) {
       const { data, error } = await supabase
@@ -317,7 +317,7 @@ class LocalDBService {
   // Register as a volunteer
   async registerVolunteer(name, email, cause, skills, message) {
     const user = this.getCurrentUser();
-    const userId = user ? user.id : 'anonymous';
+    const userId = user ? user.id : null; // Use null instead of 'anonymous' string
 
     if (supabase) {
       const { data, error } = await supabase
@@ -361,7 +361,7 @@ class LocalDBService {
   // Register a contact query
   async registerContactMessage(name, email, subject, message) {
     const user = this.getCurrentUser();
-    const userId = user ? user.id : 'anonymous';
+    const userId = user ? user.id : null; // Use null instead of 'anonymous' string
 
     if (supabase) {
       const { data, error } = await supabase

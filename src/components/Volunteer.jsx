@@ -33,7 +33,8 @@ export default function Volunteer({ user, setActiveTab }) {
   // Pre-fill user details if authenticated
   useEffect(() => {
     if (user) {
-      setFullName(user.full_name || '');
+      const fullName = user.first_name ? `${user.first_name}${user.last_name ? ' ' + user.last_name : ''}` : '';
+      setFullName(fullName);
       setEmail(user.email || '');
     } else {
       setFullName('');

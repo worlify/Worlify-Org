@@ -52,7 +52,9 @@ if (hasValidCredentials) {
   console.log('✅ Supabase initialized successfully with custom credentials.');
 } else {
   console.warn(
-    '⚠️ Supabase credentials not configured in environment or secrets.\n' +
+    '⚠️ Supabase credentials not configured or invalid.\n' +
+    `Loaded URL: "${supabaseUrl}"\n` +
+    `Loaded Key: ${supabaseAnonKey ? '(Present, length ' + supabaseAnonKey.length + ')' : '(Missing)'}\n` +
     'The app will run in "Local Mode" using localStorage for mock authentication and database persistence.'
   );
 }

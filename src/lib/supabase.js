@@ -100,34 +100,32 @@ class LocalDBService {
     const normalizedPassword = normalizePassword(password);
 
     if (supabase) {
-      // Real Supabase implementation - use custom users table
-      await new Promise(resolve => setTimeout(resolve, 600)); // Simulate network latency
-      
-      // Split full name into first and last name
+      // Real Supabase implementation - create an Auth user then persist profile metadata in the users table
+      await new Promise(resolve => setTimeout(resolve, 600));
+
+      const { data: authData, error: authError } = await supabase.auth.signUp({
+        email: normalizedEmail,
+        password: normalizedPassword,
+      });
+
+      if (authError) {
+        return { data: null, error: authError };
+      }
+
+      const authUser = authData?.user;
+      if (!authUser) {
+        return { data: null, error: { message: 'Unable to create account. Please verify your email if required.' } };
+      }
+
       const nameParts = fullName.trim().split(' ');
       const firstName = nameParts[0] || 'User';
       const lastName = nameParts.slice(1).join(' ') || '';
-      
-      // Check if user exists
-      const { data: existingUsers, error: checkError } = await supabase
-        .from('users')
-        .select('id')
-        .eq('email', normalizedEmail)
-        .single();
-      
-      if (checkError && checkError.code !== 'PGRST116') {
-        return { data: null, error: checkError };
-      }
-      
-      if (existingUsers) {
-        return { data: null, error: { message: 'A user with this email already exists.' } };
-      }
 
-      // Create new user in custom users table
       const { data: newUser, error } = await supabase
         .from('users')
         .insert([
           {
+            id: authUser.id,
             email: normalizedEmail,
             password: normalizedPassword, // Note: In production, hash this password!
             first_name: firstName,
@@ -142,9 +140,8 @@ class LocalDBService {
         return { data: null, error };
       }
 
-      // Auto log in after signup
-      const user = newUser[0];
-      this.currentSession = { user };
+      const user = Array.isArray(newUser) ? newUser[0] : newUser;
+      this.currentSession = { user: { ...authUser, ...user } };
       this._set('worlify_session', this.currentSession);
       return { data: this.currentSession, error: null };
     }
@@ -182,30 +179,56 @@ class LocalDBService {
     const normalizedPassword = normalizePassword(password);
 
     if (supabase) {
-      // Real Supabase implementation - query custom users table
+      // Real Supabase implementation - authenticate with Supabase Auth and load profile metadata
       await new Promise(resolve => setTimeout(resolve, 600));
-      
-      const { data: users, error } = await supabase
+
+      const { data: authData, error: authError } = await supabase.auth.signInWithPassword({
+        email: normalizedEmail,
+        password: normalizedPassword,
+      });
+
+      if (authError) {
+        // Fallback: if the user exists in the local users table with the same credentials,
+        // continue with that profile instead of failing completely.
+        const { data: fallbackUser, error: fallbackError } = await supabase
+          .from('users')
+          .select('*')
+          .eq('email', normalizedEmail)
+          .single();
+
+        if (!fallbackError && fallbackUser) {
+          const storedPassword = typeof fallbackUser.password === 'string' ? fallbackUser.password.trim() : '';
+          if (storedPassword === normalizedPassword) {
+            const sessionUser = { ...fallbackUser, email: normalizedEmail };
+            this.currentSession = { user: sessionUser };
+            this._set('worlify_session', this.currentSession);
+            return { data: this.currentSession, error: null };
+          }
+        }
+
+        return { data: null, error: authError };
+      }
+
+      const authUser = authData?.user;
+      if (!authUser) {
+        return { data: null, error: { message: 'Invalid email or password.' } };
+      }
+
+      const { data: userMeta, error: profileError } = await supabase
         .from('users')
         .select('*')
-        .eq('email', normalizedEmail);
+        .eq('email', normalizedEmail)
+        .single();
 
-      if (error) {
-        return { data: null, error };
+      if (profileError && profileError.code !== 'PGRST116') {
+        return { data: null, error: profileError };
       }
 
-      if (!users || users.length === 0) {
-        return { data: null, error: { message: 'Invalid email or password.' } };
-      }
+      const sessionUser = userMeta
+        ? { ...authUser, ...userMeta }
+        : { ...authUser, email: normalizedEmail, first_name: '', last_name: '', support: 0, badges: [] };
 
-      const user = users[0];
-      // Simple password comparison (in production, use bcrypt or similar)
-      const storedPassword = typeof user.password === 'string' ? user.password.trim() : '';
-      if (storedPassword !== normalizedPassword) {
-        return { data: null, error: { message: 'Invalid email or password.' } };
-      }
-
-      this.currentSession = { user };
+      this.currentSession = { user: sessionUser };
       this._set('worlify_session', this.currentSession);
       return { data: this.currentSession, error: null };
     }

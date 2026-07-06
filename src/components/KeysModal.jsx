@@ -52,10 +52,13 @@ export default function KeysModal({ isOpen, onClose }) {
             <div className={styles.stepNumber}>3</div>
             <div className={styles.stepText}>
               <strong>Configure secrets in Google AI Studio</strong>
-              <div>Open the <strong>Secrets panel</strong> (or gear icon settings) in Google AI Studio and configure these two environment variables:</div>
+              <div>Open the <strong>Secrets panel</strong> (or gear icon settings) in Google AI Studio and configure these environment variables:</div>
               <div className={styles.codeBlock}>
-                VITE_SUPABASE_URL="your_copied_project_url"<br />
-                VITE_SUPABASE_ANON_KEY="your_copied_anon_key"
+                NEXT_PUBLIC_SUPABASE_URL="your_copied_project_url"<br />
+                NEXT_PUBLIC_SUPABASE_ANON_KEY="your_copied_anon_key"
+              </div>
+              <div style={{ marginTop: '8px', fontSize: '11px', color: 'var(--text-muted)' }}>
+                If your local preview also supports Vite-style envs, add <strong>VITE_SUPABASE_URL</strong> and <strong>VITE_SUPABASE_ANON_KEY</strong> too.
               </div>
             </div>
           </div>

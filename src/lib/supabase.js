@@ -1,14 +1,25 @@
 import { createClient } from '@supabase/supabase-js';
 
+const normalizeEnvVar = (value) => {
+  if (typeof value !== 'string') return value;
+  const trimmed = value.trim();
+  if ((trimmed.startsWith('"') && trimmed.endsWith('"')) || (trimmed.startsWith("'") && trimmed.endsWith("'"))) {
+    return trimmed.slice(1, -1).trim();
+  }
+  return trimmed;
+};
+
 // Retrieve Supabase credentials from environment variables supported by Next.js, Vite, and generic deployment env names
-const supabaseUrl =
+const supabaseUrl = normalizeEnvVar(
   process.env.NEXT_PUBLIC_SUPABASE_URL ||
   process.env.VITE_SUPABASE_URL ||
-  process.env.SUPABASE_URL;
-const supabaseAnonKey =
+  process.env.SUPABASE_URL
+);
+const supabaseAnonKey = normalizeEnvVar(
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ||
   process.env.VITE_SUPABASE_ANON_KEY ||
-  process.env.SUPABASE_ANON_KEY;
+  process.env.SUPABASE_ANON_KEY
+);
 
 // Check if a string is a valid HTTP or HTTPS URL
 const isValidHttpUrl = (string) => {

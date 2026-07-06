@@ -54,11 +54,11 @@ export default function KeysModal({ isOpen, onClose }) {
               <strong>Configure secrets in Google AI Studio</strong>
               <div>Open the <strong>Secrets panel</strong> (or gear icon settings) in Google AI Studio and configure these environment variables:</div>
               <div className={styles.codeBlock}>
-                NEXT_PUBLIC_SUPABASE_URL="your_copied_project_url"<br />
-                NEXT_PUBLIC_SUPABASE_ANON_KEY="your_copied_anon_key"
+                NEXT_PUBLIC_SUPABASE_URL=https://your_copied_project_url<br />
+                NEXT_PUBLIC_SUPABASE_ANON_KEY=your_copied_anon_key
               </div>
               <div style={{ marginTop: '8px', fontSize: '11px', color: 'var(--text-muted)' }}>
-                If your local preview also supports Vite-style envs, add <strong>VITE_SUPABASE_URL</strong> and <strong>VITE_SUPABASE_ANON_KEY</strong> too.
+                Enter raw values in Vercel / AI Studio without surrounding quotes. Add <strong>VITE_SUPABASE_URL</strong> and <strong>VITE_SUPABASE_ANON_KEY</strong> only for local Vite-style previews.
               </div>
             </div>
           </div>

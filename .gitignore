@@ -1,4 +1,7 @@
 node_modules/
+.next/
+.cache/
+out/
 build/
 dist/
 coverage/

@@ -15,6 +15,16 @@ export default function Navbar({ activeTab, setActiveTab, user, onLogout, isLoca
     setIsMenuOpen(false);
   };
 
+  const getInitials = () => {
+    if (user?.first_name) {
+      return user.first_name.trim().charAt(0).toUpperCase();
+    }
+    if (user?.email) {
+      return user.email.trim().charAt(0).toUpperCase();
+    }
+    return 'U';
+  };
+
   return (
     <header className={styles.navbar} id="main-header">
       {/* Informative ribbon explaining Supabase local mock mode */}
@@ -74,14 +84,14 @@ export default function Navbar({ activeTab, setActiveTab, user, onLogout, isLoca
         <div className={styles.authGroup} id="auth-actions-group">
           {user ? (
             <>
-              {/* Authenticated user UI */}
+              {/* Authenticated user UI - Circular Avatar instead of Text Button */}
               <div 
-                className={`${styles.navLink} ${activeTab === 'dashboard' ? styles.activeNavLink : ''} ${styles.userBadge}`}
+                className={`${styles.avatarCircle} ${activeTab === 'dashboard' ? styles.activeAvatarCircle : ''}`}
                 onClick={() => handleNavClick('dashboard')}
                 id="nav-link-dashboard"
+                title={`Go to Dashboard (${user.first_name || user.email})`}
               >
-                <User size={16} />
-                <span>{user.first_name || user.email}</span>
+                {getInitials()}
               </div>
               <button 
                 className={styles.logoutBtn} 
@@ -169,9 +179,14 @@ export default function Navbar({ activeTab, setActiveTab, user, onLogout, isLoca
               <>
                 <div 
                   className={styles.mobileUserBadge}
-                  onClick={() => handleNavClick('dashboard')}
+                  onClick={() => {
+                    handleNavClick('dashboard');
+                    setIsMenuOpen(false);
+                  }}
                 >
-                  <User size={16} />
+                  <div className={styles.mobileAvatar}>
+                    {getInitials()}
+                  </div>
                   <span>{user.first_name || user.email}</span>
                 </div>
                 <button 

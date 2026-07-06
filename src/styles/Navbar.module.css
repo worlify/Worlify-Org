@@ -218,6 +218,34 @@
   color: #1e40af;
 }
 
+/* Supporter Circular Avatar */
+.avatarCircle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background-color: #0056d2; /* Royal blue brand accent */
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s ease-in-out;
+  user-select: none;
+  box-shadow: 0 2px 5px rgba(0, 86, 210, 0.15);
+}
+
+.avatarCircle:hover {
+  background-color: #0047b3;
+  transform: scale(1.05);
+}
+
+.activeAvatarCircle {
+  background-color: #0047b3;
+  box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #0056d2;
+}
+
 /* Responsive Hamburger Toggle Button */
 .hamburger {
   display: none;
@@ -397,5 +425,20 @@
 
   .mobileDonateBtn:hover {
     background-color: #0047b3;
+  }
+
+  /* Mobile Avatar Initials Badge */
+  .mobileAvatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background-color: #0056d2;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 700;
+    margin-right: 2px;
   }
 }

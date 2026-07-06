@@ -71,9 +71,9 @@ export default function Footer({ setActiveTab }) {
         {/* Bottom Bar Section */}
         <div className={styles.bottomBar}>
           <div>
-            <span>© {new Date().getFullYear()} Worlify NGO. All rights reserved. Registered 501(c)(3) nonprofit.</span>
+            <span>© {new Date().getFullYear()} Worlify Foundation. All rights reserved.</span>
           </div>
-          
+
           <div className={styles.socials}>
             <Twitter size={18} className={styles.socialIcon} id="footer-social-twitter" />
             <Facebook size={18} className={styles.socialIcon} id="footer-social-facebook" />

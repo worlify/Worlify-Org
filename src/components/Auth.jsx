@@ -30,10 +30,13 @@ export default function Auth({ onLoginSuccess }) {
       return;
     }
 
+    const normalizedEmail = email.trim();
+    const normalizedPassword = password.trim();
+
     setIsSubmitting(true);
     setErrorMsg('');
     try {
-      const { data, error } = await db.signIn(email, password);
+      const { data, error } = await db.signIn(normalizedEmail, normalizedPassword);
       
       if (!error && data) {
         // Authenticated successfully! Notify parent App
@@ -62,10 +65,13 @@ export default function Auth({ onLoginSuccess }) {
       return;
     }
 
+    const normalizedEmail = email.trim();
+    const normalizedPassword = password.trim();
+
     setIsSubmitting(true);
     setErrorMsg('');
     try {
-      const { data, error } = await db.signUp(email, password, fullName);
+      const { data, error } = await db.signUp(normalizedEmail, normalizedPassword, fullName);
 
       if (!error && data) {
         // Registered and auto logged in! Notify parent App
@@ -136,6 +142,10 @@ export default function Auth({ onLoginSuccess }) {
                 placeholder="e.g. supporter@gmail.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                autoComplete="email"
+                autoCapitalize="none"
+                autoCorrect="off"
+                inputMode="email"
                 required
                 id="signin-email-input"
               />
@@ -149,6 +159,7 @@ export default function Auth({ onLoginSuccess }) {
                 placeholder="••••••••"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                autoComplete="current-password"
                 required
                 id="signin-password-input"
               />
@@ -200,6 +211,10 @@ export default function Auth({ onLoginSuccess }) {
                 placeholder="e.g. supporter@gmail.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                autoComplete="email"
+                autoCapitalize="none"
+                autoCorrect="off"
+                inputMode="email"
                 required
                 id="signup-email-input"
               />
@@ -213,6 +228,7 @@ export default function Auth({ onLoginSuccess }) {
                 placeholder="••••••••"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                autoComplete="new-password"
                 required
                 id="signup-password-input"
               />

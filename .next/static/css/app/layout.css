@@ -1,0 +1,101 @@
+/*!***********************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[14].oneOf[10].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[14].oneOf[10].use[3]!./src/index.css ***!
+  \***********************************************************************************************************************************************************************************************************************************************************/
+/* Google Fonts - Inter for general UI and Space Grotesk for Display */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap');
+
+/* CSS Custom Variables for brand identity and clean UI design */
+:root {
+  --primary-color: #0d9488;          /* Teal: Healthcare, Nature, Trust */
+  --primary-hover: #0f766e;
+  --secondary-color: #f97316;        /* Amber Orange: Child Welfare, Education, warmth */
+  --secondary-hover: #ea580c;
+  --accent-color: #3b82f6;           /* Blue: Women Empowerment */
+  --danger-color: #ef4444;           /* Red: Errors & crucial warnings */
+  --success-color: #22c55e;          /* Green: Positive impacts */
+  
+  --bg-color: #f8fafc;               /* Crisp off-white */
+  --bg-card: #ffffff;                /* Pure white for containers */
+  --text-main: #1e293b;              /* Dark slate text */
+  --text-muted: #64748b;             /* Gray text for secondary descriptions */
+  --text-light: #94a3b8;             /* Light gray for decorative/disabled elements */
+  
+  --border-color: #e2e8f0;           /* Soft grey borders */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Space Grotesk', sans-serif;
+  
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s ease;
+}
+
+/* Global resets and layout styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button, input, select, textarea {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Utility layout/scaffolding used in main skeleton (no Tailwind classes) */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-color);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: var(--radius-sm);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-light);
+}
+

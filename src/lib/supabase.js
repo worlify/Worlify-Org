@@ -1,8 +1,8 @@
 import { createClient } from '@supabase/supabase-js';
 
-// Retrieve Supabase credentials from Vite environment variables
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+// Retrieve Supabase credentials from environment variables supported by Next.js and Vite
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.VITE_SUPABASE_URL;
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || process.env.VITE_SUPABASE_ANON_KEY;
 
 // Check if a string is a valid HTTP or HTTPS URL
 const isValidHttpUrl = (string) => {
@@ -14,6 +14,9 @@ const isValidHttpUrl = (string) => {
     return false;
   }
 };
+
+const normalizeEmail = (value) => (typeof value === 'string' ? value.trim().toLowerCase() : '');
+const normalizePassword = (value) => (typeof value === 'string' ? value.trim() : '');
 
 // Check if valid credentials are provided
 const hasValidCredentials = 
@@ -45,6 +48,11 @@ if (hasValidCredentials) {
  */
 class LocalDBService {
   constructor() {
+    if (typeof window === 'undefined') {
+      this.currentSession = null;
+      return;
+    }
+
     // Initialize collections in localStorage if they don't exist
     if (!localStorage.getItem('worlify_users')) {
       localStorage.setItem('worlify_users', JSON.stringify([]));
@@ -67,7 +75,7 @@ class LocalDBService {
       ];
       localStorage.setItem('worlify_volunteers', JSON.stringify(initialVolunteers));
     }
-    
+
     // Store current session in memory and localStorage
     const savedSession = localStorage.getItem('worlify_session');
     this.currentSession = savedSession ? JSON.parse(savedSession) : null;
@@ -75,17 +83,22 @@ class LocalDBService {
 
   // Helper to read localStorage
   _get(key) {
+    if (typeof window === 'undefined') return [];
     return JSON.parse(localStorage.getItem(key) || '[]');
   }
 
   // Helper to write localStorage
   _set(key, data) {
+    if (typeof window === 'undefined') return;
     localStorage.setItem(key, JSON.stringify(data));
   }
 
   // --- AUTH METHODS ---
   
   async signUp(email, password, fullName = 'Supporter') {
+    const normalizedEmail = normalizeEmail(email);
+    const normalizedPassword = normalizePassword(password);
+
     if (supabase) {
       // Real Supabase implementation - use custom users table
       await new Promise(resolve => setTimeout(resolve, 600)); // Simulate network latency
@@ -99,8 +112,12 @@ class LocalDBService {
       const { data: existingUsers, error: checkError } = await supabase
         .from('users')
         .select('id')
-        .eq('email', email.toLowerCase())
+        .eq('email', normalizedEmail)
         .single();
+      
+      if (checkError && checkError.code !== 'PGRST116') {
+        return { data: null, error: checkError };
+      }
       
       if (existingUsers) {
         return { data: null, error: { message: 'A user with this email already exists.' } };
@@ -111,8 +128,8 @@ class LocalDBService {
         .from('users')
         .insert([
           {
-            email: email.toLowerCase(),
-            password, // Note: In production, hash this password!
+            email: normalizedEmail,
+            password: normalizedPassword, // Note: In production, hash this password!
             first_name: firstName,
             last_name: lastName,
             support: 0,
@@ -136,15 +153,15 @@ class LocalDBService {
     await new Promise(resolve => setTimeout(resolve, 600));
     const users = this._get('worlify_users');
     
-    if (users.some(u => u.email.toLowerCase() === email.toLowerCase())) {
+    if (users.some(u => normalizeEmail(u.email) === normalizedEmail)) {
       return { data: null, error: { message: 'A user with this email already exists.' } };
     }
 
     const nameParts = fullName.trim().split(' ');
     const newUser = {
       id: 'usr_' + Math.random().toString(36).substr(2, 9),
-      email: email.toLowerCase(),
-      password,
+      email: normalizedEmail,
+      password: normalizedPassword,
       first_name: nameParts[0] || 'User',
       last_name: nameParts.slice(1).join(' ') || '',
       support: 0,
@@ -161,6 +178,9 @@ class LocalDBService {
   }
 
   async signIn(email, password) {
+    const normalizedEmail = normalizeEmail(email);
+    const normalizedPassword = normalizePassword(password);
+
     if (supabase) {
       // Real Supabase implementation - query custom users table
       await new Promise(resolve => setTimeout(resolve, 600));
@@ -168,15 +188,20 @@ class LocalDBService {
       const { data: users, error } = await supabase
         .from('users')
         .select('*')
-        .eq('email', email.toLowerCase());
+        .eq('email', normalizedEmail);
 
-      if (error || !users || users.length === 0) {
+      if (error) {
+        return { data: null, error };
+      }
+
+      if (!users || users.length === 0) {
         return { data: null, error: { message: 'Invalid email or password.' } };
       }
 
       const user = users[0];
       // Simple password comparison (in production, use bcrypt or similar)
-      if (user.password !== password) {
+      const storedPassword = typeof user.password === 'string' ? user.password.trim() : '';
+      if (storedPassword !== normalizedPassword) {
         return { data: null, error: { message: 'Invalid email or password.' } };
       }
 
@@ -188,7 +213,11 @@ class LocalDBService {
     // Mock Implementation
     await new Promise(resolve => setTimeout(resolve, 600));
     const users = this._get('worlify_users');
-    const user = users.find(u => u.email.toLowerCase() === email.toLowerCase() && u.password === password);
+    const user = users.find((u) => {
+      const storedEmail = normalizeEmail(u.email);
+      const storedPassword = typeof u.password === 'string' ? u.password.trim() : '';
+      return storedEmail === normalizedEmail && storedPassword === normalizedPassword;
+    });
 
     if (!user) {
       return { data: null, error: { message: 'Invalid email or password.' } };
@@ -201,17 +230,26 @@ class LocalDBService {
 
   async signOut() {
     if (supabase) {
-      const { error } = await supabase.auth.signOut();
-      return { error };
+      try {
+        await supabase.auth.signOut();
+      } catch (err) {
+        console.warn('Supabase auth signOut error:', err);
+      }
     }
 
-    // Mock Implementation
+    // Clear local session states in both real Supabase and Mock modes
     this.currentSession = null;
-    localStorage.removeItem('worlify_session');
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem('worlify_session');
+    }
     return { error: null };
   }
 
   getCurrentUser() {
+    if (typeof window === 'undefined') {
+      return null;
+    }
+
     // First, check if session exists in memory
     if (this.currentSession && this.currentSession.user) {
       return this.currentSession.user;

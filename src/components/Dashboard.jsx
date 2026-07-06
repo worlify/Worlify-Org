@@ -134,9 +134,13 @@ export default function Dashboard({ user, setActiveTab }) {
                   {(() => {
                     try {
                       const badgeList = JSON.parse(user?.badges || '[]');
-                      return badgeList.length;
+                      if (Array.isArray(badgeList)) {
+                        return badgeList.length;
+                      }
+                      return typeof badgeList === 'number' ? badgeList : 0;
                     } catch {
-                      return 0;
+                      const count = Number(user?.badges);
+                      return isNaN(count) ? 0 : count;
                     }
                   })()} Earned
                 </div>
@@ -145,19 +149,47 @@ export default function Dashboard({ user, setActiveTab }) {
                   {(() => {
                     try {
                       const badgeList = JSON.parse(user?.badges || '[]');
-                      return badgeList.map((badge, idx) => (
-                        <span 
-                          className={styles.earnedBadge} 
-                          key={idx}
-                          style={{ borderColor: badge.color || '#666', color: badge.color || '#666' }}
-                          id={`earned-badge-${idx}`}
-                        >
-                          {badge.name}
-                        </span>
-                      ));
+                      if (Array.isArray(badgeList)) {
+                        return badgeList.map((badge, idx) => (
+                          <span 
+                            className={styles.earnedBadge} 
+                            key={idx}
+                            style={{ borderColor: badge.color || '#666', color: badge.color || '#666' }}
+                            id={`earned-badge-${idx}`}
+                          >
+                            {badge.name}
+                          </span>
+                        ));
+                      }
+                      const count = typeof badgeList === 'number' ? badgeList : 0;
+                      if (count > 0) {
+                        return Array.from({ length: count }).map((_, idx) => (
+                          <span 
+                            className={styles.earnedBadge} 
+                            key={idx}
+                            style={{ borderColor: 'var(--secondary-color)', color: 'var(--secondary-color)' }}
+                            id={`earned-badge-generic-${idx}`}
+                          >
+                            🌟 Supporter Badge {idx + 1}
+                          </span>
+                        ));
+                      }
                     } catch {
-                      return null;
+                      const count = Number(user?.badges);
+                      if (!isNaN(count) && count > 0) {
+                        return Array.from({ length: count }).map((_, idx) => (
+                          <span 
+                            className={styles.earnedBadge} 
+                            key={idx}
+                            style={{ borderColor: 'var(--secondary-color)', color: 'var(--secondary-color)' }}
+                            id={`earned-badge-generic-${idx}`}
+                          >
+                            🌟 Supporter Badge {idx + 1}
+                          </span>
+                        ));
+                      }
                     }
+                    return null;
                   })()}
                 </div>
               </div>

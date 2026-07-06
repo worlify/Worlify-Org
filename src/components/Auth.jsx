@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { db } from '../lib/supabase';
+import { db, isLocalMode } from '../lib/supabase';
 import styles from '../styles/Auth.module.css';
 
 /**
@@ -258,6 +258,31 @@ export default function Auth({ onLoginSuccess }) {
             </p>
           </form>
         )}
+
+        {/* Connection status indicator */}
+        <div style={{ 
+          marginTop: '20px', 
+          padding: '8px 12px', 
+          borderRadius: 'var(--radius-sm)', 
+          fontSize: '11px', 
+          textAlign: 'center',
+          backgroundColor: isLocalMode ? 'rgba(239, 68, 68, 0.08)' : 'rgba(16, 185, 129, 0.08)',
+          color: isLocalMode ? 'rgb(239, 68, 68)' : 'rgb(16, 185, 129)',
+          border: isLocalMode ? '1px dashed rgba(239, 68, 68, 0.2)' : '1px dashed rgba(16, 185, 129, 0.2)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: '6px'
+        }} id="auth-mode-indicator">
+          <span style={{ 
+            width: '6px', 
+            height: '6px', 
+            borderRadius: '50%', 
+            backgroundColor: isLocalMode ? 'rgb(239, 68, 68)' : 'rgb(16, 185, 129)',
+            display: 'inline-block'
+          }}></span>
+          {isLocalMode ? 'Local Sandbox Mode (Mock Data)' : 'Supabase Cloud (Connected)'}
+        </div>
       </div>
     </section>
   );

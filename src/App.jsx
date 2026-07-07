@@ -11,6 +11,7 @@ import Donate from './components/Donate';
 import Auth from './components/Auth';
 import Dashboard from './components/Dashboard';
 import Contact from './components/Contact';
+import Faqs from './components/Faqs';
 import Footer from './components/Footer';
 import KeysModal from './components/KeysModal';
 import { db, isLocalMode } from './lib/supabase';
@@ -55,6 +56,11 @@ export default function App() {
     }
     restoreSession();
   }, []);
+
+  // Scroll to top when active tab changes
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [activeTab]);
 
   // Login handler
   const handleLoginSuccess = (userData) => {
@@ -164,6 +170,12 @@ export default function App() {
 
         {activeTab === 'contact' && (
           <Contact 
+            setActiveTab={setActiveTab}
+          />
+        )}
+
+        {activeTab === 'faqs' && (
+          <Faqs 
             setActiveTab={setActiveTab}
           />
         )}

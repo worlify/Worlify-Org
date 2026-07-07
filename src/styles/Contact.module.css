@@ -1,67 +1,85 @@
 .contactPage {
-  background-color: #f8fafc;
+  background-color: #fcfcfc;
   min-height: 100vh;
   color: #1e293b;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   padding-bottom: 80px;
 }
 
-/* Hero Section */
-.heroSection {
-  background-color: #f1f5f9;
-  background-image: radial-gradient(at 50% 0%, rgba(15, 98, 254, 0.04) 0px, transparent 50%),
-                    radial-gradient(at 0% 0%, rgba(244, 63, 94, 0.02) 0px, transparent 50%);
-  padding: 80px 24px 60px 24px;
-  text-align: center;
-}
-
-.heroContent {
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.tag {
-  display: inline-block;
-  color: #0056d2;
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 2px;
-  margin-bottom: 16px;
-  text-transform: uppercase;
-}
-
-.title {
-  font-size: 38px;
-  font-weight: 700;
-  color: #0f172a;
-  line-height: 1.25;
-  letter-spacing: -0.015em;
-  margin-bottom: 16px;
-}
-
-.subtitle {
-  font-size: 16px;
-  color: #64748b;
-  line-height: 1.6;
-  max-width: 680px;
-  margin: 0 auto;
-}
-
-/* Main Layout Container */
+/* 1. Main Grid Layout */
 .mainContainer {
-  max-width: 1100px;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 40px 24px;
+  padding: 60px 24px 40px 24px;
 }
 
 .gridContainer {
   display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  gap: 60px;
+  grid-template-columns: 0.95fr 1.05fr;
+  gap: 80px;
   align-items: start;
 }
 
-/* Form Column (Left) */
+/* Left Column: Direct Contacts */
+.infoColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.contactSection {
+  display: flex;
+  flex-direction: column;
+}
+
+.sectionHeader {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #0f172a;
+  margin-bottom: 14px;
+  border-bottom: 1px solid #f1f5f9;
+  padding-bottom: 8px;
+}
+
+.sectionText {
+  font-size: 14px;
+  color: #64748b;
+  line-height: 1.6;
+  margin-bottom: 4px;
+}
+
+.emailLink {
+  font-size: 14px;
+  color: #0056d2;
+  text-decoration: underline;
+  font-weight: 500;
+  width: fit-content;
+}
+
+.subSection {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.subSectionHeader {
+  font-size: 12px;
+  font-weight: 700;
+  color: #475569;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+  text-transform: uppercase;
+}
+
+.inlineEmail {
+  color: #0056d2;
+  text-decoration: underline;
+  font-weight: 500;
+}
+
+/* Right Column: Helpdesk Form */
 .formColumn {
   display: flex;
   flex-direction: column;
@@ -70,28 +88,36 @@
 .formCard {
   background-color: #ffffff;
   border: 1px solid #e2e8f0;
-  border-radius: 12px;
+  border-radius: 8px;
   padding: 40px;
-  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.02);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
 }
 
 .formHeader {
   font-size: 18px;
-  font-weight: 600;
-  color: #334155;
-  margin-bottom: 28px;
+  font-weight: 700;
+  color: #0f172a;
+  letter-spacing: 1.5px;
+  margin-bottom: 6px;
+}
+
+.formSubheader {
+  font-size: 13.5px;
+  color: #64748b;
+  line-height: 1.5;
+  margin-bottom: 30px;
 }
 
 .contactForm {
   display: flex;
   flex-direction: column;
-  gap: 22px;
+  gap: 20px;
 }
 
 .formRow {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 20px;
+  gap: 16px;
 }
 
 .inputGroup {
@@ -101,9 +127,10 @@
 }
 
 .inputGroup label {
-  font-size: 13px;
-  font-weight: 500;
+  font-size: 12px;
+  font-weight: 600;
   color: #475569;
+  letter-spacing: 0.5px;
 }
 
 .inputGroup input, 
@@ -111,13 +138,13 @@
 .selectWrapper select {
   background-color: #ffffff;
   border: 1px solid #cbd5e1;
-  border-radius: 6px;
+  border-radius: 4px;
   padding: 11px 14px;
   font-size: 14px;
   color: #1e293b;
   outline: none;
   width: 100%;
-  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  transition: all 0.15s ease-in-out;
 }
 
 .inputGroup input::placeholder, 
@@ -128,8 +155,8 @@
 .inputGroup input:focus, 
 .inputGroup textarea:focus,
 .selectWrapper select:focus {
-  border-color: #0056d2;
-  box-shadow: 0 0 0 3px rgba(0, 86, 210, 0.1);
+  border-color: #0f172a;
+  box-shadow: 0 0 0 3px rgba(15, 23, 42, 0.06);
 }
 
 .selectWrapper {
@@ -148,24 +175,25 @@
 }
 
 .submitBtn {
-  background-color: #0056d2;
+  background-color: #000000;
   color: #ffffff;
   border: none;
-  padding: 13px 24px;
-  font-weight: 600;
+  padding: 13px 32px;
+  font-weight: 700;
   font-size: 13px;
-  letter-spacing: 0.5px;
-  border-radius: 9999px;
+  letter-spacing: 1px;
+  border-radius: 4px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: background-color 0.15s ease-in-out, transform 0.1s ease-in-out;
-  margin-top: 8px;
+  margin-top: 10px;
+  width: fit-content;
 }
 
 .submitBtn:hover {
-  background-color: #0047b3;
+  background-color: #1e293b;
 }
 
 .submitBtn:active {
@@ -173,280 +201,313 @@
 }
 
 .submitBtn:disabled {
-  background-color: #94a3b8;
+  background-color: #cbd5e1;
   cursor: not-allowed;
 }
 
-/* Info Column (Right) */
-.infoColumn {
+/* 2. Accordions Section */
+.accordionSection {
+  background-color: #f1f5f9;
+  padding: 60px 24px;
+  border-top: 1px solid #e2e8f0;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.accordionContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.accordionItem {
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(15, 23, 42, 0.01);
+}
+
+.accordionHeader {
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 22px 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14.5px;
+  font-weight: 700;
+  color: #0f172a;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+  letter-spacing: 0.5px;
+  text-align: left;
+}
+
+.accordionHeader:hover {
+  background-color: #f8fafc;
+}
+
+.accordionContent {
+  padding: 30px 28px;
+  border-top: 1px solid #f1f5f9;
+}
+
+.accordionSubBlock {
   display: flex;
   flex-direction: column;
 }
 
-.columnHeader h2 {
-  font-size: 18px;
-  font-weight: 600;
-  color: #334155;
-  margin-bottom: 24px;
+.subBlockTitle {
+  font-size: 13px;
+  font-weight: 700;
+  color: #475569;
+  margin-bottom: 20px;
+  letter-spacing: 0.5px;
+  border-bottom: 1px dashed #e2e8f0;
+  padding-bottom: 6px;
 }
 
-.contactBlocks {
-  display: flex;
-  flex-direction: column;
+/* CSR & Partnerships Grid */
+.contactGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   gap: 24px;
 }
 
-.contactBlockItem {
+.gridCard {
+  background-color: #ffffff;
+  border: 1px solid #f1f5f9;
+  padding: 20px;
+  border-radius: 4px;
   display: flex;
-  gap: 16px;
-  align-items: flex-start;
+  flex-direction: column;
+  gap: 4px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.02);
 }
 
-.iconWrapper {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
+.cardRegion {
+  font-size: 11px;
+  font-weight: 700;
+  color: #94a3b8;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+}
+
+.cardContactInfo {
+  font-size: 13.5px;
+  color: #334155;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.cardEmailLink {
+  font-size: 13px;
+  color: #0056d2;
+  text-decoration: underline;
+  margin-top: 6px;
+  word-break: break-all;
+  width: fit-content;
+}
+
+.accordionPlaceholderText {
+  font-size: 14px;
+  color: #475569;
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+
+.accordionPlaceholderText:last-child {
+  margin-bottom: 0;
+}
+
+/* 3. Visit Us Here */
+.visitUsSection {
+  max-width: 1200px;
+  margin: 60px auto;
+  padding: 0 24px;
+}
+
+.visitContainer {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
+  flex-direction: column;
+  gap: 20px;
 }
 
-.blueIcon {
-  background-color: #eff6ff;
-  color: #2563eb;
+.visitHeader {
+  font-size: 16px;
+  font-weight: 700;
+  color: #0f172a;
+  letter-spacing: 1px;
 }
 
-.greenIcon {
-  background-color: #ecfdf5;
-  color: #10b981;
-}
-
-.purpleIcon {
-  background-color: #f5f3ff;
-  color: #8b5cf6;
-}
-
-.blockInfo {
+.officeBlock {
   display: flex;
   flex-direction: column;
   gap: 4px;
 }
 
-.blockTitleBlue {
-  font-size: 11px;
+.officeType {
+  font-size: 13px;
   font-weight: 700;
-  letter-spacing: 1px;
-  color: #2563eb;
+  color: #64748b;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
 }
 
-.blockTitleGreen {
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 1px;
-  color: #10b981;
-}
-
-.blockTitlePurple {
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 1px;
-  color: #8b5cf6;
-}
-
-.blockText {
+.officeAddress {
   font-size: 14px;
-  color: #475569;
+  color: #1e293b;
   line-height: 1.5;
 }
 
-.divider {
-  height: 1px;
-  background-color: #e2e8f0;
-  margin: 32px 0;
-}
-
-.followSection h3 {
-  font-size: 12px;
-  font-weight: 700;
+.officeDetails {
+  font-size: 13.5px;
   color: #64748b;
-  letter-spacing: 1.5px;
-  margin-bottom: 16px;
-}
-
-.socialButtons {
-  display: flex;
-  gap: 12px;
-}
-
-.socialBtn {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  border: 1px solid #cbd5e1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #64748b;
-  background-color: #ffffff;
-  transition: all 0.2s ease;
-}
-
-.socialBtn:hover {
-  border-color: #2563eb;
-  color: #2563eb;
-  background-color: #f8fafc;
-}
-
-/* Styled Headquarters Map Image Banner */
-.mapSection {
-  max-width: 1100px;
-  margin: 40px auto 60px auto;
-  padding: 0 24px;
+  line-height: 1.5;
 }
 
 .mapContainer {
-  position: relative;
-  background-color: #f1f5f9;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.02);
   border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+  margin-top: 16px;
   height: 380px;
 }
 
-.mapImage {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0.95;
+/* 4. Regional Offices Section */
+.regionalSection {
+  max-width: 1200px;
+  margin: 80px auto 40px auto;
+  padding: 0 24px;
 }
 
-/* Floating overlay widgets */
-.badgeHq {
-  position: absolute;
-  top: 40%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: #ffffff;
-  border: 1px solid #e2e8f0;
-  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
-  padding: 8px 16px;
-  border-radius: 9999px;
+.regionalContainer {
   display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 12px;
-  font-weight: 600;
-  color: #334155;
-  z-index: 10;
-}
-
-.badgeIconHq {
-  color: #ef4444;
-}
-
-.cardGlobalHub {
-  position: absolute;
-  bottom: 24px;
-  left: 24px;
-  background-color: #ffffff;
-  border: 1px solid #e2e8f0;
-  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.1);
-  padding: 16px 20px;
-  border-radius: 8px;
-  max-width: 320px;
-  z-index: 10;
-}
-
-.cardHubHeader {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 6px;
-}
-
-.cardHubPin {
-  color: #0056d2;
-}
-
-.cardGlobalHub h4 {
-  font-size: 14px;
-  font-weight: 700;
-  color: #0f172a;
-  margin: 0;
-}
-
-.cardGlobalHub p {
-  font-size: 12px;
-  color: #64748b;
-  line-height: 1.4;
-  margin: 0;
-}
-
-/* FAQ Section */
-.faqSection {
-  background-color: #f1f5f9;
-  padding: 60px 24px;
-}
-
-.faqContent {
-  max-width: 1100px;
-  margin: 0 auto;
-}
-
-.faqTitle {
-  font-size: 20px;
-  font-weight: 600;
-  color: #334155;
-  text-align: center;
-  margin-bottom: 8px;
-}
-
-.faqSubtitle {
-  font-size: 14px;
-  color: #64748b;
-  text-align: center;
-  margin-bottom: 40px;
-}
-
-.faqGrid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  flex-direction: column;
   gap: 24px;
 }
 
-.faqCard {
+.regionalHeader {
+  font-size: 16px;
+  font-weight: 700;
+  color: #0f172a;
+  letter-spacing: 1px;
+}
+
+.tabButtonsRow {
+  display: flex;
+  gap: 12px;
+  border-bottom: 1px solid #e2e8f0;
+  padding-bottom: 12px;
+}
+
+.tabBtn {
+  background-color: transparent;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  padding: 8px 24px;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #64748b;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  letter-spacing: 0.5px;
+}
+
+.tabBtn:hover {
+  background-color: #f8fafc;
+  color: #0f172a;
+}
+
+.activeTabBtn {
+  background-color: #ffffff;
+  border-color: #0f172a;
+  color: #0f172a;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.regionalCardsRow {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 12px;
+}
+
+.regionalCard {
   background-color: #ffffff;
   border: 1px solid #e2e8f0;
   border-radius: 8px;
-  padding: 24px;
-  box-shadow: 0 2px 4px rgba(15, 23, 42, 0.01);
+  padding: 36px 24px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.02);
 }
 
-.faqCard h3 {
-  font-size: 15px;
+.regionalCard:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.06);
+  border-color: #cbd5e1;
+}
+
+.cardIconWrapper {
+  width: 52px;
+  height: 52px;
+  background-color: #f0fdf4;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease;
+}
+
+.regionalCard:hover .cardIconWrapper {
+  transform: scale(1.05);
+}
+
+.cardIcon {
+  color: #16a34a;
+}
+
+.cardHeaderTitle {
+  font-size: 13px;
   font-weight: 700;
-  color: #0f172a;
-  margin-bottom: 8px;
+  color: #94a3b8;
+  letter-spacing: 1px;
 }
 
-.faqCard p {
+.cardTextContent {
   font-size: 13.5px;
-  color: #475569;
+  color: #334155;
   line-height: 1.5;
   margin: 0;
 }
 
-/* Success State Box inside Form */
+.cardEmailLinkText {
+  font-size: 13.5px;
+  color: #0056d2;
+  text-decoration: underline;
+  word-break: break-all;
+  font-weight: 500;
+}
+
+/* Success & Error State formatting */
 .successState {
   text-align: center;
-  padding: 30px 10px;
+  padding: 40px 10px;
 }
 
 .successIcon {
-  color: #10b981;
-  margin-bottom: 16px;
+  color: #22c55e;
+  margin-bottom: 20px;
 }
 
 .successState h3 {
@@ -465,58 +526,59 @@
 
 .resetBtn {
   background-color: transparent;
-  color: #0056d2;
+  color: #0f172a;
   border: 1px solid #cbd5e1;
-  border-radius: 9999px;
-  padding: 8px 20px;
+  border-radius: 4px;
+  padding: 8px 24px;
   font-size: 13px;
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
   transition: all 0.15s ease-in-out;
 }
 
 .resetBtn:hover {
   background-color: #f8fafc;
-  border-color: #0056d2;
+  border-color: #0f172a;
 }
 
 .errorBox {
   background-color: #fef2f2;
   border: 1px solid #fca5a5;
-  border-radius: 6px;
+  border-radius: 4px;
   color: #b91c1c;
-  padding: 12px;
+  padding: 12px 16px;
   font-size: 13px;
+  line-height: 1.4;
 }
 
-/* Responsiveness adjustments */
+/* --- Responsive Adaptations --- */
 @media (max-width: 992px) {
   .gridContainer {
     grid-template-columns: 1fr;
-    gap: 40px;
+    gap: 50px;
   }
   
-  .faqGrid {
-    grid-template-columns: 1fr;
+  .contactGrid {
+    grid-template-columns: 1fr 1fr;
   }
-}
-
-@media (max-width: 600px) {
-  .formRow {
+  
+  .regionalCardsRow {
     grid-template-columns: 1fr;
     gap: 16px;
   }
+}
+
+@media (max-width: 768px) {
+  .contactGrid {
+    grid-template-columns: 1fr;
+  }
   
-  .title {
-    font-size: 28px;
+  .formRow {
+    grid-template-columns: 1fr;
+    gap: 20px;
   }
   
   .formCard {
-    padding: 24px;
-  }
-  
-  .cardGlobalHub {
-    right: 24px;
-    max-width: initial;
+    padding: 30px 20px;
   }
 }

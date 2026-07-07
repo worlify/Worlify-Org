@@ -44,6 +44,7 @@ export default function Footer({ setActiveTab }) {
               <li className={styles.linkItem} onClick={() => setActiveTab('volunteer')} id="footer-nav-volunteer">Volunteer Hub</li>
               <li className={styles.linkItem} onClick={() => setActiveTab('donate')} id="footer-nav-donate">Make a Donation</li>
               <li className={styles.linkItem} onClick={() => setActiveTab('contact')} id="footer-nav-contact">Contact Us</li>
+              <li className={styles.linkItem} onClick={() => setActiveTab('faqs')} id="footer-nav-faqs">FAQs</li>
               <li className={styles.linkItem} onClick={() => setActiveTab('auth')} id="footer-nav-auth">Supporter Portal</li>
             </ul>
           </div>

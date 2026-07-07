@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Globe, User, LogOut, Heart, Menu, X } from 'lucide-react';
+import { Globe, User, LogOut, Heart, Menu, X, ChevronDown } from 'lucide-react';
 import styles from '../styles/Navbar.module.css';
 
 /**
@@ -9,6 +9,8 @@ import styles from '../styles/Navbar.module.css';
  */
 export default function Navbar({ activeTab, setActiveTab, user, onLogout, isLocalMode, onOpenKeysModal }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isMobileDropdownOpen, setIsMobileDropdownOpen] = useState(false);
 
   const handleNavClick = (tabId) => {
     setActiveTab(tabId);
@@ -24,6 +26,8 @@ export default function Navbar({ activeTab, setActiveTab, user, onLogout, isLoca
     }
     return 'U';
   };
+
+  const isContactActive = activeTab === 'contact' || activeTab === 'faqs';
 
   return (
     <header className={styles.navbar} id="main-header">
@@ -76,6 +80,43 @@ export default function Navbar({ activeTab, setActiveTab, user, onLogout, isLoca
               id="nav-link-gallery"
             >
               Gallery
+            </li>
+            <li 
+              className={`${styles.navLink} ${styles.dropdownContainer} ${isContactActive ? styles.activeNavLink : ''}`}
+              onMouseEnter={() => setIsDropdownOpen(true)}
+              onMouseLeave={() => setIsDropdownOpen(false)}
+              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+              id="nav-link-contact-parent"
+            >
+              <span className={styles.dropdownToggle}>
+                Contact Us <ChevronDown size={14} className={`${styles.caretIcon} ${isDropdownOpen ? styles.caretRotated : ''}`} />
+              </span>
+              {isDropdownOpen && (
+                <ul className={styles.dropdownMenu} id="contact-dropdown-menu">
+                  <li 
+                    className={`${styles.dropdownItem} ${activeTab === 'contact' ? styles.activeDropdownItem : ''}`}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleNavClick('contact');
+                      setIsDropdownOpen(false);
+                    }}
+                    id="dropdown-item-get-in-touch"
+                  >
+                    Get in Touch
+                  </li>
+                  <li 
+                    className={`${styles.dropdownItem} ${activeTab === 'faqs' ? styles.activeDropdownItem : ''}`}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleNavClick('faqs');
+                      setIsDropdownOpen(false);
+                    }}
+                    id="dropdown-item-faqs"
+                  >
+                    FAQs
+                  </li>
+                </ul>
+              )}
             </li>
           </ul>
         </nav>
@@ -169,6 +210,36 @@ export default function Navbar({ activeTab, setActiveTab, user, onLogout, isLoca
               onClick={() => handleNavClick('gallery')}
             >
               Gallery
+            </li>
+            <li className={styles.mobileDropdownContainer}>
+              <div 
+                className={`${styles.mobileNavLink} ${styles.mobileDropdownToggle} ${isContactActive ? styles.activeMobileNavLink : ''}`}
+                onClick={() => setIsMobileDropdownOpen(!isMobileDropdownOpen)}
+              >
+                Contact Us <ChevronDown size={16} className={`${styles.caretIcon} ${isMobileDropdownOpen ? styles.caretRotated : ''}`} />
+              </div>
+              {isMobileDropdownOpen && (
+                <ul className={styles.mobileSubMenu}>
+                  <li 
+                    className={`${styles.mobileSubNavLink} ${activeTab === 'contact' ? styles.activeMobileSubNavLink : ''}`}
+                    onClick={() => {
+                      handleNavClick('contact');
+                      setIsMenuOpen(false);
+                    }}
+                  >
+                    Get in Touch
+                  </li>
+                  <li 
+                    className={`${styles.mobileSubNavLink} ${activeTab === 'faqs' ? styles.activeMobileSubNavLink : ''}`}
+                    onClick={() => {
+                      handleNavClick('faqs');
+                      setIsMenuOpen(false);
+                    }}
+                  >
+                    FAQs
+                  </li>
+                </ul>
+              )}
             </li>
           </ul>
 

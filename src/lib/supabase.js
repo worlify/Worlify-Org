@@ -339,7 +339,12 @@ class LocalDBService {
   async addDonation(amount, cause, email = null) {
     const user = this.getCurrentUser();
     const donorEmail = email || (user ? user.email : 'anonymous@helper.org');
-    const userId = user ? user.id : null; // Use null instead of 'anonymous' string
+    let userId = user ? user.id : null;
+
+    // Validate UUID format to prevent foreign key violation with mock IDs
+    if (userId && !/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(userId)) {
+      userId = null;
+    }
 
     if (supabase) {
       const { data, error } = await supabase
@@ -354,6 +359,25 @@ class LocalDBService {
           }
         ])
         .select();
+
+      // Retry without user_id if foreign key constraint fails (error code 23503)
+      if (error && error.code === '23503') {
+        console.warn('Foreign key violation on user_id in donations. Retrying as anonymous.');
+        const retryResult = await supabase
+          .from('donations')
+          .insert([
+            {
+              amount: Number(amount),
+              cause,
+              user_id: null,
+              user_email: donorEmail,
+              date: new Date().toISOString()
+            }
+          ])
+          .select();
+        return retryResult;
+      }
+
       return { data, error };
     }
 
@@ -397,7 +421,12 @@ class LocalDBService {
   // Register as a volunteer
   async registerVolunteer(name, email, cause, skills, message) {
     const user = this.getCurrentUser();
-    const userId = user ? user.id : null; // Use null instead of 'anonymous' string
+    let userId = user ? user.id : null;
+
+    // Validate UUID format to prevent foreign key violation with mock IDs
+    if (userId && !/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(userId)) {
+      userId = null;
+    }
 
     if (supabase) {
       const { data, error } = await supabase
@@ -415,6 +444,28 @@ class LocalDBService {
           }
         ])
         .select();
+
+      // Retry without user_id if foreign key constraint fails (error code 23503)
+      if (error && error.code === '23503') {
+        console.warn('Foreign key violation on user_id in volunteers. Retrying as anonymous.');
+        const retryResult = await supabase
+          .from('volunteers')
+          .insert([
+            {
+              user_id: null,
+              name,
+              email,
+              cause,
+              skills,
+              message,
+              status: 'Pending',
+              date: new Date().toISOString()
+            }
+          ])
+          .select();
+        return retryResult;
+      }
+
       return { data, error };
     }
 
@@ -441,7 +492,12 @@ class LocalDBService {
   // Register a contact query
   async registerContactMessage(name, email, subject, message) {
     const user = this.getCurrentUser();
-    const userId = user ? user.id : null; // Use null instead of 'anonymous' string
+    let userId = user ? user.id : null;
+
+    // Validate UUID format to prevent foreign key violation with mock IDs
+    if (userId && !/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(userId)) {
+      userId = null;
+    }
 
     if (supabase) {
       const { data, error } = await supabase
@@ -457,6 +513,26 @@ class LocalDBService {
           }
         ])
         .select();
+
+      // Retry without user_id if foreign key constraint fails (error code 23503)
+      if (error && error.code === '23503') {
+        console.warn('Foreign key violation on user_id in contact_messages. Retrying as anonymous.');
+        const retryResult = await supabase
+          .from('contact_messages')
+          .insert([
+            {
+              user_id: null,
+              name,
+              email,
+              subject,
+              message,
+              date: new Date().toISOString()
+            }
+          ])
+          .select();
+        return retryResult;
+      }
+
       return { data, error };
     }
 

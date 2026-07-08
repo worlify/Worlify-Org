@@ -1,7 +1,7 @@
 .contactPage {
-  background-color: #fcfcfc;
+  background-color: var(--bg-color);
   min-height: 100vh;
-  color: #1e293b;
+  color: var(--text-main);
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   padding-bottom: 80px;
 }
@@ -36,15 +36,15 @@
   font-size: 15px;
   font-weight: 700;
   letter-spacing: 1px;
-  color: #0f172a;
+  color: var(--text-main);
   margin-bottom: 14px;
-  border-bottom: 1px solid #f1f5f9;
+  border-bottom: 1px solid var(--border-color);
   padding-bottom: 8px;
 }
 
 .sectionText {
   font-size: 14px;
-  color: #64748b;
+  color: var(--text-muted);
   line-height: 1.6;
   margin-bottom: 4px;
 }
@@ -67,7 +67,7 @@
 .subSectionHeader {
   font-size: 12px;
   font-weight: 700;
-  color: #475569;
+  color: var(--text-muted);
   letter-spacing: 0.5px;
   margin-bottom: 4px;
   text-transform: uppercase;
@@ -86,8 +86,8 @@
 }
 
 .formCard {
-  background-color: #ffffff;
-  border: 1px solid #e2e8f0;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
   border-radius: 8px;
   padding: 40px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
@@ -96,14 +96,14 @@
 .formHeader {
   font-size: 18px;
   font-weight: 700;
-  color: #0f172a;
+  color: var(--text-main);
   letter-spacing: 1.5px;
   margin-bottom: 6px;
 }
 
 .formSubheader {
   font-size: 13.5px;
-  color: #64748b;
+  color: var(--text-muted);
   line-height: 1.5;
   margin-bottom: 30px;
 }
@@ -129,19 +129,19 @@
 .inputGroup label {
   font-size: 12px;
   font-weight: 600;
-  color: #475569;
+  color: var(--text-muted);
   letter-spacing: 0.5px;
 }
 
 .inputGroup input, 
 .inputGroup textarea,
 .selectWrapper select {
-  background-color: #ffffff;
-  border: 1px solid #cbd5e1;
+  background-color: var(--bg-color);
+  border: 1px solid var(--border-color);
   border-radius: 4px;
   padding: 11px 14px;
   font-size: 14px;
-  color: #1e293b;
+  color: var(--text-main);
   outline: none;
   width: 100%;
   transition: all 0.15s ease-in-out;
@@ -149,13 +149,13 @@
 
 .inputGroup input::placeholder, 
 .inputGroup textarea::placeholder {
-  color: #94a3b8;
+  color: var(--text-light);
 }
 
 .inputGroup input:focus, 
 .inputGroup textarea:focus,
 .selectWrapper select:focus {
-  border-color: #0f172a;
+  border-color: var(--text-main);
   box-shadow: 0 0 0 3px rgba(15, 23, 42, 0.06);
 }
 
@@ -207,10 +207,10 @@
 
 /* 2. Accordions Section */
 .accordionSection {
-  background-color: #f1f5f9;
+  background-color: var(--bg-color);
   padding: 60px 24px;
-  border-top: 1px solid #e2e8f0;
-  border-bottom: 1px solid #e2e8f0;
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
 }
 
 .accordionContainer {
@@ -222,8 +222,8 @@
 }
 
 .accordionItem {
-  background-color: #ffffff;
-  border: 1px solid #e2e8f0;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
   border-radius: 4px;
   overflow: hidden;
   box-shadow: 0 2px 4px rgba(15, 23, 42, 0.01);
@@ -239,7 +239,7 @@
   align-items: center;
   font-size: 14.5px;
   font-weight: 700;
-  color: #0f172a;
+  color: var(--text-main);
   cursor: pointer;
   transition: background-color 0.15s ease;
   letter-spacing: 0.5px;
@@ -247,12 +247,12 @@
 }
 
 .accordionHeader:hover {
-  background-color: #f8fafc;
+  background-color: var(--bg-color);
 }
 
 .accordionContent {
   padding: 30px 28px;
-  border-top: 1px solid #f1f5f9;
+  border-top: 1px solid var(--border-color);
 }
 
 .accordionSubBlock {
@@ -263,10 +263,10 @@
 .subBlockTitle {
   font-size: 13px;
   font-weight: 700;
-  color: #475569;
+  color: var(--text-muted);
   margin-bottom: 20px;
   letter-spacing: 0.5px;
-  border-bottom: 1px dashed #e2e8f0;
+  border-bottom: 1px dashed var(--border-color);
   padding-bottom: 6px;
 }
 
@@ -278,8 +278,8 @@
 }
 
 .gridCard {
-  background-color: #ffffff;
-  border: 1px solid #f1f5f9;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
   padding: 20px;
   border-radius: 4px;
   display: flex;
@@ -299,7 +299,7 @@
 
 .cardContactInfo {
   font-size: 13.5px;
-  color: #334155;
+  color: var(--text-main);
   margin: 0;
   line-height: 1.4;
 }
@@ -315,7 +315,7 @@
 
 .accordionPlaceholderText {
   font-size: 14px;
-  color: #475569;
+  color: var(--text-muted);
   line-height: 1.6;
   margin-bottom: 10px;
 }
@@ -340,7 +340,7 @@
 .visitHeader {
   font-size: 16px;
   font-weight: 700;
-  color: #0f172a;
+  color: var(--text-main);
   letter-spacing: 1px;
 }
 
@@ -353,25 +353,25 @@
 .officeType {
   font-size: 13px;
   font-weight: 700;
-  color: #64748b;
+  color: var(--text-muted);
   letter-spacing: 0.5px;
   margin-bottom: 4px;
 }
 
 .officeAddress {
   font-size: 14px;
-  color: #1e293b;
+  color: var(--text-main);
   line-height: 1.5;
 }
 
 .officeDetails {
   font-size: 13.5px;
-  color: #64748b;
+  color: var(--text-muted);
   line-height: 1.5;
 }
 
 .mapContainer {
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--border-color);
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
@@ -395,39 +395,39 @@
 .regionalHeader {
   font-size: 16px;
   font-weight: 700;
-  color: #0f172a;
+  color: var(--text-main);
   letter-spacing: 1px;
 }
 
 .tabButtonsRow {
   display: flex;
   gap: 12px;
-  border-bottom: 1px solid #e2e8f0;
+  border-bottom: 1px solid var(--border-color);
   padding-bottom: 12px;
 }
 
 .tabBtn {
   background-color: transparent;
-  border: 1px solid #cbd5e1;
+  border: 1px solid var(--border-color);
   border-radius: 4px;
   padding: 8px 24px;
   font-size: 12.5px;
   font-weight: 700;
-  color: #64748b;
+  color: var(--text-muted);
   cursor: pointer;
   transition: all 0.15s ease;
   letter-spacing: 0.5px;
 }
 
 .tabBtn:hover {
-  background-color: #f8fafc;
-  color: #0f172a;
+  background-color: var(--bg-card);
+  color: var(--text-main);
 }
 
 .activeTabBtn {
-  background-color: #ffffff;
-  border-color: #0f172a;
-  color: #0f172a;
+  background-color: var(--bg-card);
+  border-color: var(--text-main);
+  color: var(--text-main);
   box-shadow: 0 2px 5px rgba(0,0,0,0.05);
 }
 
@@ -439,8 +439,8 @@
 }
 
 .regionalCard {
-  background-color: #ffffff;
-  border: 1px solid #e2e8f0;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
   border-radius: 8px;
   padding: 36px 24px;
   text-align: center;
@@ -461,7 +461,7 @@
 .cardIconWrapper {
   width: 52px;
   height: 52px;
-  background-color: #f0fdf4;
+  background-color: rgba(22, 163, 74, 0.12);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -480,13 +480,13 @@
 .cardHeaderTitle {
   font-size: 13px;
   font-weight: 700;
-  color: #94a3b8;
+  color: var(--text-light);
   letter-spacing: 1px;
 }
 
 .cardTextContent {
   font-size: 13.5px;
-  color: #334155;
+  color: var(--text-main);
   line-height: 1.5;
   margin: 0;
 }
@@ -513,21 +513,21 @@
 .successState h3 {
   font-size: 18px;
   font-weight: 700;
-  color: #0f172a;
+  color: var(--text-main);
   margin-bottom: 8px;
 }
 
 .successState p {
   font-size: 14px;
-  color: #64748b;
+  color: var(--text-muted);
   line-height: 1.5;
   margin-bottom: 24px;
 }
 
 .resetBtn {
   background-color: transparent;
-  color: #0f172a;
-  border: 1px solid #cbd5e1;
+  color: var(--text-main);
+  border: 1px solid var(--border-color);
   border-radius: 4px;
   padding: 8px 24px;
   font-size: 13px;
@@ -537,8 +537,8 @@
 }
 
 .resetBtn:hover {
-  background-color: #f8fafc;
-  border-color: #0f172a;
+  background-color: var(--bg-color);
+  border-color: var(--text-main);
 }
 
 .errorBox {

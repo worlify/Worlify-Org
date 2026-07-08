@@ -1,7 +1,8 @@
 /* Get Involved - High Fidelity Styles matching Mockup */
 
 .volunteerContainer {
-  background-color: #ffffff;
+  background-color: var(--bg-color);
+  color: var(--text-main);
   overflow: hidden;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
@@ -115,7 +116,9 @@
 /* 2. Why Volunteer With Us Section */
 .whySection {
   padding: 80px 24px;
-  background-color: #f8fafc;
+  background-color: var(--bg-card);
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
   text-align: center;
 }
 
@@ -127,13 +130,13 @@
 .sectionTitle {
   font-size: 32px;
   font-weight: 800;
-  color: #0f172a;
+  color: var(--text-main);
   margin-bottom: 12px;
   letter-spacing: -0.5px;
 }
 
 .sectionSubtitle {
-  color: #64748b;
+  color: var(--text-muted);
   font-size: 15px;
   line-height: 1.6;
 }
@@ -154,9 +157,9 @@
 }
 
 .featureCard {
-  background-color: #ffffff;
+  background-color: var(--bg-card);
   border-radius: 12px;
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--border-color);
   padding: 40px 32px;
   box-shadow: 0 4px 12px rgba(15, 23, 42, 0.02);
   text-align: center;
@@ -181,30 +184,30 @@
 }
 
 .blueIcon {
-  background-color: #eff6ff;
+  background-color: rgba(0, 86, 210, 0.12);
   color: #0056d2;
 }
 
 .greenIcon {
-  background-color: #ecfdf5;
+  background-color: rgba(5, 150, 105, 0.12);
   color: #059669;
 }
 
 .purpleIcon {
-  background-color: #f5f3ff;
+  background-color: rgba(124, 58, 237, 0.12);
   color: #7c3aed;
 }
 
 .cardTitle {
   font-size: 18px;
   font-weight: 700;
-  color: #0f172a;
+  color: var(--text-main);
   margin-bottom: 12px;
 }
 
 .cardText {
   font-size: 13.5px;
-  color: #64748b;
+  color: var(--text-muted);
   line-height: 1.5;
   margin: 0;
 }
@@ -212,7 +215,7 @@
 /* 3. Form and Info Split Section */
 .applySection {
   padding: 80px 24px;
-  background-color: #ffffff;
+  background-color: var(--bg-color);
 }
 
 .applyGrid {
@@ -254,7 +257,7 @@
 .applyTitle {
   font-size: 36px;
   font-weight: 800;
-  color: #0f172a;
+  color: var(--text-main);
   line-height: 1.2;
   margin-bottom: 20px;
   letter-spacing: -0.8px;
@@ -262,7 +265,7 @@
 
 .applyDesc {
   font-size: 15px;
-  color: #475569;
+  color: var(--text-muted);
   line-height: 1.6;
   margin-bottom: 32px;
 }
@@ -279,7 +282,7 @@
   gap: 12px;
   font-size: 14px;
   font-weight: 500;
-  color: #334155;
+  color: var(--text-main);
 }
 
 .checkIcon {
@@ -289,8 +292,8 @@
 
 /* Clean Form Card styling */
 .formCard {
-  background-color: #f8fafc;
-  border: 1px solid #e2e8f0;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
   border-radius: 16px;
   padding: 40px;
   box-shadow: 0 4px 12px rgba(15, 23, 42, 0.01);
@@ -337,17 +340,17 @@
 .label {
   font-size: 12.5px;
   font-weight: 600;
-  color: #334155;
+  color: var(--text-muted);
 }
 
 .input, .select {
   width: 100%;
   padding: 11px 16px;
-  border: 1px solid #e2e8f0;
-  background-color: #ffffff;
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-color);
   border-radius: 8px;
   font-size: 14px;
-  color: #0f172a;
+  color: var(--text-main);
   outline: none;
   transition: all 0.15s ease;
 }
@@ -360,11 +363,11 @@
 .textarea {
   width: 100%;
   padding: 12px 16px;
-  border: 1px solid #e2e8f0;
-  background-color: #ffffff;
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-color);
   border-radius: 8px;
   font-size: 14px;
-  color: #0f172a;
+  color: var(--text-main);
   outline: none;
   min-height: 120px;
   resize: vertical;
@@ -399,8 +402,8 @@
 
 /* Success Card */
 .successCard {
-  background-color: #ffffff;
-  border: 1px solid #cbd5e1;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
   border-radius: 12px;
   padding: 40px;
   text-align: center;
@@ -414,13 +417,13 @@
 .successTitle {
   font-size: 22px;
   font-weight: 800;
-  color: #0f172a;
+  color: var(--text-main);
   margin-bottom: 12px;
 }
 
 .successText {
   font-size: 14px;
-  color: #64748b;
+  color: var(--text-muted);
   line-height: 1.6;
   margin-bottom: 24px;
 }
@@ -467,7 +470,7 @@
 /* 4. Corporate & CSR Partnerships Horizontal Bento Grid */
 .corporateSection {
   padding: 40px 24px 80px 24px;
-  background-color: #ffffff;
+  background-color: var(--bg-color);
 }
 
 .corporateCard {

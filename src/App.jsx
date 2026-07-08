@@ -37,6 +37,23 @@ export default function App() {
   // Loading state for recovery session check
   const [isLoadingSession, setIsLoadingSession] = useState(true);
 
+  // Global Theme State
+  const [theme, setTheme] = useState('light');
+
+  // Initialize theme on load
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('worlify_theme') || 'light';
+    setTheme(savedTheme);
+    document.documentElement.setAttribute('data-theme', savedTheme);
+  }, []);
+
+  const toggleTheme = () => {
+    const nextTheme = theme === 'light' ? 'dark' : 'light';
+    setTheme(nextTheme);
+    localStorage.setItem('worlify_theme', nextTheme);
+    document.documentElement.setAttribute('data-theme', nextTheme);
+  };
+
   // Restore session on application load
   useEffect(() => {
     function restoreSession() {
@@ -121,6 +138,8 @@ export default function App() {
         onLogout={handleLogout}
         isLocalMode={isLocalMode}
         onOpenKeysModal={() => setKeysModalOpen(true)}
+        theme={theme}
+        toggleTheme={toggleTheme}
       />
 
       {/* 2. Main Tabbed Panel Stage */}
@@ -202,6 +221,7 @@ export default function App() {
         isOpen={keysModalOpen} 
         onClose={() => setKeysModalOpen(false)} 
       />
+
     </div>
   );
 }

@@ -104,9 +104,7 @@ export default function Faqs({ setActiveTab }) {
       <section className={styles.heroSection}>
         <div className={styles.heroContent}>
           <h1 className={styles.title}>Frequently Asked Questions</h1>
-          <p className={styles.subtitle}>
-            Have questions about how we work, how your donations are used, or how you can participate? Find the answers here.
-          </p>
+          <p className={styles.subtitle}>Have questions about how we work, how your donations are used, or how you can participate? Find the answers here.</p>
 
           {/* Search bar inside hero */}
           <div className={styles.searchBarContainer}>
@@ -196,12 +194,12 @@ export default function Faqs({ setActiveTab }) {
             <div className={styles.emptyState}>
               <HelpCircle size={48} className={styles.emptyIcon} />
               <h3>No FAQ matches found</h3>
-              <p>We couldn't find any questions matching "{searchQuery}". Try modifying your keywords or select another tab.</p>
+              <p>We couldn&apos;t find any questions matching &quot;{searchQuery}&quot;. Try modifying your keywords or select another tab.</p>
               <button 
                 onClick={() => { setSearchQuery(''); setActiveCategory('all'); }} 
                 className={styles.clearBtn}
               >
-                Clear Search & Filters
+                Clear Search &amp; Filters
               </button>
             </div>
           )}
@@ -213,7 +211,7 @@ export default function Faqs({ setActiveTab }) {
       <section className={styles.promptSection}>
         <div className={styles.promptContainer}>
           <h2>Still have questions?</h2>
-          <p>If you couldn't find the answers you were looking for, please don't hesitate to reach out to our Helpdesk directly.</p>
+          <p>If you couldn&apos;t find the answers you were looking for, please don&apos;t hesitate to reach out to our Helpdesk directly.</p>
           <button 
             className={styles.contactBtn}
             onClick={() => setActiveTab('contact')}

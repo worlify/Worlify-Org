@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
-import { Globe, User, LogOut, Heart, Menu, X, ChevronDown } from 'lucide-react';
+import { User, LogOut, Heart, Menu, X, ChevronDown, Sun, Moon } from 'lucide-react';
 import styles from '../styles/Navbar.module.css';
+
+const MARQUEE_TEXT = "Worlify Foundation is registered under sections 12A & 80G of the Income Tax Act, 1961 and CSR-1 registered under the Ministry of Corporate Affairs for undertaking CSR activities.";
 
 /**
  * Navbar Component
  * Renders the top header navigation, active page tab, and user-auth controls.
- * Uses CSS Modules for styling to avoid utility classes.
+ * Integrates light/dark toggle.
  */
-export default function Navbar({ activeTab, setActiveTab, user, onLogout, isLocalMode, onOpenKeysModal }) {
+export default function Navbar({ activeTab, setActiveTab, user, onLogout, isLocalMode, onOpenKeysModal, theme = 'light', toggleTheme }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isMobileDropdownOpen, setIsMobileDropdownOpen] = useState(false);
@@ -31,10 +33,32 @@ export default function Navbar({ activeTab, setActiveTab, user, onLogout, isLoca
 
   return (
     <header className={styles.navbar} id="main-header">
-      {/* Informative ribbon explaining Supabase local mock mode */}
+      
+      {/* 1. Top Bar Ribbon (Marquee, Language select, Dark Theme Toggle) */}
+      <div className={styles.topBar} id="header-top-bar">
+        <div className={styles.marqueeWrapper}>
+          <div className={styles.marqueeTextContainer}>
+            <span className={styles.marqueeSpan}>{MARQUEE_TEXT}</span>
+            <span className={styles.marqueeSpan}>{MARQUEE_TEXT}</span>
+          </div>
+        </div>
+        
+        <div className={styles.topBarControls}>
+          {/* Theme Toggle */}
+          <button 
+            className={styles.themeToggleBtn}
+            onClick={toggleTheme}
+            title={theme === 'light' ? 'Switch to Dark Mode' : 'Switch to Light Mode'}
+            aria-label="Toggle Theme Mode"
+          >
+            {theme === 'light' ? <Moon size={13} /> : <Sun size={13} />}
+          </button>
+        </div>
+      </div>
 
+      {/* 2. Main Navigation Header Container */}
       <div className={styles.navContainer}>
-        {/* Brand Logo matching mockup */}
+        {/* Brand Logo */}
         <div 
           className={styles.logo} 
           onClick={() => handleNavClick('home')}
@@ -125,7 +149,6 @@ export default function Navbar({ activeTab, setActiveTab, user, onLogout, isLoca
         <div className={styles.authGroup} id="auth-actions-group">
           {user ? (
             <>
-              {/* Authenticated user UI - Circular Avatar instead of Text Button */}
               <div 
                 className={`${styles.avatarCircle} ${activeTab === 'dashboard' ? styles.activeAvatarCircle : ''}`}
                 onClick={() => handleNavClick('dashboard')}
@@ -145,7 +168,6 @@ export default function Navbar({ activeTab, setActiveTab, user, onLogout, isLoca
             </>
           ) : (
             <>
-              {/* Guest UI */}
               <button 
                 className={styles.loginBtn} 
                 onClick={() => handleNavClick('auth')}
@@ -177,7 +199,7 @@ export default function Navbar({ activeTab, setActiveTab, user, onLogout, isLoca
         </button>
       </div>
 
-      {/* Mobile responsive menu dropdown */}
+      {/* Mobile responsive menu drawer */}
       {isMenuOpen && (
         <div className={styles.mobileMenu} id="mobile-dropdown-menu">
           <ul className={styles.mobileNavLinks}>

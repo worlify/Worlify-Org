@@ -1,6 +1,7 @@
 import React from 'react';
 import { Globe, Mail, Phone, MapPin, Twitter, Facebook, Instagram, Heart } from 'lucide-react';
 import styles from '../styles/Footer.module.css';
+import logo from '../assets/images/logo.png';
 
 /**
  * Footer Component
@@ -14,9 +15,13 @@ export default function Footer({ setActiveTab }) {
         <div className={styles.grid}>
           {/* Brand Introduction */}
           <div className={styles.brandColumn}>
-            <div className={styles.brandLogo} id="footer-logo">
-              <Globe className={styles.logoIcon} size={24} />
-              <span>Worlify</span>
+            <div 
+              className={styles.brandLogo} 
+              id="footer-logo"
+              onClick={() => setActiveTab('home')}
+              style={{ cursor: 'pointer' }}
+            >
+              <img src={logo.src || logo} alt="Worlify Foundation" className={styles.logoImg} />
             </div>
             <p className={styles.brandTagline}>
               Worlify is a registered multi-cause non-governmental organization working on the frontlines of global relief. We believe in transparency, collaborative action, and making local impact globally across 5 critical pillars.

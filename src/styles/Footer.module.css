@@ -39,6 +39,20 @@
   color: var(--secondary-color);
 }
 
+.logoImg {
+  height: 72px;
+  width: auto;
+  object-fit: contain;
+  background-color: #ffffff;
+  padding: 3px 8px;
+  border-radius: 6px;
+  transition: transform 0.3s ease;
+}
+
+.brandLogo:hover .logoImg {
+  transform: scale(1.05);
+}
+
 .brandTagline {
   font-size: 14px;
   line-height: 1.6;

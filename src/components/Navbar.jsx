@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { User, LogOut, Heart, Menu, X, ChevronDown, Sun, Moon } from 'lucide-react';
 import styles from '../styles/Navbar.module.css';
+import logo from '../assets/images/logo.png';
 
 const MARQUEE_TEXT = "Worlify Foundation is registered under sections 12A & 80G of the Income Tax Act, 1961 and CSR-1 registered under the Ministry of Corporate Affairs for undertaking CSR activities.";
 
@@ -64,7 +65,7 @@ export default function Navbar({ activeTab, setActiveTab, user, onLogout, isLoca
           onClick={() => handleNavClick('home')}
           id="navbar-logo"
         >
-          <span className={styles.logoText}>Worlify</span>
+          <img src={logo.src || logo} alt="Worlify Foundation" className={styles.logoImg} />
         </div>
 
         {/* Navigation links centered - Desktop */}

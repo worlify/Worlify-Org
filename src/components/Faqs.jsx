@@ -22,7 +22,7 @@ export default function Faqs({ setActiveTab }) {
     {
       category: 'general',
       question: 'Where are your headquarters located?',
-      answer: 'Our global headquarters are located at Gurucharan House, Yusuf Sarai, New Delhi, India. We also operate key regional hubs in Mumbai, Patna, and Bengaluru to coordinate local support efforts.',
+      answer: 'Our head office is located at A/1, JAN KALYAN BHAWAN-NEAR SMS COLLEGE, KASIMPUR BIRUHA, LUCKNOW, UTTAR PRADESH, 226501, INDIA. Our registered office is located at A/189, GROUND FLOOR NARAYAN ENCLAVE, KASIMPUR BIRUHA, LUCKNOW, UTTAR PRADESH, 226501, INDIA.',
       icon: BookOpen
     },
     {
@@ -46,7 +46,7 @@ export default function Faqs({ setActiveTab }) {
     {
       category: 'donations',
       question: 'Can I donate items like books, clothing, or medical supplies?',
-      answer: 'Yes! We actively collect and distribute physical educational materials, winter clothing, and medical supplies during relief drives. Please fill out our Helpdesk form or contact us via info@sankalpindia.org to coordinate logistics.',
+      answer: 'Yes! We actively collect and distribute physical educational materials, winter clothing, and medical supplies during relief drives. Please fill out our Helpdesk form or contact us via supportworlify@gmail.com to coordinate logistics.',
       icon: Heart
     },
     {
@@ -70,7 +70,7 @@ export default function Faqs({ setActiveTab }) {
     {
       category: 'partnerships',
       question: 'Who do I contact for Corporate Social Responsibility (CSR) partnerships?',
-      answer: 'For CSR alignments and corporate sponsorships, please reach out to our regional corporate leads listed on the "Get in Touch" page, or send a detailed proposal directly to corporatepartnerships@sankalpindia.org.',
+      answer: 'For CSR alignments and corporate sponsorships, please reach out to our team via the "Get in Touch" page, or send a detailed proposal directly to supportworlify@gmail.com.',
       icon: Briefcase
     },
     {

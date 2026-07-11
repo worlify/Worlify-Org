@@ -12,6 +12,7 @@ import Auth from './components/Auth';
 import Dashboard from './components/Dashboard';
 import Contact from './components/Contact';
 import Faqs from './components/Faqs';
+import Legal from './components/Legal';
 import Footer from './components/Footer';
 import KeysModal from './components/KeysModal';
 import { db, isLocalMode } from './lib/supabase';
@@ -195,6 +196,12 @@ export default function App() {
 
         {activeTab === 'faqs' && (
           <Faqs 
+            setActiveTab={setActiveTab}
+          />
+        )}
+
+        {activeTab === 'legal' && (
+          <Legal 
             setActiveTab={setActiveTab}
           />
         )}

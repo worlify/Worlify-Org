@@ -107,6 +107,13 @@ export default function Navbar({ activeTab, setActiveTab, user, onLogout, isLoca
               Gallery
             </li>
             <li 
+              className={`${styles.navLink} ${activeTab === 'legal' ? styles.activeNavLink : ''}`}
+              onClick={() => handleNavClick('legal')}
+              id="nav-link-legal"
+            >
+              Legal & Transparency
+            </li>
+            <li 
               className={`${styles.navLink} ${styles.dropdownContainer} ${isContactActive ? styles.activeNavLink : ''}`}
               onMouseEnter={() => setIsDropdownOpen(true)}
               onMouseLeave={() => setIsDropdownOpen(false)}
@@ -233,6 +240,12 @@ export default function Navbar({ activeTab, setActiveTab, user, onLogout, isLoca
               onClick={() => handleNavClick('gallery')}
             >
               Gallery
+            </li>
+            <li 
+              className={`${styles.mobileNavLink} ${activeTab === 'legal' ? styles.activeMobileNavLink : ''}`}
+              onClick={() => handleNavClick('legal')}
+            >
+              Legal & Transparency
             </li>
             <li className={styles.mobileDropdownContainer}>
               <div 

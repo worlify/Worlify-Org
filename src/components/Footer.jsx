@@ -55,15 +55,15 @@ export default function Footer({ setActiveTab }) {
             <div className={styles.contactInfo}>
               <div className={styles.contactRow}>
                 <MapPin size={16} className={styles.logoIcon} />
-                <span>100 Global Care Blvd, Suite 400, NY</span>
+                <span>A/189, GROUND FLOOR NARAYAN ENCLAVE, KASIMPUR BIRUHA, LUCKNOW, UTTAR PRADESH, 226501, INDIA</span>
               </div>
               <div className={styles.contactRow}>
                 <Phone size={16} className={styles.logoIcon} />
-                <span>+1 (800) 555-CARE (2273)</span>
+                <span>+91 9161321513</span>
               </div>
               <div className={styles.contactRow}>
                 <Mail size={16} className={styles.logoIcon} />
-                <span>contact@worlify.org</span>
+                <span>supportworlify@gmail.com</span>
               </div>
             </div>
           </div>

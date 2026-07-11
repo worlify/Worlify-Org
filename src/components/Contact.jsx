@@ -19,7 +19,7 @@ export default function Contact({ setActiveTab }) {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
-  
+
   // Accordion open/close state
   const [expandedAccordions, setExpandedAccordions] = useState({
     partnership: true,
@@ -29,7 +29,7 @@ export default function Contact({ setActiveTab }) {
   });
 
   // Regional office active tab
-  const [activeOfficeTab, setActiveOfficeTab] = useState('mumbai');
+  const [activeOfficeTab, setActiveOfficeTab] = useState('head_office');
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -82,62 +82,57 @@ export default function Contact({ setActiveTab }) {
 
   // Office data for regional tabs
   const offices = {
-    mumbai: {
-      address: 'Unit No. 101, First Floor, Block A, Mumbai Tech Park, BKC, Mumbai - 400051',
-      phone: '+91-22-68934500',
-      email: 'mumbai@sankalpindia.org'
+    head_office: {
+      address: 'A/1, JAN KALYAN BHAWAN-NEAR SMS COLLEGE, KASIMPUR BIRUHA, LUCKNOW, UTTAR PRADESH, 226501, INDIA',
+      phone: '+91-9161321513',
+      email: 'supportworlify@gmail.com'
     },
-    patna: {
-      address: '3rd Floor, Shanti Enclave, Boring Road, Near Chauraha, Patna - 800001',
-      phone: '+91-612-4029188',
-      email: 'patna@sankalpindia.org'
-    },
-    bengaluru: {
-      address: 'No. 45, 2nd Cross Road, Koramangala 4th Block, Bengaluru - 560034',
-      phone: '+91-80-41589300',
-      email: 'bengaluru@sankalpindia.org'
+    regd_office: {
+      address: 'A/189, GROUND FLOOR NARAYAN ENCLAVE, KASIMPUR BIRUHA, LUCKNOW, UTTAR PRADESH, 226501, INDIA',
+      phone: '+91-9161321513',
+      email: 'supportworlify@gmail.com'
     }
   };
 
   return (
     <div className={styles.contactPage} id="contact-page-container">
-      
+
       {/* 1. Main Grid: Info columns left, Helpdesk form right */}
       <section className={styles.mainContainer}>
         <div className={styles.gridContainer}>
-          
+
           {/* Left Column: Direct Contacts */}
           <div className={styles.infoColumn}>
             <div className={styles.contactSection}>
               <h3 className={styles.sectionHeader}>FOR CORPORATE PARTNERSHIPS</h3>
               <p className={styles.sectionText}>For all queries relating to corporate partnerships:</p>
-              <a href="mailto:corporatepartnerships@sankalpindia.org" className={styles.emailLink}>
-                corporatepartnerships@sankalpindia.org
+              <a href="mailto:supportworlify@gmail.com" className={styles.emailLink}>
+                supportworlify@gmail.com
               </a>
             </div>
 
             <div className={styles.contactSection}>
               <h3 className={styles.sectionHeader}>DONATION RELATED QUERIES</h3>
-              
+
               <div className={styles.subSection}>
                 <h4 className={styles.subSectionHeader}>FOR NEW DONORS</h4>
-                <p className={styles.sectionText}>Ashutosh: +91 9886311666 / <a href="mailto:ashutosh@sankalpindia.org" className={styles.inlineEmail}>ashutosh@sankalpindia.org</a></p>
-                <p className={styles.sectionText}>Or write to us at <a href="mailto:donate@sankalpindia.org" className={styles.inlineEmail}>donate@sankalpindia.org</a></p>
+                <p className={styles.sectionText}>RAVI: +91 9161321513 / <a href="mailto:ravikumarverma.co.in@gmail.com" className={styles.inlineEmail}>ravikumarverma.co.in@gmail.com</a></p>
+                <p className={styles.sectionText}>Or write to us at <a href="mailto:worlifyfoundation@gmail.com" className={styles.inlineEmail}>worlifyfoundation@gmail.com</a></p>
               </div>
 
               <div className={styles.subSection}>
                 <h4 className={styles.subSectionHeader}>FOR EXISTING DONORS</h4>
                 <p className={styles.sectionText}>For all queries regarding donation receipts/certificates:</p>
-                <a href="mailto:receipt@sankalpindia.org" className={styles.emailLink}>
-                  receipt@sankalpindia.org
+                <a href="mailto:worlifyfoundation@gmail.com" className={styles.emailLink}>
+                  worlifyfoundation@gmail.com
                 </a>
               </div>
             </div>
 
             <div className={styles.contactSection}>
               <h3 className={styles.sectionHeader}>FOR ALL GENERAL QUERIES</h3>
-              <a href="mailto:info@sankalpindia.org" className={styles.emailLink}>
-                info@sankalpindia.org
+              <a href="mailto:supportworlify@gmail.com" className={styles.emailLink}>
+                supportworlify@gmail.com
               </a>
             </div>
           </div>
@@ -153,7 +148,7 @@ export default function Contact({ setActiveTab }) {
                   <CheckCircle size={48} className={styles.successIcon} />
                   <h3>Submitted Successfully!</h3>
                   <p>Thank you. Your message has been received. Our support team will get in touch with you shortly.</p>
-                  <button 
+                  <button
                     className={styles.resetBtn}
                     onClick={() => setSuccess(false)}
                   >
@@ -241,9 +236,9 @@ export default function Contact({ setActiveTab }) {
                     ></textarea>
                   </div>
 
-                  <button 
-                    type="submit" 
-                    className={styles.submitBtn} 
+                  <button
+                    type="submit"
+                    className={styles.submitBtn}
                     disabled={loading}
                     id="contact-submit-btn"
                   >
@@ -260,100 +255,54 @@ export default function Contact({ setActiveTab }) {
       {/* 2. Accordions Section */}
       <section className={styles.accordionSection}>
         <div className={styles.accordionContainer}>
-          
+
           {/* Panel 1: Partnership Support */}
           <div className={styles.accordionItem}>
-            <button 
-              className={styles.accordionHeader} 
+            <button
+              className={styles.accordionHeader}
               onClick={() => toggleAccordion('partnership')}
             >
               <span>PARTNERSHIP SUPPORT</span>
               {expandedAccordions.partnership ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
             </button>
-            
+
             {expandedAccordions.partnership && (
               <div className={styles.accordionContent}>
                 <div className={styles.accordionSubBlock}>
                   <h4 className={styles.subBlockTitle}>CORPORATE SOCIAL RESPONSIBILITY (CSR) RELATED QUERIES</h4>
-                  
+
                   <div className={styles.contactGrid}>
                     <div className={styles.gridCard}>
                       <span className={styles.cardRegion}>NORTH REGION</span>
-                      <p className={styles.cardContactInfo}>Manav Singh Saluja</p>
-                      <p className={styles.cardContactInfo}>+91 8826048123</p>
-                      <a href="mailto:manav.saluja@sankalpindia.org" className={styles.cardEmailLink}>manav.saluja@sankalpindia.org</a>
+                      <p className={styles.cardContactInfo}>Ravi Kumar Verma</p>
+                      <p className={styles.cardContactInfo}>+91 9161321513</p>
+                      <a href="mailto:ravikumarverma.co.in@gmail.com" className={styles.cardEmailLink}>ravikumarverma.co.in@gmail.com</a>
                     </div>
-                    
-                    <div className={styles.gridCard}>
+
+                    {/* <div className={styles.gridCard}>
                       <span className={styles.cardRegion}>WEST REGION</span>
                       <p className={styles.cardContactInfo}>Amit Shukla</p>
                       <p className={styles.cardContactInfo}>+91 9967115859</p>
                       <a href="mailto:amit.shukla@sankalpindia.org" className={styles.cardEmailLink}>amit.shukla@sankalpindia.org</a>
-                    </div>
-
-                    <div className={styles.gridCard}>
-                      <span className={styles.cardRegion}>SOUTH REGION</span>
-                      <p className={styles.cardContactInfo}>Anubhav Kapoor</p>
-                      <p className={styles.cardContactInfo}>+91 9820542338</p>
-                      <a href="mailto:anubhav.kapoor@sankalpindia.org" className={styles.cardEmailLink}>anubhav.kapoor@sankalpindia.org</a>
-                    </div>
-
-                    <div className={styles.gridCard}>
-                      <span className={styles.cardRegion}>EAST REGION</span>
-                      <p className={styles.cardContactInfo}>Sanjay Agrawal</p>
-                      <p className={styles.cardContactInfo}>+91 9831038166</p>
-                      <a href="mailto:sanjay.agrawal@sankalpindia.org" className={styles.cardEmailLink}>sanjay.agrawal@sankalpindia.org</a>
-                    </div>
-
-                    <div className={styles.gridCard}>
-                      <span className={styles.cardRegion}>CORPORATE EMPLOYER ENGAGEMENT</span>
-                      <p className={styles.cardContactInfo}>Abhay Pandey</p>
-                      <p className={styles.cardContactInfo}>+91 9920367280</p>
-                      <a href="mailto:abhay.pandey@sankalpindia.org" className={styles.cardEmailLink}>abhay.pandey@sankalpindia.org</a>
-                    </div>
-
-                    <div className={styles.gridCard}>
-                      <span className={styles.cardRegion}>CAUSE MARKETING & CAMPAIGNS</span>
-                      <p className={styles.cardContactInfo}>Rohan Dey</p>
-                      <p className={styles.cardContactInfo}>+91 9819665780</p>
-                      <a href="mailto:rohan.dey@sankalpindia.org" className={styles.cardEmailLink}>rohan.dey@sankalpindia.org</a>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
 
                 <div className={styles.accordionSubBlock} style={{ marginTop: '24px' }}>
                   <h4 className={styles.subBlockTitle}>OTHER PARTNERSHIPS</h4>
-                  
+
                   <div className={styles.contactGrid}>
                     <div className={styles.gridCard}>
                       <span className={styles.cardRegion}>EVENT RELATED QUERIES</span>
-                      <p className={styles.cardContactInfo}>Rajeev Sharma</p>
-                      <a href="mailto:rajeev@sankalpindia.org" className={styles.cardEmailLink}>rajeev@sankalpindia.org</a>
+                      <p className={styles.cardContactInfo}>Support Worlify</p>
+                      <a href="mailto:supportworlify@gmail.com" className={styles.cardEmailLink}>supportworlify@gmail.com</a>
                     </div>
 
-                    <div className={styles.gridCard}>
+                    {/* <div className={styles.gridCard}>
                       <span className={styles.cardRegion}>PHILANTHROPY ADVISORY</span>
                       <p className={styles.cardContactInfo}>Nitin Patel</p>
                       <a href="mailto:nitin.patel@sankalpindia.org" className={styles.cardEmailLink}>nitin.patel@sankalpindia.org</a>
-                    </div>
-
-                    <div className={styles.gridCard}>
-                      <span className={styles.cardRegion}>SCHOOL PARTNERSHIP</span>
-                      <p className={styles.cardContactInfo}>Kiran Mehta</p>
-                      <a href="mailto:kiran.mehta@sankalpindia.org" className={styles.cardEmailLink}>kiran.mehta@sankalpindia.org</a>
-                    </div>
-
-                    <div className={styles.gridCard}>
-                      <span className={styles.cardRegion}>MEDIA & GOVT AFFAIRS</span>
-                      <p className={styles.cardContactInfo}>Nehal Sen</p>
-                      <a href="mailto:nehal@sankalpindia.org" className={styles.cardEmailLink}>nehal@sankalpindia.org</a>
-                    </div>
-
-                    <div className={styles.gridCard}>
-                      <span className={styles.cardRegion}>CELEBRITY ASSOCIATIONS</span>
-                      <p className={styles.cardContactInfo}>Pranay Singh</p>
-                      <a href="mailto:pranay.singh@sankalpindia.org" className={styles.cardEmailLink}>pranay.singh@sankalpindia.org</a>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               </div>
@@ -362,8 +311,8 @@ export default function Contact({ setActiveTab }) {
 
           {/* Panel 2: Communication Associations */}
           <div className={styles.accordionItem}>
-            <button 
-              className={styles.accordionHeader} 
+            <button
+              className={styles.accordionHeader}
               onClick={() => toggleAccordion('communication')}
             >
               <span>COMMUNICATION RELATED ASSOCIATIONS</span>
@@ -373,7 +322,7 @@ export default function Contact({ setActiveTab }) {
               <div className={styles.accordionContent}>
                 <p className={styles.accordionPlaceholderText}>For media relations, PR inquiries and public communication associations:</p>
                 <p className={styles.accordionPlaceholderText}>
-                  <strong>Media Desk:</strong> <a href="mailto:media@sankalpindia.org" className={styles.inlineEmail}>media@sankalpindia.org</a> or call +91-11-40583415
+                  <strong>Media Desk:</strong> <a href="mailto:supportworlify@gmail.com" className={styles.inlineEmail}>supportworlify@gmail.com</a> or call +91-9161321513
                 </p>
               </div>
             )}
@@ -381,8 +330,8 @@ export default function Contact({ setActiveTab }) {
 
           {/* Panel 3: Programme Related Queries */}
           <div className={styles.accordionItem}>
-            <button 
-              className={styles.accordionHeader} 
+            <button
+              className={styles.accordionHeader}
               onClick={() => toggleAccordion('programme')}
             >
               <span>PROGRAMME RELATED QUERIES</span>
@@ -392,7 +341,7 @@ export default function Contact({ setActiveTab }) {
               <div className={styles.accordionContent}>
                 <p className={styles.accordionPlaceholderText}>For questions regarding our ongoing campaigns, execution tracking and field status:</p>
                 <p className={styles.accordionPlaceholderText}>
-                  <strong>Program Office:</strong> <a href="mailto:programmes@sankalpindia.org" className={styles.inlineEmail}>programmes@sankalpindia.org</a> or call +91-11-40583420
+                  <strong>Program Office:</strong> <a href="mailto:supportworlify@gmail.com" className={styles.inlineEmail}>supportworlify@gmail.com</a> or call +91-9161321513
                 </p>
               </div>
             )}
@@ -400,8 +349,8 @@ export default function Contact({ setActiveTab }) {
 
           {/* Panel 4: Volunteering & Jobs */}
           <div className={styles.accordionItem}>
-            <button 
-              className={styles.accordionHeader} 
+            <button
+              className={styles.accordionHeader}
               onClick={() => toggleAccordion('volunteering')}
             >
               <span>VOLUNTEERING & JOBS</span>
@@ -411,7 +360,7 @@ export default function Contact({ setActiveTab }) {
               <div className={styles.accordionContent}>
                 <p className={styles.accordionPlaceholderText}>To join our team or apply for internships, fellowship programs and voluntary duties:</p>
                 <p className={styles.accordionPlaceholderText}>
-                  <strong>Human Resources:</strong> <a href="mailto:careers@sankalpindia.org" className={styles.inlineEmail}>careers@sankalpindia.org</a>. Please attach your resume and cover letter.
+                  <strong>Human Resources:</strong> <a href="mailto:supportworlify@gmail.com" className={styles.inlineEmail}>supportworlify@gmail.com</a>. Please attach your resume and cover letter.
                 </p>
               </div>
             )}
@@ -424,26 +373,26 @@ export default function Contact({ setActiveTab }) {
       <section className={styles.visitUsSection}>
         <div className={styles.visitContainer}>
           <h2 className={styles.visitHeader}>VISIT US HERE</h2>
-          
+
           <div className={styles.officeBlock}>
             <h3 className={styles.officeType}>HEAD OFFICE</h3>
-            <p className={styles.officeAddress}>1st & 2nd Floor, Gurucharan House, Yusuf Sarai Community Centre, New Delhi - 110016</p>
-            <p className={styles.officeDetails}>Phone: +91-11-40583400, Fax: +91-11-40583401</p>
-            <p className={styles.officeDetails}>Email: <a href="mailto:info@sankalpindia.org" className={styles.inlineEmail}>info@sankalpindia.org</a></p>
-            
+            <p className={styles.officeAddress}>A/1, JAN KALYAN BHAWAN-NEAR SMS COLLEGE, KASIMPUR BIRUHA, LUCKNOW, UTTAR PRADESH, 226501, INDIA</p>
+            <p className={styles.officeDetails}>Phone: +91-9161321513</p>
+            <p className={styles.officeDetails}>Email: <a href="mailto:supportworlify@gmail.com" className={styles.inlineEmail}>supportworlify@gmail.com</a></p>
+
             <p className={styles.officeAddress} style={{ marginTop: '16px' }}><strong>Regd. Office:</strong></p>
-            <p className={styles.officeAddress}>S-217, Panchsheel Park, New Delhi - 110017</p>
+            <p className={styles.officeAddress}>A/189, GROUND FLOOR NARAYAN ENCLAVE, KASIMPUR BIRUHA, LUCKNOW, UTTAR PRADESH, 226501, INDIA</p>
           </div>
 
           {/* Google Maps Iframe Embed container */}
           <div className={styles.mapContainer}>
-            <iframe 
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3561.9400421819164!2d81.0759911!3d26.778181099999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399be7a302a11e01%3A0x897b06736ed0e32c!2sWorlify%20Foundation!5e0!3m2!1sen!2sin!4v1783431168435!5m2!1sen!2sin" 
-              width="100%" 
-              height="380" 
-              style={{ border: 0 }} 
-              allowFullScreen="" 
-              loading="lazy" 
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3561.9400421819164!2d81.0759911!3d26.778181099999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399be7a302a11e01%3A0x897b06736ed0e32c!2sWorlify%20Foundation!5e0!3m2!1sen!2sin!4v1783431168435!5m2!1sen!2sin"
+              width="100%"
+              height="380"
+              style={{ border: 0 }}
+              allowFullScreen=""
+              loading="lazy"
               referrerPolicy="strict-origin-when-cross-origin"
               title="Worlify Foundation Map Location"
             ></iframe>
@@ -458,23 +407,17 @@ export default function Contact({ setActiveTab }) {
 
           {/* Tabs header */}
           <div className={styles.tabButtonsRow}>
-            <button 
-              className={`${styles.tabBtn} ${activeOfficeTab === 'mumbai' ? styles.activeTabBtn : ''}`}
-              onClick={() => setActiveOfficeTab('mumbai')}
+            <button
+              className={`${styles.tabBtn} ${activeOfficeTab === 'head_office' ? styles.activeTabBtn : ''}`}
+              onClick={() => setActiveOfficeTab('head_office')}
             >
-              MUMBAI
+              Head Office
             </button>
-            <button 
-              className={`${styles.tabBtn} ${activeOfficeTab === 'patna' ? styles.activeTabBtn : ''}`}
-              onClick={() => setActiveOfficeTab('patna')}
+            <button
+              className={`${styles.tabBtn} ${activeOfficeTab === 'regd_office' ? styles.activeTabBtn : ''}`}
+              onClick={() => setActiveOfficeTab('regd_office')}
             >
-              PATNA
-            </button>
-            <button 
-              className={`${styles.tabBtn} ${activeOfficeTab === 'bengaluru' ? styles.activeTabBtn : ''}`}
-              onClick={() => setActiveOfficeTab('bengaluru')}
-            >
-              BENGALURU
+              Registered Office
             </button>
           </div>
 

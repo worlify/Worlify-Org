@@ -159,7 +159,7 @@
 /* 3. Impact Section */
 .impactSection {
   padding: 5rem 0;
-  background-color: var(--bg-card);
+  background-color: #F3F2F3;
   border-top: 1px solid var(--border-color);
   border-bottom: 1px solid var(--border-color);
 }
@@ -233,82 +233,90 @@
 /* 4. Programmes Section */
 .programmesSection {
   padding: 5rem 0;
-  background-color: var(--bg-color);
+  background-color: #ffffff;
 }
 
 .programmeGrid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 2rem;
-  padding: 0 1rem;
+  gap: 4.5rem 5.5rem;
+  padding: 2.5rem 1rem;
+  max-width: 1100px;
+  margin: 0 auto;
 }
 
-.programmeCard {
-  background-color: var(--bg-card);
-  padding: 2.25rem;
-  border-radius: 8px;
-  border: 1px solid var(--border-color);
-  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);
-  transition: all 0.3s ease;
-}
-
-.programmeCard:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 20px -5px rgba(0, 0, 0, 0.08);
-  border-color: var(--border-color);
-}
-
-.programmeHeader {
+.programmeItem {
   display: flex;
   align-items: center;
-  gap: 1.25rem;
-  margin-bottom: 1rem;
+  gap: 1.75rem;
 }
 
-.programmeIcon {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
+.programmeIconWrapper {
+  flex-shrink: 0;
+  width: 90px;
+  height: 90px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
+  transition: transform 0.3s ease;
+}
+
+.programmeItem:hover .programmeIconWrapper {
+  transform: scale(1.08);
+}
+
+.programmeSvg {
+  width: 100%;
+  height: 100%;
+}
+
+.programmeText {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
 }
 
 .programmeTitle {
-  font-size: 1.25rem;
-  font-weight: 800;
+  font-family: var(--font-display);
+  font-size: 1.45rem;
+  font-weight: 700;
   letter-spacing: 0.5px;
+  margin: 0;
+  line-height: 1.2;
 }
 
 .programmeDesc {
-  font-size: 0.975rem;
-  color: var(--text-muted);
-  line-height: 1.6;
+  font-size: 0.95rem;
+  color: #475569;
+  line-height: 1.45;
+  margin: 0;
 }
 
-/* Programme Colors */
-.iconEdu { background-color: #f59e0b; }
-.colorEdu { color: #f59e0b; }
+/* Programme Colors matched to mockup */
+.colorEdu { color: #E2A93E; }
+.colorHealth { color: #9D8ABF; }
+.colorWomen { color: #84B0BA; }
+.colorLive { color: #C69A85; }
+.colorGrass { color: #48C379; }
+.colorDisaster { color: #EE7A6B; }
 
-.iconHealth { background-color: #06b6d4; }
-.colorHealth { color: #06b6d4; }
-
-.iconWomen { background-color: #ec4899; }
-.colorWomen { color: #ec4899; }
-
-.iconLive { background-color: #3b82f6; }
-.colorLive { color: #3b82f6; }
-
-.iconGrass { background-color: #10b981; }
-.colorGrass { color: #10b981; }
-
-.iconDisaster { background-color: #ef4444; }
-.colorDisaster { color: #ef4444; }
+@media (max-width: 968px) {
+  .programmeGrid {
+    gap: 3.5rem 3rem;
+  }
+  .programmeIconWrapper {
+    width: 80px;
+    height: 80px;
+  }
+  .programmeTitle {
+    font-size: 1.3rem;
+  }
+}
 
 @media (max-width: 768px) {
   .programmeGrid {
     grid-template-columns: 1fr;
+    gap: 3rem;
   }
 }
 

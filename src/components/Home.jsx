@@ -24,7 +24,11 @@ import awardCeremony from '../assets/images/award_ceremony.png';
 
 export default function Home({ setActiveTab, setDonationPreload, isLocalMode }) {
   // Live stats dynamically updated by db if available
-  const [impactedCount, setImpactedCount] = useState(20); // In Lakhs
+  const [livesTarget, setLivesTarget] = useState(2000);
+  const [livesCount, setLivesCount] = useState(0);
+  const [villagesCount, setVillagesCount] = useState(0);
+  const [projectsCount, setProjectsCount] = useState(0);
+  const [statesCount, setStatesCount] = useState(0);
 
   useEffect(() => {
     const loadStats = async () => {
@@ -32,8 +36,8 @@ export default function Home({ setActiveTab, setDonationPreload, isLocalMode }) 
         const { data, error } = await db.getDonations();
         if (!error && data) {
           const totalAmount = data.reduce((sum, item) => sum + Number(item.amount), 0);
-          // Dynamically increase impacted count based on donations
-          setImpactedCount(20 + Number((totalAmount / 100000).toFixed(2))); 
+          // Dynamically increase lives target based on donations
+          setLivesTarget(2000 + Math.floor(totalAmount / 500));
         }
       } catch (e) {
         console.error('Error loading stats: ', e);
@@ -41,6 +45,37 @@ export default function Home({ setActiveTab, setDonationPreload, isLocalMode }) 
     };
     loadStats();
   }, []);
+
+  useEffect(() => {
+    const duration = 1500; // 1.5 seconds fast counting animation
+    let animationFrameId;
+    const startTime = performance.now();
+
+    const animate = (time) => {
+      const elapsed = time - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      
+      // Easing function: easeOutQuad
+      const easeOutProgress = progress * (2 - progress);
+
+      setLivesCount(Math.floor(easeOutProgress * livesTarget));
+      setVillagesCount(Math.floor(easeOutProgress * 5));
+      setProjectsCount(Math.floor(easeOutProgress * 15));
+      setStatesCount(Math.floor(easeOutProgress * 3));
+
+      if (progress < 1) {
+        animationFrameId = requestAnimationFrame(animate);
+      }
+    };
+
+    animationFrameId = requestAnimationFrame(animate);
+
+    return () => {
+      if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+      }
+    };
+  }, [livesTarget]);
 
   // 10 high-resolution sliding backgrounds representing education and community support
   const heroImages = [
@@ -134,25 +169,25 @@ export default function Home({ setActiveTab, setDonationPreload, isLocalMode }) 
           
           <div className={styles.impactGrid}>
             <div className={styles.impactCard} id="impact-card-lives">
-              <div className={styles.impactValue}>{impactedCount}+ Lakh</div>
+              <div className={styles.impactValue}>{livesCount}+</div>
               <div className={styles.impactLabel}>LIVES</div>
               <div className={styles.impactSub}>children and families impacted directly so far</div>
             </div>
             
             <div className={styles.impactCard} id="impact-card-villages">
-              <div className={styles.impactValue}>2000+</div>
+              <div className={styles.impactValue}>{villagesCount}+</div>
               <div className={styles.impactLabel}>VILLAGES</div>
               <div className={styles.impactSub}>and urban slums reached across the country</div>
             </div>
             
             <div className={styles.impactCard} id="impact-card-projects">
-              <div className={styles.impactValue}>400+</div>
+              <div className={styles.impactValue}>{projectsCount}+</div>
               <div className={styles.impactLabel}>PROJECTS</div>
               <div className={styles.impactSub}>focused on education, healthcare, and livelihood</div>
             </div>
             
             <div className={styles.impactCard} id="impact-card-states">
-              <div className={styles.impactValue}>27+</div>
+              <div className={styles.impactValue}>{statesCount}+</div>
               <div className={styles.impactLabel}>STATES</div>
               <div className={styles.impactSub}>covered under active grassroots operations</div>
             </div>
@@ -164,85 +199,151 @@ export default function Home({ setActiveTab, setDonationPreload, isLocalMode }) 
       <section className={styles.programmesSection} id="our-programmes">
         <div className="container">
           <h2 className={styles.sectionHeading}>OUR PROGRAMMES</h2>
-          <div className={styles.impactDivider}></div>
 
           <div className={styles.programmeGrid}>
             {/* Programme 1: Education */}
-            <div className={styles.programmeCard} id="prog-card-education">
-              <div className={styles.programmeHeader}>
-                <div className={`${styles.programmeIcon} ${styles.iconEdu}`}>
-                  <BookOpen size={24} />
-                </div>
-                <h3 className={`${styles.programmeTitle} ${styles.colorEdu}`}>EDUCATION</h3>
+            <div className={styles.programmeItem} id="prog-item-education">
+              <div className={styles.programmeIconWrapper}>
+                <svg viewBox="0 0 100 100" className={styles.programmeSvg} xmlns="http://www.w3.org/2000/svg">
+                  <path d="M 22,45 C 18,28 36,15 54,18 C 72,21 82,35 80,53 C 78,71 63,82 46,80 C 29,78 26,62 22,45 Z" fill="#FCEACD" />
+                  <path d="M 28,68 L 48,74 L 52,74 L 72,68" stroke="#334155" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+                  <path d="M 28,68 C 28,68 38,62 48,65 L 48,74 C 38,71 28,68 28,68 Z" fill="#D97706" stroke="#334155" strokeWidth="2" />
+                  <path d="M 72,68 C 72,68 62,62 52,65 L 52,74 C 62,71 72,68 72,68 Z" fill="#D97706" stroke="#334155" strokeWidth="2" />
+                  <path d="M 30,38 C 30,38 38,32 48,35 L 48,65 C 38,62 30,38 30,38 Z" fill="#FFFFFF" stroke="#334155" strokeWidth="2" strokeLinejoin="round" />
+                  <path d="M 30,38 C 30,38 38,32 48,35 L 48,65 C 38,62 30,68 30,68 Z" fill="#FFFFFF" stroke="#334155" strokeWidth="2" strokeLinejoin="round" />
+                  <path d="M 70,38 C 70,38 62,32 52,35 L 52,65 C 62,62 70,68 70,68 Z" fill="#FFFFFF" stroke="#334155" strokeWidth="2" strokeLinejoin="round" />
+                  <line x1="50" y1="36" x2="50" y2="70" stroke="#334155" strokeWidth="2" />
+                  <path d="M 34,44 Q 40,41 44,43" stroke="#94A3B8" strokeWidth="1.5" strokeLinecap="round" />
+                  <path d="M 34,50 Q 40,47 44,49" stroke="#94A3B8" strokeWidth="1.5" strokeLinecap="round" />
+                  <path d="M 34,56 Q 40,53 44,55" stroke="#94A3B8" strokeWidth="1.5" strokeLinecap="round" />
+                  <path d="M 66,44 Q 60,41 56,43" stroke="#94A3B8" strokeWidth="1.5" strokeLinecap="round" />
+                  <path d="M 66,50 Q 60,47 56,49" stroke="#94A3B8" strokeWidth="1.5" strokeLinecap="round" />
+                  <path d="M 66,56 Q 60,53 56,55" stroke="#94A3B8" strokeWidth="1.5" strokeLinecap="round" />
+                </svg>
               </div>
-              <p className={styles.programmeDesc}>
-                Reaching out to children in slums and rural areas, ensuring access to quality elementary schooling, textbooks, and remote digital classrooms.
-              </p>
+              <div className={styles.programmeText}>
+                <h3 className={`${styles.programmeTitle} ${styles.colorEdu}`}>EDUCATION</h3>
+                <p className={styles.programmeDesc}>
+                  Education, nutrition and holistic development of children
+                </p>
+              </div>
             </div>
 
             {/* Programme 2: Healthcare */}
-            <div className={styles.programmeCard} id="prog-card-healthcare">
-              <div className={styles.programmeHeader}>
-                <div className={`${styles.programmeIcon} ${styles.iconHealth}`}>
-                  <Activity size={24} />
-                </div>
-                <h3 className={`${styles.programmeTitle} ${styles.colorHealth}`}>HEALTHCARE</h3>
+            <div className={styles.programmeItem} id="prog-item-healthcare">
+              <div className={styles.programmeIconWrapper}>
+                <svg viewBox="0 0 100 100" className={styles.programmeSvg} xmlns="http://www.w3.org/2000/svg">
+                  <path d="M 25,48 C 21,30 33,18 51,20 C 69,22 79,32 77,50 C 75,68 62,79 44,77 C 26,75 29,66 25,48 Z" fill="#E8E2F5" />
+                  <path d="M 50,72 C 50,72 26,52 26,38 C 26,26 36,18 46,24 C 50,28 50,28 50,28 C 50,28 50,28 54,24 C 64,18 74,26 74,38 C 74,52 50,72 50,72 Z" fill="#C084FC" opacity="0.3" />
+                  <path d="M 50,72 C 50,72 26,52 26,38 C 26,26 36,18 46,24 C 50,28 50,28 50,28 C 50,28 50,28 54,24 C 64,18 74,26 74,38 C 74,52 50,72 50,72 Z" stroke="#334155" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+                  <path d="M 22,46 L 36,46 L 41,35 L 46,55 L 51,28 L 56,50 L 60,42 L 64,46 L 78,46" stroke="#334155" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+                </svg>
               </div>
-              <p className={styles.programmeDesc}>
-                Deploying mobile pediatric clinics, diagnostic health camps, and maternal health consultations directly to remote villages and slums.
-              </p>
+              <div className={styles.programmeText}>
+                <h3 className={`${styles.programmeTitle} ${styles.colorHealth}`}>HEALTHCARE</h3>
+                <p className={styles.programmeDesc}>
+                  Taking healthcare services to doorsteps of hard to reach communities
+                </p>
+              </div>
             </div>
 
             {/* Programme 3: Women Empowerment */}
-            <div className={styles.programmeCard} id="prog-card-women">
-              <div className={styles.programmeHeader}>
-                <div className={`${styles.programmeIcon} ${styles.iconWomen}`}>
-                  <Users size={24} />
-                </div>
-                <h3 className={`${styles.programmeTitle} ${styles.colorWomen}`}>WOMEN EMPOWERMENT</h3>
+            <div className={styles.programmeItem} id="prog-item-women">
+              <div className={styles.programmeIconWrapper}>
+                <svg viewBox="0 0 100 100" className={styles.programmeSvg} xmlns="http://www.w3.org/2000/svg">
+                  <path d="M 20,48 C 18,30 32,16 52,19 C 72,22 81,37 79,55 C 77,73 61,81 42,79 C 23,77 22,66 20,48 Z" fill="#DBEFEF" />
+                  <path d="M 42,65 L 42,76 C 42,78 45,80 50,80 C 55,80 58,78 58,76 L 58,65" fill="#2DD4BF" opacity="0.3" stroke="#334155" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M 38,62 C 34,60 34,50 38,48 C 38,48 38,44 42,44 C 44,44 46,46 46,48 C 46,46 48,44 51,44 C 54,44 55,47 55,49 C 55,47 58,45 61,45 C 64,45 66,48 66,52 C 66,56 64,65 58,66 C 54,67 44,66 38,62 Z" fill="#2DD4BF" opacity="0.4" stroke="#334155" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M 36,60 C 36,60 42,52 49,54 C 51,55 52,57 52,59 C 52,61 48,63 42,63 C 38,63 36,60 36,60 Z" fill="#2DD4BF" opacity="0.5" stroke="#334155" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M 46,48 L 46,55" stroke="#334155" strokeWidth="2" />
+                  <path d="M 53,49 L 53,55" stroke="#334155" strokeWidth="2" />
+                  <path d="M 59,51 L 59,57" stroke="#334155" strokeWidth="2" />
+                  <line x1="28" y1="36" x2="33" y2="40" stroke="#334155" strokeWidth="2" strokeLinecap="round" />
+                  <line x1="34" y1="26" x2="38" y2="32" stroke="#334155" strokeWidth="2" strokeLinecap="round" />
+                  <line x1="50" y1="22" x2="50" y2="28" stroke="#334155" strokeWidth="2" strokeLinecap="round" />
+                  <line x1="66" y1="26" x2="62" y2="32" stroke="#334155" strokeWidth="2" strokeLinecap="round" />
+                  <line x1="72" y1="36" x2="67" y2="40" stroke="#334155" strokeWidth="2" strokeLinecap="round" />
+                </svg>
               </div>
-              <p className={styles.programmeDesc}>
-                Facilitating self-help groups, vocational training, financial literacy workshops, and leadership skills development for young girls.
-              </p>
+              <div className={styles.programmeText}>
+                <h3 className={`${styles.programmeTitle} ${styles.colorWomen}`}>WOMEN EMPOWERMENT</h3>
+                <p className={styles.programmeDesc}>
+                  Empowering adolescent girls & women through community engagement
+                </p>
+              </div>
             </div>
 
             {/* Programme 4: Livelihood */}
-            <div className={styles.programmeCard} id="prog-card-livelihood">
-              <div className={styles.programmeHeader}>
-                <div className={`${styles.programmeIcon} ${styles.iconLive}`}>
-                  <Briefcase size={24} />
-                </div>
-                <h3 className={`${styles.programmeTitle} ${styles.colorLive}`}>LIVELIHOOD</h3>
+            <div className={styles.programmeItem} id="prog-item-livelihood">
+              <div className={styles.programmeIconWrapper}>
+                <svg viewBox="0 0 100 100" className={styles.programmeSvg} xmlns="http://www.w3.org/2000/svg">
+                  <path d="M 23,45 C 19,27 34,16 52,18 C 70,20 81,32 79,50 C 77,68 64,79 46,77 C 28,75 27,63 23,45 Z" fill="#F4E9E2" />
+                  <g transform="rotate(-3 50 50)">
+                    <rect x="30" y="24" width="40" height="52" rx="4" fill="#FFFFFF" stroke="#334155" strokeWidth="2.5" strokeLinejoin="round" />
+                    <path d="M 30,24 L 70,24 L 70,44 Z" fill="#F59E0B" opacity="0.1" />
+                    <rect x="36" y="32" width="12" height="12" rx="2" fill="#E2E8F0" stroke="#334155" strokeWidth="2" />
+                    <circle cx="42" cy="36" r="3" fill="#94A3B8" />
+                    <path d="M 38,43 C 38,40 40,40 42,40 C 44,40 46,40 46,43 Z" fill="#94A3B8" />
+                    <line x1="53" y1="34" x2="64" y2="34" stroke="#334155" strokeWidth="2" strokeLinecap="round" />
+                    <line x1="53" y1="40" x2="60" y2="40" stroke="#334155" strokeWidth="2" strokeLinecap="round" />
+                    <line x1="36" y1="52" x2="64" y2="52" stroke="#334155" strokeWidth="2" strokeLinecap="round" />
+                    <line x1="36" y1="58" x2="64" y2="58" stroke="#334155" strokeWidth="2" strokeLinecap="round" />
+                    <line x1="36" y1="64" x2="56" y2="64" stroke="#334155" strokeWidth="2" strokeLinecap="round" />
+                  </g>
+                </svg>
               </div>
-              <p className={styles.programmeDesc}>
-                Providing job-readiness skills training, computer coding modules, retail certifications, and job-placement assistance to urban youth.
-              </p>
+              <div className={styles.programmeText}>
+                <h3 className={`${styles.programmeTitle} ${styles.colorLive}`}>LIVELIHOOD</h3>
+                <p className={styles.programmeDesc}>
+                  Skill training and placement support for underprivileged youth
+                </p>
+              </div>
             </div>
 
             {/* Programme 5: Empowering Grassroots */}
-            <div className={styles.programmeCard} id="prog-card-grassroots">
-              <div className={styles.programmeHeader}>
-                <div className={`${styles.programmeIcon} ${styles.iconGrass}`}>
-                  <Flame size={24} />
-                </div>
-                <h3 className={`${styles.programmeTitle} ${styles.colorGrass}`}>EMPOWERING GRASSROOTS</h3>
+            <div className={styles.programmeItem} id="prog-item-grassroots">
+              <div className={styles.programmeIconWrapper}>
+                <svg viewBox="0 0 100 100" className={styles.programmeSvg} xmlns="http://www.w3.org/2000/svg">
+                  <path d="M 22,46 C 18,29 33,15 51,18 C 69,21 80,33 78,51 C 76,69 63,80 45,78 C 27,76 26,63 22,46 Z" fill="#DFF4E5" />
+                  <path d="M 28,44 C 28,26 72,26 72,44 C 72,46 64,48 50,48 C 36,48 28,44 28,44 Z" fill="#4ADE80" opacity="0.3" stroke="#334155" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M 39,46 C 39,46 44,32 50,48" stroke="#334155" strokeWidth="1.5" fill="none" />
+                  <path d="M 61,46 C 61,46 56,32 50,48" stroke="#334155" strokeWidth="1.5" fill="none" />
+                  <line x1="28" y1="44" x2="50" y2="68" stroke="#334155" strokeWidth="2" strokeLinecap="round" />
+                  <line x1="39" y1="47" x2="50" y2="68" stroke="#334155" strokeWidth="1.5" strokeLinecap="round" />
+                  <line x1="61" y1="47" x2="50" y2="68" stroke="#334155" strokeWidth="1.5" strokeLinecap="round" />
+                  <line x1="72" y1="44" x2="50" y2="68" stroke="#334155" strokeWidth="2" strokeLinecap="round" />
+                  <rect x="44" y="66" width="12" height="12" rx="2" fill="#FFFFFF" stroke="#334155" strokeWidth="2" strokeLinejoin="round" />
+                  <line x1="50" y1="69" x2="50" y2="75" stroke="#4ADE80" strokeWidth="2" strokeLinecap="round" />
+                  <line x1="47" y1="72" x2="53" y2="72" stroke="#4ADE80" strokeWidth="2" strokeLinecap="round" />
+                </svg>
               </div>
-              <p className={styles.programmeDesc}>
-                Strengthening smaller community-based organizations (CBOs) through training, seed funding, governance auditing, and scale mentorship.
-              </p>
+              <div className={styles.programmeText}>
+                <h3 className={`${styles.programmeTitle} ${styles.colorGrass}`}>EMPOWERING GRASSROOTS</h3>
+                <p className={styles.programmeDesc}>
+                  Helping community-based organizations become locally sustainable
+                </p>
+              </div>
             </div>
 
             {/* Programme 6: Disaster Response */}
-            <div className={styles.programmeCard} id="prog-card-disaster">
-              <div className={styles.programmeHeader}>
-                <div className={`${styles.programmeIcon} ${styles.iconDisaster}`}>
-                  <ShieldCheck size={24} />
-                </div>
-                <h3 className={`${styles.programmeTitle} ${styles.colorDisaster}`}>DISASTER RESPONSE</h3>
+            <div className={styles.programmeItem} id="prog-item-disaster">
+              <div className={styles.programmeIconWrapper}>
+                <svg viewBox="0 0 100 100" className={styles.programmeSvg} xmlns="http://www.w3.org/2000/svg">
+                  <path d="M 24,46 C 20,29 32,15 50,17 C 68,19 80,31 78,49 C 76,67 63,78 45,76 C 27,74 28,63 24,46 Z" fill="#FCE6E2" />
+                  <path d="M 50,56 C 50,56 40,48 40,42 C 40,36 45,33 50,37 C 55,33 60,36 60,42 C 60,48 50,56 50,56 Z" fill="#F87171" opacity="0.5" stroke="#334155" strokeWidth="2" strokeLinejoin="round" />
+                  <path d="M 28,62 C 28,62 34,54 44,57 C 46,58 48,60 46,63 C 44,66 38,68 32,67 C 30,67 28,62 28,62 Z" fill="#F87171" opacity="0.3" stroke="#334155" strokeWidth="2" strokeLinejoin="round" />
+                  <path d="M 32,67 Q 38,72 44,70 Q 50,68 50,60" fill="none" stroke="#334155" strokeWidth="2" strokeLinecap="round" />
+                  <path d="M 72,62 C 72,62 66,54 56,57 C 54,58 52,60 54,63 C 56,66 62,68 68,67 C 70,67 72,62 72,62 Z" fill="#F87171" opacity="0.3" stroke="#334155" strokeWidth="2" strokeLinejoin="round" />
+                  <path d="M 68,67 Q 62,72 56,70 Q 50,68 50,60" fill="none" stroke="#334155" strokeWidth="2" strokeLinecap="round" />
+                  <circle cx="50" cy="45" r="12" fill="none" stroke="#334155" strokeWidth="1.5" strokeDasharray="2,2" />
+                </svg>
               </div>
-              <p className={styles.programmeDesc}>
-                Reaching out in times of natural disasters or humanitarian crises with immediate survival kits, dry rations, hygiene products, and shelters.
-              </p>
+              <div className={styles.programmeText}>
+                <h3 className={`${styles.programmeTitle} ${styles.colorDisaster}`}>DISASTER RESPONSE</h3>
+                <p className={styles.programmeDesc}>
+                  Reach out and respond to the needs of the disaster-affected people
+                </p>
+              </div>
             </div>
           </div>
         </div>

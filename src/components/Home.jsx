@@ -354,92 +354,197 @@ export default function Home({ setActiveTab, setDonationPreload, isLocalMode }) 
         <div className="container">
           <div className={styles.sdgIntro}>TOWARDS ACHIEVING</div>
           <h2 className={styles.sectionHeading}>SUSTAINABLE DEVELOPMENT GOALS</h2>
-          <div className={styles.impactDivider}></div>
 
           <div className={styles.hexagonGrid}>
+            
             {/* Hexagon 1: SDG 3 */}
             <div className={styles.hexWrapper}>
-              <svg viewBox="0 0 100 100" className={styles.hexSvg}>
-                <polygon points="50 3, 93 28, 93 72, 50 97, 7 72, 7 28" fill="#e5243b" />
-                <foreignObject x="15" y="15" width="70" height="70">
-                  <div className={styles.hexContent}>
-                    <div className={styles.hexIcon}><Activity size={18} /></div>
-                    <div className={styles.hexTitle}>Good Health & Well-being</div>
-                    <div className={styles.hexGoal}>SDG 3</div>
-                  </div>
-                </foreignObject>
+              <svg viewBox="0 0 100 110" className={styles.hexSvg} xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <filter id="sdg-shadow-blur" x="-20%" y="-20%" width="140%" height="140%">
+                    <feGaussianBlur stdDeviation="1.5" result="blur" />
+                  </filter>
+                  <linearGradient id="grad-sdg3" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stopColor="#CBB4E5" />
+                    <stop offset="100%" stopColor="#835EBE" />
+                  </linearGradient>
+                </defs>
+                <path d="M 56.9 7 L 86.1 24 Q 93 28 93 36 L 93 74 Q 93 82 86.1 86 L 56.9 103 Q 50 107 43.1 103 L 13.9 86 Q 7 82 7 74 L 7 36 Q 7 28 13.9 24 L 43.1 7 Q 50 3 56.9 7 Z" fill="url(#grad-sdg3)" />
+                {/* 3D Slit Groove Shadow */}
+                <ellipse cx="50" cy="56.5" rx="38" ry="2.2" fill="#000000" opacity="0.32" filter="url(#sdg-shadow-blur)" />
+                <line x1="8" y1="55" x2="92" y2="55" stroke="#000000" strokeWidth="0.8" opacity="0.22" />
+                
+                {/* Icon: Heart Pulse */}
+                <g transform="translate(0, 4)">
+                  <path d="M 50 37 Q 50 37 36 26 C 29 20 40 12 50 22 C 60 12 71 20 64 26 Z" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M 31 28 L 41 28 L 44 20 L 47 36 L 51 14 L 54 31 L 57 25 L 60 28 L 69 28" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                </g>
+
+                {/* Text: GOOD HEALTH & WELL BEING #3 */}
+                <text x="50" y="73" fill="white" fontSize="5.8" fontWeight="bold" textAnchor="middle" fontFamily="Inter, sans-serif" letterSpacing="0.2">GOOD HEALTH &amp;</text>
+                <text x="50" y="81" fill="white" fontSize="5.8" fontWeight="bold" textAnchor="middle" fontFamily="Inter, sans-serif" letterSpacing="0.2">WELL BEING</text>
+                <text x="50" y="96" fill="white" fontSize="9.5" fontWeight="900" textAnchor="middle" fontFamily="Inter, sans-serif">#3</text>
               </svg>
             </div>
 
             {/* Hexagon 2: SDG 5 */}
             <div className={styles.hexWrapper}>
-              <svg viewBox="0 0 100 100" className={styles.hexSvg}>
-                <polygon points="50 3, 93 28, 93 72, 50 97, 7 72, 7 28" fill="#ff3a21" />
-                <foreignObject x="15" y="15" width="70" height="70">
-                  <div className={styles.hexContent}>
-                    <div className={styles.hexIcon}><Users size={18} /></div>
-                    <div className={styles.hexTitle}>Gender Equality</div>
-                    <div className={styles.hexGoal}>SDG 5</div>
-                  </div>
-                </foreignObject>
+              <svg viewBox="0 0 100 110" className={styles.hexSvg} xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <linearGradient id="grad-sdg5" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stopColor="#EC6EA4" />
+                    <stop offset="100%" stopColor="#DE3A7E" />
+                  </linearGradient>
+                </defs>
+                <path d="M 56.9 7 L 86.1 24 Q 93 28 93 36 L 93 74 Q 93 82 86.1 86 L 56.9 103 Q 50 107 43.1 103 L 13.9 86 Q 7 82 7 74 L 7 36 Q 7 28 13.9 24 L 43.1 7 Q 50 3 56.9 7 Z" fill="url(#grad-sdg5)" />
+                {/* 3D Slit Groove Shadow */}
+                <ellipse cx="50" cy="56.5" rx="38" ry="2.2" fill="#000000" opacity="0.32" filter="url(#sdg-shadow-blur)" />
+                <line x1="8" y1="55" x2="92" y2="55" stroke="#000000" strokeWidth="0.8" opacity="0.22" />
+
+                {/* Icon: Combined Gender Equality */}
+                <g transform="translate(0, 3)">
+                  <circle cx="50" cy="26" r="8" fill="none" stroke="white" strokeWidth="2.5" />
+                  {/* Female cross */}
+                  <line x1="50" y1="34" x2="50" y2="42" stroke="white" strokeWidth="2.5" strokeLinecap="round" />
+                  <line x1="46" y1="38" x2="54" y2="38" stroke="white" strokeWidth="2.5" strokeLinecap="round" />
+                  {/* Male arrow */}
+                  <line x1="56" y1="20" x2="63" y2="13" stroke="white" strokeWidth="2.5" strokeLinecap="round" />
+                  <line x1="58" y1="13" x2="63" y2="13" stroke="white" strokeWidth="2.5" strokeLinecap="round" />
+                  <line x1="63" y1="13" x2="63" y2="18" stroke="white" strokeWidth="2.5" strokeLinecap="round" />
+                  {/* Equals sign */}
+                  <line x1="47" y1="24" x2="53" y2="24" stroke="white" strokeWidth="1.8" strokeLinecap="round" />
+                  <line x1="47" y1="28" x2="53" y2="28" stroke="white" strokeWidth="1.8" strokeLinecap="round" />
+                </g>
+
+                {/* Text: GENDER EQUALITY #5 */}
+                <text x="50" y="73" fill="white" fontSize="5.8" fontWeight="bold" textAnchor="middle" fontFamily="Inter, sans-serif" letterSpacing="0.2">GENDER</text>
+                <text x="50" y="81" fill="white" fontSize="5.8" fontWeight="bold" textAnchor="middle" fontFamily="Inter, sans-serif" letterSpacing="0.2">EQUALITY</text>
+                <text x="50" y="96" fill="white" fontSize="9.5" fontWeight="900" textAnchor="middle" fontFamily="Inter, sans-serif">#5</text>
               </svg>
             </div>
 
             {/* Hexagon 3: SDG 4 */}
             <div className={styles.hexWrapper}>
-              <svg viewBox="0 0 100 100" className={styles.hexSvg}>
-                <polygon points="50 3, 93 28, 93 72, 50 97, 7 72, 7 28" fill="#c5192d" />
-                <foreignObject x="15" y="15" width="70" height="70">
-                  <div className={styles.hexContent}>
-                    <div className={styles.hexIcon}><BookOpen size={18} /></div>
-                    <div className={styles.hexTitle}>Quality Education</div>
-                    <div className={styles.hexGoal}>SDG 4</div>
-                  </div>
-                </foreignObject>
+              <svg viewBox="0 0 100 110" className={styles.hexSvg} xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <linearGradient id="grad-sdg4" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stopColor="#FFE066" />
+                    <stop offset="100%" stopColor="#EAA31A" />
+                  </linearGradient>
+                </defs>
+                <path d="M 56.9 7 L 86.1 24 Q 93 28 93 36 L 93 74 Q 93 82 86.1 86 L 56.9 103 Q 50 107 43.1 103 L 13.9 86 Q 7 82 7 74 L 7 36 Q 7 28 13.9 24 L 43.1 7 Q 50 3 56.9 7 Z" fill="url(#grad-sdg4)" />
+                {/* 3D Slit Groove Shadow */}
+                <ellipse cx="50" cy="56.5" rx="38" ry="2.2" fill="#000000" opacity="0.32" filter="url(#sdg-shadow-blur)" />
+                <line x1="8" y1="55" x2="92" y2="55" stroke="#000000" strokeWidth="0.8" opacity="0.22" />
+
+                {/* Icon: Graduation Cap */}
+                <g transform="translate(0, 4)">
+                  <polygon points="50 14, 78 22, 50 30, 22 22" fill="white" stroke="white" strokeWidth="1" strokeLinejoin="round" />
+                  <path d="M 32 25 L 32 31 C 32 36 68 36 68 31 L 68 25" fill="white" stroke="white" strokeWidth="1" />
+                  <path d="M 72 23 L 78 25 L 78 35" fill="none" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+                  <circle cx="78" cy="35" r="1.5" fill="white" />
+                </g>
+
+                {/* Text: QUALITY EDUCATION #4 */}
+                <text x="50" y="73" fill="white" fontSize="5.8" fontWeight="bold" textAnchor="middle" fontFamily="Inter, sans-serif" letterSpacing="0.2">QUALITY</text>
+                <text x="50" y="81" fill="white" fontSize="5.8" fontWeight="bold" textAnchor="middle" fontFamily="Inter, sans-serif" letterSpacing="0.2">EDUCATION</text>
+                <text x="50" y="96" fill="white" fontSize="9.5" fontWeight="900" textAnchor="middle" fontFamily="Inter, sans-serif">#4</text>
               </svg>
             </div>
 
             {/* Hexagon 4: SDG 8 */}
             <div className={styles.hexWrapper}>
-              <svg viewBox="0 0 100 100" className={styles.hexSvg}>
-                <polygon points="50 3, 93 28, 93 72, 50 97, 7 72, 7 28" fill="#a21942" />
-                <foreignObject x="15" y="15" width="70" height="70">
-                  <div className={styles.hexContent}>
-                    <div className={styles.hexIcon}><Briefcase size={18} /></div>
-                    <div className={styles.hexTitle}>Decent Work & Growth</div>
-                    <div className={styles.hexGoal}>SDG 8</div>
-                  </div>
-                </foreignObject>
+              <svg viewBox="0 0 100 110" className={styles.hexSvg} xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <linearGradient id="grad-sdg8" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stopColor="#6ECC6E" />
+                    <stop offset="100%" stopColor="#3B9C3B" />
+                  </linearGradient>
+                </defs>
+                <path d="M 56.9 7 L 86.1 24 Q 93 28 93 36 L 93 74 Q 93 82 86.1 86 L 56.9 103 Q 50 107 43.1 103 L 13.9 86 Q 7 82 7 74 L 7 36 Q 7 28 13.9 24 L 43.1 7 Q 50 3 56.9 7 Z" fill="url(#grad-sdg8)" />
+                {/* 3D Slit Groove Shadow */}
+                <ellipse cx="50" cy="56.5" rx="38" ry="2.2" fill="#000000" opacity="0.32" filter="url(#sdg-shadow-blur)" />
+                <line x1="8" y1="55" x2="92" y2="55" stroke="#000000" strokeWidth="0.8" opacity="0.22" />
+
+                {/* Icon: Bar Chart Upward */}
+                <g transform="translate(0, 4)">
+                  {/* Axes */}
+                  <line x1="28" y1="36" x2="68" y2="36" stroke="white" strokeWidth="2" strokeLinecap="round" />
+                  <line x1="28" y1="16" x2="28" y2="36" stroke="white" strokeWidth="2" strokeLinecap="round" />
+                  {/* Bars */}
+                  <rect x="33" y="27" width="5" height="9" fill="white" />
+                  <rect x="43" y="22" width="5" height="14" fill="white" />
+                  <rect x="53" y="16" width="5" height="20" fill="white" />
+                  {/* Up Arrow */}
+                  <path d="M 33 29 L 45 19 L 57 14 L 66 11" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" />
+                  <path d="M 59 11 L 66 11 L 66 18" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                </g>
+
+                {/* Text: DECENT WORK & ECONOMIC GROWTH #8 */}
+                <text x="50" y="71" fill="white" fontSize="5.3" fontWeight="bold" textAnchor="middle" fontFamily="Inter, sans-serif" letterSpacing="0.1">DECENT WORK &amp;</text>
+                <text x="50" y="78" fill="white" fontSize="5.3" fontWeight="bold" textAnchor="middle" fontFamily="Inter, sans-serif" letterSpacing="0.1">ECONOMIC GROWTH</text>
+                <text x="50" y="96" fill="white" fontSize="9.5" fontWeight="900" textAnchor="middle" fontFamily="Inter, sans-serif">#8</text>
               </svg>
             </div>
 
             {/* Hexagon 5: SDG 10 */}
             <div className={styles.hexWrapper}>
-              <svg viewBox="0 0 100 100" className={styles.hexSvg}>
-                <polygon points="50 3, 93 28, 93 72, 50 97, 7 72, 7 28" fill="#dd1367" />
-                <foreignObject x="15" y="15" width="70" height="70">
-                  <div className={styles.hexContent}>
-                    <div className={styles.hexIcon}><Smile size={18} /></div>
-                    <div className={styles.hexTitle}>Reduced Inequalities</div>
-                    <div className={styles.hexGoal}>SDG 10</div>
-                  </div>
-                </foreignObject>
+              <svg viewBox="0 0 100 110" className={styles.hexSvg} xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <linearGradient id="grad-sdg10" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stopColor="#6A93D4" />
+                    <stop offset="100%" stopColor="#3D5FA4" />
+                  </linearGradient>
+                </defs>
+                <path d="M 56.9 7 L 86.1 24 Q 93 28 93 36 L 93 74 Q 93 82 86.1 86 L 56.9 103 Q 50 107 43.1 103 L 13.9 86 Q 7 82 7 74 L 7 36 Q 7 28 13.9 24 L 43.1 7 Q 50 3 56.9 7 Z" fill="url(#grad-sdg10)" />
+                {/* 3D Slit Groove Shadow */}
+                <ellipse cx="50" cy="56.5" rx="38" ry="2.2" fill="#000000" opacity="0.32" filter="url(#sdg-shadow-blur)" />
+                <line x1="8" y1="55" x2="92" y2="55" stroke="#000000" strokeWidth="0.8" opacity="0.22" />
+
+                {/* Icon: Inequalities Ring */}
+                <g transform="translate(0, 4)">
+                  <circle cx="50" cy="25" r="9.5" stroke="white" strokeWidth="2.5" fill="none" strokeDasharray="50 10" strokeDashoffset="12" />
+                  <line x1="45" y1="23" x2="55" y2="23" stroke="white" strokeWidth="2" strokeLinecap="round" />
+                  <line x1="45" y1="27" x2="55" y2="27" stroke="white" strokeWidth="2" strokeLinecap="round" />
+                </g>
+
+                {/* Text: REDUCED INEQUALITIES #10 */}
+                <text x="50" y="73" fill="white" fontSize="5.8" fontWeight="bold" textAnchor="middle" fontFamily="Inter, sans-serif" letterSpacing="0.2">REDUCED</text>
+                <text x="50" y="81" fill="white" fontSize="5.8" fontWeight="bold" textAnchor="middle" fontFamily="Inter, sans-serif" letterSpacing="0.2">INEQUALITIES</text>
+                <text x="50" y="96" fill="white" fontSize="9.5" fontWeight="900" textAnchor="middle" fontFamily="Inter, sans-serif">#10</text>
               </svg>
             </div>
 
             {/* Hexagon 6: SDG 17 */}
             <div className={styles.hexWrapper}>
-              <svg viewBox="0 0 100 100" className={styles.hexSvg}>
-                <polygon points="50 3, 93 28, 93 72, 50 97, 7 72, 7 28" fill="#19486a" />
-                <foreignObject x="15" y="15" width="70" height="70">
-                  <div className={styles.hexContent}>
-                    <div className={styles.hexIcon}><Award size={18} /></div>
-                    <div className={styles.hexTitle}>Partnerships for Goals</div>
-                    <div className={styles.hexGoal}>SDG 17</div>
-                  </div>
-                </foreignObject>
+              <svg viewBox="0 0 100 110" className={styles.hexSvg} xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <linearGradient id="grad-sdg17" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stopColor="#8ED851" />
+                    <stop offset="100%" stopColor="#5B9B27" />
+                  </linearGradient>
+                </defs>
+                <path d="M 56.9 7 L 86.1 24 Q 93 28 93 36 L 93 74 Q 93 82 86.1 86 L 56.9 103 Q 50 107 43.1 103 L 13.9 86 Q 7 82 7 74 L 7 36 Q 7 28 13.9 24 L 43.1 7 Q 50 3 56.9 7 Z" fill="url(#grad-sdg17)" />
+                {/* 3D Slit Groove Shadow */}
+                <ellipse cx="50" cy="56.5" rx="38" ry="2.2" fill="#000000" opacity="0.32" filter="url(#sdg-shadow-blur)" />
+                <line x1="8" y1="55" x2="92" y2="55" stroke="#000000" strokeWidth="0.8" opacity="0.22" />
+
+                {/* Icon: Partnerships Flower Venn */}
+                <g transform="translate(0, 4)">
+                  <circle cx="50" cy="20" r="5" fill="none" stroke="white" strokeWidth="1.25" />
+                  <circle cx="58" cy="24" r="5" fill="none" stroke="white" strokeWidth="1.25" />
+                  <circle cx="55" cy="32" r="5" fill="none" stroke="white" strokeWidth="1.25" />
+                  <circle cx="45" cy="32" r="5" fill="none" stroke="white" strokeWidth="1.25" />
+                  <circle cx="42" cy="24" r="5" fill="none" stroke="white" strokeWidth="1.25" />
+                </g>
+
+                {/* Text: PARTNERSHIPS FOR THE GOALS #17 */}
+                <text x="50" y="71" fill="white" fontSize="5.3" fontWeight="bold" textAnchor="middle" fontFamily="Inter, sans-serif" letterSpacing="0.1">PARTNERSHIPS</text>
+                <text x="50" y="78" fill="white" fontSize="5.3" fontWeight="bold" textAnchor="middle" fontFamily="Inter, sans-serif" letterSpacing="0.1">FOR THE GOALS</text>
+                <text x="50" y="96" fill="white" fontSize="9.5" fontWeight="900" textAnchor="middle" fontFamily="Inter, sans-serif">#17</text>
               </svg>
             </div>
+
           </div>
         </div>
       </section>

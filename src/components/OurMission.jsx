@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Target, Eye, BookOpen, Activity, Heart, ShieldCheck, Leaf, Download } from 'lucide-react';
+import { Target, Eye, BookOpen, Activity, Heart, ShieldCheck, Leaf } from 'lucide-react';
 import styles from '../styles/OurMission.module.css';
 
 /**
@@ -186,14 +186,6 @@ export default function OurMission({ setActiveTab }) {
                     </div>
                   </div>
                 </div>
-
-                <button 
-                  className={styles.downloadBtn}
-                  onClick={() => alert('Downloading Annual Report 2023... (In production this will retrieve the PDF file)')}
-                >
-                  <Download size={16} />
-                  Download 2023 Annual Report
-                </button>
               </div>
 
               {/* Graphic Efficiency Ring */}

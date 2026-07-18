@@ -2,6 +2,11 @@ import React from 'react';
 import { Twitter, Linkedin, Mail } from 'lucide-react';
 import styles from '../styles/OurDirectors.module.css';
 
+// Import director images
+import raviKumarVermaImg from '../assets/images/ravi_kumar_verma.png';
+import rahulKumarVermaImg from '../assets/images/rahul_kumar_verma.jpg';
+import lxminaDeviImg from '../assets/images/lxmina_devi.jpg';
+
 /**
  * OurDirectors Component
  * Displays executive leadership profiles, board message, and advisory council committees.
@@ -9,32 +14,32 @@ import styles from '../styles/OurDirectors.module.css';
 export default function OurDirectors({ setActiveTab }) {
   const directorsData = [
     {
-      name: 'Elena Richardson',
-      role: 'Founder & Executive Director',
-      image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=400',
-      bio: 'Elena has over 15 years in international development heading transparent philanthropic innovations. Formerly a systems coordinator at the UN, she focuses on scaling grassroots aid structures.',
+      name: 'Mr. Ravi Kumar Verma',
+      role: 'Chairman',
+      image: raviKumarVermaImg,
+      bio: 'Mr. Ravi Kumar Verma is the Chairman of Worlify. An entrepreneur and philanthropist with extensive leadership experience in grassroots development and social enterprise planning, driving community transformation initiatives across regions.',
       twitter: '#',
       linkedin: '#'
     },
     {
-      name: 'Dr. Marcus Chen',
-      role: 'Chief Impact Officer',
-      image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=400',
-      bio: 'Former WHO systems adviser. Marcus is an expert in medical campaign logistics and field measurement. He manages our health pillar and ensures all impact metrics are verified.',
+      name: 'Mr. Rahul Kumar Verma',
+      role: 'Director',
+      image: rahulKumarVermaImg,
+      bio: 'Mr. Rahul Kumar Verma is a Director at Worlify. An operations specialist focusing on ground execution, resource logistics, and ensuring transparency in distribution networks.',
       twitter: '#',
       linkedin: '#'
     },
     {
-      name: 'Sarah Al-Fayed',
-      role: 'Director of Field Operations',
-      image: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=400',
-      bio: 'Sarah coordinates our on-the-ground volunteer frameworks and rapid crisis-response networks. With a background in disaster relief, she oversees field nodes across South Asia.',
+      name: 'Ms. Lxmina Devi',
+      role: 'Trustee',
+      image: lxminaDeviImg,
+      bio: 'Ms. Lxmina Devi is a Trustee of Worlify. An active community advocate overseeing child welfare, nutrition initiatives, and women empowerment initiatives to create social equity.',
       twitter: '#',
       linkedin: '#'
     },
     {
       name: 'Rajesh Kumar, CPA',
-      role: 'Director of Financial Governance',
+      role: 'Cordinator of Financial Department',
       image: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=400',
       bio: 'Rajesh has a decade of experience auditing public sector charities and NGOs. He oversees our blockchain receipt-matching systems and files quarterly public transparency reports.',
       twitter: '#',
@@ -94,7 +99,7 @@ export default function OurDirectors({ setActiveTab }) {
             {directorsData.map((director, idx) => (
               <div key={idx} className={styles.directorCard}>
                 <div className={styles.imageWrapper}>
-                  <img src={director.image} alt={director.name} className={styles.directorImage} />
+                  <img src={director.image?.src || director.image} alt={director.name} className={styles.directorImage} />
                 </div>
                 <div className={styles.cardBody}>
                   <h3 className={styles.directorName}>{director.name}</h3>
@@ -117,14 +122,14 @@ export default function OurDirectors({ setActiveTab }) {
         <div className="container">
           <div className={styles.messageGrid}>
             <div className={styles.messageImageWrapper}>
-              <img 
-                src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=600" 
-                alt="Elena Richardson Executive Director" 
+              <img
+                src={raviKumarVermaImg?.src || raviKumarVermaImg}
+                alt="Mr. Ravi Kumar Verma Chairman"
                 className={styles.messageImage}
               />
             </div>
             <div className={styles.messageText}>
-              <h2 className={styles.messageTitle}>Letter from the Director</h2>
+              <h2 className={styles.messageTitle}>Letter from the Chairman</h2>
               <div className={styles.messageQuote}>
                 "The measure of an organization is not the volume of funds it raises, but the efficiency and integrity with which those funds are translated into human dignity."
               </div>
@@ -135,8 +140,8 @@ export default function OurDirectors({ setActiveTab }) {
                 As we scale our five development pillars, we pledge to maintain this high-efficiency delivery model. Thank you for walking this path of transformation with us.
               </p>
               <div className={styles.signatureArea}>
-                <div className={styles.directorSig}>Elena Richardson</div>
-                <div className={styles.directorSigTitle}>Founder & Executive Director, Worlify</div>
+                <div className={styles.directorSig}>Mr. Ravi Kumar Verma</div>
+                <div className={styles.directorSigTitle}>Chairman, Worlify</div>
               </div>
             </div>
           </div>

@@ -15,6 +15,11 @@ import {
 } from 'lucide-react';
 import styles from '../styles/About.module.css';
 
+// Import director images
+import raviKumarVermaImg from '../assets/images/ravi_kumar_verma.png';
+import rahulKumarVermaImg from '../assets/images/rahul_kumar_verma.jpg';
+import lxminaDeviImg from '../assets/images/lxmina_devi.jpg';
+
 /**
  * About Component
  * Renders the full organizational overview, transparency breakdown,
@@ -48,22 +53,22 @@ export default function About({ setActiveTab }) {
   // Leadership Team
   const team = [
     {
-      name: 'Elena Richardson',
-      role: 'Founder & Executive Director',
-      image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=400',
-      bio: 'Over 15 years in international development heading transparent philanthropic innovations.'
+      name: 'Mr. Ravi Kumar Verma',
+      role: 'Chairman',
+      image: raviKumarVermaImg,
+      bio: 'An entrepreneur and philanthropist with extensive leadership experience in grassroots development and social enterprise planning.'
     },
     {
-      name: 'Dr. Marcus Chen',
-      role: 'Chief Impact Officer',
-      image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=400',
-      bio: 'Former WHO systems adviser. Expert in medical campaign logistics and field measurements.'
+      name: 'Mr. Rahul Kumar Verma',
+      role: 'Director',
+      image: rahulKumarVermaImg,
+      bio: 'An operations specialist focusing on ground execution, resource logistics, and ensuring transparency in distribution networks.'
     },
     {
-      name: 'Sarah Al-Fayed',
-      role: 'Director of Field Operations',
-      image: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=400',
-      bio: 'Coordinates on-the-ground volunteer frameworks and rapid crisis-response networks.'
+      name: 'Ms. Lxmina Devi',
+      role: 'Trustee',
+      image: lxminaDeviImg,
+      bio: 'An active community advocate overseeing child welfare, nutrition initiatives, and women empowerment initiatives.'
     }
   ];
 
@@ -235,7 +240,7 @@ export default function About({ setActiveTab }) {
             {team.map((member, idx) => (
               <div className={styles.teamCard} key={idx} id={`team-card-${idx}`}>
                 <div className={styles.teamImageWrapper}>
-                  <img src={member.image} alt={member.name} className={styles.teamImage} />
+                  <img src={member.image?.src || member.image} alt={member.name} className={styles.teamImage} />
                 </div>
                 <h3 className={styles.teamName}>{member.name}</h3>
                 <div className={styles.teamRole}>{member.role}</div>

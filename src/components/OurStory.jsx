@@ -1,6 +1,7 @@
 import React from 'react';
 import { Heart } from 'lucide-react';
 import styles from '../styles/OurStory.module.css';
+import ourStoryKidsImg from '../assets/images/our_story_kids.jpg';
 
 /**
  * OurStory Component
@@ -87,8 +88,8 @@ export default function OurStory({ setActiveTab }) {
             </div>
             <div className={styles.editorialImageWrapper}>
               <img 
-                src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&q=80&w=800" 
-                alt="Humanitarian worker with children" 
+                src={ourStoryKidsImg.src || ourStoryKidsImg} 
+                alt="Children showing peace sign and smiling" 
                 className={styles.editorialImage}
               />
             </div>

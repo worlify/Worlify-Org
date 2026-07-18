@@ -39,6 +39,7 @@
   opacity: 0;
   transition: opacity 1.2s ease-in-out, transform 6.2s ease;
   transform: scale(1.04);
+  filter: contrast(1.05) brightness(1.02) saturate(1.05);
 }
 
 .activeHeroSlide {
@@ -53,7 +54,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.45);
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0.25) 50%, rgba(0, 0, 0, 0.05) 100%);
   z-index: 2;
 }
 
@@ -70,6 +71,7 @@
   line-height: 1.15;
   margin-bottom: 1.5rem;
   letter-spacing: -1px;
+  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
 }
 
 .heroTitleHighlight {
@@ -82,6 +84,7 @@
   margin-bottom: 2rem;
   color: #f8fafc;
   max-width: 600px;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
 }
 
 .primaryBtn {

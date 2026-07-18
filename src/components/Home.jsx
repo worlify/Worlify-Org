@@ -19,8 +19,14 @@ import { db } from '../lib/supabase';
 import styles from '../styles/Home.module.css';
 
 // Import local generated assets
-import heroSchoolGirl from '../assets/images/hero_school_girl.png';
 import awardCeremony from '../assets/images/award_ceremony.png';
+import slider2 from '../assets/images/slider2.jpg';
+import slider3 from '../assets/images/slider3.jpg';
+import slider4 from '../assets/images/slider4.jpg';
+import slider_new1 from '../assets/images/slider_new1.jpg';
+import slider_new2 from '../assets/images/slider_new2.jpg';
+import slider_new4 from '../assets/images/slider_new4.jpg';
+import shikshaNaRukeImg from '../assets/images/shiksha_na_ruke.jpg';
 
 export default function Home({ setActiveTab, setDonationPreload, isLocalMode }) {
   // Live stats dynamically updated by db if available
@@ -77,18 +83,14 @@ export default function Home({ setActiveTab, setDonationPreload, isLocalMode }) 
     };
   }, [livesTarget]);
 
-  // 10 high-resolution sliding backgrounds representing education and community support
+  // sliding backgrounds representing education and community support
   const heroImages = [
-    heroSchoolGirl.src || heroSchoolGirl,
-    "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&q=80&w=1600",
-    "https://images.unsplash.com/photo-1597006338631-2a837f26e69a?auto=format&fit=crop&q=80&w=1600",
-    "https://images.unsplash.com/photo-1588072432836-e10032774350?auto=format&fit=crop&q=80&w=1600",
-    "https://images.unsplash.com/photo-1596492784531-6e6eb5ea9993?auto=format&fit=crop&q=80&w=1600",
-    "https://images.unsplash.com/photo-1567057419565-4349c49d8a04?auto=format&fit=crop&q=80&w=1600",
-    "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&q=80&w=1600",
-    "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&q=80&w=1600",
-    "https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&q=80&w=1600",
-    "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&q=80&w=1600"
+    slider2.src || slider2,
+    slider3.src || slider3,
+    slider4.src || slider4,
+    slider_new1.src || slider_new1,
+    slider_new2.src || slider_new2,
+    slider_new4.src || slider_new4
   ];
 
   const [currentHeroIndex, setCurrentHeroIndex] = useState(0);
@@ -115,28 +117,6 @@ export default function Home({ setActiveTab, setDonationPreload, isLocalMode }) 
               style={{ backgroundImage: `url(${imgUrl})` }}
             />
           ))}
-        </div>
-
-        <div className={styles.heroOverlay}></div>
-        <div className="container">
-          <div className={styles.heroContent}>
-            <h1 className={styles.heroTitle}>
-              BRINGING SMILES <br />
-              <span className={styles.heroTitleHighlight}>THROUGH EDUCATION <br />& EMPOWERMENT</span>
-            </h1>
-            <p className={styles.heroSubtitle}>
-              Empowering children, women, and communities across India to achieve their potential.
-            </p>
-            <div className={styles.heroActions}>
-              <button 
-                className={styles.primaryBtn} 
-                onClick={() => setActiveTab('donate')}
-                id="hero-donate-now-btn"
-              >
-                Support a Cause <ChevronRight size={16} />
-              </button>
-            </div>
-          </div>
         </div>
       </section>
 
@@ -600,7 +580,7 @@ export default function Home({ setActiveTab, setDonationPreload, isLocalMode }) 
             <div className={styles.supportCard} id="support-cause-education">
               <div 
                 className={styles.supportCardImg} 
-                style={{ backgroundImage: `url('https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&q=80&w=600')` }}
+                style={{ backgroundImage: `url(${shikshaNaRukeImg.src || shikshaNaRukeImg})` }}
               >
                 <div className={styles.supportCardTitleTag}>EDUCATION</div>
               </div>

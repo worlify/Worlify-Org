@@ -4,7 +4,9 @@ import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Home from './components/Home';
 import Causes from './components/Causes';
-import About from './components/About';
+import OurStory from './components/OurStory';
+import OurMission from './components/OurMission';
+import OurDirectors from './components/OurDirectors';
 import Gallery from './components/Gallery';
 import Volunteer from './components/Volunteer';
 import Donate from './components/Donate';
@@ -162,8 +164,20 @@ export default function App() {
           />
         )}
 
-        {activeTab === 'about' && (
-          <About 
+        {activeTab === 'about-story' && (
+          <OurStory 
+            setActiveTab={setActiveTab}
+          />
+        )}
+
+        {(activeTab === 'about' || activeTab === 'about-mission') && (
+          <OurMission 
+            setActiveTab={setActiveTab}
+          />
+        )}
+
+        {activeTab === 'about-directors' && (
+          <OurDirectors 
             setActiveTab={setActiveTab}
           />
         )}

@@ -335,7 +335,7 @@ export default function Causes({ setActiveTab, setDonationPreload, preloadedCaus
               <div className={styles.transparencyBtns}>
                 <button 
                   className={styles.solidDarkBtn}
-                  onClick={() => setActiveTab('about')}
+                  onClick={() => setActiveTab('about-mission')}
                   id="causes-download-report-btn"
                 >
                   <Download size={16} />
@@ -343,7 +343,7 @@ export default function Causes({ setActiveTab, setDonationPreload, preloadedCaus
                 </button>
                 <button 
                   className={styles.outlineBtn}
-                  onClick={() => setActiveTab('about')}
+                  onClick={() => setActiveTab('about-mission')}
                   id="causes-view-dashboard-btn"
                 >
                   View Transparency Dashboard

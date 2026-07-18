@@ -152,7 +152,7 @@ export default function Home({ setActiveTab, setDonationPreload, isLocalMode }) 
             </p>
             <button 
               className={styles.readMoreLink} 
-              onClick={() => setActiveTab('about')}
+              onClick={() => setActiveTab('about-mission')}
               id="intro-read-more-btn"
             >
               Read More <ChevronRight size={14} />

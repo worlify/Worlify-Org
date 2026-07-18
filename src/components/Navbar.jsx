@@ -14,6 +14,8 @@ export default function Navbar({ activeTab, setActiveTab, user, onLogout, isLoca
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isMobileDropdownOpen, setIsMobileDropdownOpen] = useState(false);
+  const [isAboutDropdownOpen, setIsAboutDropdownOpen] = useState(false);
+  const [isMobileAboutDropdownOpen, setIsMobileAboutDropdownOpen] = useState(false);
 
   const handleNavClick = (tabId) => {
     setActiveTab(tabId);
@@ -31,6 +33,7 @@ export default function Navbar({ activeTab, setActiveTab, user, onLogout, isLoca
   };
 
   const isContactActive = activeTab === 'contact' || activeTab === 'faqs';
+  const isAboutActive = activeTab === 'about-story' || activeTab === 'about-mission' || activeTab === 'about-directors' || activeTab === 'about';
 
   return (
     <header className={styles.navbar} id="main-header">
@@ -79,11 +82,52 @@ export default function Navbar({ activeTab, setActiveTab, user, onLogout, isLoca
               Home
             </li>
             <li 
-              className={`${styles.navLink} ${activeTab === 'about' ? styles.activeNavLink : ''}`}
-              onClick={() => handleNavClick('about')}
-              id="nav-link-about"
+              className={`${styles.navLink} ${styles.dropdownContainer} ${isAboutActive ? styles.activeNavLink : ''}`}
+              onMouseEnter={() => setIsAboutDropdownOpen(true)}
+              onMouseLeave={() => setIsAboutDropdownOpen(false)}
+              onClick={() => setIsAboutDropdownOpen(!isAboutDropdownOpen)}
+              id="nav-link-about-parent"
             >
-              About
+              <span className={styles.dropdownToggle}>
+                About <ChevronDown size={14} className={`${styles.caretIcon} ${isAboutDropdownOpen ? styles.caretRotated : ''}`} />
+              </span>
+              {isAboutDropdownOpen && (
+                <ul className={styles.dropdownMenu} id="about-dropdown-menu">
+                  <li 
+                    className={`${styles.dropdownItem} ${activeTab === 'about-story' ? styles.activeDropdownItem : ''}`}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleNavClick('about-story');
+                      setIsAboutDropdownOpen(false);
+                    }}
+                    id="dropdown-item-our-story"
+                  >
+                    Our Story
+                  </li>
+                  <li 
+                    className={`${styles.dropdownItem} ${activeTab === 'about-mission' ? styles.activeDropdownItem : ''}`}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleNavClick('about-mission');
+                      setIsAboutDropdownOpen(false);
+                    }}
+                    id="dropdown-item-our-mission"
+                  >
+                    Our Mission
+                  </li>
+                  <li 
+                    className={`${styles.dropdownItem} ${activeTab === 'about-directors' ? styles.activeDropdownItem : ''}`}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleNavClick('about-directors');
+                      setIsAboutDropdownOpen(false);
+                    }}
+                    id="dropdown-item-our-directors"
+                  >
+                    Our Directors
+                  </li>
+                </ul>
+              )}
             </li>
             <li 
               className={`${styles.navLink} ${activeTab === 'causes' ? styles.activeNavLink : ''}`}
@@ -217,11 +261,44 @@ export default function Navbar({ activeTab, setActiveTab, user, onLogout, isLoca
             >
               Home
             </li>
-            <li 
-              className={`${styles.mobileNavLink} ${activeTab === 'about' ? styles.activeMobileNavLink : ''}`}
-              onClick={() => handleNavClick('about')}
-            >
-              About
+            <li className={styles.mobileDropdownContainer}>
+              <div 
+                className={`${styles.mobileNavLink} ${styles.mobileDropdownToggle} ${isAboutActive ? styles.activeMobileNavLink : ''}`}
+                onClick={() => setIsMobileAboutDropdownOpen(!isMobileAboutDropdownOpen)}
+              >
+                About <ChevronDown size={16} className={`${styles.caretIcon} ${isMobileAboutDropdownOpen ? styles.caretRotated : ''}`} />
+              </div>
+              {isMobileAboutDropdownOpen && (
+                <ul className={styles.mobileSubMenu}>
+                  <li 
+                    className={`${styles.mobileSubNavLink} ${activeTab === 'about-story' ? styles.activeMobileSubNavLink : ''}`}
+                    onClick={() => {
+                      handleNavClick('about-story');
+                      setIsMenuOpen(false);
+                    }}
+                  >
+                    Our Story
+                  </li>
+                  <li 
+                    className={`${styles.mobileSubNavLink} ${activeTab === 'about-mission' ? styles.activeMobileSubNavLink : ''}`}
+                    onClick={() => {
+                      handleNavClick('about-mission');
+                      setIsMenuOpen(false);
+                    }}
+                  >
+                    Our Mission
+                  </li>
+                  <li 
+                    className={`${styles.mobileSubNavLink} ${activeTab === 'about-directors' ? styles.activeMobileSubNavLink : ''}`}
+                    onClick={() => {
+                      handleNavClick('about-directors');
+                      setIsMenuOpen(false);
+                    }}
+                  >
+                    Our Directors
+                  </li>
+                </ul>
+              )}
             </li>
             <li 
               className={`${styles.mobileNavLink} ${activeTab === 'causes' ? styles.activeMobileNavLink : ''}`}

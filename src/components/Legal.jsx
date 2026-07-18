@@ -1180,7 +1180,7 @@ export default function Legal({ setActiveTab }) {
                       <div className={styles.auditDot}></div>
                       <div>
                         <div className={styles.auditDesc}>Verified by **Legal Counsel**</div>
-                        <div className={styles.auditTime}>11 Jyly 206</div>
+                        <div className={styles.auditTime}>11 July 2026</div>
                       </div>
                     </div>
                     <div className={styles.auditStep}>
@@ -1194,16 +1194,6 @@ export default function Legal({ setActiveTab }) {
                 </div>
               </div>
 
-              <div className={styles.sidebarActions}>
-                <button
-                  className={styles.btnSecondary}
-                  onClick={() => window.print()}
-                  style={{ width: '100%' }}
-                >
-                  <Printer size={14} style={{ marginRight: '6px' }} />
-                  Print Document
-                </button>
-              </div>
 
             </div>
 

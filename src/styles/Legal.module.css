@@ -1533,6 +1533,21 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  overflow-y: auto;
+  max-height: 100%;
+}
+
+.modalSidebar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.modalSidebar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.modalSidebar::-webkit-scrollbar-thumb {
+  background-color: var(--border-color);
+  border-radius: 3px;
 }
 
 .sidebarMetaTitle {

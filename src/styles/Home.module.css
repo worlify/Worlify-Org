@@ -167,6 +167,11 @@
   border-bottom: 1px solid var(--border-color);
 }
 
+[data-theme='dark'] .impactSection {
+  background-color: #161d30;
+}
+
+
 .sectionHeading {
   font-size: 2.25rem;
   font-weight: 900;
@@ -236,8 +241,9 @@
 /* 4. Programmes Section */
 .programmesSection {
   padding: 5rem 0;
-  background-color: #ffffff;
+  background-color: var(--bg-card);
 }
+
 
 .programmeGrid {
   display: grid;
@@ -290,7 +296,7 @@
 
 .programmeDesc {
   font-size: 0.95rem;
-  color: #475569;
+  color: var(--text-muted);
   line-height: 1.45;
   margin: 0;
 }
@@ -326,7 +332,7 @@
 /* 5. SDG Grid Hexagons */
 .sdgSection {
   padding: 5rem 0;
-  background-color: #ffffff;
+  background-color: var(--bg-card);
   border-top: 1px solid var(--border-color);
   border-bottom: 1px solid var(--border-color);
   text-align: center;

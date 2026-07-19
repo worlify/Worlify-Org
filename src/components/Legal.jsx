@@ -144,12 +144,13 @@ const INITIAL_DOCUMENTS = [
     regNo: 'TRUST/2020/987',
     issueDate: '12 Feb 2020',
     renewalDate: 'Permanent',
-    fileSize: '2.4 MB',
-    fileType: 'PDF',
+    fileSize: '228 KB',
+    fileType: 'JPG',
     status: 'Verified',
     badgeType: 'verified',
     downloads: 1109,
-    isFeatured: false
+    isFeatured: false,
+    filePath: '/trust_deed.jpg'
   },
   {
     id: 'doc-8',
@@ -1058,16 +1059,45 @@ export default function Legal({ setActiveTab }) {
                 </div>
               </div>
 
-              {/* Real PDF iframe or Simulated Paper Document Canvas */}
+              {/* Real PDF iframe or Image or Simulated Paper Document Canvas */}
               {previewDoc.filePath ? (
-                <div style={{ flexGrow: 1, backgroundColor: '#ffffff', borderRadius: '12px', overflow: 'hidden', boxShadow: '0 10px 30px rgba(0,0,0,0.05)', marginBottom: '16px', border: '1px solid #e2e8f0', height: '100%', minHeight: '400px' }}>
-                  <iframe
-                    src={`${previewDoc.filePath}#zoom=FitH`}
-                    width="100%"
-                    height="100%"
-                    style={{ border: 'none', display: 'block' }}
-                    title={previewDoc.name}
-                  />
+                <div style={{
+                  flex: '1 1 0',
+                  minHeight: 0,
+                  backgroundColor: '#ffffff',
+                  borderRadius: '12px',
+                  overflow: 'auto',
+                  boxShadow: '0 10px 30px rgba(0,0,0,0.05)',
+                  marginBottom: '16px',
+                  border: '1px solid #e2e8f0',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}>
+                  {previewDoc.filePath.match(/\.(jpeg|jpg|gif|png)$/i) ? (
+                    <img
+                      src={previewDoc.filePath}
+                      alt={previewDoc.name}
+                      style={{
+                        maxWidth: `${zoomLevel}%`,
+                        maxHeight: `${zoomLevel}%`,
+                        width: 'auto',
+                        height: 'auto',
+                        objectFit: 'contain',
+                        display: 'block',
+                        margin: 'auto',
+                        transition: 'max-width 0.2s ease, max-height 0.2s ease'
+                      }}
+                    />
+                  ) : (
+                    <iframe
+                      src={`${previewDoc.filePath}#zoom=FitH`}
+                      width="100%"
+                      height="100%"
+                      style={{ border: 'none', display: 'block' }}
+                      title={previewDoc.name}
+                    />
+                  )}
                 </div>
               ) : (
                 <div className={styles.simulatedDocCanvas} style={{ transform: `scale(${zoomLevel / 100})`, transformOrigin: 'top center' }}>

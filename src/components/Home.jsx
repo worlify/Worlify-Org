@@ -8,8 +8,6 @@ import {
   Briefcase, 
   Smile, 
   ShieldCheck, 
-  ArrowRight, 
-  Play, 
   Users,
   Flame,
   Award,
@@ -19,14 +17,12 @@ import { db } from '../lib/supabase';
 import styles from '../styles/Home.module.css';
 
 // Import local generated assets
-import awardCeremony from '../assets/images/award_ceremony.png';
 import slider2 from '../assets/images/slider2.jpg';
 import slider3 from '../assets/images/slider3.jpg';
 import slider4 from '../assets/images/slider4.jpg';
 import slider_new1 from '../assets/images/slider_new1.jpg';
 import slider_new2 from '../assets/images/slider_new2.jpg';
 import slider_new4 from '../assets/images/slider_new4.jpg';
-import shikshaNaRukeImg from '../assets/images/shiksha_na_ruke.jpg';
 
 export default function Home({ setActiveTab, setDonationPreload, isLocalMode }) {
   // Live stats dynamically updated by db if available
@@ -529,147 +525,7 @@ export default function Home({ setActiveTab, setDonationPreload, isLocalMode }) 
         </div>
       </section>
 
-      {/* 6. Stories in Motion Section */}
-      <section className={styles.storiesSection} id="stories-motion">
-        <div className="container">
-          <h2 className={styles.sectionHeading}>STORIES IN MOTION</h2>
-          <div className={styles.impactDivider}></div>
 
-          <div className={styles.videoGrid}>
-            {/* Video 1 */}
-            <div className={styles.videoCard} id="video-card-1">
-              <div 
-                className={styles.videoThumbnail} 
-                style={{ backgroundImage: `url('https://images.unsplash.com/photo-1594608661623-aa0bd3a69d98?auto=format&fit=crop&q=80&w=600')` }}
-              >
-                <div className={styles.videoOverlay}>
-                  <div className={styles.playButton}>
-                    <Play size={24} fill="white" />
-                  </div>
-                </div>
-              </div>
-              <h3 className={styles.videoTitle}>Impact in Rural Slums: The Ground Reality</h3>
-            </div>
-
-            {/* Video 2 */}
-            <div className={styles.videoCard} id="video-card-2">
-              <div 
-                className={styles.videoThumbnail} 
-                style={{ backgroundImage: `url('https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&q=80&w=600')` }}
-              >
-                <div className={styles.videoOverlay}>
-                  <div className={styles.playButton}>
-                    <Play size={24} fill="white" />
-                  </div>
-                </div>
-              </div>
-              <h3 className={styles.videoTitle}>Shiksha Na Ruke: Education Campaign Documentary</h3>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 7. Support a Cause Section */}
-      <section className={styles.causesSupportSection} id="support-cause">
-        <div className="container">
-          <h2 className={styles.sectionHeading}>SUPPORT A CAUSE</h2>
-          <div className={styles.impactDivider}></div>
-
-          <div className={styles.supportCauseGrid}>
-            {/* Cause Card 1 */}
-            <div className={styles.supportCard} id="support-cause-education">
-              <div 
-                className={styles.supportCardImg} 
-                style={{ backgroundImage: `url(${shikshaNaRukeImg.src || shikshaNaRukeImg})` }}
-              >
-                <div className={styles.supportCardTitleTag}>EDUCATION</div>
-              </div>
-              <div className={styles.supportCardBody}>
-                <h3 className={styles.supportCardTitle}>Shiksha Na Ruke</h3>
-                <p className={styles.supportCardDesc}>
-                  Ensure that underprivileged children do not drop out of school due to lack of notebooks, school kits, or digital classroom tools.
-                </p>
-              </div>
-            </div>
-
-            {/* Cause Card 2 */}
-            <div className={styles.supportCard} id="support-cause-healthcare">
-              <div 
-                className={styles.supportCardImg} 
-                style={{ backgroundImage: `url('https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&q=80&w=600')` }}
-              >
-                <div className={styles.supportCardTitleTag}>HEALTHCARE</div>
-              </div>
-              <div className={styles.supportCardBody}>
-                <h3 className={styles.supportCardTitle}>Health on Wheels</h3>
-                <p className={styles.supportCardDesc}>
-                  Fund mobile clinic vans that supply primary healthcare, pediatric checks, and medicine to thousands of cut-off villages.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 8. Our Partners in Change Section */}
-      <section className={styles.partnersSection} id="partners-csr">
-        <div className="container">
-          <h2 className={styles.sectionHeading}>OUR PARTNERS IN CHANGE</h2>
-          <div className={styles.impactDivider}></div>
-
-          <div className={styles.partnersGrid}>
-            <div className={styles.partnersTexts}>
-              <h3 className={styles.partnersSubtitle}>Corporate Social Responsibility Partnerships</h3>
-              <p className={styles.partnersDesc}>
-                We partner with leading corporations to create high-impact, transparent, and measurable CSR initiatives. Our solutions cover baseline auditing, community-first deployment, operational reporting, and third-party certifications to match global benchmarks.
-              </p>
-              <button 
-                className={styles.secondaryBtn}
-                onClick={() => setActiveTab('volunteer')}
-                id="partner-contact-btn"
-              >
-                Get In Touch <ArrowRight size={16} style={{ marginLeft: '6px' }} />
-              </button>
-            </div>
-            
-            <div className={styles.partnersImageContainer}>
-              <img 
-                src={awardCeremony.src || awardCeremony} 
-                alt="Award ceremony at corporate social responsibility event" 
-                className={styles.partnersImg} 
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 9. Empanelment & Accreditations Section */}
-      <section className={styles.accreditSection} id="empanelment-accreditations">
-        <div className="container">
-          <h2 className={styles.sectionHeading}>EMPANELMENT & ACCREDITATIONS</h2>
-          <div className={styles.impactDivider}></div>
-
-          <div className={styles.accreditGrid}>
-            {/* Card 1 */}
-            <div className={styles.accreditCard} id="accredit-card-un">
-              <div className={styles.accreditLogoText}>UNGC MEMBER</div>
-              <h3 className={styles.accreditTitle}>Member of the United Nations Global Compact</h3>
-              <p className={styles.accreditDesc}>
-                Worlify is an active member supporting the United Nations Global Compact, aligning operations with universal principles on human rights, environment, and anti-corruption.
-              </p>
-            </div>
-
-            {/* Card 2 */}
-            <div className={styles.accreditCard} id="accredit-card-guidestar">
-              <div className={styles.accreditLogoText}>GUIDESTAR PLATINUM</div>
-              <h3 className={styles.accreditTitle}>Accredited at Platinum level by GuideStar India</h3>
-              <p className={styles.accreditDesc}>
-                Worlify has been accredited at the highest Platinum status for financial transparency, standard practices, regulatory compliance, and community outreach.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
     </div>
   );
 }

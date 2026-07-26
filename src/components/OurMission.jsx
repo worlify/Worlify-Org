@@ -70,10 +70,9 @@ export default function OurMission({ setActiveTab }) {
               <div className={styles.iconWrapper} style={{ backgroundColor: 'rgba(13, 148, 136, 0.1)' }}>
                 <Target size={28} color="var(--primary-color)" />
               </div>
-              <h2 className={styles.valueTitle}>Our Mission Statement</h2>
+              <h2 className={styles.valueTitle}>Our Mission</h2>
               <p className={styles.valueText}>
-                To empower marginalized communities by providing the tools, education, and health resources necessary for self-sustained growth, ensuring every individual has the opportunity to thrive with dignity and security.
-              </p>
+                Worlify Foundation’s mission is to bring hope and light into the lives of those who feel alone, helpless, and unseen by society. Through education, skill development, and compassionate support, we strive to rebuild broken confidence and provide every individual—especially children, women, and vulnerable communities—the opportunity to live with dignity. Our goal is not just to improve circumstances, but to awaken strength, self-belief, and resilience within them. Every step we take is guided by empathy, care, and commitment, so that every person can pursue their dreams, become self-reliant, and contribute meaningfully to a more just and compassionate society.              </p>
             </div>
 
             <div className={styles.valueCard} id="vision-card">
@@ -82,8 +81,7 @@ export default function OurMission({ setActiveTab }) {
               </div>
               <h2 className={styles.valueTitle}>Our Long-term Vision</h2>
               <p className={styles.valueText}>
-                A world where geographic location and social status do not determine a human's potential, and where sustainable, transparent aid models create lasting global equity and community resilience.
-              </p>
+                Worlify Foundation envisions a future where no one feels invisible, helpless, or abandoned. We are committed to wiping away tears caused by poverty, injustice, and lack of opportunity, and replacing them with hope and dignity. We believe every heart carries dreams worth protecting and every life deserves compassion and respect. Through education, care, and meaningful opportunities, we strive to heal broken confidence and light a path of hope for those living in darkness, building a society rooted in humanity, empathy, and shared progress.              </p>
             </div>
           </div>
         </div>
@@ -104,14 +102,14 @@ export default function OurMission({ setActiveTab }) {
               const pillar = pillarsData[key];
               const isSelected = selectedPillar === key;
               return (
-                <div 
-                  key={key} 
+                <div
+                  key={key}
                   className={styles.pillarCard}
                   onClick={() => setSelectedPillar(key)}
                   style={isSelected ? { borderColor: pillar.color, backgroundColor: 'var(--bg-card)', boxShadow: 'var(--shadow-md)' } : {}}
                 >
-                  <div 
-                    className={styles.pillarIcon} 
+                  <div
+                    className={styles.pillarIcon}
                     style={{ backgroundColor: pillar.color }}
                   >
                     {pillar.icon}
@@ -126,7 +124,7 @@ export default function OurMission({ setActiveTab }) {
           {/* Active Pillar Detail View */}
           {selectedPillar && (
             <div className={styles.pillarDetailPanel}>
-              <div 
+              <div
                 className={styles.detailIconLarge}
                 style={{ backgroundColor: pillarsData[selectedPillar].color }}
               >
@@ -146,7 +144,7 @@ export default function OurMission({ setActiveTab }) {
         <div className="container">
           <div className={styles.accountabilityCard}>
             <div className={styles.accountabilityGrid}>
-              
+
               <div className={styles.financialIntro}>
                 <span className={styles.auditBadge}>Verified and Audited</span>
                 <h2 className={styles.financialTitle}>Radical Accountability</h2>

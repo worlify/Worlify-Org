@@ -6,6 +6,7 @@ import styles from '../styles/OurDirectors.module.css';
 import raviKumarVermaImg from '../assets/images/ravi_kumar_verma.png';
 import rahulKumarVermaImg from '../assets/images/rahul_kumar_verma.jpg';
 import lxminaDeviImg from '../assets/images/lxmina_devi.jpg';
+import rajeshKumarImg from '../assets/images/rajesh_kumar.png';
 
 /**
  * OurDirectors Component
@@ -38,10 +39,10 @@ export default function OurDirectors({ setActiveTab }) {
       linkedin: '#'
     },
     {
-      name: 'Rajesh Kumar, CPA',
-      role: 'Cordinator of Financial Department',
-      image: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=400',
-      bio: 'Rajesh has a decade of experience auditing public sector charities and NGOs. He oversees our blockchain receipt-matching systems and files quarterly public transparency reports.',
+      name: 'Mr. Kaushik Kishore',
+      role: 'Former Director',
+      image: rajeshKumarImg,
+      bio: 'Mr. Kaushik Kishore served as a Director at Worlify, providing strategic guidance in the early stages of the organization.',
       twitter: '#',
       linkedin: '#'
     }

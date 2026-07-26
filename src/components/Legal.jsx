@@ -137,36 +137,37 @@ const INITIAL_DOCUMENTS = [
   },
   {
     id: 'doc-7',
-    name: 'Trust Deed',
-    category: 'Legal',
-    description: 'Constitutional document outlining Worlify foundation bylaws, trustee responsibilities, and operational scope.',
-    authority: 'Registrar of Trust',
-    regNo: 'TRUST/2020/987',
-    issueDate: '12 Feb 2020',
+    name: 'NITI Aayog Certificate',
+    category: 'Government',
+    description: 'Official enrollment certificate under the NITI Aayog NGO Darpan Portal confirming transparency registry and credentials.',
+    authority: 'NITI Aayog, Govt of India',
+    regNo: 'UP/2023/0344068',
+    issueDate: '12 May 2023',
     renewalDate: 'Permanent',
-    fileSize: '228 KB',
-    fileType: 'JPG',
+    fileSize: '257 KB',
+    fileType: 'PDF',
     status: 'Verified',
     badgeType: 'verified',
     downloads: 1109,
     isFeatured: false,
-    filePath: '/trust_deed.jpg'
+    filePath: '/niti_ayog.pdf'
   },
   {
     id: 'doc-8',
-    name: 'Audit Report 2023-24',
+    name: 'CSR-1',
     category: 'Audit',
-    description: 'Independent auditor report detailing complete asset allocations, expense audits, and financial statements.',
-    authority: 'Chartered Accountant Firm',
-    regNo: 'AUDIT/2023-24/09',
-    issueDate: '30 Sep 2024',
-    renewalDate: 'Annual',
-    fileSize: '3.5 MB',
+    description: 'Official approval letter from the Ministry of Corporate Affairs (ROC Kanpur) for registration of entity to undertake CSR activities.',
+    authority: 'Ministry of Corporate Affairs, Govt of India',
+    regNo: 'CSR00103607',
+    issueDate: '23 Jan 2026',
+    renewalDate: 'Permanent',
+    fileSize: '318 KB',
     fileType: 'PDF',
-    status: 'Compliant',
-    badgeType: 'active',
+    status: 'Verified',
+    badgeType: 'verified',
     downloads: 1980,
-    isFeatured: false
+    isFeatured: false,
+    filePath: '/csr_1.pdf'
   }
 ];
 
@@ -193,7 +194,7 @@ export default function Legal({ setActiveTab }) {
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [selectedYear, setSelectedYear] = useState('All Years');
   const [selectedStatus, setSelectedStatus] = useState('All Statuses');
-  const [sortBy, setSortBy] = useState('name');
+  const [sortBy, setSortBy] = useState('default');
   const [isGridView, setIsGridView] = useState(true);
 
   // Modal Preview States
@@ -531,6 +532,7 @@ export default function Legal({ setActiveTab }) {
                 onChange={(e) => setSortBy(e.target.value)}
                 className={styles.filterSelect}
               >
+                <option value="default">Default Order</option>
                 <option value="name">Sort by Name</option>
                 <option value="downloads">Sort by Downloads</option>
                 <option value="date">Sort by Date</option>

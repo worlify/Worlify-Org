@@ -50,24 +50,36 @@ export default function OurDirectors({ setActiveTab }) {
 
   const advisorsData = [
     {
-      name: 'Dr. Aris Vance',
-      role: 'Professor of Public Health, Johns Hopkins',
-      committee: 'Healthcare & Nutrition'
+      name: 'Shubham',
+      role: 'Administrative Head'
     },
     {
-      name: 'Maya Lin',
-      role: 'Former Managing Director, Clean Grid Alliance',
-      committee: 'Environmental Action'
+      name: 'Pimkesh',
+      role: 'Core Team Member'
     },
     {
-      name: 'Justice Sandra Sen',
-      role: 'Retired High Court Magistrate',
-      committee: 'Audit & Compliance'
+      name: 'Anshu',
+      role: 'Education Coordinator'
     },
     {
-      name: 'Vikram Mehta',
-      role: 'Co-Founder, Tech4Good Accelerator',
-      committee: 'Education Tech'
+      name: 'Manvi',
+      role: 'Events Coordinator'
+    },
+    {
+      name: 'Pallavi',
+      role: 'Tailoring Instructor'
+    },
+    {
+      name: 'Ajay',
+      role: 'Media Head'
+    },
+    {
+      name: 'Ms. Karishma Verma',
+      role: 'Core Team Member'
+    },
+    {
+      name: 'Mr. Pradeep Kumar Gupta',
+      role: 'Core Team Member'
     }
   ];
 
@@ -165,7 +177,6 @@ export default function OurDirectors({ setActiveTab }) {
                 <tr>
                   <th>Advisor Name</th>
                   <th>Primary Affiliation / Role</th>
-                  <th>Board Committee focus</th>
                 </tr>
               </thead>
               <tbody>
@@ -173,9 +184,6 @@ export default function OurDirectors({ setActiveTab }) {
                   <tr key={idx}>
                     <td className={styles.govMemberName}>{advisor.name}</td>
                     <td>{advisor.role}</td>
-                    <td>
-                      <span className={styles.committeeBadge}>{advisor.committee}</span>
-                    </td>
                   </tr>
                 ))}
               </tbody>

@@ -37,7 +37,7 @@ export default function Navbar({ activeTab, setActiveTab, user, onLogout, isLoca
 
   return (
     <header className={styles.navbar} id="main-header">
-      
+
       {/* 1. Top Bar Ribbon (Marquee, Language select, Dark Theme Toggle) */}
       <div className={styles.topBar} id="header-top-bar">
         <div className={styles.marqueeWrapper}>
@@ -46,10 +46,10 @@ export default function Navbar({ activeTab, setActiveTab, user, onLogout, isLoca
             <span className={styles.marqueeSpan}>{MARQUEE_TEXT}</span>
           </div>
         </div>
-        
+
         <div className={styles.topBarControls}>
           {/* Theme Toggle */}
-          <button 
+          <button
             className={styles.themeToggleBtn}
             onClick={toggleTheme}
             title={theme === 'light' ? 'Switch to Dark Mode' : 'Switch to Light Mode'}
@@ -63,8 +63,8 @@ export default function Navbar({ activeTab, setActiveTab, user, onLogout, isLoca
       {/* 2. Main Navigation Header Container */}
       <div className={styles.navContainer}>
         {/* Brand Logo */}
-        <div 
-          className={styles.logo} 
+        <div
+          className={styles.logo}
           onClick={() => handleNavClick('home')}
           id="navbar-logo"
         >
@@ -74,14 +74,14 @@ export default function Navbar({ activeTab, setActiveTab, user, onLogout, isLoca
         {/* Navigation links centered - Desktop */}
         <nav className={styles.desktopNav}>
           <ul className={styles.navLinks} id="nav-links-list">
-            <li 
+            <li
               className={`${styles.navLink} ${activeTab === 'home' ? styles.activeNavLink : ''}`}
               onClick={() => handleNavClick('home')}
               id="nav-link-home"
             >
               Home
             </li>
-            <li 
+            <li
               className={`${styles.navLink} ${styles.dropdownContainer} ${isAboutActive ? styles.activeNavLink : ''}`}
               onMouseEnter={() => setIsAboutDropdownOpen(true)}
               onMouseLeave={() => setIsAboutDropdownOpen(false)}
@@ -93,7 +93,7 @@ export default function Navbar({ activeTab, setActiveTab, user, onLogout, isLoca
               </span>
               {isAboutDropdownOpen && (
                 <ul className={styles.dropdownMenu} id="about-dropdown-menu">
-                  <li 
+                  <li
                     className={`${styles.dropdownItem} ${activeTab === 'about-story' ? styles.activeDropdownItem : ''}`}
                     onClick={(e) => {
                       e.stopPropagation();
@@ -104,7 +104,7 @@ export default function Navbar({ activeTab, setActiveTab, user, onLogout, isLoca
                   >
                     Our Story
                   </li>
-                  <li 
+                  <li
                     className={`${styles.dropdownItem} ${activeTab === 'about-mission' ? styles.activeDropdownItem : ''}`}
                     onClick={(e) => {
                       e.stopPropagation();
@@ -115,7 +115,7 @@ export default function Navbar({ activeTab, setActiveTab, user, onLogout, isLoca
                   >
                     Our Mission
                   </li>
-                  <li 
+                  <li
                     className={`${styles.dropdownItem} ${activeTab === 'about-directors' ? styles.activeDropdownItem : ''}`}
                     onClick={(e) => {
                       e.stopPropagation();
@@ -124,40 +124,40 @@ export default function Navbar({ activeTab, setActiveTab, user, onLogout, isLoca
                     }}
                     id="dropdown-item-our-directors"
                   >
-                    Our Directors
+                    People Behind Worlify
                   </li>
                 </ul>
               )}
             </li>
-            <li 
+            <li
               className={`${styles.navLink} ${activeTab === 'causes' ? styles.activeNavLink : ''}`}
               onClick={() => handleNavClick('causes')}
               id="nav-link-causes"
             >
               Our Causes
             </li>
-            <li 
+            <li
               className={`${styles.navLink} ${activeTab === 'volunteer' ? styles.activeNavLink : ''}`}
               onClick={() => handleNavClick('volunteer')}
               id="nav-link-volunteer"
             >
               Get Involved
             </li>
-            <li 
+            <li
               className={`${styles.navLink} ${activeTab === 'gallery' ? styles.activeNavLink : ''}`}
               onClick={() => handleNavClick('gallery')}
               id="nav-link-gallery"
             >
               Gallery
             </li>
-            <li 
+            <li
               className={`${styles.navLink} ${activeTab === 'legal' ? styles.activeNavLink : ''}`}
               onClick={() => handleNavClick('legal')}
               id="nav-link-legal"
             >
               Legal & Transparency
             </li>
-            <li 
+            <li
               className={`${styles.navLink} ${styles.dropdownContainer} ${isContactActive ? styles.activeNavLink : ''}`}
               onMouseEnter={() => setIsDropdownOpen(true)}
               onMouseLeave={() => setIsDropdownOpen(false)}
@@ -169,7 +169,7 @@ export default function Navbar({ activeTab, setActiveTab, user, onLogout, isLoca
               </span>
               {isDropdownOpen && (
                 <ul className={styles.dropdownMenu} id="contact-dropdown-menu">
-                  <li 
+                  <li
                     className={`${styles.dropdownItem} ${activeTab === 'contact' ? styles.activeDropdownItem : ''}`}
                     onClick={(e) => {
                       e.stopPropagation();
@@ -180,7 +180,7 @@ export default function Navbar({ activeTab, setActiveTab, user, onLogout, isLoca
                   >
                     Get in Touch
                   </li>
-                  <li 
+                  <li
                     className={`${styles.dropdownItem} ${activeTab === 'faqs' ? styles.activeDropdownItem : ''}`}
                     onClick={(e) => {
                       e.stopPropagation();
@@ -201,7 +201,7 @@ export default function Navbar({ activeTab, setActiveTab, user, onLogout, isLoca
         <div className={styles.authGroup} id="auth-actions-group">
           {user ? (
             <>
-              <div 
+              <div
                 className={`${styles.avatarCircle} ${activeTab === 'dashboard' ? styles.activeAvatarCircle : ''}`}
                 onClick={() => handleNavClick('dashboard')}
                 id="nav-link-dashboard"
@@ -209,8 +209,8 @@ export default function Navbar({ activeTab, setActiveTab, user, onLogout, isLoca
               >
                 {getInitials()}
               </div>
-              <button 
-                className={styles.logoutBtn} 
+              <button
+                className={styles.logoutBtn}
                 onClick={onLogout}
                 id="logout-btn"
               >
@@ -220,8 +220,8 @@ export default function Navbar({ activeTab, setActiveTab, user, onLogout, isLoca
             </>
           ) : (
             <>
-              <button 
-                className={styles.loginBtn} 
+              <button
+                className={styles.loginBtn}
                 onClick={() => handleNavClick('auth')}
                 id="login-btn"
               >
@@ -231,8 +231,8 @@ export default function Navbar({ activeTab, setActiveTab, user, onLogout, isLoca
           )}
 
           {/* Core high-impact CTA button */}
-          <button 
-            className={styles.donateBtn} 
+          <button
+            className={styles.donateBtn}
             onClick={() => handleNavClick('donate')}
             id="quick-donate-btn"
           >
@@ -241,8 +241,8 @@ export default function Navbar({ activeTab, setActiveTab, user, onLogout, isLoca
         </div>
 
         {/* Mobile responsive hamburger toggle button */}
-        <button 
-          className={styles.hamburger} 
+        <button
+          className={styles.hamburger}
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           aria-label="Toggle Menu"
           id="mobile-menu-toggle"
@@ -255,14 +255,14 @@ export default function Navbar({ activeTab, setActiveTab, user, onLogout, isLoca
       {isMenuOpen && (
         <div className={styles.mobileMenu} id="mobile-dropdown-menu">
           <ul className={styles.mobileNavLinks}>
-            <li 
+            <li
               className={`${styles.mobileNavLink} ${activeTab === 'home' ? styles.activeMobileNavLink : ''}`}
               onClick={() => handleNavClick('home')}
             >
               Home
             </li>
             <li className={styles.mobileDropdownContainer}>
-              <div 
+              <div
                 className={`${styles.mobileNavLink} ${styles.mobileDropdownToggle} ${isAboutActive ? styles.activeMobileNavLink : ''}`}
                 onClick={() => setIsMobileAboutDropdownOpen(!isMobileAboutDropdownOpen)}
               >
@@ -270,7 +270,7 @@ export default function Navbar({ activeTab, setActiveTab, user, onLogout, isLoca
               </div>
               {isMobileAboutDropdownOpen && (
                 <ul className={styles.mobileSubMenu}>
-                  <li 
+                  <li
                     className={`${styles.mobileSubNavLink} ${activeTab === 'about-story' ? styles.activeMobileSubNavLink : ''}`}
                     onClick={() => {
                       handleNavClick('about-story');
@@ -279,7 +279,7 @@ export default function Navbar({ activeTab, setActiveTab, user, onLogout, isLoca
                   >
                     Our Story
                   </li>
-                  <li 
+                  <li
                     className={`${styles.mobileSubNavLink} ${activeTab === 'about-mission' ? styles.activeMobileSubNavLink : ''}`}
                     onClick={() => {
                       handleNavClick('about-mission');
@@ -288,44 +288,44 @@ export default function Navbar({ activeTab, setActiveTab, user, onLogout, isLoca
                   >
                     Our Mission
                   </li>
-                  <li 
+                  <li
                     className={`${styles.mobileSubNavLink} ${activeTab === 'about-directors' ? styles.activeMobileSubNavLink : ''}`}
                     onClick={() => {
                       handleNavClick('about-directors');
                       setIsMenuOpen(false);
                     }}
                   >
-                    Our Directors
+                    People Behind Worlify
                   </li>
                 </ul>
               )}
             </li>
-            <li 
+            <li
               className={`${styles.mobileNavLink} ${activeTab === 'causes' ? styles.activeMobileNavLink : ''}`}
               onClick={() => handleNavClick('causes')}
             >
               Our Causes
             </li>
-            <li 
+            <li
               className={`${styles.mobileNavLink} ${activeTab === 'volunteer' ? styles.activeMobileNavLink : ''}`}
               onClick={() => handleNavClick('volunteer')}
             >
               Get Involved
             </li>
-            <li 
+            <li
               className={`${styles.mobileNavLink} ${activeTab === 'gallery' ? styles.activeMobileNavLink : ''}`}
               onClick={() => handleNavClick('gallery')}
             >
               Gallery
             </li>
-            <li 
+            <li
               className={`${styles.mobileNavLink} ${activeTab === 'legal' ? styles.activeMobileNavLink : ''}`}
               onClick={() => handleNavClick('legal')}
             >
               Legal & Transparency
             </li>
             <li className={styles.mobileDropdownContainer}>
-              <div 
+              <div
                 className={`${styles.mobileNavLink} ${styles.mobileDropdownToggle} ${isContactActive ? styles.activeMobileNavLink : ''}`}
                 onClick={() => setIsMobileDropdownOpen(!isMobileDropdownOpen)}
               >
@@ -333,7 +333,7 @@ export default function Navbar({ activeTab, setActiveTab, user, onLogout, isLoca
               </div>
               {isMobileDropdownOpen && (
                 <ul className={styles.mobileSubMenu}>
-                  <li 
+                  <li
                     className={`${styles.mobileSubNavLink} ${activeTab === 'contact' ? styles.activeMobileSubNavLink : ''}`}
                     onClick={() => {
                       handleNavClick('contact');
@@ -342,7 +342,7 @@ export default function Navbar({ activeTab, setActiveTab, user, onLogout, isLoca
                   >
                     Get in Touch
                   </li>
-                  <li 
+                  <li
                     className={`${styles.mobileSubNavLink} ${activeTab === 'faqs' ? styles.activeMobileSubNavLink : ''}`}
                     onClick={() => {
                       handleNavClick('faqs');
@@ -361,7 +361,7 @@ export default function Navbar({ activeTab, setActiveTab, user, onLogout, isLoca
           <div className={styles.mobileAuthGroup}>
             {user ? (
               <>
-                <div 
+                <div
                   className={styles.mobileUserBadge}
                   onClick={() => {
                     handleNavClick('dashboard');
@@ -373,7 +373,7 @@ export default function Navbar({ activeTab, setActiveTab, user, onLogout, isLoca
                   </div>
                   <span>{user.first_name || user.email}</span>
                 </div>
-                <button 
+                <button
                   className={styles.mobileLogoutBtn}
                   onClick={() => {
                     onLogout();
@@ -384,14 +384,14 @@ export default function Navbar({ activeTab, setActiveTab, user, onLogout, isLoca
                 </button>
               </>
             ) : (
-              <button 
+              <button
                 className={styles.mobileLoginBtn}
                 onClick={() => handleNavClick('auth')}
               >
                 Sign In
               </button>
             )}
-            <button 
+            <button
               className={styles.mobileDonateBtn}
               onClick={() => handleNavClick('donate')}
             >

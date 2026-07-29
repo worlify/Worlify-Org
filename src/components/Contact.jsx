@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Mail, Phone, MapPin, CheckCircle, ChevronDown, ChevronUp, Building2, Landmark } from 'lucide-react';
+import { Mail, Phone, MapPin, CheckCircle, ChevronDown, ChevronUp, Building2, Landmark, Facebook, Twitter, Instagram, Linkedin, Youtube } from 'lucide-react';
 import { db } from '../lib/supabase';
 import styles from '../styles/Contact.module.css';
 
@@ -134,6 +134,27 @@ export default function Contact({ setActiveTab }) {
               <a href="mailto:supportworlify@gmail.com" className={styles.emailLink}>
                 supportworlify@gmail.com
               </a>
+            </div>
+
+            <div className={styles.contactSection}>
+              <h3 className={styles.sectionHeader}>CONNECT WITH US</h3>
+              <div className={styles.socialRow}>
+                <a href="https://www.facebook.com/share/1KR1fknnr8/" target="_blank" rel="noopener noreferrer" title="Facebook" className={styles.socialBtn}>
+                  <Facebook size={18} />
+                </a>
+                <a href="https://x.com/worlifyngo" target="_blank" rel="noopener noreferrer" title="Twitter / X" className={styles.socialBtn}>
+                  <Twitter size={18} />
+                </a>
+                <a href="https://www.instagram.com/worlifyngo?igsh=MWNwMmkzand2ZzhzMQ==" target="_blank" rel="noopener noreferrer" title="Instagram" className={styles.socialBtn}>
+                  <Instagram size={18} />
+                </a>
+                <a href="https://www.linkedin.com/company/worlifyfoundation/" target="_blank" rel="noopener noreferrer" title="LinkedIn" className={styles.socialBtn}>
+                  <Linkedin size={18} />
+                </a>
+                <a href="https://youtube.com/@worlifyfoundation?si=VQuQRmWtRaBNQBQW" target="_blank" rel="noopener noreferrer" title="YouTube" className={styles.socialBtn}>
+                  <Youtube size={18} />
+                </a>
+              </div>
             </div>
           </div>
 

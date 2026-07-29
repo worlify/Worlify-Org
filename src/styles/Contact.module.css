@@ -79,6 +79,34 @@
   font-weight: 500;
 }
 
+.socialRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.socialBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  color: #0056d2;
+  transition: all 0.25s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.socialBtn:hover {
+  background-color: #0056d2;
+  color: #ffffff;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 14px rgba(0, 86, 210, 0.3);
+}
+
 /* Right Column: Helpdesk Form */
 .formColumn {
   display: flex;

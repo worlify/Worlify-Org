@@ -641,6 +641,28 @@
   flex-shrink: 0;
 }
 
+.topBarSocials {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.topBarSocials a {
+  color: rgba(255, 255, 255, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  padding: 3px;
+  border-radius: 4px;
+}
+
+.topBarSocials a:hover {
+  color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.15);
+  transform: translateY(-1px);
+}
+
 
 .themeToggleBtn {
   background: none;

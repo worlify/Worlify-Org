@@ -1,5 +1,5 @@
 import React from 'react';
-import { Globe, Mail, Phone, MapPin, Twitter, Facebook, Instagram, Heart } from 'lucide-react';
+import { Globe, Mail, Phone, MapPin, Twitter, Facebook, Instagram, Linkedin, Youtube } from 'lucide-react';
 import styles from '../styles/Footer.module.css';
 
 /**
@@ -73,10 +73,21 @@ export default function Footer({ setActiveTab }) {
           </div>
 
           <div className={styles.socials}>
-            <Twitter size={18} className={styles.socialIcon} id="footer-social-twitter" />
-            <Facebook size={18} className={styles.socialIcon} id="footer-social-facebook" />
-            <Instagram size={18} className={styles.socialIcon} id="footer-social-instagram" />
-            <Heart size={18} className={styles.socialIcon} fill="var(--secondary-color)" color="var(--secondary-color)" />
+            <a href="https://www.facebook.com/share/1KR1fknnr8/" target="_blank" rel="noopener noreferrer" title="Facebook" aria-label="Facebook">
+              <Facebook size={18} className={styles.socialIcon} id="footer-social-facebook" />
+            </a>
+            <a href="https://x.com/worlifyngo" target="_blank" rel="noopener noreferrer" title="Twitter / X" aria-label="Twitter / X">
+              <Twitter size={18} className={styles.socialIcon} id="footer-social-twitter" />
+            </a>
+            <a href="https://www.instagram.com/worlifyngo?igsh=MWNwMmkzand2ZzhzMQ==" target="_blank" rel="noopener noreferrer" title="Instagram" aria-label="Instagram">
+              <Instagram size={18} className={styles.socialIcon} id="footer-social-instagram" />
+            </a>
+            <a href="https://www.linkedin.com/company/worlifyfoundation/" target="_blank" rel="noopener noreferrer" title="LinkedIn" aria-label="LinkedIn">
+              <Linkedin size={18} className={styles.socialIcon} id="footer-social-linkedin" />
+            </a>
+            <a href="https://youtube.com/@worlifyfoundation?si=VQuQRmWtRaBNQBQW" target="_blank" rel="noopener noreferrer" title="YouTube" aria-label="YouTube">
+              <Youtube size={18} className={styles.socialIcon} id="footer-social-youtube" />
+            </a>
           </div>
         </div>
       </div>

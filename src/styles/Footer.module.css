@@ -120,16 +120,27 @@
 
 .socials {
   display: flex;
+  align-items: center;
   gap: 16px;
+}
+
+.socials a {
+  color: var(--text-muted, #94a3b8);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.socials a:hover {
+  color: #ffffff;
+  transform: translateY(-2px);
 }
 
 .socialIcon {
   cursor: pointer;
   transition: var(--transition-fast);
-}
-
-.socialIcon:hover {
-  color: white;
 }
 
 @media (max-width: 968px) {

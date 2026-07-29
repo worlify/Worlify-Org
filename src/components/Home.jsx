@@ -15,6 +15,7 @@ import {
 } from 'lucide-react';
 import { db } from '../lib/supabase';
 import styles from '../styles/Home.module.css';
+import ProgrammesMap from './ProgrammesMap';
 
 // Import local generated assets
 import slider2 from '../assets/images/slider2.jpg';
@@ -525,6 +526,8 @@ export default function Home({ setActiveTab, setDonationPreload, isLocalMode }) 
         </div>
       </section>
 
+      {/* 6. Worlify Foundation's Programmes Across India Section */}
+      <ProgrammesMap />
 
     </div>
   );

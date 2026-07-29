@@ -389,4 +389,152 @@
   }
 }
 
+/* 6. Programmes Across India Map Section */
+.mapSection {
+  padding: 5rem 0;
+  background-color: var(--bg-card);
+  border-bottom: 1px solid var(--border-color);
+  overflow: hidden;
+}
+
+.mapGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.mapContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.mapHeading {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #1d5288;
+  line-height: 1.2;
+  letter-spacing: -0.5px;
+  margin-bottom: 2rem;
+  text-transform: uppercase;
+}
+
+:global([data-theme='dark']) .mapHeading {
+  color: #60a5fa;
+}
+
+.mapDescription {
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: var(--text-muted);
+  margin-bottom: 0;
+}
+
+.mapVisualContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.realMapContainer {
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+.indiaRealSvg {
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.09));
+}
+
+.stateInactive {
+  fill: #d1d5db;
+  stroke: #ffffff;
+  stroke-width: 1;
+  transition: all 0.25s ease;
+}
+
+.stateUp {
+  fill: #f59e0b;
+  stroke: #ffffff;
+  stroke-width: 1.5;
+  filter: drop-shadow(0 4px 10px rgba(245, 158, 11, 0.5));
+  transition: all 0.25s ease;
+  cursor: pointer;
+}
+
+.stateUp:hover {
+  fill: #ea580c;
+  filter: drop-shadow(0 8px 18px rgba(245, 158, 11, 0.7));
+}
+
+.stateBihar {
+  fill: #84cc16;
+  stroke: #ffffff;
+  stroke-width: 1.5;
+  filter: drop-shadow(0 4px 10px rgba(132, 204, 22, 0.5));
+  transition: all 0.25s ease;
+  cursor: pointer;
+}
+
+.stateBihar:hover {
+  fill: #65a30d;
+  filter: drop-shadow(0 8px 18px rgba(132, 204, 22, 0.7));
+}
+
+.labelOverlaySvg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.mapStateLabel {
+  fill: #ffffff;
+  font-size: 13px;
+  font-weight: 800;
+  font-family: var(--font-sans);
+  text-anchor: middle;
+  dominant-baseline: central;
+  text-shadow: 0 1.5px 4px rgba(0, 0, 0, 0.65);
+}
+
+:global([data-theme='dark']) .stateInactive {
+  fill: #273549;
+  stroke: #111827;
+}
+
+:global([data-theme='dark']) .stateUp {
+  stroke: #111827;
+}
+
+:global([data-theme='dark']) .stateBihar {
+  stroke: #111827;
+}
+
+@media (max-width: 968px) {
+  .mapGrid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    text-align: center;
+  }
+
+  .mapContent {
+    align-items: center;
+  }
+
+  .mapHeading {
+    font-size: 1.8rem;
+  }
+}
+
+
+
 

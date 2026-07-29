@@ -17,6 +17,7 @@ import Faqs from './components/Faqs';
 import Legal from './components/Legal';
 import Footer from './components/Footer';
 import KeysModal from './components/KeysModal';
+import FloatingActions from './components/FloatingActions';
 import { db, isLocalMode } from './lib/supabase';
 
 /**
@@ -242,6 +243,9 @@ export default function App() {
         isOpen={keysModalOpen} 
         onClose={() => setKeysModalOpen(false)} 
       />
+
+      {/* 5. Floating Actions (Phone Call, WhatsApp, Reach Top) */}
+      <FloatingActions />
 
     </div>
   );

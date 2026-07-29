@@ -16,6 +16,7 @@ import {
 import { db } from '../lib/supabase';
 import styles from '../styles/Home.module.css';
 import ProgrammesMap from './ProgrammesMap';
+import AboutCircleSection from './AboutCircleSection';
 
 // Import local generated assets
 import slider2 from '../assets/images/slider2.jpg';
@@ -117,26 +118,8 @@ export default function Home({ setActiveTab, setDonationPreload, isLocalMode }) 
         </div>
       </section>
 
-      {/* 2. Intro Text Section */}
-      <section className={styles.introSection} id="intro-about">
-        <div className="container">
-          <div className={styles.introContent}>
-            <p className={styles.introHighlight}>
-              <strong>Worlify Foundation</strong> is a development organisation in India, focusing on children's education, healthcare, livelihood, and women empowerment. We believe in grassroots empowerment and achieving sustainable development goals.
-            </p>
-            <p className={styles.introText}>
-              Our grassroots programmes address the needs of underprivileged sections of society. We partner with grassroots organisations and local communities to implement sustainable development initiatives, helping families secure healthcare, clean environments, and educational support.
-            </p>
-            <button 
-              className={styles.readMoreLink} 
-              onClick={() => setActiveTab('about-mission')}
-              id="intro-read-more-btn"
-            >
-              Read More <ChevronRight size={14} />
-            </button>
-          </div>
-        </div>
-      </section>
+      {/* 2. About Us Section with 4-Quadrant Circular Image & Story Link */}
+      <AboutCircleSection setActiveTab={setActiveTab} />
 
       {/* 3. Our Impact Section */}
       <section className={styles.impactSection} id="our-impact">

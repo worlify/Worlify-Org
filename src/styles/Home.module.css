@@ -552,6 +552,221 @@
   }
 }
 
+/* 7. About Circle Section (4-Quadrant Image Circle & Story Content) */
+.aboutCircleSection {
+  padding: 5rem 0;
+  background-color: var(--bg-card);
+  border-bottom: 1px solid var(--border-color);
+  overflow: hidden;
+}
+
+.aboutCircleGrid {
+  display: grid;
+  grid-template-columns: 460px 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.circleFrameWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.circleFrameContainer {
+  position: relative;
+  width: 420px;
+  height: 420px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 12px;
+  padding: 4px;
+}
+
+.quadrant {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease;
+}
+
+.quadrant:hover {
+  transform: scale(1.02);
+  z-index: 2;
+}
+
+.quadrantTopLeft {
+  border-top-left-radius: 200px;
+}
+
+.quadrantTopRight {
+  border-top-right-radius: 200px;
+}
+
+.quadrantBottomLeft {
+  border-bottom-left-radius: 200px;
+}
+
+.quadrantBottomRight {
+  border-bottom-right-radius: 200px;
+}
+
+.centerBadge {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 24px;
+  z-index: 5;
+  border: 4px solid var(--bg-card);
+  transition: all 0.35s ease;
+  cursor: pointer;
+}
+
+.badgeDrop {
+  fill: #dc2626;
+  transition: fill 0.35s ease;
+}
+
+.badgeHand {
+  fill: #dc2626;
+  transition: fill 0.35s ease;
+}
+
+/* On hover of center badge OR the 4-quadrant circle frame */
+.centerBadge:hover,
+.circleFrameContainer:hover .centerBadge {
+  background: #dc2626;
+  border-color: #dc2626;
+  transform: translate(-50%, -50%) scale(1.08);
+  box-shadow: 0 16px 38px rgba(220, 38, 38, 0.45);
+}
+
+.centerBadge:hover .badgeDrop,
+.circleFrameContainer:hover .centerBadge .badgeDrop,
+.centerBadge:hover .badgeHand,
+.circleFrameContainer:hover .centerBadge .badgeHand {
+  fill: #ffffff;
+}
+
+.centerBadgeSvg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.aboutCircleContent {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.aboutTagline {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #dc2626;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.aboutTitle {
+  font-size: 2.3rem;
+  font-weight: 800;
+  color: #1d5288;
+  letter-spacing: -0.5px;
+  margin-bottom: 0.6rem;
+  text-transform: uppercase;
+}
+
+:global([data-theme='dark']) .aboutTitle {
+  color: #60a5fa;
+}
+
+.aboutRedLine {
+  width: 60px;
+  height: 4px;
+  background-color: #dc2626;
+  border-radius: 2px;
+  margin-bottom: 1.5rem;
+}
+
+.aboutParagraph {
+  font-size: 1.02rem;
+  line-height: 1.75;
+  color: var(--text-muted);
+  margin-bottom: 1.25rem;
+}
+
+.discoverBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 0.8rem;
+  padding: 0.8rem 1.8rem;
+  background-color: #0077c8;
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 700;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0, 119, 200, 0.35);
+  transition: all 0.25s ease;
+}
+
+.discoverBtn:hover {
+  background-color: #005fa3;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 119, 200, 0.5);
+}
+
+:global([data-theme='dark']) .centerBadge {
+  background: #1e293b;
+  border-color: #0f172a;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+}
+
+@media (max-width: 968px) {
+  .aboutCircleGrid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    text-align: center;
+  }
+
+  .aboutCircleContent {
+    align-items: center;
+  }
+
+  .aboutTitle {
+    font-size: 1.8rem;
+  }
+
+  .circleFrameContainer {
+    width: 320px;
+    height: 320px;
+  }
+
+  .centerBadge {
+    width: 110px;
+    height: 110px;
+    padding: 18px;
+  }
+}
+
+
 
 
 

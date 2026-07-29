@@ -31,18 +31,58 @@ https.get(url, (res) => {
       if (id === 'an' || id === 'ld') return;
 
       let className = 'styles.stateInactive';
-      if (id === 'up') className = 'styles.stateUp';
-      if (id === 'br') className = 'styles.stateBihar';
+      let extraProps = '';
 
-      processedPaths.push(`      <path id="${id}" aria-label="${label}" className={${className}} d="${d}" />`);
+      if (id === 'up') {
+        className = 'styles.stateUp';
+        extraProps = ` onMouseEnter={(e) => handleMouseEnter('Uttar Pradesh', e)} onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave}`;
+      } else if (id === 'br') {
+        className = 'styles.stateBihar';
+        extraProps = ` onMouseEnter={(e) => handleMouseEnter('Bihar', e)} onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave}`;
+      }
+
+      processedPaths.push(`      <path id="${id}" aria-label="${label}" className={${className}}${extraProps} d="${d}" />`);
     });
 
     const jsxCode = `'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import styles from '../styles/Home.module.css';
 
 export default function IndiaRealMap() {
+  const [tooltip, setTooltip] = useState(null);
+
+  const handleMouseEnter = (name, event) => {
+    const svgEl = event.currentTarget.ownerSVGElement;
+    if (!svgEl) return;
+    const rect = svgEl.getBoundingClientRect();
+    setTooltip({
+      name,
+      x: event.clientX - rect.left,
+      y: event.clientY - rect.top,
+    });
+  };
+
+  const handleMouseMove = (event) => {
+    if (!tooltip) return;
+    const svgEl = event.currentTarget.ownerSVGElement;
+    if (!svgEl) return;
+    const rect = svgEl.getBoundingClientRect();
+    setTooltip((prev) =>
+      prev
+        ? {
+            ...prev,
+            x: event.clientX - rect.left,
+            y: event.clientY - rect.top,
+          }
+        : null
+    );
+  };
+
+  const handleMouseLeave = () => {
+    setTooltip(null);
+  };
+
   return (
     <div className={styles.realMapContainer}>
       <svg
@@ -53,13 +93,24 @@ export default function IndiaRealMap() {
       >
 ${processedPaths.join('\n')}
       </svg>
+      {tooltip && (
+        <div
+          className={styles.mapTooltip}
+          style={{
+            left: \`\${tooltip.x}px\`,
+            top: \`\${tooltip.y - 12}px\`,
+          }}
+        >
+          {tooltip.name}
+        </div>
+      )}
     </div>
   );
 }
 `;
 
     fs.writeFileSync(path.join(__dirname, '../src/components/IndiaRealMap.jsx'), jsxCode);
-    console.log(`Successfully generated clean IndiaRealMap.jsx with ${processedPaths.length} state paths!`);
+    console.log(`Successfully generated interactive IndiaRealMap.jsx!`);
   });
 }).on('error', (err) => {
   console.error('Error fetching SVG:', err);

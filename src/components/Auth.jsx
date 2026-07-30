@@ -12,12 +12,12 @@ import styles from '../styles/Auth.module.css';
 export default function Auth({ onLoginSuccess }) {
   // Tabs: 'signin' or 'signup'
   const [activeTab, setActiveTab] = useState('signin');
-  
+
   // Input fields state
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [fullName, setFullName] = useState('');
-  
+
   // Feedback states
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
@@ -37,7 +37,7 @@ export default function Auth({ onLoginSuccess }) {
     setErrorMsg('');
     try {
       const { data, error } = await db.signIn(normalizedEmail, normalizedPassword);
-      
+
       if (!error && data) {
         // Authenticated successfully! Notify parent App
         onLoginSuccess(data.user);
@@ -139,7 +139,7 @@ export default function Auth({ onLoginSuccess }) {
               <input
                 type="email"
                 className={styles.input}
-                placeholder="e.g. supporter@gmail.com"
+                placeholder="example@gmail.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 autoComplete="email"
@@ -165,8 +165,8 @@ export default function Auth({ onLoginSuccess }) {
               />
             </div>
 
-            <button 
-              type="submit" 
+            <button
+              type="submit"
               className={styles.submitBtn}
               disabled={isSubmitting}
               id="signin-submit-btn"
@@ -176,8 +176,8 @@ export default function Auth({ onLoginSuccess }) {
 
             <p className={styles.togglePrompt}>
               New to Worlify?{' '}
-              <span 
-                className={styles.toggleLink} 
+              <span
+                className={styles.toggleLink}
                 onClick={() => {
                   setActiveTab('signup');
                   setErrorMsg('');
@@ -208,7 +208,7 @@ export default function Auth({ onLoginSuccess }) {
               <input
                 type="email"
                 className={styles.input}
-                placeholder="e.g. supporter@gmail.com"
+                placeholder="example@gmail.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 autoComplete="email"
@@ -234,8 +234,8 @@ export default function Auth({ onLoginSuccess }) {
               />
             </div>
 
-            <button 
-              type="submit" 
+            <button
+              type="submit"
               className={styles.submitBtn}
               disabled={isSubmitting}
               id="signup-submit-btn"
@@ -245,8 +245,8 @@ export default function Auth({ onLoginSuccess }) {
 
             <p className={styles.togglePrompt}>
               Already have an account?{' '}
-              <span 
-                className={styles.toggleLink} 
+              <span
+                className={styles.toggleLink}
                 onClick={() => {
                   setActiveTab('signin');
                   setErrorMsg('');
@@ -260,11 +260,11 @@ export default function Auth({ onLoginSuccess }) {
         )}
 
         {/* Connection status indicator */}
-        <div style={{ 
-          marginTop: '20px', 
-          padding: '8px 12px', 
-          borderRadius: 'var(--radius-sm)', 
-          fontSize: '11px', 
+        <div style={{
+          marginTop: '20px',
+          padding: '8px 12px',
+          borderRadius: 'var(--radius-sm)',
+          fontSize: '11px',
           textAlign: 'center',
           backgroundColor: isLocalMode ? 'rgba(239, 68, 68, 0.08)' : 'rgba(16, 185, 129, 0.08)',
           color: isLocalMode ? 'rgb(239, 68, 68)' : 'rgb(16, 185, 129)',
@@ -274,10 +274,10 @@ export default function Auth({ onLoginSuccess }) {
           justifyContent: 'center',
           gap: '6px'
         }} id="auth-mode-indicator">
-          <span style={{ 
-            width: '6px', 
-            height: '6px', 
-            borderRadius: '50%', 
+          <span style={{
+            width: '6px',
+            height: '6px',
+            borderRadius: '50%',
             backgroundColor: isLocalMode ? 'rgb(239, 68, 68)' : 'rgb(16, 185, 129)',
             display: 'inline-block'
           }}></span>

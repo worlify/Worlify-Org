@@ -20,14 +20,66 @@ import KeysModal from './components/KeysModal';
 import FloatingActions from './components/FloatingActions';
 import { db, isLocalMode } from './lib/supabase';
 
+const VALID_TABS = [
+  'home', 'causes', 'about-story', 'about-mission', 'about-directors', 
+  'about', 'gallery', 'volunteer', 'donate', 'contact', 'faqs', 'legal', 
+  'auth', 'dashboard'
+];
+
+function getTabFromUrl() {
+  if (typeof window === 'undefined') return 'home';
+  // Prioritize clean pathname (e.g., /gallery)
+  const path = window.location.pathname.replace(/^\//, '').trim();
+  if (path && VALID_TABS.includes(path)) {
+    return path;
+  }
+  // Support hash fallback if present (e.g. #gallery)
+  const hash = window.location.hash.replace(/^#\/?/, '').trim();
+  if (hash && VALID_TABS.includes(hash)) {
+    return hash;
+  }
+  return 'home';
+}
+
 /**
  * Main Application Component (Worlify NGO)
  * Governs state-driven client-side routing, user session handling,
  * and global configuration guides.
  */
 export default function App() {
-  // Current visible tab: 'home' | 'causes' | 'about' | 'gallery' | 'volunteer' | 'donate' | 'auth' | 'dashboard'
-  const [activeTab, setActiveTab] = useState('home');
+  // Current visible tab initialized from URL
+  const [activeTab, setActiveTabState] = useState(getTabFromUrl);
+
+  const setActiveTab = (tabId) => {
+    setActiveTabState(tabId);
+    if (typeof window !== 'undefined') {
+      const newPath = tabId === 'home' ? '/' : `/${tabId}`;
+      if (window.location.pathname !== newPath || window.location.hash) {
+        window.history.pushState({ tab: tabId }, '', newPath);
+      }
+    }
+  };
+
+  // Sync state on URL popstate (back/forward) or hashchange
+  useEffect(() => {
+    const handleUrlChange = () => {
+      const tabFromUrl = getTabFromUrl();
+      setActiveTabState(tabFromUrl);
+    };
+
+    const currentTab = getTabFromUrl();
+    const targetPath = currentTab === 'home' ? '/' : `/${currentTab}`;
+    if (typeof window !== 'undefined' && (window.location.pathname !== targetPath || window.location.hash)) {
+      window.history.replaceState({ tab: currentTab }, '', targetPath);
+    }
+
+    window.addEventListener('popstate', handleUrlChange);
+    window.addEventListener('hashchange', handleUrlChange);
+    return () => {
+      window.removeEventListener('popstate', handleUrlChange);
+      window.removeEventListener('hashchange', handleUrlChange);
+    };
+  }, []);
   
   // Authenticated user state
   const [user, setUser] = useState(null);

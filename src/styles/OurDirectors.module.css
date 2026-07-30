@@ -242,6 +242,21 @@
   letter-spacing: 0.5px;
 }
 
+.directorEmailRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 6px;
+  font-size: 13.5px;
+  color: var(--text-light);
+  text-decoration: none;
+}
+
+.directorEmailIcon {
+  flex-shrink: 0;
+  color: var(--text-light);
+}
+
 /* Advisory Board & Governance Section */
 .governanceSection {
   padding: 90px 0;

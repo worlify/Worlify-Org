@@ -1,4 +1,5 @@
 import React from 'react';
+import { Mail } from 'lucide-react';
 import styles from '../styles/OurDirectors.module.css';
 
 // Import director images
@@ -141,6 +142,10 @@ export default function OurDirectors({ setActiveTab }) {
               <div className={styles.signatureArea}>
                 <div className={styles.directorSig}>Mr. Ravi Kumar Verma</div>
                 <div className={styles.directorSigTitle}>Chairman, Worlify</div>
+                <a href="mailto:ravikumarverma.co.in@gmail.com" className={styles.directorEmailRow}>
+                  <Mail size={16} className={styles.directorEmailIcon} />
+                  <span>ravikumarverma.co.in@gmail.com</span>
+                </a>
               </div>
             </div>
           </div>

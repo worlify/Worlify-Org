@@ -54,10 +54,10 @@ export const CAUSES_DATA = {
       }
     ],
     impactStats: [
-      { number: 15000, suffix: '+', label: 'Children Supported', iconName: 'GraduationCap' },
-      { number: 350, suffix: '+', label: 'School Projects', iconName: 'School' },
-      { number: 120, suffix: '+', label: 'Active Mentors', iconName: 'Users' },
-      { number: 15, suffix: '', label: 'States Reached', iconName: 'MapPin' }
+      { number: 150, suffix: '+', label: 'Children Supported', iconName: 'GraduationCap' },
+      { number: 12, suffix: '+', label: 'School Projects', iconName: 'School' },
+      { number: 18, suffix: '+', label: 'Active Mentors', iconName: 'Users' },
+      { number: 3, suffix: '', label: 'States Reached', iconName: 'MapPin' }
     ],
     gallery: [
       { url: typeof shikshaNaRuke === 'string' ? shikshaNaRuke : shikshaNaRuke.src, caption: 'Digital classroom session in rural Bihar' },
@@ -117,10 +117,10 @@ export const CAUSES_DATA = {
       }
     ],
     impactStats: [
-      { number: 45000, suffix: '+', label: 'Daily Meals Served', iconName: 'Utensils' },
-      { number: 8500, suffix: '+', label: 'Ration Kits Gifted', iconName: 'Package' },
-      { number: 85, suffix: '+', label: 'Community Kitchens', iconName: 'Home' },
-      { number: 18, suffix: '', label: 'Districts Covered', iconName: 'MapPin' }
+      { number: 500, suffix: '+', label: 'Meals Served', iconName: 'Utensils' },
+      { number: 120, suffix: '+', label: 'Ration Kits Gifted', iconName: 'Package' },
+      { number: 4, suffix: '+', label: 'Community Kitchens', iconName: 'Home' },
+      { number: 3, suffix: '', label: 'Districts Covered', iconName: 'MapPin' }
     ],
     gallery: [
       { url: typeof sliderNew1 === 'string' ? sliderNew1 : sliderNew1.src, caption: 'Community meal distribution drive' },
@@ -180,10 +180,10 @@ export const CAUSES_DATA = {
       }
     ],
     impactStats: [
-      { number: 85000, suffix: '+', label: 'Patients Treated', iconName: 'Stethoscope' },
-      { number: 120, suffix: '+', label: 'Free Health Camps', iconName: 'HeartPulse' },
-      { number: 24, suffix: '+', label: 'Mobile Vans Active', iconName: 'Ambulance' },
-      { number: 12, suffix: '', label: 'States Reached', iconName: 'MapPin' }
+      { number: 100, suffix: '+', label: 'Patients Treated', iconName: 'Stethoscope' },
+      { number: 10, suffix: '+', label: 'Free Health Camps', iconName: 'HeartPulse' },
+      { number: 1, suffix: '+', label: 'Mobile Vans Active', iconName: 'Ambulance' },
+      { number: 2, suffix: '', label: 'States Reached', iconName: 'MapPin' }
     ],
     gallery: [
       { url: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&q=80&w=800', caption: 'Doctor conducting routine child checkup in rural camp' },
@@ -243,10 +243,10 @@ export const CAUSES_DATA = {
       }
     ],
     impactStats: [
-      { number: 12500, suffix: '+', label: 'Cases Advocated', iconName: 'Scale' },
-      { number: 420, suffix: '+', label: 'Legal Aid Camps', iconName: 'Shield' },
-      { number: 85, suffix: '+', label: 'Pro-Bono Lawyers', iconName: 'Users' },
-      { number: 14, suffix: '', label: 'States Active', iconName: 'MapPin' }
+      { number: 10, suffix: '+', label: 'Cases Advocated', iconName: 'Scale' },
+      { number: 6, suffix: '+', label: 'Legal Aid Camps', iconName: 'Shield' },
+      { number: 5, suffix: '+', label: 'Pro-Bono Lawyers', iconName: 'Users' },
+      { number: 2, suffix: '', label: 'States Active', iconName: 'MapPin' }
     ],
     gallery: [
       { url: 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&q=80&w=800', caption: 'Legal rights awareness seminar in community hall' },
@@ -268,7 +268,7 @@ export const CAUSES_DATA = {
     subtitle: 'SUSTAINABLE PLANET, GREENER TOMORROW',
     heading: 'Protecting Ecosystems & Championing Climate Resilience',
     description: 'Climate change impacts the most vulnerable first. We plant native forests, install solar clean water units, lead ocean cleanup drives, and advocate zero-waste practices.',
-    badge: '180,000+ Trees Planted',
+    badge: '1,200+ Trees Planted',
     colors: {
       primary: '#16a34a',
       secondary: '#22c55e',
@@ -306,10 +306,10 @@ export const CAUSES_DATA = {
       }
     ],
     impactStats: [
-      { number: 180000, suffix: '+', label: 'Trees Planted', iconName: 'Trees' },
-      { number: 45, suffix: '+', label: 'Solar Water Hubs', iconName: 'Droplets' },
-      { number: 320, suffix: '+', label: 'Clean-up Drives', iconName: 'Recycle' },
-      { number: 20, suffix: '', label: 'Forest Zones Restored', iconName: 'MapPin' }
+      { number: 500, suffix: '+', label: 'Trees Planted', iconName: 'Trees' },
+      { number: 3, suffix: '+', label: 'Solar Water Hubs', iconName: 'Droplets' },
+      { number: 15, suffix: '+', label: 'Clean-up Drives', iconName: 'Recycle' },
+      { number: 2, suffix: '', label: 'Forest Zones Restored', iconName: 'MapPin' }
     ],
     gallery: [
       { url: 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&q=80&w=800', caption: 'Volunteers planting saplings in reforestation drive' },
@@ -369,10 +369,10 @@ export const CAUSES_DATA = {
       }
     ],
     impactStats: [
-      { number: 9800, suffix: '+', label: 'Animals Rescued', iconName: 'Ambulance' },
-      { number: 35000, suffix: '+', label: 'Stray Meals Served', iconName: 'Heart' },
-      { number: 6500, suffix: '+', label: 'Rabies Vaccinations', iconName: 'Shield' },
-      { number: 5, suffix: '', label: 'Animal Sanctuaries', iconName: 'Home' }
+      { number: 120, suffix: '+', label: 'Animals Rescued', iconName: 'Ambulance' },
+      { number: 400, suffix: '+', label: 'Stray Meals Served', iconName: 'Heart' },
+      { number: 90, suffix: '+', label: 'Vaccinations Given', iconName: 'Shield' },
+      { number: 1, suffix: '', label: 'Animal Sanctuary', iconName: 'Home' }
     ],
     gallery: [
       { url: 'https://images.unsplash.com/photo-1548767797-d8c844163c4c?auto=format&fit=crop&q=80&w=800', caption: 'Rescued dog receiving gentle medical treatment' },
@@ -394,7 +394,7 @@ export const CAUSES_DATA = {
     subtitle: 'VOCATIONAL TRAINING, ECONOMIC EMPOWERMENT',
     heading: 'Unlocking Youth Potential Through Job-Ready Skills',
     description: 'True independence comes from sustainable livelihoods. We offer certified vocational courses in coding, tailoring, solar maintenance, healthcare assistance, and micro-entrepreneurship.',
-    badge: '88% Placement Rate',
+    badge: '75% Placement Rate',
     colors: {
       primary: '#4f46e5',
       secondary: '#6366f1',
@@ -432,10 +432,10 @@ export const CAUSES_DATA = {
       }
     ],
     impactStats: [
-      { number: 18500, suffix: '+', label: 'Youth Skilled', iconName: 'Briefcase' },
-      { number: 38, suffix: '+', label: 'Training Centers', iconName: 'Wrench' },
-      { number: 88, suffix: '%', label: 'Job Placement', iconName: 'Award' },
-      { number: 16, suffix: '', label: 'State Partnerships', iconName: 'MapPin' }
+      { number: 200, suffix: '+', label: 'Youth Skilled', iconName: 'Briefcase' },
+      { number: 2, suffix: '+', label: 'Training Centers', iconName: 'Wrench' },
+      { number: 5, suffix: '%', label: 'Job Placement', iconName: 'Award' },
+      { number: 2, suffix: '', label: 'State Partnerships', iconName: 'MapPin' }
     ],
     gallery: [
       { url: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&q=80&w=800', caption: 'Youth computer literacy and digital skills class' },
@@ -495,10 +495,10 @@ export const CAUSES_DATA = {
       }
     ],
     impactStats: [
-      { number: 22000, suffix: '+', label: 'Families Uplifted', iconName: 'Home' },
-      { number: 4800, suffix: '+', label: 'Micro-Businesses Funded', iconName: 'Coins' },
-      { number: 1200, suffix: '+', label: 'Eco-Toilets Built', iconName: 'Sprout' },
-      { number: 22, suffix: '', label: 'Districts Transformed', iconName: 'MapPin' }
+      { number: 180, suffix: '+', label: 'Families Uplifted', iconName: 'Home' },
+      { number: 40, suffix: '+', label: 'Micro-Businesses Funded', iconName: 'Coins' },
+      { number: 2, suffix: '+', label: 'Eco-Toilets Built', iconName: 'Sprout' },
+      { number: 3, suffix: '', label: 'Districts Reached', iconName: 'MapPin' }
     ],
     gallery: [
       { url: 'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&q=80&w=800', caption: 'Community empowerment and micro-grant distribution' },

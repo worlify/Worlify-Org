@@ -1,20 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { db } from '../lib/supabase';
-import { 
-  CheckCircle, 
-  Shield, 
-  Gift, 
-  Heart, 
-  ArrowRight, 
-  Lock, 
-  CreditCard, 
-  Landmark, 
-  QrCode, 
-  Smartphone, 
-  Check, 
-  BookOpen, 
-  TrendingUp, 
-  ChevronRight, 
+import {
+  CheckCircle,
+  Shield,
+  Gift,
+  Heart,
+  ArrowRight,
+  Lock,
+  CreditCard,
+  Landmark,
+  QrCode,
+  Smartphone,
+  Check,
+  BookOpen,
+  TrendingUp,
+  ChevronRight,
   Award,
   Globe
 } from 'lucide-react';
@@ -27,16 +27,16 @@ import styles from '../styles/Donate.module.css';
 export default function Donate({ user, preloadedCause, clearPreload, setActiveTab }) {
   // General Fund vs Specific Cause tab selection
   const [directTo, setDirectTo] = useState('general'); // 'general' or 'cause'
-  
+
   // Frequency toggle (One-time vs Monthly)
   const [frequency, setFrequency] = useState('one-time'); // 'one-time' or 'monthly'
-  
+
   // Selected donation presets (Currency: INR ₹)
   const [selectedAmount, setSelectedAmount] = useState('2500'); // '1000', '2500', '5000', '10000'
   const [customAmount, setCustomAmount] = useState('');
-  
+
   const [selectedCause, setSelectedCause] = useState('Education');
-  
+
   // Billing details (Simulated security form fields revealed upon proceed)
   const [showBillingForm, setShowBillingForm] = useState(false);
   const [cardNumber, setCardNumber] = useState('');
@@ -58,7 +58,7 @@ export default function Donate({ user, preloadedCause, clearPreload, setActiveTa
         .replace(' Programs', '')
         .replace(' Services', '')
         .replace(' Action', '');
-      
+
       setSelectedCause(cleanCause);
       setDirectTo('cause'); // auto open cause selector
       clearPreload(); // Clear reference
@@ -118,7 +118,7 @@ export default function Donate({ user, preloadedCause, clearPreload, setActiveTa
   // Handle donation checkout payment
   const handleCheckoutSubmit = async (e) => {
     e.preventDefault();
-    
+
     const finalAmount = getFinalAmount();
     const destination = directTo === 'general' ? 'General Fund' : selectedCause;
 
@@ -140,7 +140,7 @@ export default function Donate({ user, preloadedCause, clearPreload, setActiveTa
     setIsSubmitting(true);
     try {
       const emailToUse = donorEmail || (user ? user.email : 'anonymous@helper.org');
-      
+
       const { data, error } = await db.addDonation(finalAmount, destination, emailToUse);
 
       if (!error) {
@@ -164,11 +164,11 @@ export default function Donate({ user, preloadedCause, clearPreload, setActiveTa
 
   return (
     <div className={styles.donateContainer} id="donate-view-root">
-      
+
       {/* 1. Hero Cover Banner / Split Layout Section */}
       <section className={styles.heroSection} id="donate-hero-section">
         <div className={styles.heroGrid}>
-          
+
           {/* Left Column Text details */}
           <div className={styles.heroLeft}>
             <span className={styles.joinBadge}>Join The Movement</span>
@@ -178,7 +178,7 @@ export default function Donate({ user, preloadedCause, clearPreload, setActiveTa
             <p className={styles.heroDesc}>
               Empower communities, protect the environment, and provide essential healthcare. Every rupee you share helps us build a more equitable world for everyone.
             </p>
-            
+
             {/* 100% Tax Benefit Card */}
             <div className={styles.taxBenefitCard} id="tax-benefit-guarantee-card">
               <div className={styles.shieldIconWrapper}>
@@ -194,12 +194,12 @@ export default function Donate({ user, preloadedCause, clearPreload, setActiveTa
           {/* Right Column: Active Campaign Highlight Frame */}
           <div className={styles.heroRight}>
             <div className={styles.imageWrapper} id="campaign-banner-image-wrapper">
-              <img 
-                src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&q=80&w=800" 
-                alt="Teacher helping Indian school children" 
+              <img
+                src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&q=80&w=800"
+                alt="Teacher helping Indian school children"
                 className={styles.campaignImg}
               />
-              
+
               {/* Floating campaign overlay widget */}
               <div className={styles.activeProjectCard} id="floating-active-project-card">
                 <span className={styles.activeTag}>ACTIVE PROJECT</span>
@@ -219,9 +219,9 @@ export default function Donate({ user, preloadedCause, clearPreload, setActiveTa
 
       {/* 2. Interactive Donation checkout card with light grey-purple background wrapper */}
       <section className={styles.checkoutSection} id="checkout-form-section">
-        
+
         <div className={styles.checkoutCard} id="checkout-main-interactive-card">
-          
+
           {success ? (
             <div className={styles.successCard} id="checkout-success-banner">
               <CheckCircle size={64} className={styles.successIcon} />
@@ -231,7 +231,7 @@ export default function Donate({ user, preloadedCause, clearPreload, setActiveTa
               </p>
               <div className={styles.successActions}>
                 {user ? (
-                  <button 
+                  <button
                     type="button"
                     className={styles.dashboardBtn}
                     onClick={() => setActiveTab('dashboard')}
@@ -240,7 +240,7 @@ export default function Donate({ user, preloadedCause, clearPreload, setActiveTa
                     Track in Dashboard
                   </button>
                 ) : (
-                  <button 
+                  <button
                     type="button"
                     className={styles.dashboardBtn}
                     onClick={() => setActiveTab('auth')}
@@ -249,8 +249,8 @@ export default function Donate({ user, preloadedCause, clearPreload, setActiveTa
                     Create Free Supporter Account
                   </button>
                 )}
-                <button 
-                  type="button" 
+                <button
+                  type="button"
                   className={styles.resetBtn}
                   onClick={() => setSuccess(false)}
                   id="success-checkout-another-btn"
@@ -262,9 +262,9 @@ export default function Donate({ user, preloadedCause, clearPreload, setActiveTa
           ) : (
             <div>
               <div className={styles.cardTopLabel}>WHERE SHOULD WE DIRECT YOUR GIFT?</div>
-              
+
               {/* Coming Soon Message */}
-              <div 
+              <div
                 style={{
                   textAlign: 'center',
                   padding: '60px 20px',
@@ -276,9 +276,9 @@ export default function Donate({ user, preloadedCause, clearPreload, setActiveTa
                 id="donation-coming-soon-banner"
               >
                 <Gift size={48} style={{ margin: '0 auto 20px', color: 'var(--primary-color)' }} />
-                <h3 style={{ 
-                  fontSize: '22px', 
-                  fontWeight: '700', 
+                <h3 style={{
+                  fontSize: '22px',
+                  fontWeight: '700',
                   color: '#1a1a1a',
                   marginBottom: '12px'
                 }}>
@@ -290,7 +290,7 @@ export default function Donate({ user, preloadedCause, clearPreload, setActiveTa
                   lineHeight: '1.6',
                   marginBottom: '24px'
                 }}>
-                  We're setting up secure payment infrastructure to safely collect your generous contributions. 
+                  We're setting up secure payment infrastructure to safely collect your generous contributions.
                 </p>
                 <p style={{
                   fontSize: '15px',
@@ -310,7 +310,7 @@ export default function Donate({ user, preloadedCause, clearPreload, setActiveTa
 
       {/* 3. Every Penny Matters split structural grid layout */}
       <section className={styles.impactSection} id="every-penny-matters-impact-reports">
-        
+
         <div className={styles.impactHeader}>
           <h2 className={styles.impactTitle}>Every Penny Matters</h2>
           <p className={styles.impactSubtitle}>
@@ -320,16 +320,16 @@ export default function Donate({ user, preloadedCause, clearPreload, setActiveTa
 
         {/* Row 1 Grid: Sustainability vs Education */}
         <div className={styles.row1Grid} id="every-penny-row1-grid">
-          
+
           {/* Left Large Card: Sustainability Banner */}
           <div className={styles.sustainabilityCard} id="every-penny-sustainability-box">
-            <img 
-              src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&q=80&w=800" 
-              alt="Volunteers planting trees" 
+            <img
+              src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&q=80&w=800"
+              alt="Volunteers planting trees"
               className={styles.cardBgImg}
             />
             <div className={styles.cardDarkOverlay} />
-            
+
             <div className={styles.sustainabilityContent}>
               <span className={styles.sustainBadge}>SUSTAINABILITY</span>
               <h3 className={styles.sustainTitle}>Greening Our Future</h3>
@@ -344,7 +344,7 @@ export default function Donate({ user, preloadedCause, clearPreload, setActiveTa
             <div className={styles.eduIconWrapper}>
               <BookOpen size={22} />
             </div>
-            
+
             <div>
               <h3 className={styles.eduTitle}>Education For All</h3>
               <p className={styles.eduDesc}>
@@ -361,31 +361,6 @@ export default function Donate({ user, preloadedCause, clearPreload, setActiveTa
         </div>
 
         {/* Row 2: Full landscape card for Healthcare & Wellness */}
-        <div className={styles.healthBar} id="every-penny-health-wellness-banner">
-          <div className={styles.healthLeft}>
-            <img 
-              src="https://images.unsplash.com/photo-1584515901187-601004a702c5?auto=format&fit=crop&q=80&w=200" 
-              alt="Medical clinics" 
-              className={styles.healthThumb}
-            />
-            <div>
-              <h4 className={styles.healthTitle}>Health & Wellness</h4>
-              <p className={styles.healthDesc}>
-                Over 100 mobile clinics deployed, reaching remote villages with essential medical aid and vaccines.
-              </p>
-            </div>
-          </div>
-          
-          {/* Interactive Arrow Button */}
-          <button 
-            type="button" 
-            className={styles.arrowCircleBtn}
-            onClick={() => setActiveTab('causes')}
-            id="health-wellness-arrow-btn"
-          >
-            <ChevronRight size={20} />
-          </button>
-        </div>
 
       </section>
 

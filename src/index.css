@@ -105,4 +105,117 @@ img {
   background: var(--text-light);
 }
 
+/* =============================================
+   Professional Splash / Loader Screen
+   ============================================= */
+.worlify-splash {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #f0fdfa 0%, #ecfdf5 50%, #f0f9ff 100%);
+  /* Subtle animated radial glow behind the card */
+  overflow: hidden;
+}
 
+[data-theme='dark'] .worlify-splash {
+  background: linear-gradient(135deg, #0b1a18 0%, #0b1520 50%, #0b1628 100%);
+}
+
+/* Decorative animated background blob */
+.worlify-splash::before {
+  content: '';
+  position: absolute;
+  width: 480px;
+  height: 480px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(13,148,136,0.12) 0%, transparent 70%);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: splashPulse 2s ease-in-out infinite;
+}
+
+@keyframes splashPulse {
+  0%, 100% { transform: translate(-50%, -50%) scale(1);   opacity: 0.7; }
+  50%       { transform: translate(-50%, -50%) scale(1.18); opacity: 1;   }
+}
+
+/* Card container */
+.worlify-splash__card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  padding: 48px 60px;
+  background: rgba(255,255,255,0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.6);
+  border-radius: 24px;
+  box-shadow:
+    0 8px 32px rgba(13,148,136,0.10),
+    0 2px 8px rgba(0,0,0,0.06);
+  animation: splashCardIn 0.45s cubic-bezier(0.34,1.56,0.64,1) both;
+}
+
+[data-theme='dark'] .worlify-splash__card {
+  background: rgba(17,24,39,0.85);
+  border-color: rgba(255,255,255,0.08);
+  box-shadow:
+    0 8px 32px rgba(13,148,136,0.15),
+    0 2px 8px rgba(0,0,0,0.4);
+}
+
+@keyframes splashCardIn {
+  from { opacity: 0; transform: translateY(24px) scale(0.94); }
+  to   { opacity: 1; transform: translateY(0)    scale(1);    }
+}
+
+/* Logo */
+.worlify-splash__logo-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.worlify-splash__logo {
+  width: 140px;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 16px rgba(13,148,136,0.20));
+  animation: splashLogoFloat 3s ease-in-out infinite;
+}
+
+@keyframes splashLogoFloat {
+  0%, 100% { transform: translateY(0);   }
+  50%       { transform: translateY(-6px); }
+}
+
+/* 3-dot bounce */
+.worlify-splash__dots {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.worlify-splash__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--primary-color);
+  display: inline-block;
+  animation: dotBounce 1.2s ease-in-out infinite;
+}
+
+.worlify-splash__dot:nth-child(1) { animation-delay: 0s;    }
+.worlify-splash__dot:nth-child(2) { animation-delay: 0.2s;  background: var(--secondary-color); }
+.worlify-splash__dot:nth-child(3) { animation-delay: 0.4s;  }
+
+@keyframes dotBounce {
+  0%, 80%, 100% { transform: scale(0.7) translateY(0);  opacity: 0.5; }
+  40%           { transform: scale(1)   translateY(-10px); opacity: 1;   }
+}

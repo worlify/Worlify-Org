@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import logoImg from './assets/images/logo.png';
 import Navbar from './components/Navbar';
 import Home from './components/Home';
 import Causes from './components/Causes';
@@ -22,11 +23,11 @@ import { db, isLocalMode } from './lib/supabase';
 
 const VALID_TABS = [
   'home', 'causes',
-  'causes-education', 'causes-food-nutrition', 'causes-healthcare', 
-  'causes-human-rights', 'causes-environment', 'causes-animal-welfare', 
+  'causes-education', 'causes-food-nutrition', 'causes-healthcare',
+  'causes-human-rights', 'causes-environment', 'causes-animal-welfare',
   'causes-skill-development', 'causes-poverty-alleviation',
-  'about-story', 'about-mission', 'about-directors', 
-  'about', 'gallery', 'volunteer', 'donate', 'contact', 'faqs', 'legal', 
+  'about-story', 'about-mission', 'about-directors',
+  'about', 'gallery', 'volunteer', 'donate', 'contact', 'faqs', 'legal',
   'auth', 'dashboard'
 ];
 
@@ -96,16 +97,16 @@ export default function App() {
       window.removeEventListener('hashchange', handleUrlChange);
     };
   }, []);
-  
+
   // Authenticated user state
   const [user, setUser] = useState(null);
-  
+
   // Shared state to transfer donation intent between views (e.g., clicking support on a Cause)
   const [donationPreload, setDonationPreload] = useState('');
-  
+
   // Supabase credentials configuration modal state
   const [keysModalOpen, setKeysModalOpen] = useState(false);
-  
+
   // Loading state for recovery session check
   const [isLoadingSession, setIsLoadingSession] = useState(true);
 
@@ -127,8 +128,14 @@ export default function App() {
   };
 
   // Restore session on application load
+  // Uses Promise.all to enforce a minimum splash duration (600ms) so the
+  // loader is always visible long enough — without adding delay when the
+  // session check itself takes longer.
   useEffect(() => {
-    function restoreSession() {
+    async function restoreSession() {
+      const MIN_SPLASH_MS = 600;
+      const minDelay = new Promise((res) => setTimeout(res, MIN_SPLASH_MS));
+
       try {
         const currentUser = db.getCurrentUser();
         if (currentUser) {
@@ -139,9 +146,11 @@ export default function App() {
         }
       } catch (e) {
         console.error('Session recovery failed: ', e);
-      } finally {
-        setIsLoadingSession(false);
       }
+
+      // Wait until both the session check AND the minimum time have passed
+      await minDelay;
+      setIsLoadingSession(false);
     }
     restoreSession();
   }, []);
@@ -174,38 +183,42 @@ export default function App() {
 
   if (isLoadingSession) {
     return (
-      <div 
-        style={{ 
-          height: '100vh', 
-          display: 'flex', 
-          flexDirection: 'column',
-          alignItems: 'center', 
-          justifyContent: 'center',
-          fontFamily: 'var(--font-sans)',
-          color: 'var(--text-muted)'
-        }}
-        id="loading-screen"
-      >
-        <div style={{ fontSize: '24px', fontWeight: '700', color: 'var(--primary-color)', marginBottom: '12px' }}>Worlify</div>
-        <div>Loading Supporter Session...</div>
+      <div className="worlify-splash" id="loading-screen">
+        <div className="worlify-splash__card">
+          {/* Logo */}
+          <div className="worlify-splash__logo-wrap">
+            <img
+              src={logoImg.src || logoImg}
+              alt="Worlify Logo"
+              className="worlify-splash__logo"
+            />
+          </div>
+
+          {/* 3-dot bounce */}
+          <div className="worlify-splash__dots" aria-label="Loading" role="status">
+            <span className="worlify-splash__dot" />
+            <span className="worlify-splash__dot" />
+            <span className="worlify-splash__dot" />
+          </div>
+        </div>
       </div>
     );
   }
 
   return (
-    <div 
-      style={{ 
-        display: 'flex', 
-        flexDirection: 'column', 
-        minHeight: '100vh', 
-        backgroundColor: 'var(--bg-color)' 
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        minHeight: '100vh',
+        backgroundColor: 'var(--bg-color)'
       }}
       id="worlify-root"
     >
       {/* 1. Universal Site Navigation */}
-      <Navbar 
-        activeTab={activeTab} 
-        setActiveTab={setActiveTab} 
+      <Navbar
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
         user={user}
         onLogout={handleLogout}
         isLocalMode={isLocalMode}
@@ -217,15 +230,15 @@ export default function App() {
       {/* 2. Main Tabbed Panel Stage */}
       <main style={{ flexGrow: 1 }} id="main-content-stage">
         {activeTab === 'home' && (
-          <Home 
-            setActiveTab={setActiveTab} 
+          <Home
+            setActiveTab={setActiveTab}
             setDonationPreload={setDonationPreload}
             isLocalMode={isLocalMode}
           />
         )}
-        
+
         {(activeTab === 'causes' || activeTab.startsWith('causes-')) && (
-          <Causes 
+          <Causes
             activeTab={activeTab}
             setActiveTab={setActiveTab}
             setDonationPreload={setDonationPreload}
@@ -235,19 +248,19 @@ export default function App() {
         )}
 
         {activeTab === 'about-story' && (
-          <OurStory 
+          <OurStory
             setActiveTab={setActiveTab}
           />
         )}
 
         {(activeTab === 'about' || activeTab === 'about-mission') && (
-          <OurMission 
+          <OurMission
             setActiveTab={setActiveTab}
           />
         )}
 
         {activeTab === 'about-directors' && (
-          <OurDirectors 
+          <OurDirectors
             setActiveTab={setActiveTab}
           />
         )}
@@ -255,16 +268,16 @@ export default function App() {
         {activeTab === 'gallery' && (
           <Gallery setActiveTab={setActiveTab} setDonationPreload={setDonationPreload} />
         )}
-        
+
         {activeTab === 'volunteer' && (
-          <Volunteer 
+          <Volunteer
             user={user}
             setActiveTab={setActiveTab}
           />
         )}
-        
+
         {activeTab === 'donate' && (
-          <Donate 
+          <Donate
             user={user}
             preloadedCause={donationPreload}
             clearPreload={() => setDonationPreload('')}
@@ -273,31 +286,31 @@ export default function App() {
         )}
 
         {activeTab === 'contact' && (
-          <Contact 
+          <Contact
             setActiveTab={setActiveTab}
           />
         )}
 
         {activeTab === 'faqs' && (
-          <Faqs 
+          <Faqs
             setActiveTab={setActiveTab}
           />
         )}
 
         {activeTab === 'legal' && (
-          <Legal 
+          <Legal
             setActiveTab={setActiveTab}
           />
         )}
-        
+
         {activeTab === 'auth' && (
-          <Auth 
+          <Auth
             onLoginSuccess={handleLoginSuccess}
           />
         )}
-        
+
         {activeTab === 'dashboard' && (
-          <Dashboard 
+          <Dashboard
             user={user}
             setActiveTab={setActiveTab}
           />
@@ -308,9 +321,9 @@ export default function App() {
       <Footer setActiveTab={setActiveTab} />
 
       {/* 4. Supabase Setup Guide Modal */}
-      <KeysModal 
-        isOpen={keysModalOpen} 
-        onClose={() => setKeysModalOpen(false)} 
+      <KeysModal
+        isOpen={keysModalOpen}
+        onClose={() => setKeysModalOpen(false)}
       />
 
       {/* 5. Floating Actions (Phone Call, WhatsApp, Reach Top) */}

@@ -157,25 +157,8 @@
   font-size: 14.5px;
   color: var(--text-muted);
   line-height: 1.6;
-  margin-bottom: 24px;
+  margin-bottom: 0;
   flex-grow: 1;
-}
-
-.socialRow {
-  display: flex;
-  gap: 12px;
-  border-top: 1px solid var(--border-color);
-  padding-top: 16px;
-}
-
-.socialIcon {
-  color: var(--text-muted);
-  transition: color 0.2s ease;
-  cursor: pointer;
-}
-
-.socialIcon:hover {
-  color: var(--accent-color);
 }
 
 /* Executive Message Section */

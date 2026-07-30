@@ -1,5 +1,4 @@
 import React from 'react';
-import { Twitter, Linkedin, Mail } from 'lucide-react';
 import styles from '../styles/OurDirectors.module.css';
 
 // Import director images
@@ -18,33 +17,25 @@ export default function OurDirectors({ setActiveTab }) {
       name: 'Mr. Ravi Kumar Verma',
       role: 'Chairman',
       image: raviKumarVermaImg,
-      bio: 'Mr. Ravi Kumar Verma is the Chairman of Worlify. An entrepreneur and philanthropist with extensive leadership experience in grassroots development and social enterprise planning, driving community transformation initiatives across regions.',
-      twitter: '#',
-      linkedin: '#'
+      bio: 'Mr. Ravi Kumar Verma is the Chairman of Worlify. An entrepreneur and philanthropist with extensive leadership experience in grassroots development and social enterprise planning, driving community transformation initiatives across regions.'
     },
     {
       name: 'Mr. Rahul Kumar Verma',
       role: 'Director',
       image: rahulKumarVermaImg,
-      bio: 'Mr. Rahul Kumar Verma is a Director at Worlify. An operations specialist focusing on ground execution, resource logistics, and ensuring transparency in distribution networks.',
-      twitter: '#',
-      linkedin: '#'
+      bio: 'Mr. Rahul Kumar Verma is a Director at Worlify. An operations specialist focusing on ground execution, resource logistics, and ensuring transparency in distribution networks.'
     },
     {
       name: 'Ms. Lxmina Devi',
       role: 'Trustee',
       image: lxminaDeviImg,
-      bio: 'Ms. Lxmina Devi is a Trustee of Worlify. An active community advocate overseeing child welfare, nutrition initiatives, and women empowerment initiatives to create social equity.',
-      twitter: '#',
-      linkedin: '#'
+      bio: 'Ms. Lxmina Devi is a Trustee of Worlify. An active community advocate overseeing child welfare, nutrition initiatives, and women empowerment initiatives to create social equity.'
     },
     {
       name: 'Mr. Kaushik Kishore',
       role: 'Former Director',
       image: rajeshKumarImg,
-      bio: 'Mr. Kaushik Kishore served as a Director at Worlify, providing strategic guidance in the early stages of the organization.',
-      twitter: '#',
-      linkedin: '#'
+      bio: 'Mr. Kaushik Kishore served as a Director at Worlify, providing strategic guidance in the early stages of the organization.'
     }
   ];
 
@@ -118,11 +109,6 @@ export default function OurDirectors({ setActiveTab }) {
                   <h3 className={styles.directorName}>{director.name}</h3>
                   <div className={styles.directorRole}>{director.role}</div>
                   <p className={styles.directorBio}>{director.bio}</p>
-                  <div className={styles.socialRow}>
-                    <Twitter size={16} className={styles.socialIcon} onClick={() => window.open(director.twitter)} />
-                    <Linkedin size={16} className={styles.socialIcon} onClick={() => window.open(director.linkedin)} />
-                    <Mail size={16} className={styles.socialIcon} />
-                  </div>
                 </div>
               </div>
             ))}

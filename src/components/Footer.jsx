@@ -1,5 +1,5 @@
 import React from 'react';
-import { Globe, Mail, Phone, MapPin, Twitter, Facebook, Instagram, Linkedin, Youtube } from 'lucide-react';
+import { Globe, Mail, Phone, MapPin, Twitter, Facebook, Instagram, Linkedin, Youtube, ChevronRight } from 'lucide-react';
 import styles from '../styles/Footer.module.css';
 
 /**
@@ -23,11 +23,26 @@ export default function Footer({ setActiveTab }) {
           <div>
             <h4 className={styles.columnTitle}>Our Focus Pillars</h4>
             <ul className={styles.linksList}>
-              <li className={styles.linkItem} onClick={() => setActiveTab('causes')} id="footer-cause-education">Education Support</li>
-              <li className={styles.linkItem} onClick={() => setActiveTab('causes')} id="footer-cause-healthcare">Healthcare Programs</li>
-              <li className={styles.linkItem} onClick={() => setActiveTab('causes')} id="footer-cause-welfare">Child Welfare Services</li>
-              <li className={styles.linkItem} onClick={() => setActiveTab('causes')} id="footer-cause-empowerment">Women Empowerment</li>
-              <li className={styles.linkItem} onClick={() => setActiveTab('causes')} id="footer-cause-environment">Environmental Action</li>
+              <li className={styles.linkItem} onClick={() => setActiveTab('causes')} id="footer-cause-education">
+                <ChevronRight size={16} className={styles.linkChevron} />
+                <span>Education Support</span>
+              </li>
+              <li className={styles.linkItem} onClick={() => setActiveTab('causes')} id="footer-cause-healthcare">
+                <ChevronRight size={16} className={styles.linkChevron} />
+                <span>Healthcare Programs</span>
+              </li>
+              <li className={styles.linkItem} onClick={() => setActiveTab('causes')} id="footer-cause-welfare">
+                <ChevronRight size={16} className={styles.linkChevron} />
+                <span>Child Welfare Services</span>
+              </li>
+              <li className={styles.linkItem} onClick={() => setActiveTab('causes')} id="footer-cause-empowerment">
+                <ChevronRight size={16} className={styles.linkChevron} />
+                <span>Women Empowerment</span>
+              </li>
+              <li className={styles.linkItem} onClick={() => setActiveTab('causes')} id="footer-cause-environment">
+                <ChevronRight size={16} className={styles.linkChevron} />
+                <span>Environmental Action</span>
+              </li>
             </ul>
           </div>
 
@@ -35,14 +50,38 @@ export default function Footer({ setActiveTab }) {
           <div>
             <h4 className={styles.columnTitle}>Quick Navigation</h4>
             <ul className={styles.linksList}>
-              <li className={styles.linkItem} onClick={() => setActiveTab('home')} id="footer-nav-home">Home Page</li>
-              <li className={styles.linkItem} onClick={() => setActiveTab('causes')} id="footer-nav-causes">Active Causes</li>
-              <li className={styles.linkItem} onClick={() => setActiveTab('volunteer')} id="footer-nav-volunteer">Volunteer Hub</li>
-              <li className={styles.linkItem} onClick={() => setActiveTab('donate')} id="footer-nav-donate">Make a Donation</li>
-              <li className={styles.linkItem} onClick={() => setActiveTab('contact')} id="footer-nav-contact">Contact Us</li>
-              <li className={styles.linkItem} onClick={() => setActiveTab('faqs')} id="footer-nav-faqs">FAQs</li>
-              <li className={styles.linkItem} onClick={() => setActiveTab('legal')} id="footer-nav-legal">Legal & Transparency</li>
-              <li className={styles.linkItem} onClick={() => setActiveTab('auth')} id="footer-nav-auth">Supporter Portal</li>
+              <li className={styles.linkItem} onClick={() => setActiveTab('home')} id="footer-nav-home">
+                <ChevronRight size={16} className={styles.linkChevron} />
+                <span>Home Page</span>
+              </li>
+              <li className={styles.linkItem} onClick={() => setActiveTab('causes')} id="footer-nav-causes">
+                <ChevronRight size={16} className={styles.linkChevron} />
+                <span>Active Causes</span>
+              </li>
+              <li className={styles.linkItem} onClick={() => setActiveTab('volunteer')} id="footer-nav-volunteer">
+                <ChevronRight size={16} className={styles.linkChevron} />
+                <span>Volunteer Hub</span>
+              </li>
+              <li className={styles.linkItem} onClick={() => setActiveTab('donate')} id="footer-nav-donate">
+                <ChevronRight size={16} className={styles.linkChevron} />
+                <span>Make a Donation</span>
+              </li>
+              <li className={styles.linkItem} onClick={() => setActiveTab('contact')} id="footer-nav-contact">
+                <ChevronRight size={16} className={styles.linkChevron} />
+                <span>Contact Us</span>
+              </li>
+              <li className={styles.linkItem} onClick={() => setActiveTab('faqs')} id="footer-nav-faqs">
+                <ChevronRight size={16} className={styles.linkChevron} />
+                <span>FAQs</span>
+              </li>
+              <li className={styles.linkItem} onClick={() => setActiveTab('legal')} id="footer-nav-legal">
+                <ChevronRight size={16} className={styles.linkChevron} />
+                <span>Legal & Transparency</span>
+              </li>
+              <li className={styles.linkItem} onClick={() => setActiveTab('auth')} id="footer-nav-auth">
+                <ChevronRight size={16} className={styles.linkChevron} />
+                <span>Supporter Portal</span>
+              </li>
             </ul>
           </div>
 
@@ -51,15 +90,21 @@ export default function Footer({ setActiveTab }) {
             <h4 className={styles.columnTitle}>Get In Touch</h4>
             <div className={styles.contactInfo}>
               <div className={styles.contactRow}>
-                <MapPin size={16} className={styles.logoIcon} />
+                <div className={styles.iconCircle}>
+                  <MapPin size={16} className={styles.contactIcon} />
+                </div>
                 <span>A/189, GROUND FLOOR NARAYAN ENCLAVE, KASIMPUR BIRUHA, LUCKNOW, UTTAR PRADESH, 226501, INDIA</span>
               </div>
               <div className={styles.contactRow}>
-                <Phone size={16} className={styles.logoIcon} />
+                <div className={styles.iconCircle}>
+                  <Phone size={16} className={styles.contactIcon} />
+                </div>
                 <span>+91 9161321513</span>
               </div>
               <div className={styles.contactRow}>
-                <Mail size={16} className={styles.logoIcon} />
+                <div className={styles.iconCircle}>
+                  <Mail size={16} className={styles.contactIcon} />
+                </div>
                 <span>supportworlify@gmail.com</span>
               </div>
             </div>

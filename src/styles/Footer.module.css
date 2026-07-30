@@ -1,6 +1,6 @@
 .footer {
   background-color: #0f172a; /* Deep charcoal/blue */
-  color: #94a3b8;
+  color: #ffffff;
   padding: 64px 0 32px 0;
   border-top: 1px solid #1e293b;
   margin-top: auto;
@@ -56,16 +56,18 @@
 .brandTagline {
   font-size: 14px;
   line-height: 1.6;
-  color: #94a3b8;
+  color: #ffffff;
 }
 
 .columnTitle {
   font-family: var(--font-display);
-  font-size: 16px;
-  font-weight: 600;
+  font-size: 15px;
+  font-weight: 700;
   color: white;
   margin-bottom: 20px;
   position: relative;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
 }
 
 .columnTitle::after {
@@ -87,26 +89,62 @@
 
 .linkItem {
   font-size: 14px;
+  color: #ffffff;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
   transition: var(--transition-fast);
 }
 
+.linkChevron {
+  color: #ffffff;
+  flex-shrink: 0;
+  transition: transform var(--transition-fast), color var(--transition-fast);
+}
+
 .linkItem:hover {
-  color: white;
+  color: var(--secondary-color);
   transform: translateX(4px);
+}
+
+.linkItem:hover .linkChevron {
+  color: var(--secondary-color);
+  transform: translateX(2px);
 }
 
 .contactInfo {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 16px;
   font-size: 14px;
+  color: #ffffff;
 }
 
 .contactRow {
   display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  line-height: 1.5;
+}
+
+.iconCircle {
+  display: flex;
   align-items: center;
-  gap: 10px;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  min-height: 32px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.contactIcon {
+  color: #ffffff;
 }
 
 .bottomBar {
@@ -116,6 +154,7 @@
   justify-content: space-between;
   align-items: center;
   font-size: 13px;
+  color: #ffffff;
 }
 
 .socials {
@@ -125,7 +164,7 @@
 }
 
 .socials a {
-  color: var(--text-muted, #94a3b8);
+  color: #ffffff;
   text-decoration: none;
   display: inline-flex;
   align-items: center;
@@ -134,7 +173,7 @@
 }
 
 .socials a:hover {
-  color: #ffffff;
+  color: var(--secondary-color);
   transform: translateY(-2px);
 }
 

@@ -48,8 +48,13 @@
 .heroDesc {
   font-size: 18px;
   line-height: 1.75;
-  color: var(--text-muted);
+  color: #334155;
   margin-bottom: 32px;
+  text-align: justify;
+}
+
+:global([data-theme='dark']) .heroDesc {
+  color: #cbd5e1;
 }
 
 /* Executive Directors Grid Section */
@@ -70,8 +75,12 @@
 }
 
 .sectionSubtitle {
-  color: var(--text-muted);
+  color: #475569;
   font-size: 16px;
+}
+
+:global([data-theme='dark']) .sectionSubtitle {
+  color: #94a3b8;
 }
 
 .teamGrid {
@@ -83,6 +92,36 @@
 @media (max-width: 992px) {
   .teamGrid {
     grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .directorsHero {
+    padding: 60px 0 40px 0;
+  }
+
+  .heroTitle {
+    font-size: 32px;
+  }
+
+  .heroDesc,
+  .sectionSubtitle,
+  .directorBio,
+  .messageParagraph {
+    font-size: 14.5px;
+    color: #1e293b;
+    text-align: justify;
+  }
+
+  :global([data-theme='dark']) .heroDesc,
+  :global([data-theme='dark']) .sectionSubtitle,
+  :global([data-theme='dark']) .directorBio,
+  :global([data-theme='dark']) .messageParagraph {
+    color: #f1f5f9;
+  }
+
+  .cardBody {
+    padding: 20px;
   }
 }
 
@@ -155,10 +194,15 @@
 
 .directorBio {
   font-size: 14.5px;
-  color: var(--text-muted);
+  color: #334155;
   line-height: 1.6;
   margin-bottom: 0;
   flex-grow: 1;
+  text-align: justify;
+}
+
+:global([data-theme='dark']) .directorBio {
+  color: #cbd5e1;
 }
 
 /* Executive Message Section */
@@ -219,8 +263,13 @@
 
 .messageParagraph {
   font-size: 15px;
-  color: var(--text-muted);
+  color: #334155;
   line-height: 1.65;
+  text-align: justify;
+}
+
+:global([data-theme='dark']) .messageParagraph {
+  color: #cbd5e1;
 }
 
 .signatureArea {

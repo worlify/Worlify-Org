@@ -133,10 +133,15 @@
 
 .heroSubtitle {
   font-size: 18px;
-  color: var(--text-muted);
+  color: #334155;
   line-height: 1.6;
   margin-bottom: 32px;
   max-width: 580px;
+  text-align: justify;
+}
+
+:global([data-theme='dark']) .heroSubtitle {
+  color: #cbd5e1;
 }
 
 /* Trust Badges Grid */
@@ -1693,6 +1698,38 @@
 }
 
 @media (max-width: 768px) {
+  .heroSection {
+    padding: 50px 0 40px 0;
+  }
+
+  .heroTitle {
+    font-size: 34px;
+  }
+
+  .heroSubtitle,
+  .sectionSubtitle,
+  .docCardDesc,
+  .commitmentCardDesc,
+  .trustCardDesc,
+  .faqAnswer,
+  .nodeDesc,
+  .bannerSubtitle {
+    font-size: 14.5px;
+    color: #1e293b;
+    text-align: justify;
+  }
+
+  :global([data-theme='dark']) .heroSubtitle,
+  :global([data-theme='dark']) .sectionSubtitle,
+  :global([data-theme='dark']) .docCardDesc,
+  :global([data-theme='dark']) .commitmentCardDesc,
+  :global([data-theme='dark']) .trustCardDesc,
+  :global([data-theme='dark']) .faqAnswer,
+  :global([data-theme='dark']) .nodeDesc,
+  :global([data-theme='dark']) .bannerSubtitle {
+    color: #f1f5f9;
+  }
+
   .heroGrid {
     grid-template-columns: 1fr;
     gap: 40px;

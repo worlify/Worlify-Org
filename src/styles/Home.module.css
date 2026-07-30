@@ -427,8 +427,13 @@
 .mapDescription {
   font-size: 1.05rem;
   line-height: 1.75;
-  color: var(--text-muted);
+  color: #334155;
   margin-bottom: 0;
+  text-align: justify;
+}
+
+:global([data-theme='dark']) .mapDescription {
+  color: #cbd5e1;
 }
 
 .mapVisualContainer {
@@ -550,11 +555,22 @@
   .mapHeading {
     font-size: 1.8rem;
   }
+
+  .mapDescription {
+    text-align: justify;
+    color: #1e293b;
+    font-size: 0.98rem;
+    line-height: 1.7;
+  }
+
+  :global([data-theme='dark']) .mapDescription {
+    color: #f1f5f9;
+  }
 }
 
 /* 7. About Circle Section (4-Quadrant Image Circle & Story Content) */
 .aboutCircleSection {
-  padding: 5rem 0;
+  padding: 2.5rem 0;
   background-color: var(--bg-card);
   border-bottom: 1px solid var(--border-color);
   overflow: hidden;
@@ -706,8 +722,13 @@
 .aboutParagraph {
   font-size: 1.02rem;
   line-height: 1.75;
-  color: var(--text-muted);
+  color: #334155;
   margin-bottom: 1.25rem;
+  text-align: justify;
+}
+
+:global([data-theme='dark']) .aboutParagraph {
+  color: #cbd5e1;
 }
 
 .discoverBtn {
@@ -740,9 +761,13 @@
 }
 
 @media (max-width: 968px) {
+  .aboutCircleSection {
+    padding: 2rem 0;
+  }
+
   .aboutCircleGrid {
     grid-template-columns: 1fr;
-    gap: 3rem;
+    gap: 2rem;
     text-align: center;
   }
 
@@ -763,6 +788,18 @@
     width: 110px;
     height: 110px;
     padding: 18px;
+  }
+
+  .aboutParagraph {
+    text-align: justify;
+    color: #1e293b;
+    font-size: 0.98rem;
+    line-height: 1.7;
+    margin-bottom: 1.1rem;
+  }
+
+  :global([data-theme='dark']) .aboutParagraph {
+    color: #f1f5f9;
   }
 }
 

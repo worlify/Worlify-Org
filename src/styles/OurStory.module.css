@@ -50,8 +50,13 @@
 .heroDesc {
   font-size: 18px;
   line-height: 1.75;
-  color: var(--text-muted);
+  color: #334155;
   margin-bottom: 32px;
+  text-align: justify;
+}
+
+:global([data-theme='dark']) .heroDesc {
+  color: #cbd5e1;
 }
 
 /* Editorial Story Section */
@@ -97,7 +102,12 @@
 .editorialParagraph {
   font-size: 16px;
   line-height: 1.7;
-  color: var(--text-muted);
+  color: #334155;
+  text-align: justify;
+}
+
+:global([data-theme='dark']) .editorialParagraph {
+  color: #cbd5e1;
 }
 
 .quoteBlock {
@@ -150,8 +160,12 @@
 }
 
 .sectionSubtitle {
-  color: var(--text-muted);
+  color: #475569;
   font-size: 16px;
+}
+
+:global([data-theme='dark']) .sectionSubtitle {
+  color: #94a3b8;
 }
 
 .timelineContainer {
@@ -267,12 +281,41 @@
 
 .timelineCardDesc {
   font-size: 13.5px;
-  color: var(--text-muted);
+  color: #334155;
   line-height: 1.5;
+  text-align: justify;
+}
+
+:global([data-theme='dark']) .timelineCardDesc {
+  color: #cbd5e1;
 }
 
 /* Responsive timeline for mobile */
 @media (max-width: 768px) {
+  .storyHero {
+    padding: 60px 0 40px 0;
+  }
+
+  .heroTitle {
+    font-size: 32px;
+  }
+
+  .heroDesc,
+  .sectionSubtitle,
+  .editorialParagraph,
+  .timelineCardDesc {
+    font-size: 15px;
+    color: #1e293b;
+    text-align: justify;
+  }
+
+  :global([data-theme='dark']) .heroDesc,
+  :global([data-theme='dark']) .sectionSubtitle,
+  :global([data-theme='dark']) .editorialParagraph,
+  :global([data-theme='dark']) .timelineCardDesc {
+    color: #f1f5f9;
+  }
+
   .timelineContainer::after {
     left: 31px;
   }

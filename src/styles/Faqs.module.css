@@ -32,9 +32,14 @@
 
 .subtitle {
   font-size: 15.5px;
-  color: var(--text-muted);
+  color: #334155;
   line-height: 1.6;
   max-width: 600px;
+  text-align: justify;
+}
+
+:global([data-theme='dark']) .subtitle {
+  color: #cbd5e1;
 }
 
 /* Search Bar */
@@ -193,9 +198,14 @@
 
 .answerText {
   font-size: 14px;
-  color: var(--text-muted);
-  line-height: 1.6;
+  color: #334155;
+  line-height: 1.65;
   margin: 0;
+  text-align: justify;
+}
+
+:global([data-theme='dark']) .answerText {
+  color: #cbd5e1;
 }
 
 /* Empty State search matches */
@@ -222,7 +232,7 @@
 
 .emptyState p {
   font-size: 14px;
-  color: var(--text-muted);
+  color: #334155;
   max-width: 400px;
   line-height: 1.5;
   margin: 0;
@@ -271,8 +281,13 @@
 
 .promptContainer p {
   font-size: 14.5px;
-  color: var(--text-muted);
+  color: #334155;
   line-height: 1.6;
+  text-align: justify;
+}
+
+:global([data-theme='dark']) .promptContainer p {
+  color: #cbd5e1;
 }
 
 .contactBtn {
@@ -293,6 +308,26 @@
 }
 
 /* --- Responsive Adaptations --- */
+@media (max-width: 768px) {
+  .heroSection {
+    padding: 50px 20px 40px 20px;
+  }
+
+  .subtitle,
+  .answerText,
+  .promptContainer p {
+    font-size: 14px;
+    color: #1e293b;
+    text-align: justify;
+  }
+
+  :global([data-theme='dark']) .subtitle,
+  :global([data-theme='dark']) .answerText,
+  :global([data-theme='dark']) .promptContainer p {
+    color: #f1f5f9;
+  }
+}
+
 @media (max-width: 600px) {
   .title {
     font-size: 28px;

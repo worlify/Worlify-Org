@@ -188,6 +188,8 @@ export default function Donate({ user, preloadedCause, clearPreload, setActiveTa
 
     setIsSubmitting(true);
 
+    const razorpayUrl = `https://razorpay.me/@worlifyfoundation?amount=${currentAmount}`;
+
     const donationPayload = {
       donor_name: fullName.trim(),
       donor_dob: dob || null,
@@ -200,7 +202,7 @@ export default function Donate({ user, preloadedCause, clearPreload, setActiveTa
       frequency: 'one-time',
       status: 'pending',
       declaration: isCitizenDeclared,
-      razorpay_ref: 'https://razorpay.me/@worlifyfoundation'
+      razorpay_ref: razorpayUrl
     };
 
     try {
@@ -216,13 +218,13 @@ export default function Donate({ user, preloadedCause, clearPreload, setActiveTa
         name: fullName,
         email: email,
         pan: panNumber ? panNumber.toUpperCase() : null,
-        id: data && data[0] ? data[0].id : 'DON-' + Date.now().toString().slice(-6)
+        id: data && data[0] ? data[0].id : 'DON-' + Date.now().toString().slice(-6),
+        razorpayUrl: razorpayUrl
       });
 
       setIsSubmitted(true);
 
-      // Open Razorpay Payment Link in new window
-      const razorpayUrl = 'https://razorpay.me/@worlifyfoundation';
+      // Open Razorpay Payment Link in new window with exact amount pre-filled
       window.open(razorpayUrl, '_blank', 'noopener,noreferrer');
 
     } catch (err) {
@@ -290,7 +292,7 @@ export default function Donate({ user, preloadedCause, clearPreload, setActiveTa
                 If the Razorpay payment window did not open automatically, click the button below to complete your payment securely:
               </p>
               <a
-                href="https://razorpay.me/@worlifyfoundation"
+                href={submittedDonation?.razorpayUrl || `https://razorpay.me/@worlifyfoundation?amount=${currentAmount}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className={styles.razorpayBtn}

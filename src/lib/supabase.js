@@ -336,9 +336,9 @@ class LocalDBService {
   }
 
   // Add a new donation
-  async addDonation(amount, cause, email = null) {
+  async addDonation(amount, cause, email = null, details = {}) {
     const user = this.getCurrentUser();
-    const donorEmail = email || (user ? user.email : 'anonymous@helper.org');
+    const donorEmail = email || details.donor_email || (user ? user.email : 'anonymous@helper.org');
     let userId = user ? user.id : null;
 
     // Validate UUID format to prevent foreign key violation with mock IDs
@@ -346,34 +346,39 @@ class LocalDBService {
       userId = null;
     }
 
+    const record = {
+      amount: Number(amount),
+      cause,
+      user_id: userId,
+      user_email: donorEmail,
+      donor_name: details.donor_name || null,
+      donor_phone: details.donor_phone || null,
+      donor_dob: details.donor_dob || null,
+      donor_address: details.donor_address || null,
+      donor_pincode: details.donor_pincode || null,
+      donor_city: details.donor_city || null,
+      donor_state: details.donor_state || null,
+      donor_pan: details.donor_pan || null,
+      frequency: details.frequency || 'one-time',
+      status: details.status || 'pending',
+      razorpay_ref: details.razorpay_ref || null,
+      declaration: details.declaration !== undefined ? details.declaration : true,
+      date: new Date().toISOString()
+    };
+
     if (supabase) {
       const { data, error } = await supabase
         .from('donations')
-        .insert([
-          {
-            amount: Number(amount),
-            cause,
-            user_id: userId,
-            user_email: donorEmail,
-            date: new Date().toISOString()
-          }
-        ])
+        .insert([record])
         .select();
 
       // Retry without user_id if foreign key constraint fails (error code 23503)
       if (error && error.code === '23503') {
         console.warn('Foreign key violation on user_id in donations. Retrying as anonymous.');
+        const fallbackRecord = { ...record, user_id: null };
         const retryResult = await supabase
           .from('donations')
-          .insert([
-            {
-              amount: Number(amount),
-              cause,
-              user_id: null,
-              user_email: donorEmail,
-              date: new Date().toISOString()
-            }
-          ])
+          .insert([fallbackRecord])
           .select();
         return retryResult;
       }
@@ -386,11 +391,7 @@ class LocalDBService {
     const donations = this._get('worlify_donations');
     const newDonation = {
       id: 'don_' + Math.random().toString(36).substr(2, 9),
-      user_id: userId,
-      user_email: donorEmail,
-      amount: Number(amount),
-      cause,
-      date: new Date().toISOString()
+      ...record
     };
 
     donations.unshift(newDonation);

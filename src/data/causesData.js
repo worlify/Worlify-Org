@@ -125,7 +125,7 @@ export const CAUSES_DATA = {
     gallery: [
       { url: typeof sliderNew1 === 'string' ? sliderNew1 : sliderNew1.src, caption: 'Community meal distribution drive' },
       { url: typeof sliderNew2 === 'string' ? sliderNew2 : sliderNew2.src, caption: 'Healthy breakfast served to primary students' },
-      { url: typeof lxminaDevi === 'string' ? lxminaDevi : lxminaDevi.src, caption: 'Monthly ration package delivery to elderly women' },
+      { url: 'https://images.unsplash.com/photo-1593113598332-cd288d649433?auto=format&fit=crop&q=80&w=800', caption: 'Monthly ration package delivery to elderly women' },
       { url: typeof sliderNew4 === 'string' ? sliderNew4 : sliderNew4.src, caption: 'Volunteer team preparing fresh hot meals' }
     ],
     cta: {
@@ -188,7 +188,7 @@ export const CAUSES_DATA = {
     gallery: [
       { url: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&q=80&w=800', caption: 'Doctor conducting routine child checkup in rural camp' },
       { url: 'https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&q=80&w=800', caption: 'Mobile healthcare unit arriving at remote village' },
-      { url: 'https://images.unsplash.com/photo-1631815588090-d4bfec5b1cdb?auto=format&fit=crop&q=80&w=800', caption: 'Eye checkup and free spectacles distribution' },
+      { url: 'https://images.unsplash.com/photo-1516574187841-cb9cc2ca948b?auto=format&fit=crop&q=80&w=800', caption: 'Eye checkup and free spectacles distribution' },
       { url: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&q=80&w=800', caption: 'Distributing essential maternal care kits' }
     ],
     cta: {
@@ -440,7 +440,7 @@ export const CAUSES_DATA = {
     gallery: [
       { url: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&q=80&w=800', caption: 'Youth computer literacy and digital skills class' },
       { url: 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?auto=format&fit=crop&q=80&w=800', caption: 'Electrical repair and solar technician workshop' },
-      { url: typeof lxminaDevi === 'string' ? lxminaDevi : lxminaDevi.src, caption: 'Women tailoring unit producing handcrafted garments' },
+      { url: 'https://images.unsplash.com/photo-1558769132-cb1aea458c5e?auto=format&fit=crop&q=80&w=800', caption: 'Women tailoring unit producing handcrafted garments' },
       { url: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=800', caption: 'Job placement interview orientation session' }
     ],
     cta: {

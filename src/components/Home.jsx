@@ -17,6 +17,7 @@ import { db } from '../lib/supabase';
 import styles from '../styles/Home.module.css';
 import ProgrammesMap from './ProgrammesMap';
 import AboutCircleSection from './AboutCircleSection';
+import TestimonialsSlider from './TestimonialsSlider';
 
 // Import local generated assets
 import slider2 from '../assets/images/slider2.jpg';
@@ -511,6 +512,9 @@ export default function Home({ setActiveTab, setDonationPreload, isLocalMode }) 
 
       {/* 6. Worlify Foundation's Programmes Across India Section */}
       <ProgrammesMap />
+
+      {/* 7. Testimonials Slider Section */}
+      <TestimonialsSlider />
 
     </div>
   );

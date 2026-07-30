@@ -1,0 +1,204 @@
+/* Testimonials Slider Component Styles */
+
+.testimonialsSection {
+  padding: 2rem 0 3.5rem 0;
+  background-color: #f8fafc;
+  position: relative;
+  overflow: hidden;
+}
+
+.headerWrapper {
+  text-align: center;
+  margin-bottom: 1.25rem;
+}
+
+.subHeading {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #e62e2e; /* Red accent matching reference */
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.mainHeading {
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: #0b4a72; /* Deep Blue matching reference heading */
+  text-transform: uppercase;
+  margin: 0;
+  letter-spacing: -0.5px;
+}
+
+.accentBar {
+  width: 48px;
+  height: 4px;
+  background-color: #e62e2e;
+  margin: 0.6rem auto 0 auto;
+  border-radius: 2px;
+}
+
+/* Carousel Container */
+.carouselContainer {
+  position: relative;
+  overflow: hidden;
+  padding: 1.25rem 0.5rem 0.5rem 0.5rem;
+}
+
+/* Equal Height Track */
+.carouselTrack {
+  display: flex;
+  align-items: stretch; /* Enforces 100% equal card height */
+  width: 100%;
+  will-change: transform;
+}
+
+.cardWrapper {
+  box-sizing: border-box;
+  padding: 0 14px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Signature Testimonial Card with Compact Height */
+.testimonialCard {
+  position: relative;
+  background-color: #ffffff;
+  border-left: 1.5px solid #f87171;
+  border-right: 1.5px solid #f87171;
+  border-bottom: 1.5px solid #f87171;
+  border-radius: 16px;
+  padding: 1.75rem 1.5rem 1.25rem 1.5rem;
+  box-shadow: 0 10px 24px -6px rgba(0, 0, 0, 0.05), 0 4px 10px -2px rgba(220, 38, 38, 0.04);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%; /* Equal height lock */
+  flex: 1;
+  transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+}
+
+.testimonialCard:hover {
+  transform: translateY(-4px);
+  border-color: #e62e2e;
+  box-shadow: 0 18px 30px -8px rgba(230, 46, 46, 0.15), 0 8px 16px -4px rgba(0, 0, 0, 0.04);
+}
+
+/* Signature Top Border Frame with Cutout Quote Gap */
+.topBorderLine {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: flex-start;
+  pointer-events: none;
+}
+
+.borderSegmentLeft {
+  width: 48px;
+  height: 1.5px;
+  background-color: #f87171;
+  border-top-left-radius: 16px;
+  transition: background-color 0.35s ease;
+}
+
+.testimonialCard:hover .borderSegmentLeft,
+.testimonialCard:hover .borderSegmentRight {
+  background-color: #e62e2e;
+}
+
+.quoteAccentGroup {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff;
+  padding: 0 12px;
+  margin: 0 4px;
+  position: relative;
+  top: -14px;
+  z-index: 2;
+}
+
+.quoteSvg {
+  width: 30px;
+  height: 24px;
+  display: block;
+  flex-shrink: 0;
+  filter: drop-shadow(0 2px 4px rgba(230, 46, 46, 0.2));
+}
+
+.borderSegmentRight {
+  flex: 1;
+  height: 1.5px;
+  background-color: #f87171;
+  border-top-right-radius: 16px;
+  transition: background-color 0.35s ease;
+}
+
+/* Quote Text */
+.quoteText {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #334155;
+  margin: 0.75rem 0 1.25rem 0;
+  font-weight: 450;
+  text-align: left;
+  flex-grow: 1; /* Pushes author section to bottom */
+}
+
+/* Author Details (No Avatar, Simple Designation) */
+.authorSection {
+  border-top: 1px solid #f1f5f9;
+  padding-top: 0.85rem;
+  text-align: left;
+}
+
+.authorName {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #0284c7; /* Vibrant Blue matching reference */
+  margin: 0 0 0.25rem 0;
+  letter-spacing: -0.2px;
+}
+
+.authorRole {
+  font-size: 0.9rem;
+  color: #475569;
+  margin: 0;
+  font-weight: 600;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1023px) {
+  .mainHeading {
+    font-size: 1.85rem;
+  }
+
+  .testimonialCard {
+    padding: 2.25rem 1.5rem 1.5rem 1.5rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .testimonialsSection {
+    padding: 3.5rem 0 3rem 0;
+  }
+
+  .headerWrapper {
+    margin-bottom: 2rem;
+  }
+
+  .mainHeading {
+    font-size: 1.5rem;
+  }
+
+  .cardWrapper {
+    padding: 0 6px;
+  }
+
+  .testimonialCard {
+    padding: 2.25rem 1.25rem 1.5rem 1.25rem;
+  }
+}

@@ -792,3 +792,19 @@
 .modalDonateBtn:hover {
   background-color: #0047b3;
 }
+
+@media (max-width: 768px) {
+  .galleryHeader {
+    height: 300px;
+  }
+  .galleryBody {
+    padding: 28px 0 40px 0;
+  }
+  .filterBar {
+    padding: 12px 0;
+    gap: 8px;
+  }
+  .gridSection {
+    padding: 24px 0;
+  }
+}

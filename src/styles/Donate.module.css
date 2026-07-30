@@ -916,3 +916,15 @@
   from { opacity: 0; transform: translateY(-10px); }
   to { opacity: 1; transform: translateY(0); }
 }
+
+@media (max-width: 768px) {
+  .donateHeroSection {
+    padding: 32px 0 24px 0 !important;
+  }
+  .donateMainSection {
+    padding: 24px 0 40px 0 !important;
+  }
+  .impactSpotlightSection {
+    padding: 36px 0 !important;
+  }
+}

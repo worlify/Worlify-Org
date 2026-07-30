@@ -365,3 +365,31 @@
 .govTable tr:hover td {
   background-color: rgba(15, 23, 42, 0.01);
 }
+
+@media (max-width: 768px) {
+  .directorsHero {
+    padding: 36px 0 28px 0;
+  }
+  .heroTitle {
+    font-size: 32px;
+    margin-bottom: 16px;
+  }
+  .heroDesc {
+    font-size: 14.5px;
+    margin-bottom: 20px;
+  }
+  .teamSection {
+    padding: 36px 0;
+  }
+  .sectionHeader {
+    margin-bottom: 28px;
+  }
+  .governanceSection {
+    padding: 36px 0;
+  }
+  .govTable th,
+  .govTable td {
+    padding: 14px 16px;
+    font-size: 13px;
+  }
+}

@@ -803,6 +803,32 @@
   }
 }
 
+@media (max-width: 768px) {
+  .introSection {
+    padding: 2.2rem 0;
+  }
+
+  .introHighlight {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    padding-left: 1rem;
+  }
+
+  .introText {
+    font-size: 0.98rem;
+    margin-bottom: 1.2rem;
+    padding-left: 1rem;
+  }
+
+  .mapSection {
+    padding: 2.2rem 0;
+  }
+
+  .aboutCircleSection {
+    padding: 2rem 0;
+  }
+}
+
 
 
 

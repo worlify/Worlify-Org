@@ -597,6 +597,14 @@
 }
 
 @media (max-width: 768px) {
+  .mainContainer {
+    padding: 28px 16px 32px 16px;
+  }
+
+  .gridContainer {
+    gap: 32px;
+  }
+
   .contactGrid {
     grid-template-columns: 1fr;
   }
@@ -607,6 +615,6 @@
   }
   
   .formCard {
-    padding: 30px 20px;
+    padding: 24px 16px;
   }
 }

@@ -668,3 +668,24 @@
   background-color: #f8fafc;
   transform: translateY(-0.5px);
 }
+
+@media (max-width: 768px) {
+  .heroSection {
+    height: 380px;
+  }
+  .heroTitle {
+    font-size: 32px;
+    margin-bottom: 12px;
+  }
+  .heroSubtitle {
+    font-size: 14.5px;
+    margin-bottom: 20px;
+  }
+  .pillarsSection,
+  .pathwaySection,
+  .storiesSection,
+  .formSection,
+  .newsletterSection {
+    padding: 36px 0 !important;
+  }
+}

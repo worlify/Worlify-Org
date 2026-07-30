@@ -498,3 +498,18 @@
   letter-spacing: 1.5px;
   margin-top: 4px;
 }
+
+@media (max-width: 768px) {
+  .missionHero {
+    padding: 36px 0 28px 0;
+  }
+  .valuesSection {
+    padding: 36px 0;
+  }
+  .detailsSection {
+    padding: 36px 0;
+  }
+  .financialSection {
+    padding: 36px 0;
+  }
+}

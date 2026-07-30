@@ -579,3 +579,26 @@
   margin-top: 4px;
   transform: rotate(45deg);
 }
+
+@media (max-width: 768px) {
+  .aboutHero {
+    padding: 36px 0;
+  }
+  .heroTitle {
+    font-size: 30px;
+    margin-bottom: 16px;
+  }
+  .heroDesc {
+    font-size: 14.5px;
+    margin-bottom: 20px;
+  }
+  .heroImage {
+    height: 240px;
+  }
+  .coreValuesSection {
+    padding: 36px 0;
+  }
+  .valueCard {
+    padding: 24px 20px;
+  }
+}

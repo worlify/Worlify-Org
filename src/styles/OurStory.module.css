@@ -498,3 +498,26 @@
   background-color: rgba(255, 255, 255, 0.1);
   transform: translateY(-2px);
 }
+
+@media (max-width: 768px) {
+  .storyHero {
+    padding: 36px 0 28px 0;
+  }
+  .heroTitle {
+    font-size: 32px;
+    margin-bottom: 16px;
+  }
+  .heroDesc {
+    font-size: 14.5px;
+    margin-bottom: 20px;
+  }
+  .editorialSection {
+    padding: 36px 0;
+  }
+  .timelineSection {
+    padding: 40px 0;
+  }
+  .ctaSection {
+    padding: 36px 0;
+  }
+}

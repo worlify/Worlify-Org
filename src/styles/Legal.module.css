@@ -1698,12 +1698,16 @@
 }
 
 @media (max-width: 768px) {
+  .legalPage {
+    padding-bottom: 40px;
+  }
+
   .heroSection {
-    padding: 50px 0 40px 0;
+    padding: 32px 0 24px 0;
   }
 
   .heroTitle {
-    font-size: 34px;
+    font-size: 32px;
   }
 
   .heroSubtitle,

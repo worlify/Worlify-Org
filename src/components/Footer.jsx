@@ -27,23 +27,23 @@ export default function Footer({ setActiveTab }) {
           <div>
             <h4 className={styles.columnTitle}>Our Focus Pillars</h4>
             <ul className={styles.linksList}>
-              <li className={styles.linkItem} onClick={() => setActiveTab('causes')} id="footer-cause-education">
+              <li className={styles.linkItem} onClick={() => setActiveTab('causes-education')} id="footer-cause-education">
                 <ChevronRight size={16} className={styles.linkChevron} />
                 <span>Education Support</span>
               </li>
-              <li className={styles.linkItem} onClick={() => setActiveTab('causes')} id="footer-cause-healthcare">
+              <li className={styles.linkItem} onClick={() => setActiveTab('causes-healthcare')} id="footer-cause-healthcare">
                 <ChevronRight size={16} className={styles.linkChevron} />
                 <span>Healthcare Programs</span>
               </li>
-              <li className={styles.linkItem} onClick={() => setActiveTab('causes')} id="footer-cause-welfare">
+              <li className={styles.linkItem} onClick={() => setActiveTab('causes-food-nutrition')} id="footer-cause-nutrition">
                 <ChevronRight size={16} className={styles.linkChevron} />
-                <span>Child Welfare Services</span>
+                <span>Food & Nutrition</span>
               </li>
-              <li className={styles.linkItem} onClick={() => setActiveTab('causes')} id="footer-cause-empowerment">
+              <li className={styles.linkItem} onClick={() => setActiveTab('causes-skill-development')} id="footer-cause-skills">
                 <ChevronRight size={16} className={styles.linkChevron} />
-                <span>Women Empowerment</span>
+                <span>Skill Development</span>
               </li>
-              <li className={styles.linkItem} onClick={() => setActiveTab('causes')} id="footer-cause-environment">
+              <li className={styles.linkItem} onClick={() => setActiveTab('causes-environment')} id="footer-cause-environment">
                 <ChevronRight size={16} className={styles.linkChevron} />
                 <span>Environmental Action</span>
               </li>
@@ -58,7 +58,7 @@ export default function Footer({ setActiveTab }) {
                 <ChevronRight size={16} className={styles.linkChevron} />
                 <span>Home Page</span>
               </li>
-              <li className={styles.linkItem} onClick={() => setActiveTab('causes')} id="footer-nav-causes">
+              <li className={styles.linkItem} onClick={() => setActiveTab('causes-education')} id="footer-nav-causes">
                 <ChevronRight size={16} className={styles.linkChevron} />
                 <span>Active Causes</span>
               </li>

@@ -15,7 +15,7 @@
   align-items: center;
   height: 80px;
   /* Modern compact header height */
-  max-width: 1200px;
+  max-width: 1280px;
   margin: 0 auto;
   padding: 0 24px;
 }
@@ -33,7 +33,8 @@
   cursor: pointer;
   letter-spacing: -0.5px;
   user-select: none;
-  margin-right: 48px; /* Space between logo and Home link */
+  margin-right: 24px; /* Optimized space between logo and Home link */
+  flex-shrink: 0;
 }
 
 .logoIcon {
@@ -75,28 +76,33 @@
 .desktopNav {
   display: flex;
   align-items: center;
+  flex-shrink: 0;
+  height: 100%;
 }
 
 .navLinks {
   display: flex;
   align-items: center;
-  gap: 20px; /* Space nav links comfortably */
+  gap: 18px; /* Optimized nav link spacing to fit cleanly on one line */
   list-style: none;
   margin: 0;
   padding: 0;
+  height: 100%;
 }
 
 .navLink {
-  font-size: 14.5px;
+  font-size: 14px;
   font-weight: 500;
   color: var(--text-muted);
   cursor: pointer;
-  padding: 28px 4px;
-  /* Expands hover area */
+  padding: 0 2px;
+  height: 100%;
   position: relative;
   transition: all 0.15s ease-in-out;
   display: flex;
   align-items: center;
+  white-space: nowrap; /* Strictly single line - never wrap text */
+  user-select: none;
 }
 
 .navLink:hover {
@@ -528,16 +534,21 @@
 /* Desktop dropdown styles */
 .dropdownContainer {
   position: relative;
+  display: flex;
+  align-items: center;
+  height: 100%;
 }
 
 .dropdownToggle {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 5px;
+  white-space: nowrap;
 }
 
 .caretIcon {
   transition: transform 0.2s ease;
+  flex-shrink: 0;
 }
 
 .caretRotated {
@@ -550,24 +561,31 @@
   left: 0;
   background-color: var(--bg-card);
   border: 1px solid var(--border-color);
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+  border-radius: 12px;
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.14);
   list-style: none;
   padding: 8px 0;
   margin: 0;
-  min-width: 160px;
+  min-width: 185px;
   display: flex;
   flex-direction: column;
   z-index: 1000;
+  white-space: nowrap;
+}
+
+.dropdownMenuRight {
+  right: 0;
+  left: auto;
 }
 
 .dropdownItem {
-  padding: 10px 16px;
-  font-size: 14px;
+  padding: 9px 16px;
+  font-size: 13.5px;
   color: var(--text-muted);
   cursor: pointer;
   transition: all 0.15s ease;
   text-align: left;
+  white-space: nowrap;
 }
 
 .dropdownItem:hover {

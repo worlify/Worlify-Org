@@ -21,20 +21,30 @@ import FloatingActions from './components/FloatingActions';
 import { db, isLocalMode } from './lib/supabase';
 
 const VALID_TABS = [
-  'home', 'causes', 'about-story', 'about-mission', 'about-directors', 
+  'home', 'causes',
+  'causes-education', 'causes-food-nutrition', 'causes-healthcare', 
+  'causes-human-rights', 'causes-environment', 'causes-animal-welfare', 
+  'causes-skill-development', 'causes-poverty-alleviation',
+  'about-story', 'about-mission', 'about-directors', 
   'about', 'gallery', 'volunteer', 'donate', 'contact', 'faqs', 'legal', 
   'auth', 'dashboard'
 ];
 
 function getTabFromUrl() {
   if (typeof window === 'undefined') return 'home';
-  // Prioritize clean pathname (e.g., /gallery)
-  const path = window.location.pathname.replace(/^\//, '').trim();
+  // Prioritize clean pathname (e.g. /causes/education or /gallery)
+  let path = window.location.pathname.replace(/^\//, '').trim();
+  if (path.startsWith('causes/')) {
+    path = path.replace('/', '-');
+  }
   if (path && VALID_TABS.includes(path)) {
     return path;
   }
-  // Support hash fallback if present (e.g. #gallery)
-  const hash = window.location.hash.replace(/^#\/?/, '').trim();
+  // Support hash fallback if present (e.g. #causes/education)
+  let hash = window.location.hash.replace(/^#\/?/, '').trim();
+  if (hash.startsWith('causes/')) {
+    hash = hash.replace('/', '-');
+  }
   if (hash && VALID_TABS.includes(hash)) {
     return hash;
   }
@@ -53,7 +63,10 @@ export default function App() {
   const setActiveTab = (tabId) => {
     setActiveTabState(tabId);
     if (typeof window !== 'undefined') {
-      const newPath = tabId === 'home' ? '/' : `/${tabId}`;
+      let newPath = tabId === 'home' ? '/' : `/${tabId}`;
+      if (tabId.startsWith('causes-')) {
+        newPath = `/${tabId.replace('causes-', 'causes/')}`;
+      }
       if (window.location.pathname !== newPath || window.location.hash) {
         window.history.pushState({ tab: tabId }, '', newPath);
       }
@@ -68,7 +81,10 @@ export default function App() {
     };
 
     const currentTab = getTabFromUrl();
-    const targetPath = currentTab === 'home' ? '/' : `/${currentTab}`;
+    let targetPath = currentTab === 'home' ? '/' : `/${currentTab}`;
+    if (currentTab.startsWith('causes-')) {
+      targetPath = `/${currentTab.replace('causes-', 'causes/')}`;
+    }
     if (typeof window !== 'undefined' && (window.location.pathname !== targetPath || window.location.hash)) {
       window.history.replaceState({ tab: currentTab }, '', targetPath);
     }
@@ -208,8 +224,9 @@ export default function App() {
           />
         )}
         
-        {activeTab === 'causes' && (
+        {(activeTab === 'causes' || activeTab.startsWith('causes-')) && (
           <Causes 
+            activeTab={activeTab}
             setActiveTab={setActiveTab}
             setDonationPreload={setDonationPreload}
             preloadedCause={donationPreload}

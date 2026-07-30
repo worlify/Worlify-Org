@@ -7,8 +7,8 @@ const MARQUEE_TEXT = "Worlify Foundation is registered under sections 12A & 80G 
 
 /**
  * Navbar Component
- * Renders the top header navigation, active page tab, and user-auth controls.
- * Integrates light/dark toggle.
+ * Renders top header navigation, active page tab, and user-auth controls.
+ * Integrates light/dark toggle and interactive dropdowns for About, Causes, and Contact.
  */
 export default function Navbar({ activeTab, setActiveTab, user, onLogout, isLocalMode, onOpenKeysModal, theme = 'light', toggleTheme }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -16,6 +16,8 @@ export default function Navbar({ activeTab, setActiveTab, user, onLogout, isLoca
   const [isMobileDropdownOpen, setIsMobileDropdownOpen] = useState(false);
   const [isAboutDropdownOpen, setIsAboutDropdownOpen] = useState(false);
   const [isMobileAboutDropdownOpen, setIsMobileAboutDropdownOpen] = useState(false);
+  const [isCausesDropdownOpen, setIsCausesDropdownOpen] = useState(false);
+  const [isMobileCausesDropdownOpen, setIsMobileCausesDropdownOpen] = useState(false);
 
   const handleNavClick = (tabId) => {
     setActiveTab(tabId);
@@ -34,6 +36,18 @@ export default function Navbar({ activeTab, setActiveTab, user, onLogout, isLoca
 
   const isContactActive = activeTab === 'contact' || activeTab === 'faqs';
   const isAboutActive = activeTab === 'about-story' || activeTab === 'about-mission' || activeTab === 'about-directors' || activeTab === 'about';
+  const isCausesActive = activeTab === 'causes' || activeTab.startsWith('causes-');
+
+  const causesList = [
+    { id: 'causes-education', label: 'Education' },
+    { id: 'causes-food-nutrition', label: 'Food & Nutrition' },
+    { id: 'causes-healthcare', label: 'Healthcare' },
+    { id: 'causes-human-rights', label: 'Human Rights' },
+    { id: 'causes-environment', label: 'Environment' },
+    { id: 'causes-animal-welfare', label: 'Animal Welfare' },
+    { id: 'causes-skill-development', label: 'Skill Development' },
+    { id: 'causes-poverty-alleviation', label: 'Poverty Alleviation' },
+  ];
 
   return (
     <header className={styles.navbar} id="main-header">
@@ -129,13 +143,37 @@ export default function Navbar({ activeTab, setActiveTab, user, onLogout, isLoca
                 </ul>
               )}
             </li>
+
+            {/* Our Causes Dropdown - Desktop */}
             <li
-              className={`${styles.navLink} ${activeTab === 'causes' ? styles.activeNavLink : ''}`}
-              onClick={() => handleNavClick('causes')}
-              id="nav-link-causes"
+              className={`${styles.navLink} ${styles.dropdownContainer} ${isCausesActive ? styles.activeNavLink : ''}`}
+              onMouseEnter={() => setIsCausesDropdownOpen(true)}
+              onMouseLeave={() => setIsCausesDropdownOpen(false)}
+              onClick={() => setIsCausesDropdownOpen(!isCausesDropdownOpen)}
+              id="nav-link-causes-parent"
             >
-              Our Causes
+              <span className={styles.dropdownToggle}>
+                Our Causes <ChevronDown size={14} className={`${styles.caretIcon} ${isCausesDropdownOpen ? styles.caretRotated : ''}`} />
+              </span>
+              {isCausesDropdownOpen && (
+                <ul className={styles.dropdownMenu} id="causes-dropdown-menu">
+                  {causesList.map((item) => (
+                    <li
+                      key={item.id}
+                      className={`${styles.dropdownItem} ${activeTab === item.id ? styles.activeDropdownItem : ''}`}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleNavClick(item.id);
+                        setIsCausesDropdownOpen(false);
+                      }}
+                    >
+                      {item.label}
+                    </li>
+                  ))}
+                </ul>
+              )}
             </li>
+
             <li
               className={`${styles.navLink} ${activeTab === 'volunteer' ? styles.activeNavLink : ''}`}
               onClick={() => handleNavClick('volunteer')}
@@ -300,12 +338,33 @@ export default function Navbar({ activeTab, setActiveTab, user, onLogout, isLoca
                 </ul>
               )}
             </li>
-            <li
-              className={`${styles.mobileNavLink} ${activeTab === 'causes' ? styles.activeMobileNavLink : ''}`}
-              onClick={() => handleNavClick('causes')}
-            >
-              Our Causes
+
+            {/* Our Causes Dropdown - Mobile */}
+            <li className={styles.mobileDropdownContainer}>
+              <div
+                className={`${styles.mobileNavLink} ${styles.mobileDropdownToggle} ${isCausesActive ? styles.activeMobileNavLink : ''}`}
+                onClick={() => setIsMobileCausesDropdownOpen(!isMobileCausesDropdownOpen)}
+              >
+                Our Causes <ChevronDown size={16} className={`${styles.caretIcon} ${isMobileCausesDropdownOpen ? styles.caretRotated : ''}`} />
+              </div>
+              {isMobileCausesDropdownOpen && (
+                <ul className={styles.mobileSubMenu}>
+                  {causesList.map((item) => (
+                    <li
+                      key={item.id}
+                      className={`${styles.mobileSubNavLink} ${activeTab === item.id ? styles.activeMobileSubNavLink : ''}`}
+                      onClick={() => {
+                        handleNavClick(item.id);
+                        setIsMenuOpen(false);
+                      }}
+                    >
+                      {item.label}
+                    </li>
+                  ))}
+                </ul>
+              )}
             </li>
+
             <li
               className={`${styles.mobileNavLink} ${activeTab === 'volunteer' ? styles.activeMobileNavLink : ''}`}
               onClick={() => handleNavClick('volunteer')}

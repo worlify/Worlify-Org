@@ -307,10 +307,17 @@
   opacity: 0.85;
 }
 
-/* --- Responsive Adaptations --- */
 @media (max-width: 768px) {
+  .faqsPage {
+    padding-bottom: 40px;
+  }
+
   .heroSection {
-    padding: 50px 20px 40px 20px;
+    padding: 32px 16px 24px 16px;
+  }
+
+  .contentContainer {
+    padding: 28px 0;
   }
 
   .subtitle,

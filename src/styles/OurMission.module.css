@@ -59,7 +59,7 @@
 
 /* Cards Grid: Mission and Vision */
 .valuesSection {
-  padding: 80px 0;
+  padding: 60px 0;
 }
 
 .valuesGrid {
@@ -176,7 +176,7 @@
 
 /* Interconnected Development Pillars */
 .pillarsSection {
-  padding: 90px 0;
+  padding: 50px 0;
   background-color: var(--bg-card);
   border-top: 1px solid var(--border-color);
   border-bottom: 1px solid var(--border-color);
@@ -347,7 +347,7 @@
 
 /* Financial Transparency Section */
 .transparencySection {
-  padding: 90px 0;
+  padding: 50px 0 70px 0;
 }
 
 .accountabilityCard {
@@ -504,12 +504,12 @@
     padding: 36px 0 28px 0;
   }
   .valuesSection {
-    padding: 36px 0;
+    padding: 32px 0;
   }
-  .detailsSection {
-    padding: 36px 0;
+  .pillarsSection {
+    padding: 32px 0;
   }
-  .financialSection {
-    padding: 36px 0;
+  .transparencySection {
+    padding: 32px 0;
   }
 }

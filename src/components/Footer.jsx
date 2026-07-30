@@ -99,13 +99,13 @@ export default function Footer({ setActiveTab }) {
                 </div>
                 <span>A/189, GROUND FLOOR NARAYAN ENCLAVE, KASIMPUR BIRUHA, LUCKNOW, UTTAR PRADESH, 226501, INDIA</span>
               </div>
-              <div className={styles.contactRow}>
+              <div className={`${styles.contactRow} ${styles.contactRowCenter}`}>
                 <div className={styles.iconCircle}>
                   <Phone size={16} className={styles.contactIcon} />
                 </div>
                 <span>+91 9161321513</span>
               </div>
-              <div className={styles.contactRow}>
+              <div className={`${styles.contactRow} ${styles.contactRowCenter}`}>
                 <div className={styles.iconCircle}>
                   <Mail size={16} className={styles.contactIcon} />
                 </div>

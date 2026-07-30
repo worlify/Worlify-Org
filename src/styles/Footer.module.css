@@ -122,6 +122,11 @@
   line-height: 1.5;
 }
 
+/* Phone and email rows are single-line — center them vertically with the icon */
+.contactRow.contactRowCenter {
+  align-items: center;
+}
+
 .iconCircle {
   display: flex;
   align-items: center;
@@ -134,7 +139,8 @@
   background-color: rgba(255, 255, 255, 0.12);
   border: 1px solid rgba(255, 255, 255, 0.2);
   flex-shrink: 0;
-  margin-top: 2px;
+  /* Remove the top offset — centering handles alignment */
+  margin-top: 0;
 }
 
 .contactIcon {

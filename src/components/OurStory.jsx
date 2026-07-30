@@ -10,32 +10,57 @@ import ourStoryKidsImg from '../assets/images/our_story_kids.jpg';
 export default function OurStory({ setActiveTab }) {
   const timelineData = [
     {
-      year: '2012',
+      year: '2018',
       title: 'The Foundation',
-      desc: 'Founded in a small garage by three friends with a vision for transparent, community-led giving models. We started with direct educational micro-grants for 15 children in Lucknow.'
-    },
-    {
-      year: '2015',
-      title: 'First Global Hub',
-      desc: 'Opened our first field operations office, scaling to support 10,000+ local educational grants. We expanded our scope to include clean drinking water systems and primary healthcare.'
+      desc: 'Initiated our foundational operations to establish community-led relief frameworks and aid distribution models.'
     },
     {
       year: '2019',
-      title: 'Scale for Change & Medical Mobilization',
-      desc: 'Partnered with international health agencies to build 15 sustainable clinics in underserved rural communities. These clinics run entirely on renewable energy and are staffed by local professionals.'
+      title: 'Free Education Program',
+      desc: 'Launched dedicated education programs providing free learning supplies, tuition support, and books to children.'
+    },
+    {
+      year: '2020',
+      title: 'Covid Awareness Program',
+      desc: 'Mobilized emergency Covid-19 awareness, ration distribution, and frontline protection kits for vulnerable families.'
+    },
+    {
+      year: '2021',
+      title: 'Save Environment Program',
+      desc: 'Initiated environmental conservation campaigns, tree plantation drives, and local sustainability awareness.'
+    },
+    {
+      year: '2022',
+      title: 'Health Awareness Program',
+      desc: 'Organized free medical checkup camps, hygiene kit distribution, and preventative health education.'
     },
     {
       year: '2023',
-      title: 'Radical Digital Transparency',
-      desc: 'Launched our real-time database tracker, allowing donors to view transaction-level impact. Every contribution is mapped directly to the school supply receipt or health camp invoice.'
+      title: "Women's Empowerment",
+      desc: 'Established vocational workshops and skill training centers empowering women toward economic independence.'
+    },
+    {
+      year: '2024',
+      title: 'Students Internship Program',
+      desc: 'Launched youth internship initiatives to mentor students in social work, leadership, and community development.'
+    },
+    {
+      year: '2025',
+      title: 'Multiple Donation Drive',
+      desc: 'Scaled multi-pillar donation drives delivering direct food, clothing, and educational aid across regions.'
+    },
+    {
+      year: '2026',
+      title: 'Community Van',
+      desc: 'Deployed mobile community vans to bring healthcare, nutrition, and relief supplies directly to remote doors.'
     }
   ];
 
   const statsData = [
     {
-      number: '12+',
+      number: '8+',
       label: 'Years of Dedication',
-      desc: 'Building sustainable communities since 2012.'
+      desc: 'Building sustainable communities since 2018.'
     },
     {
       number: '45k+',
@@ -59,7 +84,7 @@ export default function OurStory({ setActiveTab }) {
       {/* 1. Hero Section */}
       <section className={styles.storyHero}>
         <div className={styles.heroContent}>
-          <span className={styles.establishedBadge}>ESTABLISHED 2012</span>
+          <span className={styles.establishedBadge}>ESTABLISHED 2018</span>
           <h1 className={styles.heroTitle}>
             Our Journey: From A Small Seed To <span className={styles.highlight}>Global Impact</span>
           </h1>

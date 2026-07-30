@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { User, LogOut, Heart, Menu, X, ChevronDown, Sun, Moon, Facebook, Twitter, Instagram, Linkedin, Youtube } from 'lucide-react';
+import { User, LogOut, Heart, Menu, X, ChevronDown, Sun, Moon } from 'lucide-react';
 import styles from '../styles/Navbar.module.css';
 import logo from '../assets/images/logo.png';
 
@@ -38,7 +38,7 @@ export default function Navbar({ activeTab, setActiveTab, user, onLogout, isLoca
   return (
     <header className={styles.navbar} id="main-header">
 
-      {/* 1. Top Bar Ribbon (Marquee, Social Icons, Dark Theme Toggle) */}
+      {/* 1. Top Bar Ribbon (Marquee, Dark Theme Toggle) */}
       <div className={styles.topBar} id="header-top-bar">
         <div className={styles.marqueeWrapper}>
           <div className={styles.marqueeTextContainer}>
@@ -48,25 +48,6 @@ export default function Navbar({ activeTab, setActiveTab, user, onLogout, isLoca
         </div>
 
         <div className={styles.topBarControls}>
-          {/* Social Links */}
-          <div className={styles.topBarSocials}>
-            <a href="https://www.facebook.com/share/1KR1fknnr8/" target="_blank" rel="noopener noreferrer" title="Facebook" aria-label="Facebook">
-              <Facebook size={12} />
-            </a>
-            <a href="https://x.com/worlifyngo" target="_blank" rel="noopener noreferrer" title="Twitter / X" aria-label="Twitter / X">
-              <Twitter size={12} />
-            </a>
-            <a href="https://www.instagram.com/worlifyngo?igsh=MWNwMmkzand2ZzhzMQ==" target="_blank" rel="noopener noreferrer" title="Instagram" aria-label="Instagram">
-              <Instagram size={12} />
-            </a>
-            <a href="https://www.linkedin.com/company/worlifyfoundation/" target="_blank" rel="noopener noreferrer" title="LinkedIn" aria-label="LinkedIn">
-              <Linkedin size={12} />
-            </a>
-            <a href="https://youtube.com/@worlifyfoundation?si=VQuQRmWtRaBNQBQW" target="_blank" rel="noopener noreferrer" title="YouTube" aria-label="YouTube">
-              <Youtube size={12} />
-            </a>
-          </div>
-
           {/* Theme Toggle */}
           <button
             className={styles.themeToggleBtn}

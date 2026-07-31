@@ -42,27 +42,27 @@ export default function OurDirectors({ setActiveTab }) {
 
   const advisorsData = [
     {
-      name: 'Shubham',
+      name: 'Mr. Shubham',
       role: 'Administrative Head'
     },
     {
-      name: 'Pimkesh',
+      name: 'Mr. Pimkesh',
       role: 'Core Team Member'
     },
     {
-      name: 'Anshu',
+      name: 'Ms. Anshu',
       role: 'Education Coordinator'
     },
     {
-      name: 'Manvi',
+      name: 'Ms. Manvi',
       role: 'Events Coordinator'
     },
     {
-      name: 'Pallavi',
+      name: 'Ms. Pallavi',
       role: 'Tailoring Instructor'
     },
     {
-      name: 'Ajay',
+      name: 'Mr. Ajay',
       role: 'Media Head'
     },
     {
@@ -156,7 +156,7 @@ export default function OurDirectors({ setActiveTab }) {
       <section className={styles.governanceSection}>
         <div className="container">
           <div className={styles.sectionHeader}>
-            <h2 className={styles.sectionTitle}>Advisory Council & Governance Committees</h2>
+            <h2 className={styles.sectionTitle}>Advisory Council & Committees</h2>
             <p className={styles.sectionSubtitle}>
               Our independent advisory board reviews project efficacy, financial files, and regulatory compliance.
             </p>

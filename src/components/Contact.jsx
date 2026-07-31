@@ -94,8 +94,34 @@ export default function Contact({ setActiveTab }) {
     }
   };
 
+  const contactSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'ContactPage',
+    name: 'Contact Worlify Foundation NGO India',
+    description: 'Get in touch with Worlify Foundation in Lucknow, Uttar Pradesh, India for donations, partnerships, volunteering, or general inquiries.',
+    mainEntity: {
+      '@type': 'NGO',
+      name: 'Worlify Foundation',
+      telephone: '+91-9161321513',
+      email: 'supportworlify@gmail.com',
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: 'A/189, Ground Floor, Narayan Enclave, Kasimpur Biruha',
+        addressLocality: 'Lucknow',
+        addressRegion: 'Uttar Pradesh',
+        postalCode: '226501',
+        addressCountry: 'IN'
+      }
+    }
+  };
+
   return (
     <div className={styles.contactPage} id="contact-page-container">
+      {/* ContactPage JSON-LD Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(contactSchema) }}
+      />
 
       {/* 1. Main Grid: Info columns left, Helpdesk form right */}
       <section className={styles.mainContainer}>

@@ -169,8 +169,186 @@ export default function App() {
     restoreSession();
   }, []);
 
-  // Scroll to top when active tab changes
+  // Dynamic client-side SEO update for title, description, keywords, and canonical URL
   useEffect(() => {
+    if (typeof document === 'undefined') return;
+
+    const TAB_SEO = {
+      'home': {
+        title: 'Worlify Foundation | NGO India — Education, Healthcare & Community Welfare',
+        desc: 'Worlify Foundation is a registered NGO based in Lucknow, Uttar Pradesh, India. We work on education, healthcare, food & nutrition, skill development, women empowerment, and environmental conservation. Donate online with 80G tax exemption.',
+        canonical: 'https://worlify.org/'
+      },
+      'causes': {
+        title: 'Our Causes | Education, Healthcare, Environment & More — Worlify Foundation',
+        desc: 'Explore all causes supported by Worlify Foundation: education for underprivileged children, free healthcare camps, food & nutrition drives, skill development, environmental action, and more.',
+        canonical: 'https://worlify.org/causes'
+      },
+      'causes-education': {
+        title: 'Education for Underprivileged Children | Worlify Foundation NGO India',
+        desc: 'Worlify Foundation provides tutoring, scholarships, and educational materials to underprivileged children in India. Support education for every child. Donate online with 80G tax benefit.',
+        canonical: 'https://worlify.org/causes/education'
+      },
+      'causes-healthcare': {
+        title: 'Free Healthcare Camps & Medical Support | Worlify Foundation NGO',
+        desc: 'Worlify Foundation organizes free medical camps, health checkups, hygiene kits, and maternal healthcare in rural India. Support healthcare for the poor. Donate with 80G tax exemption.',
+        canonical: 'https://worlify.org/causes/healthcare'
+      },
+      'causes-food-nutrition': {
+        title: 'Food Security & Nutrition Programs | Worlify Foundation NGO India',
+        desc: 'Worlify runs Ann Seva and nutrition drives ensuring no child goes to bed hungry. We tackle food insecurity and malnutrition across India. Donate to feed a family today.',
+        canonical: 'https://worlify.org/causes/food-nutrition'
+      },
+      'causes-human-rights': {
+        title: 'Human Rights Advocacy | Worlify Foundation NGO India',
+        desc: 'Worlify Foundation advocates for the rights of marginalized communities across India. We provide legal awareness, support networks, and empowerment programs.',
+        canonical: 'https://worlify.org/causes/human-rights'
+      },
+      'causes-environment': {
+        title: 'Environmental Conservation & Green India | Worlify Foundation NGO',
+        desc: 'Worlify Foundation drives environmental conservation through tree plantations, clean energy, water conservation, and zero-waste programs across India.',
+        canonical: 'https://worlify.org/causes/environment'
+      },
+      'causes-animal-welfare': {
+        title: 'Animal Welfare Programs | Worlify Foundation NGO India',
+        desc: 'Worlify Foundation supports animal welfare through rescue, care, and awareness programs across India. We believe all living beings deserve compassion and protection.',
+        canonical: 'https://worlify.org/causes/animal-welfare'
+      },
+      'causes-skill-development': {
+        title: 'Skill Development & Vocational Training | Worlify Foundation NGO',
+        desc: 'Worlify Foundation provides vocational training, coding courses, tailoring, agricultural techniques, and financial literacy to empower youth and women.',
+        canonical: 'https://worlify.org/causes/skill-development'
+      },
+      'causes-poverty-alleviation': {
+        title: 'Poverty Alleviation Programs | Worlify Foundation NGO India',
+        desc: 'Worlify Foundation works to break the cycle of poverty through income support, housing assistance, welfare programs, and community empowerment.',
+        canonical: 'https://worlify.org/causes/poverty-alleviation'
+      },
+      'campaign': {
+        title: 'Active Campaigns | Donate to Change Lives — Worlify Foundation',
+        desc: 'Browse all active fundraising campaigns by Worlify Foundation. From Padhega Har Baccha (education) to Ann Seva (nutrition) and Beti Ki Muskan (girl education).',
+        canonical: 'https://worlify.org/campaign'
+      },
+      'campaign-padhaga-har-baccha': {
+        title: 'Padhega Har Baccha — Education Campaign | Worlify Foundation',
+        desc: 'Padhega Har Baccha is Worlify\'s flagship campaign to ensure every child in India gets access to quality education. Donate now for school supplies and scholarships.',
+        canonical: 'https://worlify.org/campaign/padhaga-har-baccha'
+      },
+      'campaign-ann-seva': {
+        title: 'Ann Seva — Food Security Campaign | Worlify Foundation',
+        desc: 'Ann Seva is Worlify\'s nutrition and food distribution campaign targeting hunger and malnutrition in underserved communities. Donate to feed families in need.',
+        canonical: 'https://worlify.org/campaign/ann-seva'
+      },
+      'campaign-nayi-pehchaan': {
+        title: 'Nayi Pehchaan — Women Empowerment Campaign | Worlify Foundation',
+        desc: 'Nayi Pehchaan empowers women through skill training, self-help groups, and economic independence programs in India.',
+        canonical: 'https://worlify.org/campaign/nayi-pehchaan'
+      },
+      'campaign-sahara': {
+        title: 'Sahara — Child Welfare Campaign | Worlify Foundation',
+        desc: 'Sahara provides safety, shelter, nutrition, and counseling to vulnerable children across India. Join Worlify in protecting the future of every child.',
+        canonical: 'https://worlify.org/campaign/sahara'
+      },
+      'campaign-apna-aashiyana': {
+        title: 'Apna Aashiyana — Shelter & Housing Campaign | Worlify Foundation',
+        desc: 'Apna Aashiyana helps homeless and underserved families gain safe shelter and housing support in India.',
+        canonical: 'https://worlify.org/campaign/apna-aashiyana'
+      },
+      'campaign-umeed': {
+        title: 'Umeed — Healthcare Campaign | Worlify Foundation NGO',
+        desc: 'Umeed brings free medical camps, health screenings, and medicines to communities without access to healthcare.',
+        canonical: 'https://worlify.org/campaign/umeed'
+      },
+      'campaign-dharti-bachao': {
+        title: 'Dharti Bachao — Environmental Campaign | Worlify Foundation',
+        desc: 'Dharti Bachao is Worlify\'s environmental campaign focused on tree plantation, clean energy, and sustainable living in India.',
+        canonical: 'https://worlify.org/campaign/dharti-bachao'
+      },
+      'campaign-jeev-raksha': {
+        title: 'Jeev Raksha — Animal Welfare Campaign | Worlify Foundation',
+        desc: 'Jeev Raksha supports rescue, care, and protection of animals across India. Donate to give every living being a chance at life.',
+        canonical: 'https://worlify.org/campaign/jeev-raksha'
+      },
+      'campaign-beti-ki-muskan': {
+        title: 'Beti Ki Muskan — Girl Education Campaign | Worlify Foundation',
+        desc: 'Beti Ki Muskan focuses on empowering girls through education, scholarships, and life skills programs in India.',
+        canonical: 'https://worlify.org/campaign/beti-ki-muskan'
+      },
+      'campaign-jeevandan': {
+        title: 'Jeevandan — Blood & Organ Donation Campaign | Worlify Foundation',
+        desc: 'Jeevandan encourages blood and organ donation awareness across India. Worlify Foundation connects donors with those in need.',
+        canonical: 'https://worlify.org/campaign/jeevandan'
+      },
+      'about': {
+        title: 'About Worlify Foundation | Our Mission & Vision | NGO India',
+        desc: 'Learn about Worlify Foundation — a registered multi-cause NGO in Lucknow, India. Discover our mission, vision, and five impact pillars.',
+        canonical: 'https://worlify.org/about'
+      },
+      'about-story': {
+        title: 'Our Story | How Worlify Foundation Was Founded | NGO India',
+        desc: 'Read the story of Worlify Foundation — founded with a vision to create transparent, community-led change across India.',
+        canonical: 'https://worlify.org/about-story'
+      },
+      'about-directors': {
+        title: 'Our Leadership & Directors | Worlify Foundation NGO India',
+        desc: 'Meet the team behind Worlify Foundation — our Chairman, Directors, and founding members leading community development in India.',
+        canonical: 'https://worlify.org/about-directors'
+      },
+      'donate': {
+        title: 'Donate Online to NGO India — 80G Tax Exemption | Worlify Foundation',
+        desc: 'Donate securely online to Worlify Foundation, a registered NGO in India. Support education, healthcare, nutrition, and environmental causes. Get 80G tax exemption certificate.',
+        canonical: 'https://worlify.org/donate'
+      },
+      'volunteer': {
+        title: 'Volunteer with an NGO India | Join Worlify Foundation',
+        desc: 'Become a volunteer with Worlify Foundation and create real change in communities across India. Apply online to volunteer in education, healthcare, environment, or field operations.',
+        canonical: 'https://worlify.org/volunteer'
+      },
+      'gallery': {
+        title: 'Photo Gallery | Our Work on the Ground | Worlify Foundation',
+        desc: 'See Worlify Foundation in action through our photo gallery. Real stories, real people, real impact across India.',
+        canonical: 'https://worlify.org/gallery'
+      },
+      'contact': {
+        title: 'Contact Worlify Foundation | NGO India — Get In Touch',
+        desc: 'Reach out to Worlify Foundation for donations, partnerships, volunteering, or general inquiries. Based in Lucknow, Uttar Pradesh, India.',
+        canonical: 'https://worlify.org/contact'
+      },
+      'faqs': {
+        title: 'Frequently Asked Questions | Worlify Foundation NGO India',
+        desc: 'Find answers to common questions about Worlify Foundation: how to donate, 80G tax exemption, volunteering, fund usage, and campaign details.',
+        canonical: 'https://worlify.org/faqs'
+      },
+      'legal': {
+        title: 'Legal Documents & Transparency | 80G, 12A, PAN | Worlify Foundation',
+        desc: 'Worlify Foundation is a legally registered NGO in India with 80G, 12A, NITI Aayog, and CSR-1 compliance. Download legal documents and reports.',
+        canonical: 'https://worlify.org/legal'
+      }
+    };
+
+    const currentMeta = TAB_SEO[activeTab] || TAB_SEO['home'];
+    document.title = currentMeta.title;
+
+    let metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) {
+      metaDesc.setAttribute('content', currentMeta.desc);
+    } else {
+      metaDesc = document.createElement('meta');
+      metaDesc.name = 'description';
+      metaDesc.content = currentMeta.desc;
+      document.head.appendChild(metaDesc);
+    }
+
+    let canonicalLink = document.querySelector('link[rel="canonical"]');
+    if (canonicalLink) {
+      canonicalLink.setAttribute('href', currentMeta.canonical);
+    } else {
+      canonicalLink = document.createElement('link');
+      canonicalLink.rel = 'canonical';
+      canonicalLink.href = currentMeta.canonical;
+      document.head.appendChild(canonicalLink);
+    }
+
     window.scrollTo(0, 0);
   }, [activeTab]);
 

@@ -308,8 +308,36 @@ export default function Donate({ user, preloadedCause, clearPreload, setActiveTa
     }
   };
 
+  const donateSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'DonateAction',
+    name: 'Donate to Worlify Foundation NGO India',
+    description: 'Donate online to support education, healthcare, food security, and skill development in India. 80G Tax Exemption certificate issued automatically.',
+    recipient: {
+      '@type': 'NGO',
+      name: 'Worlify Foundation',
+      url: 'https://worlify.org',
+      taxID: 'AACTW5671G',
+      nonprofitStatus: 'Nonprofit501c3',
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: 'Lucknow',
+        addressRegion: 'Uttar Pradesh',
+        postalCode: '226501',
+        addressCountry: 'IN'
+      }
+    },
+    price: '250',
+    priceCurrency: 'INR'
+  };
+
   return (
     <div className={styles.pageContainer} id="donation-page-root">
+      {/* DonateAction JSON-LD Structured Data for Google Rich Snippets */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(donateSchema) }}
+      />
 
       {/* 1. HERO HEADER SECTION */}
       <header className={styles.heroSection}>

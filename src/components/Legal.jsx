@@ -310,11 +310,11 @@ export default function Legal({ setActiveTab }) {
               </div>
 
               <h1 className={styles.heroTitle}>
-                Legal & <span className={styles.heroTitleHighlight}>Transparency</span>
+                Legal Documents &amp; <span className={styles.heroTitleHighlight}>80G / 12A Compliance</span>
               </h1>
 
               <p className={styles.heroSubtitle}>
-                We believe that transparency builds trust. Every legal registration, certification, financial report, and compliance document is publicly available for verification.
+                Worlify Foundation is a legally registered NGO in India under Section 8 of the Companies Act (MCA), with 80G Tax Exemption, 12A Registration, NITI Aayog NGO Darpan Enrollment, and CSR-1 approval. All compliance certificates, PAN details, and annual financial audit reports are publicly available below.
               </p>
 
               <div className={styles.trustBadges}>

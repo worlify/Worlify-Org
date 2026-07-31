@@ -104,11 +104,11 @@ export default function AboutCircleSection({ setActiveTab }) {
             <div className={styles.aboutRedLine}></div>
 
             <p className={styles.aboutParagraph}>
-              Worlify Foundation is dedicated to bringing hope, light, and compassion to those whom society often overlooks. We work tirelessly to transform the lives of children, women and vulnerable communities who are weighed down by poverty, inequality and harsh circumstances. We believe that every life is precious, and within every individual lies immense potential—waiting for the right opportunity to be recognized and nurtured so that their dreams can take flight.
+              <strong>Worlify Foundation</strong> is a registered non-governmental organization (NGO) based in Lucknow, Uttar Pradesh, India, dedicated to bringing hope, education, and social welfare to underserved communities. As a multi-cause Indian NGO registered under Section 8, we work across critical social impact areas including child education, free healthcare camps, food &amp; nutrition security (Ann Seva), women empowerment, skill development, and environmental action.
             </p>
 
             <p className={styles.aboutParagraph}>
-              Through education, skill development, guidance, and compassionate support, we strive to rebuild broken confidence, restore self-esteem, and provide opportunities for individuals to become self-reliant. Every smile, every small achievement, and every dream realized is not just a success—it is the very inspiration that drives our mission.
+              We believe that every life is precious and every child deserves quality education and basic healthcare. All financial contributions made to Worlify Foundation are eligible for <strong>80G tax exemption benefits</strong> under the Income Tax Act, supported by our official 12A certification, NITI Aayog Darpan recognition, and CSR-1 registration. Through transparent community-led initiatives, we strive to build sustainable livelihoods and transform lives across India.
             </p>
 
             <button
@@ -116,7 +116,7 @@ export default function AboutCircleSection({ setActiveTab }) {
               onClick={handleDiscoverMore}
               id="about-discover-more-btn"
             >
-              Discover More &rarr;
+              Discover Our Story &rarr;
             </button>
           </div>
 

@@ -11,72 +11,78 @@ export default function Faqs({ setActiveTab }) {
   const [activeCategory, setActiveCategory] = useState('all');
   const [expandedFaqIndex, setExpandedFaqIndex] = useState(null);
 
-  // List of FAQs categorized
+  // List of FAQs categorized and optimized with targeted SEO keywords for Google SERP Rich Snippets
   const faqData = [
     {
       category: 'general',
-      question: 'What is Worlify and what does it do?',
-      answer: 'Worlify is a global registered non-governmental organization working across healthcare, education, environmental conservation, and social welfare programs. We believe in creating sustainable local changes through community-focused initiatives.',
+      question: 'What is Worlify Foundation and what social work does this NGO in India do?',
+      answer: 'Worlify Foundation is a registered non-governmental organization (NGO) based in Lucknow, Uttar Pradesh, India. We operate across key social impact pillars including child education, free healthcare camps, food security & nutrition drives (Ann Seva), women empowerment, skill development, and environmental conservation.',
       icon: BookOpen
     },
     {
       category: 'general',
-      question: 'Where are your headquarters located?',
-      answer: 'Our head office is located at A/1, JAN KALYAN BHAWAN-NEAR SMS COLLEGE, KASIMPUR BIRUHA, LUCKNOW, UTTAR PRADESH, 226501, INDIA. Our registered office is located at A/189, GROUND FLOOR NARAYAN ENCLAVE, KASIMPUR BIRUHA, LUCKNOW, UTTAR PRADESH, 226501, INDIA.',
+      question: 'Where is Worlify Foundation NGO located in Lucknow, Uttar Pradesh?',
+      answer: 'Our registered office is located at A/189, Ground Floor, Narayan Enclave, Kasimpur Biruha, Lucknow, Uttar Pradesh 226501, India. Our head office is at A/1, Jan Kalyan Bhawan, near SMS College, Kasimpur Biruha, Lucknow, UP.',
       icon: BookOpen
     },
     {
       category: 'general',
-      question: 'Is Worlify transparent about its fund allocations?',
-      answer: 'Yes, transparency is one of our core values. 90% of all public contributions go directly toward community development programs, while the remaining 10% is used for transparency auditing, essential administration, and field operations logistics.',
+      question: 'Is Worlify Foundation registered with NITI Aayog NGO Darpan and MCA?',
+      answer: 'Yes, Worlify Foundation is an officially registered NGO under Section 8 of the Companies Act (Ministry of Corporate Affairs, Govt of India) with active NITI Aayog NGO Darpan enrollment (Reg No: UP/2023/0344068) and 12A certification.',
+      icon: BookOpen
+    },
+    {
+      category: 'general',
+      question: 'Is Worlify Foundation transparent about fund allocations for charity in India?',
+      answer: 'Yes, 100% transparency is maintained. 90% of all public contributions directly fund grassroots community development, child education scholarships, and healthcare camps across India, while 10% supports annual audits and operations logistics.',
       icon: BookOpen
     },
     {
       category: 'donations',
-      question: 'How can I make a financial contribution?',
-      answer: 'You can click the "Donate Now" button in the header menu, select your preferred campaign or cause, input your billing credentials, and securely complete the transaction. We support cards, net banking, and UPI payments.',
+      question: 'How can I donate online to NGO India with 80G tax exemption?',
+      answer: 'You can easily donate online via our secure donation page using UPI (Google Pay, PhonePe, Paytm), credit/debit cards, or net banking via Razorpay. All donations to Worlify Foundation qualify for 80G tax exemption benefits under Section 80G of the Income Tax Act.',
       icon: Heart
     },
     {
       category: 'donations',
-      question: 'Are my contributions eligible for tax benefits?',
-      answer: 'Yes, Worlify is a registered NGO with 80G and 12A certifications. All monetary donations are eligible for tax exemption benefits under the relevant local income tax codes. A receipt is automatically issued to your registered email.',
+      question: 'How do I receive my 80G tax exemption certificate for my donation?',
+      answer: 'When you donate online and enter your PAN card number, an official 80G tax exemption certificate and receipt is generated and emailed directly to your registered email address for your income tax return filing.',
       icon: Heart
     },
     {
       category: 'donations',
-      question: 'Can I donate items like books, clothing, or medical supplies?',
-      answer: 'Yes! We actively collect and distribute physical educational materials, winter clothing, and medical supplies during relief drives. Please fill out our Helpdesk form or contact us via supportworlify@gmail.com to coordinate logistics.',
+      question: 'Can I donate items like books, clothes, or food materials for underprivileged children?',
+      answer: 'Yes! We regularly collect and distribute educational books, school supplies, winter clothing, and food grains for underprivileged children and families across Uttar Pradesh. Contact us via supportworlify@gmail.com to coordinate logistics.',
       icon: Heart
     },
     {
       category: 'volunteering',
-      question: 'How do I apply as a volunteer?',
-      answer: 'You can navigate to the "Get Involved" tab in the header menu, choose your area of interest, fill out the volunteer application form specifying your details and available hours, and submit. Our HR team will reach out to you within 3 business days.',
+      question: 'How do I apply for NGO volunteer opportunities or social work internships in India?',
+      answer: 'You can apply online through our Volunteer Hub by choosing your preferred focus area (Education, Healthcare, Environment, etc.). Our team reviews applications and issues official volunteer certificates and fellowship experience letters.',
       icon: UserPlus
     },
     {
       category: 'volunteering',
-      question: 'Can I volunteer remotely?',
-      answer: 'Absolutely! We offer several remote volunteering tracks including copy editing, digital graphics design, software development, data research, and virtual student mentoring.',
+      question: 'Can I volunteer remotely or online for NGO social projects?',
+      answer: 'Yes, we offer flexible remote volunteering and online internship tracks including content writing, digital graphic design, social media management, software engineering, and virtual student mentoring.',
       icon: UserPlus
     },
     {
       category: 'volunteering',
-      question: 'Do volunteers get certificates of appreciation?',
-      answer: 'Yes, all registered volunteers who successfully complete their assigned campaign objectives receive a signed NGO fellowship or experience certificate detailing their hours of service and project details.',
+      question: 'Do volunteers receive an official NGO certificate of service?',
+      answer: 'Yes, all registered volunteers and interns who successfully complete their project hours receive a verified experience certificate detailing their community contribution and service hours.',
       icon: UserPlus
     },
     {
       category: 'partnerships',
-      question: 'Who do I contact for Corporate Social Responsibility (CSR) partnerships?',
-      answer: 'For CSR alignments and corporate sponsorships, please reach out to our team via the "Get in Touch" page, or send a detailed proposal directly to supportworlify@gmail.com.',
+      question: 'How can companies partner with Worlify Foundation for Corporate Social Responsibility (CSR) in India?',
+      answer: 'Worlify Foundation is registered under CSR-1 with the Ministry of Corporate Affairs (MCA). We partner with corporates to execute, monitor, and report high-impact CSR projects in education, healthcare, and skill development. Contact us at supportworlify@gmail.com.',
       icon: Briefcase
     },
     {
       category: 'partnerships',
-      question: 'Can schools, colleges, and student groups partner with Worlify?',
-      answer: 'Yes! We run dedicated youth outreach modules. Student groups can run campus donation campaigns, set up social service chapters, or register for institutional group volunteering tasks.',
+      question: 'Can schools, colleges, and university student clubs collaborate with Worlify NGO?',
+      answer: 'Yes! We actively collaborate with schools, colleges, and university chapters for campus donation drives, social awareness campaigns, student volunteering, and community service projects.',
       icon: Briefcase
     }
   ];

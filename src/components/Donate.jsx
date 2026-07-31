@@ -344,13 +344,13 @@ export default function Donate({ user, preloadedCause, clearPreload, setActiveTa
         <div className={styles.heroContent}>
           <div className={styles.badgePill}>
             <ShieldCheck size={16} color="var(--primary-color)" />
-            <span>80G Tax Exempted & 12A Certified NGO</span>
+            <span>80G Tax Exempted &amp; 12A Registered NGO India</span>
           </div>
           <h1 className={styles.heroHeading}>
-            Transform Lives With Your <span className={styles.highlightText}>Generosity</span>
+            Donate Online to <span className={styles.highlightText}>NGO India</span> — 80G Tax Exemption Benefits
           </h1>
           <p className={styles.heroSubheading}>
-            Every contribution directly funds education, healthcare, food security, and community empowerment across underserved regions in India.
+            Donate securely online to Worlify Foundation, a registered NGO based in Lucknow, Uttar Pradesh, India. Your contribution directly supports child education, free healthcare camps, food security (Ann Seva), and women empowerment with instant 80G tax deduction receipts.
           </p>
         </div>
       </header>

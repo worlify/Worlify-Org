@@ -179,14 +179,12 @@ export default function Volunteer({ user, setActiveTab }) {
           </div>
 
           <h1 className={styles.heroH1}>
-            Be the Change<br />
-            <span className={styles.heroGradientText}>India Needs Today</span>
+            Volunteer with <span className={styles.heroGradientText}>NGO India</span><br />
+            Make a Real Difference in Lucknow
           </h1>
 
           <p className={styles.heroP}>
-            Worlify is a registered multi-cause NGO empowering thousands of lives
-            across education, healthcare, nutrition, and more — and we need
-            passionate people like you.
+            Worlify Foundation is a registered NGO in Lucknow, Uttar Pradesh, India empowering thousands of lives across child education, healthcare camps, food security, and women empowerment. Join our team of passionate volunteers and receive official experience certificates for your social service.
           </p>
 
           <div className={styles.heroCtas}>

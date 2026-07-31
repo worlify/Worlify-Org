@@ -218,6 +218,41 @@ export default function Donate({ user, preloadedCause, clearPreload, setActiveTa
     }
     const amountInPaise = currentAmount * 100;
 
+    // ── STEP 1: Create Razorpay Order on server (REQUIRED for Live Mode) ──
+    let orderId = null;
+    try {
+      const orderRes = await fetch('/api/razorpay/create-order', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          amount: amountInPaise,
+          currency: 'INR',
+          receipt: `rcpt_${Date.now()}`,
+          notes: {
+            cause: selectedCause,
+            donor_name: fullName.trim(),
+            donor_email: email.trim(),
+          }
+        }),
+      });
+
+      const orderData = await orderRes.json();
+
+      if (!orderRes.ok || !orderData.id) {
+        const errMsg = orderData?.error || 'Could not initiate payment. Please try again.';
+        alert(`Payment Error: ${errMsg}`);
+        setIsSubmitting(false);
+        return;
+      }
+
+      orderId = orderData.id;
+    } catch (fetchErr) {
+      console.error('Order creation network error:', fetchErr);
+      alert('Network error while initiating payment. Please check your connection and try again.');
+      setIsSubmitting(false);
+      return;
+    }
+
     const donationPayload = {
       donor_name: fullName.trim(),
       donor_dob: dob || null,
@@ -233,10 +268,12 @@ export default function Donate({ user, preloadedCause, clearPreload, setActiveTa
       razorpay_ref: 'Razorpay Checkout'
     };
 
+    // ── STEP 2: Open Razorpay Checkout with the server order_id ──
     const options = {
       key: razorpayKey,
       amount: amountInPaise,
       currency: 'INR',
+      order_id: orderId,
       name: 'Worlify Foundation',
       description: `Donation for ${selectedCause}`,
       image: '/favicon.ico',

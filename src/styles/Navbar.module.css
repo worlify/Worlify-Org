@@ -15,9 +15,9 @@
   align-items: center;
   height: 80px;
   /* Modern compact header height */
-  max-width: 1280px;
+  max-width: 1400px;
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 16px;
 }
 
 /* Brand Logo (Left) */
@@ -33,7 +33,7 @@
   cursor: pointer;
   letter-spacing: -0.5px;
   user-select: none;
-  margin-right: 24px; /* Optimized space between logo and Home link */
+  margin-right: 12px; /* Shifted left slightly to give room to desktop nav */
   flex-shrink: 0;
 }
 
@@ -52,7 +52,7 @@
 }
 
 .logoImg {
-  height: 64px;
+  height: 54px;
   width: auto;
   object-fit: contain;
   transition: transform 0.3s ease, filter 0.3s ease;
@@ -83,7 +83,7 @@
 .navLinks {
   display: flex;
   align-items: center;
-  gap: 18px; /* Optimized nav link spacing to fit cleanly on one line */
+  gap: 12px; /* Optimized nav link spacing to fit cleanly on one line with Campaign */
   list-style: none;
   margin: 0;
   padding: 0;
@@ -91,7 +91,7 @@
 }
 
 .navLink {
-  font-size: 14px;
+  font-size: 13.5px;
   font-weight: 500;
   color: var(--text-muted);
   cursor: pointer;
@@ -130,7 +130,7 @@
 .authGroup {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 10px;
 }
 
 /* Flat clean login text button */
@@ -597,6 +597,80 @@
   color: #0056d2;
   font-weight: 600;
   background-color: rgba(0, 86, 210, 0.08);
+}
+
+/* 2-Column Desktop Grid for Campaign Dropdown (10 Sub-menus) */
+.campaignDropdownMenu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  box-shadow: 0 16px 36px rgba(15, 23, 42, 0.16);
+  list-style: none;
+  padding: 12px;
+  margin: 0;
+  min-width: 520px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 6px;
+  z-index: 1000;
+  white-space: nowrap;
+}
+
+.campaignDropdownItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  background-color: transparent;
+  text-align: left;
+}
+
+.campaignDropdownItem:hover {
+  background-color: var(--bg-color);
+  transform: translateX(2px);
+}
+
+.activeCampaignDropdownItem {
+  background-color: rgba(0, 86, 210, 0.08);
+  border: 1px solid rgba(0, 86, 210, 0.2);
+}
+
+.campaignItemBadge {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.campaignItemText {
+  display: flex;
+  flex-direction: column;
+}
+
+.campaignItemTitle {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-main);
+  line-height: 1.2;
+}
+
+.campaignItemHindi {
+  font-size: 11px;
+  color: var(--text-muted);
+  line-height: 1.2;
+  margin-top: 2px;
 }
 
 /* Top Bar Ribbon Styles */

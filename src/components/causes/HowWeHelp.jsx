@@ -2,21 +2,27 @@ import React from 'react';
 import { 
   BookOpen, GraduationCap, Laptop, Users, Utensils, Apple, Package, 
   Activity, Ambulance, HeartPulse, Pill, Stethoscope, Scale, Shield, 
-  Megaphone, UserCheck, Trees, Droplets, Recycle, Sun, Heart, Home, 
+  Megaphone, UserCheck, Trees, Droplet, Droplets, Recycle, Sun, Heart, Home, 
   Wrench, Code, Scissors, Briefcase, Coins, Sprout, Landmark, Award, 
-  School, MapPin, CheckCircle2
+  School, MapPin, CheckCircle, CheckCircle2, HeartHandshake, ShieldCheck,
+  Building, TrendingUp, HelpCircle, PhoneCall, RefreshCw, Trash2, Gift,
+  Clock, Eye
 } from 'lucide-react';
 import styles from '../../styles/CausePage.module.css';
 
 const ICON_MAP = {
   BookOpen, GraduationCap, Laptop, Users, Utensils, Apple, Package, 
   Activity, Ambulance, HeartPulse, Pill, Stethoscope, Scale, Shield, 
-  Megaphone, UserCheck, Trees, Droplets, Recycle, Sun, Heart, Home, 
+  Megaphone, UserCheck, Trees, Droplet, Droplets, Recycle, Sun, Heart, Home, 
   Wrench, Code, Scissors, Briefcase, Coins, Sprout, Landmark, Award, 
-  School, MapPin
+  School, MapPin, CheckCircle, CheckCircle2, HeartHandshake, ShieldCheck,
+  Building, TrendingUp, HelpCircle, PhoneCall, RefreshCw, Trash2, Gift,
+  Clock, Eye
 };
 
-export default function HowWeHelp({ items, causeTitle }) {
+export default function HowWeHelp({ items = [], causeTitle = '' }) {
+  if (!Array.isArray(items)) return null;
+
   return (
     <section className={styles.howWeHelpSection}>
       <div className={styles.container}>
@@ -29,10 +35,11 @@ export default function HowWeHelp({ items, causeTitle }) {
         </div>
 
         <div className={styles.cardsGrid}>
-          {items.map((card) => {
-            const IconComponent = ICON_MAP[card.iconName] || CheckCircle2;
+          {items.map((card, idx) => {
+            const RawIcon = card?.iconName ? ICON_MAP[card.iconName] : null;
+            const IconComponent = RawIcon || CheckCircle2;
             return (
-              <div key={card.id} className={styles.helpCard}>
+              <div key={card.id || idx} className={styles.helpCard}>
                 <div className={styles.cardIconBox}>
                   <IconComponent size={26} />
                 </div>

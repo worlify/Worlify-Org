@@ -27,10 +27,10 @@ export default function OurDirectors({ setActiveTab }) {
       bio: 'Mr. Rahul Kumar Verma is a Director at Worlify. An operations specialist focusing on ground execution, resource logistics, and ensuring transparency in distribution networks.'
     },
     {
-      name: 'Ms. Lxmina Devi',
+      name: 'Ms. Laxmina Devi',
       role: 'Trustee',
       image: lxminaDeviImg,
-      bio: 'Ms. Lxmina Devi is a Trustee of Worlify. An active community advocate overseeing child welfare, nutrition initiatives, and women empowerment initiatives to create social equity.'
+      bio: 'Ms. Laxmina Devi is a Trustee of Worlify. An active community advocate overseeing child welfare, nutrition initiatives, and women empowerment initiatives to create social equity.'
     },
     {
       name: 'Mr. Kaushik Kishore',

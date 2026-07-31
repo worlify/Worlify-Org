@@ -58,6 +58,10 @@ export default function Footer({ setActiveTab }) {
                 <ChevronRight size={16} className={styles.linkChevron} />
                 <span>Home Page</span>
               </li>
+              <li className={styles.linkItem} onClick={() => setActiveTab('campaign-padhaga-har-baccha')} id="footer-nav-campaign">
+                <ChevronRight size={16} className={styles.linkChevron} />
+                <span>Campaign (Top 10)</span>
+              </li>
               <li className={styles.linkItem} onClick={() => setActiveTab('causes-education')} id="footer-nav-causes">
                 <ChevronRight size={16} className={styles.linkChevron} />
                 <span>Active Causes</span>

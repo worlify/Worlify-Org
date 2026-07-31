@@ -2,13 +2,14 @@ import React, { useState } from 'react';
 import { User, LogOut, Heart, Menu, X, ChevronDown, Sun, Moon } from 'lucide-react';
 import styles from '../styles/Navbar.module.css';
 import logo from '../assets/images/logo.png';
+import { CAMPAIGNS_LIST } from '../data/campaignsData';
 
 const MARQUEE_TEXT = "Worlify Foundation is registered under sections 12A & 80G of the Income Tax Act, 1961 and CSR-1 registered under the Ministry of Corporate Affairs for undertaking CSR activities.";
 
 /**
  * Navbar Component
  * Renders top header navigation, active page tab, and user-auth controls.
- * Integrates light/dark toggle and interactive dropdowns for About, Causes, and Contact.
+ * Integrates light/dark toggle and interactive dropdowns for About, Causes, Campaign, and Contact.
  */
 export default function Navbar({ activeTab, setActiveTab, user, onLogout, isLocalMode, onOpenKeysModal, theme = 'light', toggleTheme }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -18,6 +19,8 @@ export default function Navbar({ activeTab, setActiveTab, user, onLogout, isLoca
   const [isMobileAboutDropdownOpen, setIsMobileAboutDropdownOpen] = useState(false);
   const [isCausesDropdownOpen, setIsCausesDropdownOpen] = useState(false);
   const [isMobileCausesDropdownOpen, setIsMobileCausesDropdownOpen] = useState(false);
+  const [isCampaignDropdownOpen, setIsCampaignDropdownOpen] = useState(false);
+  const [isMobileCampaignDropdownOpen, setIsMobileCampaignDropdownOpen] = useState(false);
 
   const handleNavClick = (tabId) => {
     setActiveTab(tabId);
@@ -37,6 +40,7 @@ export default function Navbar({ activeTab, setActiveTab, user, onLogout, isLoca
   const isContactActive = activeTab === 'contact' || activeTab === 'faqs';
   const isAboutActive = activeTab === 'about-story' || activeTab === 'about-mission' || activeTab === 'about-directors' || activeTab === 'about';
   const isCausesActive = activeTab === 'causes' || activeTab.startsWith('causes-');
+  const isCampaignActive = activeTab === 'campaign' || activeTab.startsWith('campaign-');
 
   const causesList = [
     { id: 'causes-education', label: 'Education' },
@@ -174,6 +178,36 @@ export default function Navbar({ activeTab, setActiveTab, user, onLogout, isLoca
               )}
             </li>
 
+            {/* Campaign Dropdown - Desktop (10 Sub-menus) */}
+            <li
+              className={`${styles.navLink} ${styles.dropdownContainer} ${isCampaignActive ? styles.activeNavLink : ''}`}
+              onMouseEnter={() => setIsCampaignDropdownOpen(true)}
+              onMouseLeave={() => setIsCampaignDropdownOpen(false)}
+              onClick={() => setIsCampaignDropdownOpen(!isCampaignDropdownOpen)}
+              id="nav-link-campaign-parent"
+            >
+              <span className={styles.dropdownToggle}>
+                Campaign <ChevronDown size={14} className={`${styles.caretIcon} ${isCampaignDropdownOpen ? styles.caretRotated : ''}`} />
+              </span>
+              {isCampaignDropdownOpen && (
+                <ul className={styles.dropdownMenu} id="campaign-dropdown-menu">
+                  {CAMPAIGNS_LIST.map((item) => (
+                    <li
+                      key={item.id}
+                      className={`${styles.dropdownItem} ${activeTab === item.tabKey ? styles.activeDropdownItem : ''}`}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleNavClick(item.tabKey);
+                        setIsCampaignDropdownOpen(false);
+                      }}
+                    >
+                      {item.title}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </li>
+
             <li
               className={`${styles.navLink} ${activeTab === 'volunteer' ? styles.activeNavLink : ''}`}
               onClick={() => handleNavClick('volunteer')}
@@ -230,7 +264,7 @@ export default function Navbar({ activeTab, setActiveTab, user, onLogout, isLoca
                     FAQs
                   </li>
                 </ul>
-              )}
+                  )}
             </li>
           </ul>
         </nav>
@@ -359,6 +393,32 @@ export default function Navbar({ activeTab, setActiveTab, user, onLogout, isLoca
                       }}
                     >
                       {item.label}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </li>
+
+            {/* Campaign Dropdown - Mobile (10 Sub-menus) */}
+            <li className={styles.mobileDropdownContainer}>
+              <div
+                className={`${styles.mobileNavLink} ${styles.mobileDropdownToggle} ${isCampaignActive ? styles.activeMobileNavLink : ''}`}
+                onClick={() => setIsMobileCampaignDropdownOpen(!isMobileCampaignDropdownOpen)}
+              >
+                Campaign <ChevronDown size={16} className={`${styles.caretIcon} ${isMobileCampaignDropdownOpen ? styles.caretRotated : ''}`} />
+              </div>
+              {isMobileCampaignDropdownOpen && (
+                <ul className={styles.mobileSubMenu}>
+                  {CAMPAIGNS_LIST.map((item) => (
+                    <li
+                      key={item.id}
+                      className={`${styles.mobileSubNavLink} ${activeTab === item.tabKey ? styles.activeMobileSubNavLink : ''}`}
+                      onClick={() => {
+                        handleNavClick(item.tabKey);
+                        setIsMenuOpen(false);
+                      }}
+                    >
+                      {item.title}
                     </li>
                   ))}
                 </ul>

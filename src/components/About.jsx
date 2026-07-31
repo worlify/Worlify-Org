@@ -1,17 +1,17 @@
 import React from 'react';
-import { 
-  Award, 
-  Target, 
-  Eye, 
-  Download, 
-  CheckCircle, 
-  Users, 
-  TrendingUp, 
-  Heart, 
-  BookOpen, 
-  Activity, 
-  Leaf, 
-  ShieldCheck 
+import {
+  Award,
+  Target,
+  Eye,
+  Download,
+  CheckCircle,
+  Users,
+  TrendingUp,
+  Heart,
+  BookOpen,
+  Activity,
+  Leaf,
+  ShieldCheck
 } from 'lucide-react';
 import styles from '../styles/About.module.css';
 
@@ -65,7 +65,7 @@ export default function About({ setActiveTab }) {
       bio: 'An operations specialist focusing on ground execution, resource logistics, and ensuring transparency in distribution networks.'
     },
     {
-      name: 'Ms. Lxmina Devi',
+      name: 'Ms. Laxmina Devi',
       role: 'Trustee',
       image: lxminaDeviImg,
       bio: 'An active community advocate overseeing child welfare, nutrition initiatives, and women empowerment initiatives.'
@@ -87,8 +87,8 @@ export default function About({ setActiveTab }) {
                 We are a global collective of humanitarian professionals dedicated to solving systemic inequality through direct action and radical financial transparency. We trace every single contribution to its exact field deployment.
               </p>
               <div className={styles.heroActions}>
-                <button 
-                  className={styles.primaryAction} 
+                <button
+                  className={styles.primaryAction}
                   onClick={() => setActiveTab('donate')}
                   id="about-hero-donate-btn"
                 >
@@ -98,9 +98,9 @@ export default function About({ setActiveTab }) {
               </div>
             </div>
             <div className={styles.heroImageContainer}>
-              <img 
-                src="https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?auto=format&fit=crop&q=80&w=800" 
-                alt="Worlify Community Garden and Operations" 
+              <img
+                src="https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?auto=format&fit=crop&q=80&w=800"
+                alt="Worlify Community Garden and Operations"
                 className={styles.heroImage}
                 id="about-hero-image"
               />
@@ -177,7 +177,7 @@ export default function About({ setActiveTab }) {
                 <Heart size={28} color="white" fill="white" />
                 <span>IMPACT CORE</span>
               </div>
-              
+
               <div className={`${styles.wheelNode} ${styles.nodeEducation}`} id="wheel-node-education">
                 <div className={styles.nodeIcon} style={{ background: '#0d9488' }}>
                   <BookOpen size={20} color="white" />
@@ -256,7 +256,7 @@ export default function About({ setActiveTab }) {
         <div className="container">
           <div className={styles.accountabilityCard} id="financial-card">
             <div className={styles.accountabilityGrid}>
-              
+
               {/* Text explanation */}
               <div className={styles.financialIntro}>
                 <div className={styles.auditBadge}>Verified by 80G</div>

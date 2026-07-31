@@ -5,6 +5,7 @@ import logoImg from './assets/images/logo.png';
 import Navbar from './components/Navbar';
 import Home from './components/Home';
 import Causes from './components/Causes';
+import Campaigns from './components/Campaigns';
 import OurStory from './components/OurStory';
 import OurMission from './components/OurMission';
 import OurDirectors from './components/OurDirectors';
@@ -26,6 +27,11 @@ const VALID_TABS = [
   'causes-education', 'causes-food-nutrition', 'causes-healthcare',
   'causes-human-rights', 'causes-environment', 'causes-animal-welfare',
   'causes-skill-development', 'causes-poverty-alleviation',
+  'campaign',
+  'campaign-padhaga-har-baccha', 'campaign-ann-seva', 'campaign-nayi-pehchaan',
+  'campaign-sahara', 'campaign-apna-aashiyana', 'campaign-umeed',
+  'campaign-dharti-bachao', 'campaign-jeev-raksha', 'campaign-beti-ki-muskan',
+  'campaign-jeevandan',
   'about-story', 'about-mission', 'about-directors',
   'about', 'gallery', 'volunteer', 'donate', 'contact', 'faqs', 'legal',
   'auth', 'dashboard'
@@ -33,17 +39,21 @@ const VALID_TABS = [
 
 function getTabFromUrl() {
   if (typeof window === 'undefined') return 'home';
-  // Prioritize clean pathname (e.g. /causes/education or /gallery)
+  // Prioritize clean pathname (e.g. /causes/education or /campaign/padhaga-har-baccha)
   let path = window.location.pathname.replace(/^\//, '').trim();
   if (path.startsWith('causes/')) {
+    path = path.replace('/', '-');
+  } else if (path.startsWith('campaign/')) {
     path = path.replace('/', '-');
   }
   if (path && VALID_TABS.includes(path)) {
     return path;
   }
-  // Support hash fallback if present (e.g. #causes/education)
+  // Support hash fallback if present
   let hash = window.location.hash.replace(/^#\/?/, '').trim();
   if (hash.startsWith('causes/')) {
+    hash = hash.replace('/', '-');
+  } else if (hash.startsWith('campaign/')) {
     hash = hash.replace('/', '-');
   }
   if (hash && VALID_TABS.includes(hash)) {
@@ -67,6 +77,8 @@ export default function App() {
       let newPath = tabId === 'home' ? '/' : `/${tabId}`;
       if (tabId.startsWith('causes-')) {
         newPath = `/${tabId.replace('causes-', 'causes/')}`;
+      } else if (tabId.startsWith('campaign-')) {
+        newPath = `/${tabId.replace('campaign-', 'campaign/')}`;
       }
       if (window.location.pathname !== newPath || window.location.hash) {
         window.history.pushState({ tab: tabId }, '', newPath);
@@ -85,6 +97,8 @@ export default function App() {
     let targetPath = currentTab === 'home' ? '/' : `/${currentTab}`;
     if (currentTab.startsWith('causes-')) {
       targetPath = `/${currentTab.replace('causes-', 'causes/')}`;
+    } else if (currentTab.startsWith('campaign-')) {
+      targetPath = `/${currentTab.replace('campaign-', 'campaign/')}`;
     }
     if (typeof window !== 'undefined' && (window.location.pathname !== targetPath || window.location.hash)) {
       window.history.replaceState({ tab: currentTab }, '', targetPath);
@@ -239,6 +253,16 @@ export default function App() {
 
         {(activeTab === 'causes' || activeTab.startsWith('causes-')) && (
           <Causes
+            activeTab={activeTab}
+            setActiveTab={setActiveTab}
+            setDonationPreload={setDonationPreload}
+            preloadedCause={donationPreload}
+            clearPreload={() => setDonationPreload('')}
+          />
+        )}
+
+        {(activeTab === 'campaign' || activeTab.startsWith('campaign-')) && (
+          <Campaigns
             activeTab={activeTab}
             setActiveTab={setActiveTab}
             setDonationPreload={setDonationPreload}

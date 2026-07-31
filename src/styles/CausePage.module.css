@@ -21,7 +21,7 @@
    ========================================================================== */
 .heroSection {
   position: relative;
-  padding: 48px 0 72px 0;
+  padding: 32px 0 40px 0;
   overflow: hidden;
   background: radial-gradient(
     circle at top right,
@@ -46,7 +46,7 @@
   font-size: 13.5px;
   font-weight: 500;
   color: var(--text-muted);
-  margin-bottom: 28px;
+  margin-bottom: 20px;
   flex-wrap: wrap;
 }
 
@@ -73,7 +73,7 @@
 .heroGrid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 48px;
+  gap: 36px;
   align-items: center;
 }
 
@@ -96,7 +96,7 @@
   color: var(--cause-primary);
   background-color: var(--cause-light-bg);
   border: 1px solid var(--cause-border);
-  margin-bottom: 16px;
+  margin-bottom: 12px;
 }
 
 [data-theme='dark'] .subtitleBadge {
@@ -104,29 +104,29 @@
 }
 
 .causeTitle {
-  font-size: 42px;
+  font-size: 38px;
   font-weight: 800;
   line-height: 1.15;
   color: var(--text-main);
-  margin-bottom: 12px;
+  margin-bottom: 10px;
   letter-spacing: -0.8px;
 }
 
 .heroHeading {
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 700;
   line-height: 1.35;
   background: var(--cause-gradient);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
 }
 
 .heroDescription {
-  font-size: 16px;
-  line-height: 1.65;
+  font-size: 15.5px;
+  line-height: 1.6;
   color: var(--text-muted);
-  margin-bottom: 32px;
+  margin-bottom: 24px;
   max-width: 540px;
 }
 
@@ -288,7 +288,7 @@
    2. HOW WE HELP SECTION
    ========================================================================== */
 .howWeHelpSection {
-  padding: 80px 0;
+  padding: 44px 0;
   background-color: var(--bg-card);
   border-top: 1px solid var(--border-color);
   border-bottom: 1px solid var(--border-color);
@@ -297,7 +297,7 @@
 .sectionHeader {
   text-align: center;
   max-width: 650px;
-  margin: 0 auto 48px auto;
+  margin: 0 auto 28px auto;
 }
 
 .sectionBadge {
@@ -311,30 +311,30 @@
 }
 
 .sectionTitle {
-  font-size: 32px;
+  font-size: 30px;
   font-weight: 800;
   color: var(--text-main);
-  margin-bottom: 12px;
+  margin-bottom: 10px;
   letter-spacing: -0.5px;
 }
 
 .sectionSubtitle {
-  font-size: 15.5px;
+  font-size: 15px;
   color: var(--text-muted);
-  line-height: 1.6;
+  line-height: 1.55;
 }
 
 .cardsGrid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
+  gap: 20px;
 }
 
 .helpCard {
   background-color: var(--bg-color);
   border: 1px solid var(--border-color);
   border-radius: 20px;
-  padding: 28px 24px;
+  padding: 24px 20px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -353,15 +353,15 @@
 }
 
 .cardIconBox {
-  width: 52px;
-  height: 52px;
+  width: 48px;
+  height: 48px;
   border-radius: 14px;
   background-color: var(--cause-light-bg);
   color: var(--cause-primary);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
   transition: all 0.3s ease;
 }
 
@@ -376,23 +376,23 @@
 }
 
 .cardTitle {
-  font-size: 18px;
+  font-size: 17px;
   font-weight: 700;
   color: var(--text-main);
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 
 .cardDesc {
-  font-size: 14px;
+  font-size: 13.5px;
   color: var(--text-muted);
-  line-height: 1.6;
+  line-height: 1.55;
 }
 
 /* ==========================================================================
    3. IMPACT STATISTICS SECTION
    ========================================================================== */
 .impactStatsSection {
-  padding: 72px 0;
+  padding: 40px 0;
   background: var(--cause-light-bg);
   position: relative;
   overflow: hidden;
@@ -405,17 +405,17 @@
 .statsGrid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
+  gap: 20px;
 }
 
 .statItem {
   background-color: var(--bg-card);
   border: 1px solid var(--border-color);
   border-radius: 20px;
-  padding: 24px;
+  padding: 20px;
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 14px;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
   transition: transform 0.25s ease;
 }
@@ -425,8 +425,8 @@
 }
 
 .statIconBox {
-  width: 48px;
-  height: 48px;
+  width: 44px;
+  height: 44px;
   border-radius: 12px;
   background: var(--cause-gradient);
   color: #ffffff;
@@ -442,7 +442,7 @@
 }
 
 .statNumber {
-  font-size: 28px;
+  font-size: 26px;
   font-weight: 800;
   line-height: 1.1;
   color: var(--text-main);
@@ -450,31 +450,31 @@
 }
 
 .statLabel {
-  font-size: 13px;
+  font-size: 12.5px;
   font-weight: 600;
   color: var(--text-muted);
-  margin-top: 4px;
+  margin-top: 2px;
 }
 
 /* ==========================================================================
    4. GALLERY SECTION
    ========================================================================== */
 .gallerySection {
-  padding: 80px 0;
+  padding: 44px 0;
   background-color: var(--bg-color);
 }
 
 .galleryGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
+  gap: 18px;
 }
 
 .galleryCard {
   position: relative;
   border-radius: 20px;
   overflow: hidden;
-  height: 240px;
+  height: 230px;
   cursor: pointer;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
   border: 1px solid var(--border-color);
@@ -581,15 +581,15 @@
    5. FINAL CTA BANNER
    ========================================================================== */
 .ctaSection {
-  padding: 80px 0;
+  padding: 44px 0;
   background-color: var(--bg-card);
 }
 
 .ctaCard {
   position: relative;
-  border-radius: 32px;
+  border-radius: 28px;
   background: var(--cause-gradient);
-  padding: 64px 48px;
+  padding: 44px 36px;
   color: #ffffff;
   overflow: hidden;
   text-align: center;
@@ -712,166 +712,166 @@
 
 @media (max-width: 768px) {
   .heroSection {
-    padding: 24px 0 32px 0;
+    padding: 16px 0 20px 0;
   }
 
   .breadcrumb {
-    margin-bottom: 18px;
+    margin-bottom: 12px;
   }
 
   .heroGrid {
     grid-template-columns: 1fr;
-    gap: 24px;
+    gap: 18px;
   }
 
   .causeTitle {
-    font-size: 30px;
-    margin-bottom: 8px;
+    font-size: 26px;
+    margin-bottom: 6px;
   }
 
   .heroHeading {
-    font-size: 18px;
-    margin-bottom: 12px;
+    font-size: 16px;
+    margin-bottom: 10px;
   }
 
   .heroDescription {
-    font-size: 14.5px;
-    margin-bottom: 20px;
+    font-size: 14px;
+    margin-bottom: 16px;
   }
 
   .heroActions {
     width: 100%;
     flex-direction: column;
-    gap: 12px;
+    gap: 10px;
   }
 
   .primaryBtn, .secondaryBtn {
     width: 100%;
     justify-content: center;
-    padding: 12px 20px;
+    padding: 11px 18px;
   }
 
   .heroImage {
-    height: 240px;
+    height: 210px;
   }
 
   .heroFloatingBadge {
-    padding: 10px 14px;
-    bottom: -16px;
-    left: 16px;
+    padding: 8px 12px;
+    bottom: -14px;
+    left: 12px;
   }
 
   /* Compact How We Help Section on Mobile */
   .howWeHelpSection {
-    padding: 40px 0;
+    padding: 24px 0;
   }
 
   .sectionHeader {
-    margin-bottom: 28px;
+    margin-bottom: 18px;
   }
 
   .sectionTitle {
-    font-size: 26px;
+    font-size: 22px;
   }
 
   .sectionSubtitle {
-    font-size: 14px;
+    font-size: 13.5px;
   }
 
   .cardsGrid {
     grid-template-columns: 1fr;
-    gap: 14px;
+    gap: 12px;
   }
 
   .helpCard {
-    padding: 20px 18px;
-    border-radius: 16px;
+    padding: 16px 14px;
+    border-radius: 14px;
   }
 
   .cardIconBox {
-    width: 44px;
-    height: 44px;
-    margin-bottom: 14px;
+    width: 40px;
+    height: 40px;
+    margin-bottom: 10px;
   }
 
   /* Compact Impact Stats Section on Mobile */
   .impactStatsSection {
-    padding: 36px 0;
+    padding: 20px 0;
   }
 
   .statsGrid {
     grid-template-columns: 1fr;
-    gap: 12px;
+    gap: 10px;
   }
 
   .statItem {
-    padding: 18px 20px;
-    border-radius: 16px;
+    padding: 14px 16px;
+    border-radius: 14px;
   }
 
   .statNumber {
-    font-size: 24px;
+    font-size: 22px;
   }
 
   .statLabel {
-    font-size: 12.5px;
+    font-size: 12px;
   }
 
   /* Compact Mobile Gallery */
   .gallerySection {
-    padding: 40px 0;
+    padding: 24px 0;
   }
 
   .galleryGrid {
     display: flex;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
-    gap: 14px;
-    padding-bottom: 12px;
+    gap: 12px;
+    padding-bottom: 8px;
     -webkit-overflow-scrolling: touch;
   }
 
   .galleryCard {
     flex: 0 0 82%;
     scroll-snap-align: start;
-    height: 200px;
-    border-radius: 16px;
+    height: 180px;
+    border-radius: 14px;
   }
 
   .galleryOverlay {
     opacity: 1; /* Always visible on touch devices */
-    padding: 14px;
+    padding: 12px;
   }
 
   /* Compact Final CTA Banner on Mobile */
   .ctaSection {
-    padding: 36px 0;
+    padding: 24px 0;
   }
 
   .ctaCard {
-    padding: 36px 20px;
-    border-radius: 24px;
+    padding: 24px 16px;
+    border-radius: 20px;
   }
 
   .ctaHeadline {
-    font-size: 22px;
-    margin-bottom: 12px;
+    font-size: 20px;
+    margin-bottom: 10px;
   }
 
   .ctaSubtext {
-    font-size: 14px;
-    margin-bottom: 24px;
+    font-size: 13.5px;
+    margin-bottom: 18px;
   }
 
   .ctaActions {
     width: 100%;
     flex-direction: column;
-    gap: 12px;
+    gap: 10px;
   }
 
   .ctaPrimaryBtn, .ctaSecondaryBtn {
     width: 100%;
     justify-content: center;
-    padding: 13px 24px;
+    padding: 12px 20px;
   }
 }

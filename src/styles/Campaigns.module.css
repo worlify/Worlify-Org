@@ -1,0 +1,193 @@
+/* Styles for Campaigns Banner & Component */
+
+.campaignContainer {
+  width: 100%;
+  position: relative;
+}
+
+.topReasonBanner {
+  background: var(--bg-card);
+  border-bottom: 2px solid var(--banner-theme, #16a34a);
+  padding: 16px 20px 16px 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.bannerInner {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.rankBadge {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background-color: var(--banner-theme, #16a34a);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  font-weight: 800;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.bannerContent {
+  flex-grow: 1;
+}
+
+.titleRow {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 4px;
+}
+
+.campaignTitle {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--text-main);
+  margin: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  letter-spacing: -0.3px;
+}
+
+.hindiSubTitle {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--banner-theme, #16a34a);
+}
+
+.reasonBox {
+  font-size: 14.5px;
+  line-height: 1.45;
+  background-color: var(--bg-color);
+  border-left: 4px solid #dc2626; /* Reason label red color matching mockup */
+  padding: 6px 12px;
+  border-radius: 0 8px 8px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.reasonLabel {
+  font-weight: 800;
+  color: #dc2626; /* Dark red "कारण:" label */
+  white-space: nowrap;
+}
+
+.reasonText {
+  color: var(--text-main);
+  font-weight: 500;
+}
+
+/* Quick Navigation Strip across all 10 campaigns */
+.quickNavStrip {
+  max-width: 1280px;
+  margin: 10px auto 0 auto;
+  padding-top: 10px;
+  border-top: 1px dashed var(--border-color);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+.quickNavLabel {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--text-muted);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.quickNavPills {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  overflow-x: auto;
+  padding-bottom: 2px;
+}
+
+.quickNavBtn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background-color: var(--bg-color);
+  border: 1px solid var(--border-color);
+  padding: 4px 10px;
+  border-radius: 9999px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+  font-size: 12.5px;
+  color: var(--text-main);
+}
+
+.quickNavBtn:hover {
+  border-color: var(--text-muted);
+  transform: translateY(-1px);
+}
+
+.activeQuickNavBtn {
+  background-color: var(--bg-card);
+  border-color: var(--banner-theme, #16a34a);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  font-weight: 700;
+}
+
+.quickNum {
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  color: #ffffff;
+  font-size: 10.5px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.quickName {
+  font-size: 12px;
+}
+
+@media (max-width: 768px) {
+  .topReasonBanner {
+    padding: 12px 14px 10px 14px;
+  }
+  .bannerInner {
+    flex-direction: column;
+    gap: 8px;
+  }
+  .rankBadge {
+    width: 38px;
+    height: 38px;
+    font-size: 18px;
+  }
+  .campaignTitle {
+    font-size: 18px;
+  }
+  .hindiSubTitle {
+    font-size: 15px;
+  }
+  .reasonBox {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+    padding: 6px 10px;
+    font-size: 13.5px;
+  }
+  .quickNavStrip {
+    margin-top: 8px;
+    padding-top: 8px;
+    gap: 8px;
+  }
+}

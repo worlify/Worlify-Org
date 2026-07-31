@@ -1,8 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  experimental: {
-    optimizePackageImports: ['lucide-react']
+  transpilePackages: ['lucide-react'],
+  webpack: (config, { dev }) => {
+    if (dev) {
+      config.cache = false;
+    }
+    return config;
   },
   env: {
     VITE_SUPABASE_URL:

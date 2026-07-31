@@ -106,14 +106,27 @@ export default function Home({ setActiveTab, setDonationPreload, isLocalMode }) 
     <div id="home-view" className={styles.homeContainer}>
       
       {/* 1. Hero Cover Banner Section */}
-      <section className={styles.heroSection} id="hero-banner">
+      <section className={styles.heroSection} id="hero-banner" aria-label="Worlify Foundation — NGO India working in education, healthcare, food security, skill development and environmental action">
+        {/* SEO: Primary H1 — visually hidden but present for search engines and screen readers */}
+        <h1 className={styles.seoH1}>
+          Worlify Foundation — NGO India | Education, Healthcare &amp; Community Welfare in Lucknow, Uttar Pradesh
+        </h1>
+
         {/* Dynamic sliding background images */}
-        <div className={styles.heroSliderContainer}>
+        <div className={styles.heroSliderContainer} role="img" aria-label="Community impact photos from Worlify Foundation NGO programmes across India">
           {heroImages.map((imgUrl, idx) => (
             <div
               key={idx}
               className={`${styles.heroSlide} ${currentHeroIndex === idx ? styles.activeHeroSlide : ''}`}
               style={{ backgroundImage: `url(${imgUrl})` }}
+              aria-label={[
+                'Children receiving education support from Worlify Foundation NGO',
+                'Healthcare camp organized by Worlify Foundation in rural India',
+                'Food distribution drive by Worlify Foundation NGO India',
+                'Skill development training by Worlify Foundation Lucknow',
+                'Environmental action and tree plantation by Worlify NGO',
+                'Community welfare program by Worlify Foundation NGO India'
+              ][idx]}
             />
           ))}
         </div>

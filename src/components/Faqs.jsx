@@ -97,9 +97,28 @@ export default function Faqs({ setActiveTab }) {
     return matchesCategory && matchesSearch;
   });
 
+  // FAQ Schema.org JSON-LD for Google Rich Results (FAQ dropdowns in SERPs)
+  const faqSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqData.map((faq) => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: faq.answer,
+      },
+    })),
+  };
+
   return (
     <div className={styles.faqsPage} id="faqs-page-container">
-      
+      {/* FAQ Schema.org Structured Data for Google Rich Results */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+
       {/* Hero Banner Section */}
       <section className={styles.heroSection}>
         <div className={styles.heroContent}>

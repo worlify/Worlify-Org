@@ -1,0 +1,29 @@
+# Worlify Foundation - robots.txt
+# https://worlify.org/robots.txt
+
+User-agent: *
+Allow: /
+
+# Block private/admin routes from indexing
+Disallow: /auth
+Disallow: /dashboard
+Disallow: /api/
+
+# Allow all major search engine crawlers
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+# Sitemap location
+Sitemap: https://worlify.org/sitemap.xml

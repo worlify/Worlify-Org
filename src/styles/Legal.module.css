@@ -1156,6 +1156,38 @@
   text-transform: uppercase;
 }
 
+.comingSoonCardActive {
+  border-color: #f59e0b !important;
+  background-color: rgba(245, 158, 11, 0.03);
+  box-shadow: 0 8px 20px rgba(245, 158, 11, 0.12) !important;
+}
+
+.comingSoonBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  background-color: rgba(245, 158, 11, 0.12);
+  color: #d97706;
+  border: 1px solid rgba(245, 158, 11, 0.25);
+  border-radius: 9999px;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
 /* Contact Cards Info Section */
 .contactTeamSection {
   padding: 60px 0;

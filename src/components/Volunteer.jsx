@@ -15,9 +15,9 @@ const CAUSES = [
 
 const STATS = [
   { value: '12,000+', label: 'Lives Impacted', icon: Heart },
-  { value: '500+',    label: 'Active Volunteers', icon: Users },
-  { value: '8',       label: 'Focus Programmes', icon: Globe },
-  { value: '4+',      label: 'Years of Service', icon: Clock },
+  { value: '500+', label: 'Active Volunteers', icon: Users },
+  { value: '8', label: 'Focus Programmes', icon: Globe },
+  { value: '8', label: 'Years of Service', icon: Clock },
 ];
 
 const WAYS = [
@@ -48,18 +48,18 @@ const WAYS = [
 ];
 
 const PERKS = [
-  { icon: Award,       text: 'Official volunteer certificate' },
-  { icon: Shield,      text: 'Background-verified safe network' },
-  { icon: Zap,         text: 'Flexible remote or on-field roles' },
-  { icon: TrendingUp,  text: 'Real-time impact dashboard access' },
-  { icon: Star,        text: 'Mentorship from sector leaders' },
-  { icon: BookOpen,    text: 'Free skill-development workshops' },
+  { icon: Award, text: 'Official volunteer certificate' },
+  { icon: Shield, text: 'Background-verified safe network' },
+  { icon: Zap, text: 'Flexible remote or on-field roles' },
+  { icon: TrendingUp, text: 'Real-time impact dashboard access' },
+  { icon: Star, text: 'Mentorship from sector leaders' },
+  { icon: BookOpen, text: 'Free skill-development workshops' },
 ];
 
 /* ── Animated Counter Hook ─────────────────────────────────── */
 function useCountUp(target, duration = 1800) {
   const [count, setCount] = useState(0);
-  const ref               = useRef(null);
+  const ref = useRef(null);
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
@@ -96,15 +96,15 @@ function StatItem({ value, label, icon: Icon }) {
 
 /* ── Main Component ────────────────────────────────────────── */
 export default function Volunteer({ user, setActiveTab }) {
-  const [fullName,       setFullName]       = useState('');
-  const [email,          setEmail]          = useState('');
-  const [phoneNumber,    setPhoneNumber]    = useState('');
+  const [fullName, setFullName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
   const [preferredCause, setPreferredCause] = useState('');
-  const [motivation,     setMotivation]     = useState('');
-  const [charCount,      setCharCount]      = useState(0);
-  const [isSubmitting,   setIsSubmitting]   = useState(false);
-  const [success,        setSuccess]        = useState(false);
-  const [errors,         setErrors]         = useState({});
+  const [motivation, setMotivation] = useState('');
+  const [charCount, setCharCount] = useState(0);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [errors, setErrors] = useState({});
 
   useEffect(() => {
     if (user) {
@@ -120,11 +120,11 @@ export default function Volunteer({ user, setActiveTab }) {
 
   const validate = () => {
     const e = {};
-    if (!fullName.trim())    e.fullName      = 'Full name is required.';
-    if (!email.trim())       e.email         = 'Email address is required.';
-    if (!phoneNumber.trim()) e.phoneNumber   = 'Phone number is required.';
-    if (!preferredCause)     e.preferredCause = 'Please select a cause.';
-    if (!motivation.trim())  e.motivation    = 'Please share your motivation.';
+    if (!fullName.trim()) e.fullName = 'Full name is required.';
+    if (!email.trim()) e.email = 'Email address is required.';
+    if (!phoneNumber.trim()) e.phoneNumber = 'Phone number is required.';
+    if (!preferredCause) e.preferredCause = 'Please select a cause.';
+    if (!motivation.trim()) e.motivation = 'Please share your motivation.';
     return e;
   };
 

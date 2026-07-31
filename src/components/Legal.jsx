@@ -202,6 +202,14 @@ export default function Legal({ setActiveTab }) {
   const [zoomLevel, setZoomLevel] = useState(100);
   const [bookmarkedDocs, setBookmarkedDocs] = useState({});
   const [downloadCounts, setDownloadCounts] = useState({});
+  const [comingSoonReports, setComingSoonReports] = useState({});
+
+  const handleReportClick = (reportName) => {
+    setComingSoonReports(prev => ({
+      ...prev,
+      [reportName]: true
+    }));
+  };
 
   // Accordion active index
   const [expandedFaq, setExpandedFaq] = useState(0);
@@ -427,7 +435,7 @@ export default function Legal({ setActiveTab }) {
                 <FileText size={24} />
               </div>
               <div>
-                <div className={styles.statsValue}>45+</div>
+                <div className={styles.statsValue}>24+</div>
                 <div className={styles.statsLabel}>Legal Documents</div>
                 <div className={styles.statsDesc}>Across all operational categories</div>
               </div>
@@ -449,7 +457,7 @@ export default function Legal({ setActiveTab }) {
                 <Award size={24} />
               </div>
               <div>
-                <div className={styles.statsValue}>08</div>
+                <div className={styles.statsValue}>24</div>
                 <div className={styles.statsLabel}>Verified Certificates</div>
                 <div className={styles.statsDesc}>100% compliant audits & tax status</div>
               </div>
@@ -460,7 +468,7 @@ export default function Legal({ setActiveTab }) {
                 <Calendar size={24} />
               </div>
               <div>
-                <div className={styles.statsValue}>11 July 2026</div>
+                <div className={styles.statsValue}>31 July 2026</div>
                 <div className={styles.statsLabel}>Last Updated</div>
                 <div className={styles.statsDesc}>All documents are current</div>
               </div>
@@ -855,22 +863,28 @@ export default function Legal({ setActiveTab }) {
           </div>
 
           <div className={styles.downloadGrid}>
-            {ANNUAL_REPORTS.map((report, idx) => (
-              <div
-                key={report.name}
-                className={styles.downloadReportCard}
-                onClick={() => {
-                  const doc = documents[0]; // mock download action
-                  handleDownload(doc);
-                }}
-              >
-                <div className={styles.reportIcon}>
-                  <FileText size={20} />
+            {ANNUAL_REPORTS.map((report) => {
+              const isComingSoon = comingSoonReports[report.name];
+              return (
+                <div
+                  key={report.name}
+                  className={`${styles.downloadReportCard} ${isComingSoon ? styles.comingSoonCardActive : ''}`}
+                  onClick={() => handleReportClick(report.name)}
+                >
+                  <div className={styles.reportIcon}>
+                    <FileText size={20} />
+                  </div>
+                  <h3 className={styles.reportTitle}>{report.name}</h3>
+                  {isComingSoon ? (
+                    <span className={styles.comingSoonBadge}>
+                      <Clock size={12} /> Coming Soon
+                    </span>
+                  ) : (
+                    <span className={styles.reportDownloadsCount}>{report.size} • {report.count} DLs</span>
+                  )}
                 </div>
-                <h3 className={styles.reportTitle}>{report.name}</h3>
-                <span className={styles.reportDownloadsCount}>{report.size} • {report.count} DLs</span>
-              </div>
-            ))}
+              );
+            })}
           </div>
 
         </div>
@@ -994,15 +1008,6 @@ export default function Legal({ setActiveTab }) {
             <div className={styles.contactBtnGroup}>
               <button className={styles.btnPrimary} onClick={() => setActiveTab('contact')}>
                 Contact Legal Desk
-              </button>
-              <button
-                className={styles.btnSecondary}
-                onClick={() => {
-                  const doc = documents[0];
-                  handleDownload(doc);
-                }}
-              >
-                Download Compliance Guide
               </button>
             </div>
 
@@ -1212,14 +1217,14 @@ export default function Legal({ setActiveTab }) {
                       <div className={styles.auditDot}></div>
                       <div>
                         <div className={styles.auditDesc}>Verified by **Legal Counsel**</div>
-                        <div className={styles.auditTime}>11 July 2026</div>
+                        <div className={styles.auditTime}>31 July 2026</div>
                       </div>
                     </div>
                     <div className={styles.auditStep}>
                       <div className={styles.auditDot} style={{ backgroundColor: '#3b82f6' }}></div>
                       <div>
                         <div className={styles.auditDesc}>Digitized in **Transparency Center**</div>
-                        <div className={styles.auditTime}>11 July 2026</div>
+                        <div className={styles.auditTime}>31 July 2026</div>
                       </div>
                     </div>
                   </div>

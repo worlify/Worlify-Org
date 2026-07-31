@@ -197,24 +197,64 @@ export default function App() {
 
   if (isLoadingSession) {
     return (
-      <div className="worlify-splash" id="loading-screen">
-        <div className="worlify-splash__card">
-          {/* Logo */}
-          <div className="worlify-splash__logo-wrap">
-            <img
-              src={logoImg.src || logoImg}
-              alt="Worlify Logo"
-              className="worlify-splash__logo"
-            />
-          </div>
+      <div className="worlify-splash" id="loading-screen" role="status" aria-label="Loading Worlify Foundation">
 
-          {/* 3-dot bounce */}
-          <div className="worlify-splash__dots" aria-label="Loading" role="status">
-            <span className="worlify-splash__dot" />
-            <span className="worlify-splash__dot" />
-            <span className="worlify-splash__dot" />
-          </div>
+        {/* Top progress bar */}
+        <div className="worlify-splash__progress-bar" />
+
+        {/* Dual-ring spinner */}
+        <div className="worlify-splash__spinner-wrap">
+          <svg
+            className="worlify-splash__ring-outer"
+            viewBox="0 0 100 100"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
+          >
+            <circle
+              cx="50" cy="50" r="42"
+              fill="none"
+              stroke="url(#ringGradOuter)"
+              strokeWidth="5"
+              strokeLinecap="round"
+              strokeDasharray="198 66"
+            />
+            <defs>
+              <linearGradient id="ringGradOuter" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#0d9488" />
+                <stop offset="100%" stopColor="#06b6d4" />
+              </linearGradient>
+            </defs>
+          </svg>
+
+          <svg
+            className="worlify-splash__ring-inner"
+            viewBox="0 0 100 100"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
+          >
+            <circle
+              cx="50" cy="50" r="28"
+              fill="none"
+              stroke="url(#ringGradInner)"
+              strokeWidth="5"
+              strokeLinecap="round"
+              strokeDasharray="88 88"
+            />
+            <defs>
+              <linearGradient id="ringGradInner" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="#f97316" />
+                <stop offset="100%" stopColor="#fbbf24" />
+              </linearGradient>
+            </defs>
+          </svg>
+
+          {/* Centre dot */}
+          <div className="worlify-splash__centre-dot" />
         </div>
+
+        {/* Brand text */}
+        <p className="worlify-splash__brand-text">Worlify Foundation</p>
+
       </div>
     );
   }

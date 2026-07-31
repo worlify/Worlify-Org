@@ -106,116 +106,143 @@ img {
 }
 
 /* =============================================
-   Professional Splash / Loader Screen
+   Professional Full-Screen Page Loader
    ============================================= */
+
+/* Animated top progress bar */
+.worlify-splash__progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 45%;
+  background: linear-gradient(90deg, #0d9488, #06b6d4, #f97316);
+  background-size: 200% 100%;
+  border-radius: 0 4px 4px 0;
+  animation: progressSlide 1.6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  box-shadow: 0 0 12px rgba(13,148,136,0.6);
+  z-index: 10000;
+}
+
+@keyframes progressSlide {
+  0%   { left: -50%; width: 40%; }
+  60%  { left: 80%;  width: 60%; }
+  100% { left: 120%; width: 40%; }
+}
+
+/* Full-screen overlay */
 .worlify-splash {
   position: fixed;
   inset: 0;
   z-index: 9999;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #f0fdfa 0%, #ecfdf5 50%, #f0f9ff 100%);
-  /* Subtle animated radial glow behind the card */
+  gap: 28px;
+  background: linear-gradient(145deg, #f0fdfa 0%, #f0fafb 40%, #fff7ed 100%);
   overflow: hidden;
 }
 
 [data-theme='dark'] .worlify-splash {
-  background: linear-gradient(135deg, #0b1a18 0%, #0b1520 50%, #0b1628 100%);
+  background: linear-gradient(145deg, #060d0c 0%, #071218 50%, #0e0a04 100%);
 }
 
-/* Decorative animated background blob */
-.worlify-splash::before {
+/* Background ambient glow blobs */
+.worlify-splash::before,
+.worlify-splash::after {
   content: '';
   position: absolute;
-  width: 480px;
-  height: 480px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(13,148,136,0.12) 0%, transparent 70%);
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  animation: splashPulse 2s ease-in-out infinite;
+  pointer-events: none;
 }
 
-@keyframes splashPulse {
-  0%, 100% { transform: translate(-50%, -50%) scale(1);   opacity: 0.7; }
-  50%       { transform: translate(-50%, -50%) scale(1.18); opacity: 1;   }
+.worlify-splash::before {
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(13,148,136,0.10) 0%, transparent 65%);
+  top: -120px;
+  right: -120px;
+  animation: ambientDrift 8s ease-in-out infinite alternate;
 }
 
-/* Card container */
-.worlify-splash__card {
+.worlify-splash::after {
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(249,115,22,0.08) 0%, transparent 65%);
+  bottom: -100px;
+  left: -80px;
+  animation: ambientDrift 10s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes ambientDrift {
+  from { transform: translate(0, 0) scale(1);    }
+  to   { transform: translate(30px, 20px) scale(1.08); }
+}
+
+/* Dual-ring spinner container */
+.worlify-splash__spinner-wrap {
   position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 32px;
-  padding: 48px 60px;
-  background: rgba(255,255,255,0.8);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255,255,255,0.6);
-  border-radius: 24px;
-  box-shadow:
-    0 8px 32px rgba(13,148,136,0.10),
-    0 2px 8px rgba(0,0,0,0.06);
-  animation: splashCardIn 0.45s cubic-bezier(0.34,1.56,0.64,1) both;
-}
-
-[data-theme='dark'] .worlify-splash__card {
-  background: rgba(17,24,39,0.85);
-  border-color: rgba(255,255,255,0.08);
-  box-shadow:
-    0 8px 32px rgba(13,148,136,0.15),
-    0 2px 8px rgba(0,0,0,0.4);
-}
-
-@keyframes splashCardIn {
-  from { opacity: 0; transform: translateY(24px) scale(0.94); }
-  to   { opacity: 1; transform: translateY(0)    scale(1);    }
-}
-
-/* Logo */
-.worlify-splash__logo-wrap {
+  width: 120px;
+  height: 120px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.worlify-splash__logo {
-  width: 140px;
-  height: auto;
-  object-fit: contain;
-  filter: drop-shadow(0 4px 16px rgba(13,148,136,0.20));
-  animation: splashLogoFloat 3s ease-in-out infinite;
+/* Outer ring — spins clockwise */
+.worlify-splash__ring-outer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  animation: spinCW 1.6s linear infinite;
+  filter: drop-shadow(0 0 8px rgba(13,148,136,0.45));
 }
 
-@keyframes splashLogoFloat {
-  0%, 100% { transform: translateY(0);   }
-  50%       { transform: translateY(-6px); }
+/* Inner ring — spins counter-clockwise, faster */
+.worlify-splash__ring-inner {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  animation: spinCCW 1.1s linear infinite;
+  filter: drop-shadow(0 0 6px rgba(249,115,22,0.40));
 }
 
-/* 3-dot bounce */
-.worlify-splash__dots {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
+@keyframes spinCW  { from { transform: rotate(0deg);    } to { transform: rotate(360deg);  } }
+@keyframes spinCCW { from { transform: rotate(0deg);    } to { transform: rotate(-360deg); } }
 
-.worlify-splash__dot {
-  width: 10px;
-  height: 10px;
+/* Centre pulsing dot */
+.worlify-splash__centre-dot {
+  width: 14px;
+  height: 14px;
   border-radius: 50%;
-  background: var(--primary-color);
-  display: inline-block;
-  animation: dotBounce 1.2s ease-in-out infinite;
+  background: conic-gradient(#0d9488, #f97316, #0d9488);
+  animation: dotPulse 1.4s ease-in-out infinite;
+  box-shadow: 0 0 0 0 rgba(13,148,136,0.5);
 }
 
-.worlify-splash__dot:nth-child(1) { animation-delay: 0s;    }
-.worlify-splash__dot:nth-child(2) { animation-delay: 0.2s;  background: var(--secondary-color); }
-.worlify-splash__dot:nth-child(3) { animation-delay: 0.4s;  }
-
-@keyframes dotBounce {
-  0%, 80%, 100% { transform: scale(0.7) translateY(0);  opacity: 0.5; }
-  40%           { transform: scale(1)   translateY(-10px); opacity: 1;   }
+@keyframes dotPulse {
+  0%, 100% { transform: scale(1);    box-shadow: 0 0 0 0   rgba(13,148,136,0.5); }
+  50%       { transform: scale(1.35); box-shadow: 0 0 0 8px rgba(13,148,136,0);   }
 }
+
+/* Brand name text */
+.worlify-splash__brand-text {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  background: linear-gradient(135deg, #0d9488 0%, #06b6d4 50%, #f97316 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: textFade 2s ease-in-out infinite alternate;
+}
+
+@keyframes textFade {
+  from { opacity: 0.55; }
+  to   { opacity: 1;    }
+}
+

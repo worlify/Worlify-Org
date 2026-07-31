@@ -210,10 +210,12 @@ export default function Donate({ user, preloadedCause, clearPreload, setActiveTa
       return;
     }
 
-    const razorpayKey = 
-      (typeof import.meta !== 'undefined' && import.meta?.env?.VITE_RAZORPAY_KEY_ID) ||
-      (typeof process !== 'undefined' && process.env?.VITE_RAZORPAY_KEY_ID) ||
-      'rzp_test_TJxSzZYnfjNIB3';
+    const razorpayKey = import.meta.env.VITE_RAZORPAY_KEY_ID;
+    if (!razorpayKey) {
+      alert('Payment configuration error: Razorpay key is missing. Please contact support.');
+      setIsSubmitting(false);
+      return;
+    }
     const amountInPaise = currentAmount * 100;
 
     const donationPayload = {

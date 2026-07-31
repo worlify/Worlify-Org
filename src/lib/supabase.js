@@ -362,6 +362,7 @@ class LocalDBService {
       frequency: details.frequency || 'one-time',
       status: details.status || 'pending',
       razorpay_ref: details.razorpay_ref || null,
+      razorpay_payment_id: details.razorpay_payment_id || null,
       declaration: details.declaration !== undefined ? details.declaration : true,
       date: new Date().toISOString()
     };

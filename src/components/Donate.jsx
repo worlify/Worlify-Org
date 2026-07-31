@@ -176,7 +176,22 @@ export default function Donate({ user, preloadedCause, clearPreload, setActiveTa
     return Object.keys(newErrors).length === 0;
   };
 
-  // Submit & Proceed to Razorpay
+  // Helper to dynamically load Razorpay Checkout SDK if window.Razorpay is not yet loaded
+  const loadRazorpayScript = () => {
+    return new Promise((resolve) => {
+      if (window.Razorpay) {
+        resolve(true);
+        return;
+      }
+      const script = document.createElement('script');
+      script.src = 'https://checkout.razorpay.com/v1/checkout.js';
+      script.onload = () => resolve(true);
+      script.onerror = () => resolve(false);
+      document.body.appendChild(script);
+    });
+  };
+
+  // Submit & Launch Razorpay Checkout
   const handleProceedToPayment = async (e) => {
     e.preventDefault();
 
@@ -188,7 +203,18 @@ export default function Donate({ user, preloadedCause, clearPreload, setActiveTa
 
     setIsSubmitting(true);
 
-    const razorpayUrl = 'https://razorpay.me/@worlifyfoundation';
+    const isLoaded = await loadRazorpayScript();
+    if (!isLoaded || !window.Razorpay) {
+      alert('Razorpay Payment Gateway failed to load. Please check your internet connection or ad blocker and try again.');
+      setIsSubmitting(false);
+      return;
+    }
+
+    const razorpayKey = 
+      (typeof import.meta !== 'undefined' && import.meta?.env?.VITE_RAZORPAY_KEY_ID) ||
+      (typeof process !== 'undefined' && process.env?.VITE_RAZORPAY_KEY_ID) ||
+      'rzp_test_TJxSzZYnfjNIB3';
+    const amountInPaise = currentAmount * 100;
 
     const donationPayload = {
       donor_name: fullName.trim(),
@@ -202,34 +228,82 @@ export default function Donate({ user, preloadedCause, clearPreload, setActiveTa
       frequency: 'one-time',
       status: 'pending',
       declaration: isCitizenDeclared,
-      razorpay_ref: razorpayUrl
+      razorpay_ref: 'Razorpay Checkout'
+    };
+
+    const options = {
+      key: razorpayKey,
+      amount: amountInPaise,
+      currency: 'INR',
+      name: 'Worlify Foundation',
+      description: `Donation for ${selectedCause}`,
+      image: '/favicon.ico',
+      prefill: {
+        name: fullName.trim(),
+        email: email.trim(),
+        contact: mobileNumber.trim()
+      },
+      notes: {
+        cause: selectedCause,
+        address: `${address.trim()}, ${city.trim()}, ${state.trim()} - ${pincode.trim()}`,
+        pan: panNumber ? panNumber.trim().toUpperCase() : 'N/A'
+      },
+      theme: {
+        color: '#0d5c3a'
+      },
+      handler: async function (response) {
+        console.log('✅ Razorpay Payment Success:', response);
+        const paymentId = response.razorpay_payment_id;
+
+        try {
+          const { data, error } = await db.addDonation(currentAmount, selectedCause, email.trim(), {
+            ...donationPayload,
+            status: 'completed',
+            razorpay_payment_id: paymentId,
+            razorpay_ref: paymentId
+          });
+
+          if (error) {
+            console.error('Donation save error:', error);
+          }
+
+          setSubmittedDonation({
+            amount: currentAmount,
+            cause: selectedCause,
+            name: fullName,
+            email: email,
+            pan: panNumber ? panNumber.toUpperCase() : null,
+            id: paymentId || (data && data[0] ? data[0].id : 'DON-' + Date.now().toString().slice(-6)),
+            paymentId: paymentId,
+            date: new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })
+          });
+
+          setIsSubmitted(true);
+        } catch (err) {
+          console.error('Error recording completed donation:', err);
+        } finally {
+          setIsSubmitting(false);
+        }
+      },
+      modal: {
+        ondismiss: function () {
+          console.log('Razorpay payment modal closed');
+          setIsSubmitting(false);
+        }
+      }
     };
 
     try {
-      const { data, error } = await db.addDonation(currentAmount, selectedCause, email.trim(), donationPayload);
-      
-      if (error) {
-        console.error('Donation save error:', error);
-      }
-
-      setSubmittedDonation({
-        amount: currentAmount,
-        cause: selectedCause,
-        name: fullName,
-        email: email,
-        pan: panNumber ? panNumber.toUpperCase() : null,
-        id: data && data[0] ? data[0].id : 'DON-' + Date.now().toString().slice(-6),
-        razorpayUrl: razorpayUrl
+      const rzp = new window.Razorpay(options);
+      rzp.on('payment.failed', function (response) {
+        console.error('Razorpay Payment Failed:', response.error);
+        alert(`Payment Failed: ${response.error.description || 'Transaction could not be completed'}`);
+        setIsSubmitting(false);
       });
-
-      setIsSubmitted(true);
-
-      // Open clean Razorpay Payment Link in new window
-      window.open(razorpayUrl, '_blank', 'noopener,noreferrer');
-
+      rzp.open();
     } catch (err) {
-      console.error('Error proceeding to payment:', err);
-    } finally {
+      console.error('Razorpay Init Error:', err);
+      alert('Failed to launch Razorpay checkout. Please try again.');
       setIsSubmitting(false);
     }
   };
@@ -256,17 +330,25 @@ export default function Donate({ user, preloadedCause, clearPreload, setActiveTa
       {/* 3. MAIN DONATION FORM CONTAINER */}
       <main className={styles.mainLayout}>
         {isSubmitted ? (
-          /* THANK YOU / PAYMENT REDIRECT SCREEN */
+          /* THANK YOU / PAYMENT SUCCESS RECEIPT SCREEN */
           <div className={styles.successCard} id="donation-success-card">
             <div className={styles.successIconWrapper}>
               <CheckCircle2 size={56} className={styles.successCheckIcon} />
             </div>
-            <h2 className={styles.successTitle}>Redirecting to Razorpay Secure Gateway...</h2>
+            <h2 className={styles.successTitle}>Thank You For Your Generous Donation!</h2>
             <p className={styles.successSub}>
-              We have initiated your donation process for <strong>₹{submittedDonation?.amount?.toLocaleString('en-IN')}</strong> under <strong>{submittedDonation?.cause}</strong>.
+              Your contribution of <strong>₹{submittedDonation?.amount?.toLocaleString('en-IN')}</strong> towards <strong>{submittedDonation?.cause}</strong> has been successfully received and verified via Razorpay.
             </p>
 
             <div className={styles.summaryBox}>
+              <div className={styles.summaryRow}>
+                <span>Payment Reference ID:</span>
+                <code>{submittedDonation?.paymentId || submittedDonation?.id}</code>
+              </div>
+              <div className={styles.summaryRow}>
+                <span>Amount Paid:</span>
+                <strong>₹{submittedDonation?.amount?.toLocaleString('en-IN')}</strong>
+              </div>
               <div className={styles.summaryRow}>
                 <span>Donor Name:</span>
                 <strong>{submittedDonation?.name}</strong>
@@ -277,31 +359,26 @@ export default function Donate({ user, preloadedCause, clearPreload, setActiveTa
               </div>
               {submittedDonation?.pan && (
                 <div className={styles.summaryRow}>
-                  <span>PAN (80G Receipt):</span>
+                  <span>PAN (80G Tax Receipt):</span>
                   <strong>{submittedDonation?.pan}</strong>
                 </div>
               )}
-              <div className={styles.summaryRow}>
-                <span>Reference ID:</span>
-                <code>{submittedDonation?.id}</code>
-              </div>
-            </div>
-
-            <div className={styles.razorpayBox}>
-              <p className={styles.razorpayInstructions}>
-                If the Razorpay payment window did not open automatically, click the button below to complete your payment securely:
-              </p>
-              <a
-                href="https://razorpay.me/@worlifyfoundation"
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.razorpayBtn}
-              >
-                Pay ₹{submittedDonation?.amount?.toLocaleString('en-IN')} via Razorpay <ExternalLink size={18} />
-              </a>
+              {submittedDonation?.date && (
+                <div className={styles.summaryRow}>
+                  <span>Date:</span>
+                  <strong>{submittedDonation?.date}</strong>
+                </div>
+              )}
             </div>
 
             <div className={styles.postPayActions}>
+              <button
+                className={styles.razorpayBtn}
+                onClick={() => window.print()}
+                style={{ cursor: 'pointer' }}
+              >
+                Print / Save 80G Receipt <FileText size={18} />
+              </button>
               <button
                 className={styles.newDonationBtn}
                 onClick={() => {

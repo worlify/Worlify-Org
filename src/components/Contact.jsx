@@ -290,7 +290,7 @@ export default function Contact({ setActiveTab }) {
             {expandedAccordions.partnership && (
               <div className={styles.accordionContent}>
                 <div className={styles.accordionSubBlock}>
-                  <h4 className={styles.subBlockTitle}>CORPORATE SOCIAL RESPONSIBILITY (CSR) RELATED QUERIES</h4>
+                  <h4 className={styles.subBlockTitle}>CORPORATE SOCIAL RESPONSIBILITY (CSR) RELATED QUERIES.</h4>
 
                   <div className={styles.contactGrid}>
                     <div className={styles.gridCard}>

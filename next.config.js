@@ -25,6 +25,10 @@ const nextConfig = {
       process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ||
       process.env.VITE_SUPABASE_ANON_KEY ||
       process.env.SUPABASE_ANON_KEY,
+    NEXT_PUBLIC_RAZORPAY_KEY_ID:
+      process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID ||
+      process.env.VITE_RAZORPAY_KEY_ID ||
+      process.env.RAZORPAY_KEY_ID,
   },
 };
 

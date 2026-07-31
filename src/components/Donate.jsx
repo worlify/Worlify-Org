@@ -210,7 +210,7 @@ export default function Donate({ user, preloadedCause, clearPreload, setActiveTa
       return;
     }
 
-    const razorpayKey = import.meta.env.VITE_RAZORPAY_KEY_ID;
+    const razorpayKey = process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID;
     if (!razorpayKey) {
       alert('Payment configuration error: Razorpay key is missing. Please contact support.');
       setIsSubmitting(false);

@@ -1,25 +1,16 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { 
   X, 
-  Calendar, 
-  SlidersHorizontal, 
   ArrowRight, 
-  ArrowLeft, 
-  Eye, 
-  Heart, 
-  Play, 
-  MapPin, 
-  BookOpen,
-  Search,
-  Sparkles,
-  ChevronRight,
-  ChevronLeft,
-  ZoomIn,
-  ZoomOut,
-  Users,
-  Award,
+  ChevronRight, 
+  ChevronLeft, 
+  ZoomIn, 
+  ZoomOut, 
+  ChevronDown,
   Layers,
-  ChevronDown
+  Heart,
+  Sparkles,
+  Filter
 } from 'lucide-react';
 import styles from '../styles/Gallery.module.css';
 
@@ -30,311 +21,407 @@ import kidsStory from '../assets/images/our_story_kids.jpg';
 import shikshaRuke from '../assets/images/shiksha_na_ruke.jpg';
 import slider1 from '../assets/images/slider_new1.jpg';
 import slider2 from '../assets/images/slider_new2.jpg';
+import slider3 from '../assets/images/slider3.jpg';
 import slider4 from '../assets/images/slider_new4.jpg';
 import lxmiDevi from '../assets/images/lxmina_devi.jpg';
 import rahulVerma from '../assets/images/rahul_kumar_verma.jpg';
+import brideKit from '../assets/images/bride_household_kit.png';
+import cattleFodder from '../assets/images/cattle_fodder_distribution.png';
+import elderlyFood from '../assets/images/elderly_food_ration.png';
+import elderlyWelfare from '../assets/images/elderly_welfare_check.png';
+import homeRepair from '../assets/images/home_repair_widow.png';
+import saharaHero from '../assets/images/sahara_hero_support.png';
+import seniorMedicine from '../assets/images/senior_medicine_distribution.png';
 
 export default function Gallery({ setActiveTab, setDonationPreload }) {
-  // Navigation & Filter States
+  // Filter & Pagination States
   const [activeFilter, setActiveFilter] = useState('All');
-  const [searchQuery, setSearchQuery] = useState('');
-  const [sortBy, setSortBy] = useState('newest'); // 'newest' | 'oldest' | 'popular' | 'recent'
-  const [visibleCount, setVisibleCount] = useState(9);
+  const [visibleCount, setVisibleCount] = useState(4); // Default 4 images
   const [selectedItemIndex, setSelectedItemIndex] = useState(null);
   const [isZoomed, setIsZoomed] = useState(false);
-  const [selectedCollection, setSelectedCollection] = useState(null);
 
   // Touch Swipe coordinates for Lightbox
   const touchStartX = useRef(0);
   const touchEndX = useRef(0);
 
-  // Master Gallery Dataset (Diverse NGO initiatives across India & Global field units)
+  // Master Gallery Dataset (25 High-Quality Photos for Pagination Testing)
   const galleryItems = useMemo(() => [
     {
       id: 1,
       title: "Empowering Rural Girls Through STEM Education",
       category: "Education",
-      label: "Featured Story",
       image: heroGirl,
-      description: "How a community scholarship changed the trajectory of a whole village through Amara's journey into biotechnology.",
+      description: "Providing public micro-scholarships & science lab kits to rural young women.",
       views: "4.8k Views",
-      supports: "1,240 Supports",
-      date: "2026-06-15",
-      displayDate: "June 2026",
-      size: "large", // Bento layout size
-      fullStory: "Amara grew up in a rural village where access to science education was severely limited. Her passion for botany and chemistry caught the attention of our local field instructors. Through Worlify's STEM Scholar program, funded entirely by public micro-donations, Amara secured a full scholarship to study biotechnology at the Africa Biosciences Hub in Kigali. Today, she is lead researcher on a crop resistance project designed to protect maize harvests from drought, directly impacting over 10,000 farmers in her home district.",
-      location: "Kigali & Bihar Outposts",
-      photoCount: 14
+      date: "June 2026",
+      fullStory: "Amara grew up in a rural village where access to science education was limited. Through Worlify's STEM Scholar program, she secured a full scholarship to study biotechnology at the Africa Biosciences Hub in Kigali. Today, she is lead researcher on a crop resistance project directly impacting over 10,000 farmers.",
+      location: "Kigali & Bihar Outposts"
     },
     {
       id: 2,
-      title: "Reforestation & Biodiversity Defense",
-      category: "Environment",
-      label: "Impact Video",
-      image: "https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?auto=format&fit=crop&q=80&w=1000",
-      description: "Witness energetic community mobilization restoring degraded forest buffers and protecting local watersheds.",
-      isVideo: true,
-      size: "tall",
-      date: "2026-05-20",
-      displayDate: "May 2026",
-      videoUrl: "https://assets.mixkit.co/videos/preview/mixkit-planting-a-small-plant-in-the-soil-41584-large.mp4",
-      views: "8.2k Views",
-      supports: "2,150 Supports",
-      fullStory: "Our reforestation efforts are completely community-driven. In this short impact documentary, see how 250 local households volunteered to plant native broadleaf saplings, establish sustainable fire lines, and protect vital headwater streams from erosion. Your contributions purchased shovels, compost, protective tree-guards, and water tankers that made this scale of restorative forestry possible.",
-      location: "Western Ghats Buffer Zone",
-      photoCount: 8
+      title: "Elderly Food Ration & Healthcare Support Drive",
+      category: "Senior Care",
+      image: elderlyFood,
+      description: "Monthly nutritious ration distribution and wellness checks for abandoned senior citizens.",
+      views: "3.9k Views",
+      date: "May 2026",
+      fullStory: "Our Project Sahara ensures destitute elderly citizens receive monthly dry ration boxes, essential vitamin supplements, and weekly door-step nurse visits across suburban informal settlements.",
+      location: "Varanasi & Kanpur Shelters"
     },
     {
       id: 3,
       title: "Mobile Medical Units in High Altitude Hamlets",
       category: "Health",
-      label: "Healthcare",
-      image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&q=80&w=1000",
-      description: "Custom-outfitted all-terrain clinics providing life-saving vaccines and diagnostic checkups to isolated mountain communities.",
-      date: "2026-04-18",
-      displayDate: "April 2026",
-      size: "standard",
+      image: seniorMedicine,
+      description: "Custom-outfitted all-terrain clinics delivering vaccines & medicine to remote hamlets.",
       views: "3.1k Views",
-      supports: "920 Supports",
-      fullStory: "High altitude or geographical isolation should never dictate health outcomes. Our custom-outfitted, all-terrain mobile clinic vans traverse challenging terrains weekly. Staffed by dedicated rotating volunteer nurses and doctors, these mobile units perform routine child immunizations, maternal checkups, point-of-care lab diagnostics, and basic diabetes management.",
-      location: "Uttarakhand Hill Outposts",
-      photoCount: 22
+      date: "May 2026",
+      fullStory: "High altitude isolation should never dictate health outcomes. Our custom-outfitted, all-terrain mobile clinic vans traverse challenging mountain roads weekly, providing free checkups and vital medication.",
+      location: "Uttarakhand Hill Outposts"
     },
     {
       id: 4,
-      title: "Women's Craft Co-op & Financial Independence",
+      title: "Women's Micro-Enterprise & Craft Co-op",
       category: "Women Empowerment",
-      label: "Empowerment",
       image: lxmiDevi,
-      description: "30 women graduated from artisan tailoring & micro-enterprise workshops to launch a self-sustaining cooperative.",
-      date: "2026-03-30",
-      displayDate: "March 2026",
-      size: "wide",
+      description: "Artisan tailoring workshops empowering rural women with economic independence.",
       views: "5.4k Views",
-      supports: "1,890 Supports",
-      fullStory: "Through our vocational workshop initiatives, local women completed high-level sewing, garment cutting, and business management courses. Armed with grant-funded sewing machines and materials, they formed the 'Sisters of Stitch' cooperative. They now craft school uniforms and custom textiles, ensuring a steady independent income source for their families.",
-      location: "Jaipur Rural Center",
-      photoCount: 19
+      date: "April 2026",
+      fullStory: "30 women graduated from artisan tailoring workshops to launch a self-sustaining cooperative. Equipped with sewing machines and raw fabrics, they now produce school uniforms for local districts.",
+      location: "Jaipur Rural Center"
     },
     {
       id: 5,
       title: "Shiksha Na Ruke: Evening Learning Hubs",
       category: "Education",
-      label: "Education",
       image: shikshaRuke,
-      description: "Providing bridge courses and warm meals to over 400 underprivileged children who work or assist their families during daytime.",
-      date: "2026-03-12",
-      displayDate: "March 2026",
-      size: "standard",
+      description: "Bridge courses & warm meals for 400+ underprivileged children after work hours.",
       views: "6.2k Views",
-      supports: "2,410 Supports",
-      fullStory: "For working families in congested urban informal settlements, safe childcare and structured learning are often unattainable. The Shiksha Na Ruke Center serves as a safe physical sanctuary after school hours, serving nutritious meals and specialized remedial tutoring.",
-      location: "Delhi NCR Outreach",
-      photoCount: 31
+      date: "April 2026",
+      fullStory: "The Shiksha Na Ruke Center serves as a safe physical sanctuary after hours, serving warm nutritious meals and specialized remedial tutoring to children from underserved urban communities.",
+      location: "Delhi NCR Outreach"
     },
     {
       id: 6,
-      title: "Clean Water Solar Aquifers",
-      category: "Environment",
-      label: "Community Support",
-      image: "https://images.unsplash.com/photo-1541913076-2e998f4df6f9?auto=format&fit=crop&q=80&w=1000",
-      description: "Inaugurated solar-powered deep borewell filtration units supplying pure drinking water directly to 500 households.",
-      date: "2026-02-24",
-      displayDate: "February 2026",
-      size: "tall",
+      title: "Flood Relief & Emergency Food Distribution",
+      category: "Emergency Aid",
+      image: slider1,
+      description: "Distributing ration kits & clean drinking water to flood-affected riverbank families.",
       views: "4.1k Views",
-      supports: "1,150 Supports",
-      fullStory: "Drought and groundwater contamination have plagued dry agrarian villages for years. By engineering solar-powered extraction rigs linked to sand filtration beds, we have delivered fresh, chilled drinking water to community distribution taps, causing water-borne illnesses to drop by 80%.",
-      location: "Thar Desert Fringe",
-      photoCount: 12
+      date: "March 2026",
+      fullStory: "During seasonal river basin flooding, our emergency response team mobilized logistics within 12 hours, ensuring dry food packs and water purification tablets reached 1,500 stranded households.",
+      location: "Assam River Belt"
     },
     {
       id: 7,
       title: "National Volunteer Leadership Summit",
       category: "Volunteers",
-      label: "Volunteers",
       image: awardCeremony,
-      description: "Recognizing top grassroots change-makers and youth leaders who drove over 50,000 hours of community service.",
-      date: "2026-02-10",
-      displayDate: "February 2026",
-      size: "wide",
+      description: "Honoring 300+ grassroots change-makers for outstanding humanitarian field service.",
       views: "7.5k Views",
-      supports: "3,100 Supports",
-      fullStory: "Our annual summit gathered 300+ field volunteers across 16 states. Outstanding youth organizers were honored with the Golden Heart Fellowship awards, cementing a nationwide network of passionate advocates.",
-      location: "New Delhi Convention Hall",
-      photoCount: 45
+      date: "March 2026",
+      fullStory: "Our annual summit gathered 300+ field volunteers across 16 states. Outstanding youth organizers were honored with the Golden Heart Fellowship awards for driving over 50,000 community service hours.",
+      location: "New Delhi Convention Hall"
     },
     {
       id: 8,
-      title: "Emergency Nutrition & Food Security Drive",
-      category: "Community Support",
-      label: "Community Support",
-      image: slider1,
-      description: "Distributing ration kits and fresh warm meals to 1,500 flood-affected families across river basin settlements.",
-      date: "2026-01-15",
-      displayDate: "January 2026",
-      size: "standard",
-      views: "3.9k Views",
-      supports: "1,040 Supports",
-      fullStory: "During heavy seasonal flooding, immediate response is vital. Our emergency response team mobilized logistics within 12 hours, ensuring clean drinking water, dry rations, and basic hygiene kits reached submerged neighborhoods.",
-      location: "Assam River Belt",
-      photoCount: 28
+      title: "Youth Climate Action & Micro-Forest Plantation",
+      category: "Volunteers",
+      image: slider4,
+      description: "Mobilizing 800 school students to plant 5,000 native tree saplings in urban parks.",
+      views: "2.8k Views",
+      date: "Feb 2026",
+      fullStory: "Urban heat islands require rapid green canopy restoration. Students took ownership of individual saplings, learning environmental science while building a greener city for tomorrow.",
+      location: "Bengaluru Urban Parks"
     },
     {
       id: 9,
-      title: "Youth Climate Action & Tree Plantation",
-      category: "Environment",
-      label: "Events",
-      image: slider4,
-      description: "Mobilizing 800 school students to plant 5,000 urban micro-forest saplings in public parklands.",
-      date: "2025-12-20",
-      displayDate: "December 2025",
-      size: "standard",
-      views: "2.8k Views",
-      supports: "880 Supports",
-      fullStory: "Urban heat islands require rapid green canopy restoration. Students took ownership of individual saplings, learning plant ecology while building a greener city for tomorrow.",
-      location: "Bengaluru Urban Parks",
-      photoCount: 16
+      title: "Pediatric Primary School Health & Dental Camp",
+      category: "Health",
+      image: kidsStory,
+      description: "Free pediatric screenings, prescription glasses & dental hygiene kits for 1,200 kids.",
+      views: "5.1k Views",
+      date: "Feb 2026",
+      fullStory: "Uncorrected vision problems are a leading hidden cause of school dropouts. Specialist doctors screened over 1,200 children, delivering custom corrective glasses and dental care kits.",
+      location: "Lucknow District Schools"
     },
     {
       id: 10,
-      title: "Pediatric Vision & Dental Care Camp",
-      category: "Health",
-      label: "Health",
-      image: kidsStory,
-      description: "Free health screenings, prescription glasses, and dental kits provided to 1,200 primary school children.",
-      date: "2025-11-28",
-      displayDate: "November 2025",
-      size: "large",
-      views: "5.1k Views",
-      supports: "1,670 Supports",
-      fullStory: "Uncorrected vision problems are a leading hidden cause of school dropouts. Our specialist doctors screened over 1,200 kids, delivering custom corrective glasses and follow-up care free of charge.",
-      location: "Lucknow District Schools",
-      photoCount: 34
+      title: "Cattle Fodder & Stray Livestock Care Drive",
+      category: "Animal Welfare",
+      image: "/images/gallery/animal-welfare/animal_1.jpg",
+      description: "Providing fresh fodder, medical treatment, and shelter support for distressed animals.",
+      views: "3.3k Views",
+      date: "Jan 2026",
+      fullStory: "During extreme heatwaves, farm animals and stray livestock suffer severe dehydration. Our mobile animal care vans distributed 10 tons of nutritious fodder and veterinary care across 12 villages.",
+      location: "Mathura Rural Shelter"
     },
     {
       id: 11,
-      title: "Digital Literacy & Computer Labs Launched",
+      title: "Digital Literacy Laptop Labs for Rural Schools",
       category: "Education",
-      label: "Education",
       image: slider2,
-      description: "Equipping rural primary schools with refurbished solar-powered laptop labs and coding fundamentals.",
-      date: "2025-11-04",
-      displayDate: "November 2025",
-      size: "standard",
+      description: "Solar-powered computer labs equipping rural primary schools with tech skills.",
       views: "4.3k Views",
-      supports: "1,290 Supports",
-      fullStory: "Bridging the digital divide starts early. We established 10 solar-powered computer labs with 150 laptops, enabling over 2,000 students to gain computer literacy, typing skills, and internet access.",
-      location: "Madhya Pradesh Villages",
-      photoCount: 25
+      date: "Jan 2026",
+      fullStory: "Bridging the digital divide starts early. We established 10 solar-powered computer labs with 150 laptops, enabling over 2,000 rural students to gain typing, computer literacy, and internet access.",
+      location: "Madhya Pradesh Villages"
     },
     {
       id: 12,
-      title: "Community Micro-grants & Entrepreneurship",
+      title: "Bride Household Rehabilitation Kit Drive",
       category: "Women Empowerment",
-      label: "Women Empowerment",
-      image: rahulVerma,
-      description: "Providing seed capital and mentorship to 50 women-led micro-enterprises in handicraft and organic farming.",
-      date: "2025-10-12",
-      displayDate: "October 2025",
-      size: "tall",
+      image: brideKit,
+      description: "Assisting impoverished young women from destitute families with essential home starter kits.",
       views: "3.7k Views",
-      supports: "1,050 Supports",
-      fullStory: "Empowering female entrepreneurs yields immediate compound benefits for family nutrition and education. Micro-grants of $250 coupled with accounting workshops led to a 100% repayment and growth rate.",
-      location: "Odisha Coastal Belt",
-      photoCount: 18
-    }
-  ], []);
-
-  // Featured Album Collections Dataset
-  const featuredCollections = [
+      date: "Dec 2025",
+      fullStory: "Underprivileged brides from poverty-stricken households received sewing machines, kitchen utensils, bedding, and dignity kits to help start their new family lives with self-respect.",
+      location: "Bundelkhand Region"
+    },
     {
-      id: "edu-drive",
-      title: "Education Drives",
-      count: "42 Photos",
+      id: 13,
+      title: "Elderly Health & Comprehensive Checkup Camp",
+      category: "Senior Care",
+      image: elderlyWelfare,
+      description: "Free blood sugar, vision, and cardiology checkups for vulnerable senior citizens.",
+      views: "4.6k Views",
+      date: "Dec 2025",
+      fullStory: "Free comprehensive health camps organized for senior citizens without family support. Over 450 seniors received free blood tests, ECG screenings, and prescription medication.",
+      location: "Ayodhya Outskirts"
+    },
+    {
+      id: 14,
+      title: "Widow Housing Repair & Shelter Renovation",
+      category: "Community Support",
+      image: homeRepair,
+      description: "Rebuilding roofs & installing sanitation facilities for destitute single mothers.",
+      views: "2.9k Views",
+      date: "Nov 2025",
+      fullStory: "Heavy monsoons damaged mud homes of widowed mothers. Volunteer construction teams repaired tin roofs, fortified brick walls, and built private clean toilets for 35 families.",
+      location: "Purvanchal Hamlets"
+    },
+    {
+      id: 15,
+      title: "Sahara Hero Support & Community Empowerment",
+      category: "Community Support",
+      image: saharaHero,
+      description: "Recognizing grassroots community heroes who volunteer daily for welfare drives.",
+      views: "5.0k Views",
+      date: "Nov 2025",
+      fullStory: "Local champions drive grassroots progress. We honored 50 neighborhood leads who manage daily meal counters, distribution centers, and child protection committees.",
+      location: "Patna Welfare Center"
+    },
+    {
+      id: 16,
+      title: "Clean Water Solar Aquifer Installation",
+      category: "Community Support",
+      image: slider3,
+      description: "Solar-powered deep borewell filtration units supplying pure water to 500 homes.",
+      views: "4.0k Views",
+      date: "Oct 2025",
+      fullStory: "Inaugurated solar-powered extraction rigs linked to sand filtration beds, delivering clean, chilled drinking water to community taps and dropping water-borne illnesses by 80%.",
+      location: "Thar Desert Fringe"
+    },
+    {
+      id: 17,
+      title: "Youth Career Counselling & Micro-Grants",
       category: "Education",
-      image: heroGirl,
-      desc: "Transforming classrooms & empowering young minds with STEM tools."
+      image: rahulVerma,
+      description: "Guiding first-generation college aspirants with entrance coaching & micro-grants.",
+      views: "3.5k Views",
+      date: "Oct 2025",
+      fullStory: "Providing high school graduates from low-income families with career mentorship, scholarship application help, and preparatory books for national technical entrance exams.",
+      location: "Ranchi Educational Hub"
     },
     {
-      id: "health-camps",
-      title: "Healthcare Camps",
-      count: "38 Photos",
+      id: 18,
+      title: "Community Warm Blanket & Winter Aid Drive",
+      category: "Emergency Aid",
+      image: slider1,
+      description: "Distributing 3,000 heavy woolen blankets to homeless individuals during severe winters.",
+      views: "5.8k Views",
+      date: "Jan 2025",
+      fullStory: "Night patrols distributed thick winter blankets, wool coats, and hot soup to urban homeless populations sleeping in unheated night shelters across Northern India.",
+      location: "Delhi NCR Night Shelters"
+    },
+    {
+      id: 19,
+      title: "Girl Child Nutrition & Growth Monitoring Camp",
       category: "Health",
-      image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&q=80&w=800",
-      desc: "Mobile health units bringing free checkups to distant hamlets."
+      image: heroGirl,
+      description: "Fighting anemia & malnutrition in rural adolescent girls with fortified dietary supplements.",
+      views: "4.2k Views",
+      date: "Feb 2025",
+      fullStory: "Anemia affects over 60% of rural teenage girls. Our healthcare workers provided hemoglobin screenings, iron-folic acid supplements, and nutrition education to 2,000 students.",
+      location: "Chhota Nagpur Plateau"
     },
     {
-      id: "tree-plant",
-      title: "Tree Plantation Drive",
-      count: "56 Photos",
-      category: "Environment",
-      image: slider4,
-      desc: "Community reforestation & native sapling canopy planting."
+      id: 20,
+      title: "Senior Citizen Friendship & Recreation Center",
+      category: "Senior Care",
+      image: elderlyWelfare,
+      description: "Creating safe community day centers with board games, books, and social companionship.",
+      views: "3.4k Views",
+      date: "Mar 2025",
+      fullStory: "Combating loneliness among seniors by establishing day recreation centers equipped with libraries, board games, yoga sessions, and daily community meals.",
+      location: "Kolkata Suburbs"
     },
     {
-      id: "women-emp",
-      title: "Women Empowerment",
-      count: "29 Photos",
+      id: 21,
+      title: "Vocational Handicraft & Clay Pottery Workshop",
       category: "Women Empowerment",
       image: lxmiDevi,
-      desc: "Artisan co-ops, micro-grants, and financial literacy workshops."
+      description: "Preserving traditional artisan skills while training women in modern e-commerce sales.",
+      views: "3.8k Views",
+      date: "Apr 2025",
+      fullStory: "Connecting traditional women artisans directly with online marketplaces, eliminating middleman cuts and boosting monthly household income by 150%.",
+      location: "Kutch Cultural Zone"
     },
     {
-      id: "food-dist",
-      title: "Food Distribution Drive",
-      count: "64 Photos",
+      id: 22,
+      title: "Slum Sanitation & Clean Neighborhood Drive",
       category: "Community Support",
-      image: slider1,
-      desc: "Nutritious warm meals & dry ration emergency support kits."
-    }
-  ];
+      image: slider4,
+      description: "Community cleanup, waste segregation bins & sanitization in dense urban settlements.",
+      views: "2.9k Views",
+      date: "May 2025",
+      fullStory: "Youth volunteers conducted waste cleanup drives, distributed color-coded recycling bins, and disinfected communal drainage lines serving over 3,000 residents.",
+      location: "Mumbai Suburban Slums"
+    },
+    {
+      id: 23,
+      title: "Children's Art & Creative Expression Fest",
+      category: "Education",
+      image: kidsStory,
+      description: "Annual art competition & talent showcase celebrating creativity in primary school kids.",
+      views: "4.9k Views",
+      date: "Jun 2025",
+      fullStory: "Over 500 children participated in an open-air painting workshop expressing their dreams for clean oceans, green forests, and equal access to education.",
+      location: "Bhopal Cultural Center"
+    },
+    {
+      id: 24,
+      title: "Emergency Ambulance & Disaster Support Fleet",
+      category: "Health",
+      image: seniorMedicine,
+      description: "24/7 free emergency patient transport for rural patients needing hospital ICU care.",
+      views: "5.1k Views",
+      date: "Jul 2025",
+      fullStory: "Deployed 5 fully equipped life-support ambulances to transport critically ill patients from rural clinic outposts to city multi-specialty government hospitals.",
+      location: "Gorakhpur Region"
+    },
+    {
+      id: 25,
+      title: "Annual Volunteer Appreciation & Fellowship",
+      category: "Volunteers",
+      image: awardCeremony,
+      description: "Celebrating thousands of volunteer hours & community impact achievements.",
+      views: "6.0k Views",
+      date: "Aug 2025",
+      fullStory: "Recognizing youth leaders and field volunteers whose dedication brings hope, warm meals, and education to thousands of underprivileged families every single day.",
+      location: "National NGO HQs"
+    },
+    {
+      id: 26,
+      title: "Stray Animal Rescue & Veterinary Care",
+      category: "Animal Welfare",
+      image: "/images/gallery/animal-welfare/animal_2.jpg",
+      description: "Rescuing and providing medical aid to injured stray animals in rural shelters.",
+      views: "4.5k Views",
+      date: "Jul 2025",
+      fullStory: "Our veterinary teams conduct daily rescue operations, treating injured animals and placing them in safe, compassionate shelter sanctuaries.",
+      location: "NGO Animal Sanctuary"
+    },
+    {
+      id: 27,
+      title: "Livestock Fodder & Health Inspection Drive",
+      category: "Animal Welfare",
+      image: "/images/gallery/animal-welfare/animal_3.jpg",
+      description: "Regular health inspections and emergency feeding drives for farm livestock.",
+      views: "3.8k Views",
+      date: "Jun 2025",
+      fullStory: "Supporting agrarian families by ensuring their cattle receive vaccinations, deworming treatment, and high-protein green fodder.",
+      location: "Rural Agrarian Belt"
+    },
+    {
+      id: 28,
+      title: "Animal Habitat & Conservation Support",
+      category: "Animal Welfare",
+      image: "/images/gallery/animal-welfare/animal_4.jpg",
+      description: "Promoting co-existence and protecting native animal habitats in community lands.",
+      views: "5.2k Views",
+      date: "May 2025",
+      fullStory: "Community awareness campaigns promoting peaceful human-wildlife co-existence and establishing water troughs during dry summer months.",
+      location: "Forest Fringe Villages"
+    },
+    {
+      id: 29,
+      title: "Community Animal Feed & Water Station Drive",
+      category: "Animal Welfare",
+      image: "/images/gallery/animal-welfare/animal_5.jpg",
+      description: "Installing clean drinking water bowls and daily feeding spots for stray animals.",
+      views: "4.1k Views",
+      date: "Apr 2025",
+      fullStory: "Volunteers set up and refill over 200 public water bowls daily across neighborhood centers, safeguarding strays against dehydration.",
+      location: "Suburban Neighborhoods"
+    },
+    {
+      id: 30,
+      title: "Veterinary Medical Camp & Vaccination Drive",
+      category: "Animal Welfare",
+      image: "/images/gallery/animal-welfare/animal_6.jpg",
+      description: "Free anti-rabies vaccination and health checks for community animals.",
+      views: "3.9k Views",
+      date: "Mar 2025",
+      fullStory: "Protecting community animals through free vaccination camps, health checkups, and emergency medical kits for local animal caregivers.",
+      location: "District Care Center"
+    },
+    {
+      id: 31,
+      title: "Animal Rehabilitation & Shelter Welfare Drive",
+      category: "Animal Welfare",
+      image: "/images/gallery/animal-welfare/animal_7.jpg"
+    },
+    { id: 32, category: "Environment", image: "/images/gallery/environment/plantation_1.jpg" },
+    { id: 33, category: "Environment", image: "/images/gallery/environment/plantation_2.jpg" },
+    { id: 34, category: "Environment", image: "/images/gallery/environment/plantation_3.jpg" },
+    { id: 35, category: "Environment", image: "/images/gallery/environment/plantation_4.jpg" },
+    { id: 36, category: "Environment", image: "/images/gallery/environment/plantation_5.jpg" },
+    { id: 37, category: "Environment", image: "/images/gallery/environment/plantation_6.jpg" },
+    { id: 38, category: "Environment", image: "/images/gallery/environment/plantation_7.jpg" },
+    { id: 39, category: "Environment", image: "/images/gallery/environment/plantation_8.jpg" },
+    { id: 40, category: "Environment", image: "/images/gallery/environment/plantation_9.jpg" },
+    { id: 41, category: "Environment", image: "/images/gallery/environment/plantation_10.jpg" },
+    { id: 42, category: "Environment", image: "/images/gallery/environment/plantation_11.jpg" },
+    { id: 43, category: "Environment", image: "/images/gallery/environment/plantation_12.jpg" },
+    { id: 44, category: "Environment", image: "/images/gallery/environment/plantation_13.jpg" },
+    { id: 45, category: "Environment", image: "/images/gallery/environment/plantation_14.jpg" },
+    { id: 46, category: "Environment", image: "/images/gallery/environment/plantation_15.jpg" },
+    { id: 47, category: "Environment", image: "/images/gallery/environment/plantation_16.jpg" },
+    { id: 48, category: "Environment", image: "/images/gallery/environment/plantation_17.jpg" },
+    { id: 49, category: "Environment", image: "/images/gallery/environment/plantation_18.jpg" }
+  ], []);
 
-  // Journey Timeline Milestones
-  const timelineMilestones = [
-    { year: '2018', title: 'Foundation Started', desc: 'Initiated field operations across 3 rural districts with 15 core volunteers.', icon: Sparkles },
-    { year: '2020', title: 'Remote Learning Hubs', desc: 'Deployed digital tablets & study kits during pandemic school closures.', icon: BookOpen },
-    { year: '2022', title: 'Mobile Clinic Fleet', desc: 'Commissioned 10 all-terrain medical vans serving 50+ remote villages.', icon: Heart },
-    { year: '2025', title: '100k Trees & Water', desc: 'Achieved 100,000 native tree plantings and 25 solar clean water aquifer rigs.', icon: Layers },
-    { year: '2026', title: 'Nationwide Scaling', desc: 'Impacting 10,000+ lives daily across 16 states with transparent open-data governance.', icon: Award }
-  ];
+  // Category Filter Options
+  const categories = ['All', 'Education', 'Health', 'Environment', 'Women Empowerment', 'Senior Care', 'Emergency Aid', 'Volunteers', 'Animal Welfare'];
 
-  // Filter & Search Logic
+  // Filtered Items Logic
   const filteredItems = useMemo(() => {
-    return galleryItems.filter(item => {
-      // Category Match
-      const matchesCategory = activeFilter === 'All' || 
-        (activeFilter === 'Videos' && item.isVideo) ||
-        item.category.toLowerCase() === activeFilter.toLowerCase();
-      
-      // Collection Filter if selected
-      const matchesCollection = !selectedCollection || item.category.toLowerCase() === selectedCollection.toLowerCase();
+    return galleryItems.filter(item => activeFilter === 'All' || item.category === activeFilter);
+  }, [galleryItems, activeFilter]);
 
-      // Search Query Match
-      const query = searchQuery.toLowerCase().trim();
-      const matchesSearch = !query || 
-        item.title.toLowerCase().includes(query) ||
-        item.description.toLowerCase().includes(query) ||
-        item.location.toLowerCase().includes(query) ||
-        item.category.toLowerCase().includes(query);
-
-      return matchesCategory && matchesCollection && matchesSearch;
-    }).sort((a, b) => {
-      if (sortBy === 'newest') return new Date(b.date) - new Date(a.date);
-      if (sortBy === 'oldest') return new Date(a.date) - new Date(b.date);
-      if (sortBy === 'popular') return parseInt(b.views) - parseInt(a.views);
-      if (sortBy === 'recent') return b.id - a.id;
-      return 0;
-    });
-  }, [galleryItems, activeFilter, selectedCollection, searchQuery, sortBy]);
-
-  // Sliced items for load more
+  // Displayed Items (Limited by visibleCount)
   const displayedItems = filteredItems.slice(0, visibleCount);
+
+  // Load More Click Handler: +2 photos each click
+  const handleLoadMore = () => {
+    setVisibleCount(prev => prev + 2);
+  };
 
   // Selected item modal details
   const currentSelectedItem = selectedItemIndex !== null ? filteredItems[selectedItemIndex] : null;
 
-  // Keyboard navigation & Esc key handler for Lightbox Modal
+  // Keyboard navigation for Lightbox
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (selectedItemIndex === null) return;
@@ -351,7 +438,6 @@ export default function Gallery({ setActiveTab, setDonationPreload }) {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [selectedItemIndex, filteredItems]);
 
-  // Lightbox Next/Prev handlers
   const handleNextLightbox = () => {
     if (selectedItemIndex !== null && selectedItemIndex < filteredItems.length - 1) {
       setSelectedItemIndex(prev => prev + 1);
@@ -366,7 +452,7 @@ export default function Gallery({ setActiveTab, setDonationPreload }) {
     }
   };
 
-  // Touch Swipe handlers for mobile lightbox navigation
+  // Touch Swipe handlers
   const handleTouchStart = (e) => {
     touchStartX.current = e.touches[0].clientX;
   };
@@ -378,538 +464,140 @@ export default function Gallery({ setActiveTab, setDonationPreload }) {
   const handleTouchEnd = () => {
     const distance = touchStartX.current - touchEndX.current;
     if (Math.abs(distance) > 50) {
-      if (distance > 0) {
-        handleNextLightbox(); // Swiped left -> next
-      } else {
-        handlePrevLightbox(); // Swiped right -> prev
-      }
-    }
-  };
-
-  // Navigate to donation page with preloaded cause
-  const handleSupportCauseClick = (category) => {
-    if (setDonationPreload) setDonationPreload(category);
-    if (setActiveTab) setActiveTab('donate');
-    setSelectedItemIndex(null);
-  };
-
-  // Scroll to gallery grid stage
-  const scrollToGrid = () => {
-    const element = document.getElementById('gallery-toolbar-anchor');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      if (distance > 0) handleNextLightbox();
+      else handlePrevLightbox();
     }
   };
 
   return (
-    <div className={styles.galleryPage} id="gallery-redesign-root">
+    <div className={styles.galleryPage} id="gallery-page-root">
       
-      {/* 1. HERO SECTION WITH ARTISTIC FLOATING COLLAGE */}
-      <section className={styles.heroSection} id="gallery-hero">
-        <div className={styles.heroGlowOverlay} />
-        
-        <div className={styles.heroContainer}>
-          {/* Left Column: Text & Emotional Messaging */}
-          <div className={styles.heroTextCol}>
-            <div className={styles.heroBadge}>
-              <Sparkles size={14} className={styles.badgeIcon} />
-              <span>Award-Winning NGO Gallery</span>
-            </div>
-            
-            <h1 className={styles.heroTitle}>
-              Moments That <br />
-              <span className={styles.titleHighlight}>Create Change</span>
-            </h1>
-            
-            <p className={styles.heroSubtitle}>
-              An editorial visual journey capturing high-impact transformations, 
-              grassroots resilience, and the real human stories powered by your generosity.
-            </p>
+      {/* 1. HEADER BANNER (Exact Match to User Reference Screenshot) */}
+      <header className={styles.headerBanner} id="gallery-header-banner">
+        <div className={styles.headerContainer}>
+          <nav className={styles.breadcrumb} aria-label="Breadcrumb">
+            <span 
+              className={styles.breadcrumbLink} 
+              onClick={() => setActiveTab && setActiveTab('home')}
+              id="gallery-breadcrumb-home"
+            >
+              Home
+            </span>
+            <span className={styles.breadcrumbSeparator}>&gt;</span>
+            <span className={styles.breadcrumbActive}>Photo Galleries</span>
+          </nav>
 
-            {/* Impact Badges */}
-            <div className={styles.heroStatsRow}>
-              <div className={styles.statChip}>
-                <span className={styles.statNumber}>12,500+</span>
-                <span className={styles.statLabel}>Photos Captured</span>
-              </div>
-              <div className={styles.statDivider} />
-              <div className={styles.statChip}>
-                <span className={styles.statNumber}>85+</span>
-                <span className={styles.statLabel}>Field Events</span>
-              </div>
-              <div className={styles.statDivider} />
-              <div className={styles.statChip}>
-                <span className={styles.statNumber}>16+</span>
-                <span className={styles.statLabel}>States Reached</span>
-              </div>
-            </div>
-
-            {/* Hero CTAs */}
-            <div className={styles.heroActions}>
-              <button 
-                type="button" 
-                className={styles.heroPrimaryBtn}
-                onClick={scrollToGrid}
-                id="hero-explore-moments-btn"
-              >
-                <span>Explore Moments</span>
-                <ArrowRight size={16} />
-              </button>
-              
-              <button 
-                type="button" 
-                className={styles.heroSecondaryBtn}
-                onClick={() => setActiveTab && setActiveTab('donate')}
-                id="hero-support-causes-btn"
-              >
-                <span>Support Our Field Work</span>
-              </button>
-            </div>
-          </div>
-
-          {/* Right Column: Floating 3D Image Collage */}
-          <div className={styles.heroCollageCol}>
-            <div className={styles.collageStage}>
-              
-              {/* Card 1: Top Left */}
-              <div className={`${styles.collageCard} ${styles.card1}`}>
-                <img src={heroGirl} alt="Girl Education" />
-                <div className={styles.collageTag}>Education</div>
-              </div>
-
-              {/* Card 2: Main Featured Center */}
-              <div className={`${styles.collageCard} ${styles.card2}`}>
-                <img src={kidsStory} alt="Children Support" />
-                <div className={styles.collageOverlay}>
-                  <span className={styles.collageTitle}>Shiksha Na Ruke</span>
-                  <span className={styles.collageMeta}>420+ Children Benefited</span>
-                </div>
-              </div>
-
-              {/* Card 3: Bottom Right */}
-              <div className={`${styles.collageCard} ${styles.card3}`}>
-                <img src={lxmiDevi} alt="Women Empowerment" />
-                <div className={styles.collageTagGold}>Empowerment</div>
-              </div>
-
-              {/* Floating Stat Widget */}
-              <div className={styles.floatingWidget}>
-                <Award size={18} className={styles.widgetIcon} />
-                <div>
-                  <div className={styles.widgetVal}>100% Transparent</div>
-                  <div className={styles.widgetSub}>Verified Field Photography</div>
-                </div>
-              </div>
-
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 2. FEATURED ALBUM COLLECTIONS CAROUSEL */}
-      <section className={styles.collectionsSection} id="gallery-featured-collections">
-        <div className={styles.container}>
-          <div className={styles.sectionHeader}>
-            <div>
-              <span className={styles.sectionCategory}>Curated Impact</span>
-              <h2 className={styles.sectionTitle}>Featured Collections</h2>
-            </div>
-            <p className={styles.sectionDesc}>
-              Explore grouped drives capturing dedicated efforts in healthcare, education, climate, and emergency aid.
-            </p>
-          </div>
-
-          <div className={styles.collectionsGrid}>
-            {featuredCollections.map((col) => {
-              const isSelected = selectedCollection === col.category;
-              return (
-                <div 
-                  key={col.id} 
-                  className={`${styles.collectionCard} ${isSelected ? styles.collectionActive : ''}`}
-                  onClick={() => {
-                    if (isSelected) {
-                      setSelectedCollection(null);
-                    } else {
-                      setSelectedCollection(col.category);
-                      setActiveFilter('All');
-                    }
-                  }}
-                  id={`collection-card-${col.id}`}
-                >
-                  <div className={styles.collectionImgWrapper}>
-                    <img src={col.image} alt={col.title} className={styles.collectionImg} />
-                    <span className={styles.collectionBadge}>{col.count}</span>
-                  </div>
-                  <div className={styles.collectionBody}>
-                    <span className={styles.colCategory}>{col.category}</span>
-                    <h3 className={styles.colTitle}>{col.title}</h3>
-                    <p className={styles.colDesc}>{col.desc}</p>
-                    <div className={styles.colFooter}>
-                      <span>{isSelected ? 'Showing Collection' : 'View Album'}</span>
-                      <ChevronRight size={14} />
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-
-          {selectedCollection && (
-            <div className={styles.activeFilterBanner}>
-              <span>Showing results for collection: <strong>{selectedCollection}</strong></span>
-              <button 
-                type="button" 
-                className={styles.clearFilterBtn}
-                onClick={() => setSelectedCollection(null)}
-              >
-                <X size={14} /> Clear Collection Filter
-              </button>
-            </div>
-          )}
-        </div>
-      </section>
-
-      {/* 3. STICKY SEARCH + CATEGORY FILTERS + SORTING TOOLBAR */}
-      <div id="gallery-toolbar-anchor" />
-      <section className={styles.stickyToolbar} id="gallery-toolbar">
-        <div className={styles.toolbarContainer}>
+          <h1 className={styles.bannerTitle}>Photo Galleries</h1>
           
-          {/* Top Row: Search Input & Sort Selector */}
-          <div className={styles.toolbarTopRow}>
-            {/* Search Input */}
-            <div className={styles.searchWrapper}>
-              <Search size={18} className={styles.searchIcon} />
-              <input 
-                type="text" 
-                placeholder="Search moments by title, location, or tag..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className={styles.searchInput}
-                id="gallery-search-input"
-              />
-              {searchQuery && (
-                <button 
-                  type="button" 
-                  className={styles.searchClearBtn}
-                  onClick={() => setSearchQuery('')}
-                >
-                  <X size={16} />
-                </button>
-              )}
-            </div>
+          {/* Green accent line under the heading */}
+          <div className={styles.greenAccentLine} />
+        </div>
+      </header>
 
-            {/* Sort Selector */}
-            <div className={styles.sortWrapper}>
-              <SlidersHorizontal size={16} className={styles.sortIcon} />
-              <select 
-                value={sortBy}
-                onChange={(e) => setSortBy(e.target.value)}
-                className={styles.sortSelect}
-                id="gallery-sort-select"
-              >
-                <option value="newest">Sort by Newest</option>
-                <option value="oldest">Sort by Oldest</option>
-                <option value="popular">Most Viewed</option>
-                <option value="recent">Recently Added</option>
-              </select>
-            </div>
-          </div>
-
-          {/* Bottom Row: Category Filter Pills */}
-          <div className={styles.filterPillsRow}>
-            {[
-              'All', 
-              'Education', 
-              'Health', 
-              'Environment', 
-              'Women Empowerment', 
-              'Community Support', 
-              'Volunteers',
-              'Videos'
-            ].map((cat) => {
-              const isActive = activeFilter === cat && !selectedCollection;
-              return (
+      {/* 2. CATEGORY FILTER TOOLBAR */}
+      <section className={styles.toolbarSection} id="gallery-toolbar">
+        <div className={styles.container}>
+          <div className={styles.toolbarWrapper}>
+            
+            {/* Category Pills */}
+            <div className={styles.categoryPills}>
+              {categories.map((cat) => (
                 <button
                   key={cat}
                   type="button"
-                  className={`${styles.filterPill} ${isActive ? styles.filterPillActive : ''}`}
+                  className={`${styles.filterPill} ${activeFilter === cat ? styles.filterPillActive : ''}`}
                   onClick={() => {
                     setActiveFilter(cat);
-                    setSelectedCollection(null);
-                    setVisibleCount(9);
+                    setVisibleCount(4); // Reset count to 4 when switching category
                   }}
-                  id={`filter-pill-${cat.toLowerCase().replace(/\s+/g, '-')}`}
+                  id={`gallery-filter-${cat.toLowerCase().replace(/\s+/g, '-')}`}
                 >
                   {cat}
                 </button>
-              );
-            })}
-          </div>
+              ))}
+            </div>
 
+          </div>
         </div>
       </section>
 
-      {/* 4. PREMIUM BENTO + PINTEREST MASONRY GALLERY GRID */}
-      <section className={styles.galleryGridSection} id="gallery-masonry-grid">
+      {/* 3. GALLERY GRID (2 IMAGES IN A ROW WITH CURVED BORDERS & LAZY LOADING) */}
+      <main className={styles.mainGridSection} id="gallery-grid-container">
         <div className={styles.container}>
           
-          {displayedItems.length === 0 ? (
-            <div className={styles.emptyGridState}>
-              <BookOpen size={48} className={styles.emptyIcon} />
-              <h3>No field moments match your search</h3>
-              <p>Try searching with a different keyword or select another category filter.</p>
+          {filteredItems.length === 0 ? (
+            <div className={styles.noResults}>
+              <Filter size={40} className={styles.noResultsIcon} />
+              <h3>No photos found</h3>
+              <p>We couldn't find any photos matching your current search or filter selection.</p>
               <button 
                 type="button" 
-                className={styles.resetSearchBtn}
+                className={styles.resetBtn}
                 onClick={() => {
-                  setSearchQuery('');
                   setActiveFilter('All');
-                  setSelectedCollection(null);
+                  setVisibleCount(4);
                 }}
               >
-                Reset All Filters
+                Reset Filters
               </button>
             </div>
           ) : (
-            <div className={styles.bentoMasonryGrid}>
-              
-              {displayedItems.map((item, index) => {
-                
-                // Color mapping for category tags
-                const tagColors = {
-                  'Education': { bg: 'rgba(37, 99, 235, 0.15)', text: '#2563eb' },
-                  'Health': { bg: 'rgba(239, 68, 68, 0.15)', text: '#ef4444' },
-                  'Environment': { bg: 'rgba(16, 185, 129, 0.15)', text: '#10b981' },
-                  'Women Empowerment': { bg: 'rgba(219, 39, 119, 0.15)', text: '#db2777' },
-                  'Volunteers': { bg: 'rgba(234, 179, 8, 0.15)', text: '#d97706' },
-                  'Community Support': { bg: 'rgba(13, 148, 136, 0.15)', text: '#0d9488' }
-                };
-
-                const currentTagStyle = tagColors[item.category] || { bg: 'rgba(100, 116, 139, 0.15)', text: '#64748b' };
-                const sizeClass = styles[`card_${item.size || 'standard'}`];
-
-                return (
-                  <React.Fragment key={item.id}>
-                    
-                    {/* EDITORIAL STORYTELLING INTERSTITIAL SPREAD (Placed after 5th item) */}
-                    {index === 5 && (
-                      <div className={styles.storytellingSpread} id="featured-story-spread">
-                        <div className={styles.spreadImageCol}>
-                          <img src={shikshaRuke} alt="Shiksha Na Ruke Story" className={styles.spreadImg} />
-                          <span className={styles.spreadBadge}>Featured Story</span>
-                        </div>
-                        <div className={styles.spreadContentCol}>
-                          <span className={styles.spreadCategory}>Education Breakthrough</span>
-                          <h3 className={styles.spreadTitle}>Empowering a Village Through Night School & Solar Hubs</h3>
-                          <p className={styles.spreadDesc}>
-                            In remote hamlets where children work alongside parents in fields during daylight, 
-                            our solar-powered night schools provide warm meals, digital tablets, and certified instructors, 
-                            ensuring education never stops.
-                          </p>
-                          <div className={styles.spreadMeta}>
-                            <span><MapPin size={14} /> Bihar Outposts</span>
-                            <span><Users size={14} /> 420+ Children</span>
-                          </div>
-                          <button 
-                            type="button" 
-                            className={styles.spreadCtaBtn}
-                            onClick={() => setSelectedItemIndex(4)} // Open Shiksha story (id 5)
-                          >
-                            <span>Read Full Story</span>
-                            <ArrowRight size={16} />
-                          </button>
-                        </div>
-                      </div>
-                    )}
-
-                    {/* Standard / Bento Card */}
-                    <div 
-                      className={`${styles.masonryCard} ${sizeClass}`}
-                      onClick={() => setSelectedItemIndex(index)}
-                      id={`gallery-card-${item.id}`}
-                    >
-                      <div className={styles.cardMediaWrapper}>
-                        <img 
-                          src={item.image} 
-                          alt={item.title} 
-                          className={styles.cardImg}
-                          loading="lazy" 
-                        />
-                        
-                        <div className={styles.cardOverlay} />
-
-                        {/* Video Play Button Overlay */}
-                        {item.isVideo && (
-                          <div className={styles.videoPlayBtn}>
-                            <Play size={22} fill="currentColor" style={{ marginLeft: '3px' }} />
-                          </div>
-                        )}
-
-                        {/* Top Meta Badges */}
-                        <div className={styles.cardTopMeta}>
-                          <span 
-                            className={styles.cardCategoryBadge}
-                            style={{ backgroundColor: currentTagStyle.bg, color: currentTagStyle.text }}
-                          >
-                            {item.category}
-                          </span>
-                          
-                          {item.photoCount && (
-                            <span className={styles.photoCountBadge}>
-                              <Layers size={12} />
-                              {item.photoCount} Photos
-                            </span>
-                          )}
-                        </div>
-
-                        {/* Bottom Content Info */}
-                        <div className={styles.cardBottomInfo}>
-                          <div className={styles.locationRow}>
-                            <MapPin size={13} />
-                            <span>{item.location}</span>
-                          </div>
-                          <h3 className={styles.cardTitle}>{item.title}</h3>
-                          <p className={styles.cardDesc}>{item.description}</p>
-                          
-                          <div className={styles.cardFooterRow}>
-                            <span className={styles.viewStoryLink}>
-                              <span>View Story</span>
-                              <ArrowRight size={14} />
-                            </span>
-                            <div className={styles.metricsGroup}>
-                              <span><Eye size={12} /> {item.views}</span>
-                            </div>
-                          </div>
-                        </div>
-
-                      </div>
+            <div className={styles.twoColumnGrid}>
+              {displayedItems.map((item, index) => (
+                <div 
+                  key={item.id} 
+                  className={styles.imageCard}
+                  onClick={() => setSelectedItemIndex(index)}
+                  id={`gallery-item-card-${item.id}`}
+                >
+                  {/* Curved Border Image Wrapper */}
+                  <div className={styles.imageWrapper}>
+                    <img 
+                      src={item.image} 
+                      alt={item.title}
+                      loading="lazy" 
+                      className={styles.galleryImg}
+                    />
+                    <div className={styles.cardHoverOverlay}>
+                      <span className={styles.viewBadge}>
+                        <ZoomIn size={16} /> View Photo
+                      </span>
                     </div>
-
-                  </React.Fragment>
-                );
-              })}
-
+                  </div>
+                </div>
+              ))}
             </div>
           )}
 
-          {/* Load More Pagination Button */}
+          {/* 4. VIEW MORE BUTTON (+5 IMAGES ON EACH CLICK) */}
           {filteredItems.length > visibleCount && (
-            <div className={styles.loadMoreRow}>
+            <div className={styles.viewMoreContainer}>
               <button 
                 type="button" 
-                className={styles.loadMoreBtn}
-                onClick={() => setVisibleCount(prev => prev + 6)}
-                id="gallery-load-more-btn"
+                className={styles.viewMoreBtn}
+                onClick={handleLoadMore}
+                id="gallery-view-more-btn"
               >
-                <span>Load More Moments</span>
+                <span>View More</span>
                 <ChevronDown size={18} />
               </button>
+              <p className={styles.showingCountText}>
+                Showing {displayedItems.length} of {filteredItems.length} photos
+              </p>
+            </div>
+          )}
+
+          {/* Indicator when all photos in current filter are loaded */}
+          {filteredItems.length > 0 && filteredItems.length <= visibleCount && (
+            <div className={styles.allLoadedText}>
+              <span>Showing {displayedItems.length} of {filteredItems.length} photos • All photos loaded</span>
             </div>
           )}
 
         </div>
-      </section>
+      </main>
 
-      {/* 5. JOURNEY TIMELINE SECTION */}
-      <section className={styles.timelineSection} id="gallery-journey-timeline">
-        <div className={styles.container}>
-          
-          <div className={styles.sectionHeader}>
-            <span className={styles.sectionCategory}>Milestones</span>
-            <h2 className={styles.sectionTitle}>Our Impact Journey</h2>
-            <p className={styles.sectionDesc}>
-              Tracing the path from a humble local outreach into a transparent, multi-state NGO network.
-            </p>
-          </div>
-
-          <div className={styles.timelineRow}>
-            {timelineMilestones.map((ms, index) => {
-              const IconComp = ms.icon;
-              return (
-                <div key={index} className={styles.timelineStep}>
-                  <div className={styles.stepNode}>
-                    <IconComp size={20} className={styles.stepIcon} />
-                  </div>
-                  <span className={styles.stepYear}>{ms.year}</span>
-                  <h4 className={styles.stepTitle}>{ms.title}</h4>
-                  <p className={styles.stepDesc}>{ms.desc}</p>
-                </div>
-              );
-            })}
-          </div>
-
-        </div>
-      </section>
-
-      {/* 6. ANIMATED IMPACT STATISTICS COUNTER */}
-      <section className={styles.statsSection} id="gallery-impact-stats">
-        <div className={styles.container}>
-          <div className={styles.statsGrid}>
-            <div className={styles.statBox}>
-              <span className={styles.statBoxNum}>12,500+</span>
-              <span className={styles.statBoxTitle}>Photos Documented</span>
-              <p className={styles.statBoxSub}>High-resolution field evidence of public work.</p>
-            </div>
-            <div className={styles.statBox}>
-              <span className={styles.statBoxNum}>10,000+</span>
-              <span className={styles.statBoxTitle}>Lives Directly Impacted</span>
-              <p className={styles.statBoxSub}>Through scholarships, mobile clinics & co-ops.</p>
-            </div>
-            <div className={styles.statBox}>
-              <span className={styles.statBoxNum}>85+</span>
-              <span className={styles.statBoxTitle}>Field Events Conducted</span>
-              <p className={styles.statBoxSub}>Health camps, tree drives & youth summits.</p>
-            </div>
-            <div className={styles.statBox}>
-              <span className={styles.statBoxNum}>500+</span>
-              <span className={styles.statBoxTitle}>Active Volunteers</span>
-              <p className={styles.statBoxSub}>Mobilized across 16 Indian states.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 7. PRE-FOOTER CALL TO ACTION (CTA) */}
-      <section className={styles.preFooterCta} id="gallery-pre-footer-cta">
-        <div className={styles.ctaCard}>
-          <div className={styles.ctaBgOverlay} />
-          <div className={styles.ctaContentRow}>
-            <div className={styles.ctaImgCol}>
-              <img src={awardCeremony} alt="Volunteers Award" className={styles.ctaImg} />
-            </div>
-            <div className={styles.ctaTextCol}>
-              <span className={styles.ctaTag}>Join The Movement</span>
-              <h2 className={styles.ctaTitle}>Be Part of More Stories Like These</h2>
-              <p className={styles.ctaDesc}>
-                Whether you offer your time as a grassroots volunteer or fund vital field programs, 
-                your action immediately empowers a community in need.
-              </p>
-              <div className={styles.ctaButtonsGroup}>
-                <button 
-                  type="button" 
-                  className={styles.ctaPrimaryBtn}
-                  onClick={() => setActiveTab && setActiveTab('volunteer')}
-                  id="cta-become-volunteer-btn"
-                >
-                  <span>Become a Volunteer</span>
-                  <Users size={16} />
-                </button>
-                <button 
-                  type="button" 
-                  className={styles.ctaSecondaryBtn}
-                  onClick={() => setActiveTab && setActiveTab('donate')}
-                  id="cta-donate-now-btn"
-                >
-                  <span>Donate Now</span>
-                  <Heart size={16} />
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 8. FULLSCREEN LIGHTBOX & STORY VIEWER MODAL */}
+      {/* 5. LIGHTBOX MODAL */}
       {currentSelectedItem && (
         <div 
           className={styles.modalBackdrop}
@@ -922,29 +610,22 @@ export default function Gallery({ setActiveTab, setDonationPreload }) {
           <div 
             className={styles.modalContainer}
             onClick={(e) => e.stopPropagation()}
-            onContextMenu={(e) => e.preventDefault()} // Disable right-click download
           >
-            {/* Top Modal Controls */}
+            {/* Modal Header */}
             <div className={styles.modalHeader}>
               <div className={styles.modalTitleMeta}>
-                <span className={styles.modalBadge}>{currentSelectedItem.category}</span>
-                <span className={styles.modalLoc}><MapPin size={13} /> {currentSelectedItem.location}</span>
+                <span className={styles.modalCategory}>{currentSelectedItem.category}</span>
               </div>
               
               <div className={styles.modalActions}>
-                {/* Zoom Toggle */}
-                {!currentSelectedItem.isVideo && (
-                  <button 
-                    type="button" 
-                    className={styles.modalControlBtn}
-                    onClick={() => setIsZoomed(prev => !prev)}
-                    title={isZoomed ? "Zoom Out" : "Zoom In"}
-                  >
-                    {isZoomed ? <ZoomOut size={18} /> : <ZoomIn size={18} />}
-                  </button>
-                )}
-
-                {/* Close Button */}
+                <button 
+                  type="button" 
+                  className={styles.modalZoomBtn}
+                  onClick={() => setIsZoomed(prev => !prev)}
+                  title={isZoomed ? "Zoom Out" : "Zoom In"}
+                >
+                  {isZoomed ? <ZoomOut size={18} /> : <ZoomIn size={18} />}
+                </button>
                 <button 
                   type="button" 
                   className={styles.modalCloseBtn}
@@ -959,82 +640,54 @@ export default function Gallery({ setActiveTab, setDonationPreload }) {
               </div>
             </div>
 
-            {/* Main Stage: Prev Button + Media + Next Button */}
+            {/* Modal Stage */}
             <div className={styles.modalStage}>
-              
-              {/* Prev Navigation Button */}
               {selectedItemIndex > 0 && (
                 <button 
                   type="button" 
                   className={`${styles.navBtn} ${styles.prevBtn}`}
                   onClick={handlePrevLightbox}
-                  title="Previous Story (Left Arrow)"
+                  title="Previous Photo"
                 >
                   <ChevronLeft size={24} />
                 </button>
               )}
 
-              {/* Media Container */}
-              <div className={styles.mediaContainer}>
-                {currentSelectedItem.isVideo ? (
-                  <div className={styles.videoWrapper}>
-                    <video 
-                      src={currentSelectedItem.videoUrl} 
-                      poster={currentSelectedItem.image}
-                      controls 
-                      autoPlay 
-                      className={styles.modalVideo}
-                    />
-                  </div>
-                ) : (
-                  <div className={`${styles.imageWrapper} ${isZoomed ? styles.zoomedImage : ''}`}>
-                    <img 
-                      src={currentSelectedItem.image} 
-                      alt={currentSelectedItem.title} 
-                      className={styles.modalImg}
-                    />
-                  </div>
-                )}
+              <div className={`${styles.modalImageWrapper} ${isZoomed ? styles.zoomed : ''}`}>
+                <img 
+                  src={currentSelectedItem.image} 
+                  alt={currentSelectedItem.title} 
+                  className={styles.modalImg}
+                />
               </div>
 
-              {/* Next Navigation Button */}
               {selectedItemIndex < filteredItems.length - 1 && (
                 <button 
                   type="button" 
                   className={`${styles.navBtn} ${styles.nextBtn}`}
                   onClick={handleNextLightbox}
-                  title="Next Story (Right Arrow)"
+                  title="Next Photo"
                 >
                   <ChevronRight size={24} />
                 </button>
               )}
-
             </div>
 
-            {/* Bottom Story Text & CTA Actions */}
+            {/* Modal Footer */}
             <div className={styles.modalFooter}>
-              <div className={styles.modalTextCol}>
-                <div className={styles.modalMetaDate}>
-                  <Calendar size={13} />
-                  <span>Documented in {currentSelectedItem.displayDate}</span>
-                </div>
-                <h2 className={styles.modalHeadline}>{currentSelectedItem.title}</h2>
-                <p className={styles.modalFullStory}>{currentSelectedItem.fullStory}</p>
-              </div>
-
               <div className={styles.modalCtaCol}>
                 <button 
                   type="button" 
-                  className={styles.modalDonateActionBtn}
-                  onClick={() => handleSupportCauseClick(currentSelectedItem.category)}
-                  id="modal-direct-support-btn"
+                  className={styles.modalDonateBtn}
+                  onClick={() => {
+                    if (setDonationPreload) setDonationPreload(currentSelectedItem.category);
+                    if (setActiveTab) setActiveTab('donate');
+                    setSelectedItemIndex(null);
+                  }}
                 >
-                  <span>Support {currentSelectedItem.category} Programs</span>
+                  <span>Support {currentSelectedItem.category}</span>
                   <ArrowRight size={16} />
                 </button>
-                <span className={styles.modalProtectedNote}>
-                  Protected NGO Asset • Download Disabled
-                </span>
               </div>
             </div>
 

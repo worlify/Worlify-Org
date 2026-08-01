@@ -489,7 +489,7 @@ class LocalDBService {
   }
 
   // Register as a volunteer
-  async registerVolunteer(name, email, cause, skills, message) {
+  async registerVolunteer(name, email, cause, skills, message, extraData = {}) {
     const user = this.getCurrentUser();
     let userId = user ? user.id : null;
 
@@ -498,40 +498,35 @@ class LocalDBService {
       userId = null;
     }
 
+    const { gender = null, address = null, pincode = null } = extraData;
+
+    const payload = {
+      user_id: userId,
+      name,
+      email,
+      gender,
+      address,
+      pincode,
+      cause,
+      skills,
+      message,
+      status: 'Pending',
+      date: new Date().toISOString()
+    };
+
     if (supabase) {
-      const { data, error } = await supabase
+      let { data, error } = await supabase
         .from('volunteers')
-        .insert([
-          {
-            user_id: userId,
-            name,
-            email,
-            cause,
-            skills,
-            message,
-            status: 'Pending',
-            date: new Date().toISOString()
-          }
-        ])
+        .insert([payload])
         .select();
 
       // Retry without user_id if foreign key constraint fails (error code 23503)
       if (error && error.code === '23503') {
         console.warn('Foreign key violation on user_id in volunteers. Retrying as anonymous.');
+        payload.user_id = null;
         const retryResult = await supabase
           .from('volunteers')
-          .insert([
-            {
-              user_id: null,
-              name,
-              email,
-              cause,
-              skills,
-              message,
-              status: 'Pending',
-              date: new Date().toISOString()
-            }
-          ])
+          .insert([payload])
           .select();
         return retryResult;
       }
@@ -544,14 +539,7 @@ class LocalDBService {
     const volunteers = this._get('worlify_volunteers');
     const newVolunteer = {
       id: 'vol_' + Math.random().toString(36).substr(2, 9),
-      user_id: userId,
-      name,
-      email,
-      cause,
-      skills,
-      message,
-      status: 'Pending',
-      date: new Date().toISOString()
+      ...payload
     };
 
     volunteers.unshift(newVolunteer);
@@ -560,7 +548,17 @@ class LocalDBService {
   }
 
   // Register a contact query
-  async registerContactMessage(name, email, subject, message) {
+  async registerContactMessage(name, email, phone, subject, message) {
+    // Graceful backward compatibility handling if 4 arguments passed: registerContactMessage(name, email, subject, message)
+    let contactPhone = phone;
+    let contactSubject = subject;
+    let contactMessage = message;
+    if (message === undefined) {
+      contactPhone = null;
+      contactSubject = phone;
+      contactMessage = subject;
+    }
+
     const user = this.getCurrentUser();
     let userId = user ? user.id : null;
 
@@ -577,8 +575,12 @@ class LocalDBService {
             user_id: userId,
             name,
             email,
-            subject,
-            message,
+            phone: contactPhone,
+            subject: contactSubject,
+            message: contactMessage,
+            status: 'pending',
+            resolved_by: null,
+            admin_notes: null,
             date: new Date().toISOString()
           }
         ])
@@ -594,8 +596,12 @@ class LocalDBService {
               user_id: null,
               name,
               email,
-              subject,
-              message,
+              phone: contactPhone,
+              subject: contactSubject,
+              message: contactMessage,
+              status: 'pending',
+              resolved_by: null,
+              admin_notes: null,
               date: new Date().toISOString()
             }
           ])
@@ -617,8 +623,12 @@ class LocalDBService {
       user_id: userId,
       name,
       email,
-      subject,
-      message,
+      phone: contactPhone,
+      subject: contactSubject,
+      message: contactMessage,
+      status: 'pending',
+      resolved_by: null,
+      admin_notes: null,
       date: new Date().toISOString()
     };
     messages.unshift(newMessage);
@@ -830,6 +840,109 @@ class LocalDBService {
     return { data: true, error: null };
   }
 
+  // Create / Register a new user account (Admin & Coordinator)
+  async createUserByAdmin({ first_name, last_name, email, phone, password, role }) {
+    const currentUser = this.getCurrentUser();
+    if (!currentUser || (currentUser.role !== 'admin' && currentUser.role !== 'coordinator')) {
+      return { data: null, error: { message: 'Only Admins and Coordinators can create new users.' } };
+    }
+
+    const normalizedEmail = normalizeEmail(email);
+    const normalizedPassword = normalizePassword(password || 'password123');
+
+    if (!first_name || !normalizedEmail) {
+      return { data: null, error: { message: 'First name and valid email address are required.' } };
+    }
+
+    if (supabase) {
+      // Check if user with email already exists in users table
+      const { data: existingUser } = await supabase
+        .from('users')
+        .select('id, email')
+        .eq('email', normalizedEmail);
+
+      if (existingUser && existingUser.length > 0) {
+        return { data: null, error: { message: 'A user with this email address already exists.' } };
+      }
+
+      // Try creating in Supabase auth (without logging out current session)
+      let authUserId = null;
+      try {
+        const { data: authData } = await supabase.auth.signUp({
+          email: normalizedEmail,
+          password: normalizedPassword
+        });
+        authUserId = authData?.user?.id;
+      } catch (err) {
+        console.warn('Supabase Auth signUp skipped during admin creation:', err);
+      }
+
+      const nameParts = first_name.trim().split(' ');
+      const userPayload = {
+        id: authUserId || 'usr_' + Math.random().toString(36).substr(2, 9),
+        email: normalizedEmail,
+        password: normalizedPassword,
+        first_name: first_name.trim(),
+        last_name: (last_name || '').trim(),
+        phone: (phone || '').trim() || null,
+        role: role || 'user',
+        support: 0,
+        badges: '[]',
+        created_at: new Date().toISOString()
+      };
+
+      let { data: newUser, error } = await supabase
+        .from('users')
+        .insert([userPayload])
+        .select();
+
+      if (error) {
+        console.warn('Supabase users insert warning:', error.message);
+        delete userPayload.role;
+        const retry = await supabase.from('users').insert([userPayload]).select();
+        newUser = retry.data;
+        if (retry.error) {
+          return { data: null, error: retry.error };
+        }
+      }
+
+      // Sync local storage cache
+      try {
+        const cachedUsers = this._get('worlify_users');
+        cachedUsers.unshift(userPayload);
+        this._set('worlify_users', cachedUsers);
+      } catch (_) {}
+
+      return { data: Array.isArray(newUser) ? newUser[0] : (newUser || userPayload), error: null };
+    }
+
+    // Mock / LocalStorage implementation
+    await new Promise(resolve => setTimeout(resolve, 400));
+    const users = this._get('worlify_users');
+
+    if (users.some(u => normalizeEmail(u.email) === normalizedEmail)) {
+      return { data: null, error: { message: 'A user with this email address already exists.' } };
+    }
+
+    const newUser = {
+      id: 'usr_' + Math.random().toString(36).substr(2, 9),
+      email: normalizedEmail,
+      password: normalizedPassword,
+      first_name: first_name.trim(),
+      last_name: (last_name || '').trim(),
+      phone: (phone || '').trim() || '',
+      role: role || 'user',
+      support: 0,
+      badges: [],
+      created_at: new Date().toISOString()
+    };
+
+    users.unshift(newUser);
+    this._set('worlify_users', users);
+
+    return { data: newUser, error: null };
+  }
+
   // Get all volunteer submissions (Coordinator & Admin)
   async getAllVolunteers() {
     const user = this.getCurrentUser();
@@ -851,17 +964,21 @@ class LocalDBService {
     return { data: volunteers, error: null };
   }
 
-  // Update volunteer application status (Coordinator & Admin)
+  // Update volunteer application status or details (Coordinator & Admin)
   async updateVolunteerStatus(volId, newStatus) {
     const user = this.getCurrentUser();
     if (!user || (user.role !== 'admin' && user.role !== 'coordinator')) {
       return { data: null, error: { message: 'Unauthorized action' } };
     }
 
+    const payload = typeof newStatus === 'object'
+      ? newStatus
+      : { status: newStatus };
+
     if (supabase) {
       const { data, error } = await supabase
         .from('volunteers')
-        .update({ status: newStatus })
+        .update(payload)
         .eq('id', volId)
         .select();
       return { data, error };
@@ -871,7 +988,7 @@ class LocalDBService {
     const volunteers = this._get('worlify_volunteers');
     const vol = volunteers.find(v => v.id === volId);
     if (vol) {
-      vol.status = newStatus;
+      Object.assign(vol, payload);
       this._set('worlify_volunteers', volunteers);
       return { data: vol, error: null };
     }
@@ -941,6 +1058,49 @@ class LocalDBService {
     messages = messages.filter(m => m.id !== msgId);
     localStorage.setItem('worlify_contact_messages', JSON.stringify(messages));
     return { data: true, error: null };
+  }
+
+  // Update contact message status & resolution notes (Admin & Coordinator)
+  async updateContactMessageStatus(msgId, { status, admin_notes, resolved_by }) {
+    const user = this.getCurrentUser();
+    if (!user || (user.role !== 'admin' && user.role !== 'coordinator')) {
+      return { data: null, error: { message: 'Only Admins and Coordinators can update inquiry status' } };
+    }
+
+    const updatedAt = new Date().toISOString();
+
+    if (supabase) {
+      const { data, error } = await supabase
+        .from('contact_messages')
+        .update({
+          status: status || 'pending',
+          resolved_by: resolved_by || null,
+          admin_notes: admin_notes || null,
+          updated_at: updatedAt
+        })
+        .eq('id', msgId)
+        .select();
+      return { data, error };
+    }
+
+    await new Promise(resolve => setTimeout(resolve, 300));
+    let messages = JSON.parse(localStorage.getItem('worlify_contact_messages') || '[]');
+    let updatedItem = null;
+    messages = messages.map(m => {
+      if (m.id === msgId) {
+        updatedItem = {
+          ...m,
+          status: status || 'pending',
+          resolved_by: resolved_by || null,
+          admin_notes: admin_notes || null,
+          updated_at: updatedAt
+        };
+        return updatedItem;
+      }
+      return m;
+    });
+    localStorage.setItem('worlify_contact_messages', JSON.stringify(messages));
+    return { data: updatedItem ? [updatedItem] : null, error: null };
   }
 
   // Delete donation record (Admin Only)

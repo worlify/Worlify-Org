@@ -160,7 +160,14 @@ export default function App() {
           setUser(currentUser);
           console.log('✅ Session restored:', currentUser.email);
         } else {
-          console.log('No session found, showing home page');
+          console.log('No session found');
+          // Protect dashboard route: if attempting to access /dashboard without active session, redirect to auth
+          if (getTabFromUrl() === 'dashboard') {
+            setActiveTabState('auth');
+            if (typeof window !== 'undefined') {
+              window.history.replaceState({ tab: 'auth' }, '', '/auth');
+            }
+          }
         }
       } catch (e) {
         console.error('Session recovery failed: ', e);
@@ -172,6 +179,17 @@ export default function App() {
     }
     restoreSession();
   }, []);
+
+  // Enforce route protection: redirect unauthenticated user if activeTab is dashboard
+  useEffect(() => {
+    if (!isLoadingSession && activeTab === 'dashboard' && !user) {
+      setActiveTab('auth');
+      setToast({
+        message: 'Please sign in to access your portal dashboard.',
+        type: 'info'
+      });
+    }
+  }, [activeTab, user, isLoadingSession]);
 
   // Dynamic client-side SEO update for title, description, keywords, and canonical URL
   useEffect(() => {

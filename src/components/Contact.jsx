@@ -57,14 +57,12 @@ export default function Contact({ setActiveTab }) {
     setErrorMsg('');
 
     try {
-      // Pack phone number into message field to preserve it safely in Supabase contact_messages table
-      const finalMessage = `Phone: ${formData.phone}\n\nMessage:\n${formData.message}`;
-
       const { error } = await db.registerContactMessage(
         formData.name,
         formData.email,
+        formData.phone,
         formData.subject,
-        finalMessage
+        formData.message
       );
 
       if (error) {

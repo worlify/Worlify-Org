@@ -3,7 +3,7 @@ import { db } from '../lib/supabase';
 import {
   Users, Heart, Globe, CheckCircle, ArrowRight, Lock,
   User, Mail, Phone, ChevronDown, BookOpen, Stethoscope,
-  Leaf, Award, Zap, Shield, Clock, TrendingUp, Star,
+  Leaf, Award, Zap, Shield, Clock, TrendingUp, Star, MapPin
 } from 'lucide-react';
 import styles from '../styles/Volunteer.module.css';
 
@@ -99,6 +99,9 @@ export default function Volunteer({ user, setActiveTab }) {
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
+  const [gender, setGender] = useState('');
+  const [address, setAddress] = useState('');
+  const [pincode, setPincode] = useState('');
   const [preferredCause, setPreferredCause] = useState('');
   const [motivation, setMotivation] = useState('');
   const [charCount, setCharCount] = useState(0);
@@ -112,9 +115,11 @@ export default function Volunteer({ user, setActiveTab }) {
         ? `${user.first_name}${user.last_name ? ' ' + user.last_name : ''}` : '';
       setFullName(name);
       setEmail(user.email || '');
+      setPhoneNumber(user.phone || '');
     } else {
       setFullName('');
       setEmail('');
+      setPhoneNumber('');
     }
   }, [user]);
 
@@ -123,6 +128,9 @@ export default function Volunteer({ user, setActiveTab }) {
     if (!fullName.trim()) e.fullName = 'Full name is required.';
     if (!email.trim()) e.email = 'Email address is required.';
     if (!phoneNumber.trim()) e.phoneNumber = 'Phone number is required.';
+    if (!gender) e.gender = 'Gender selection is required.';
+    if (!address.trim()) e.address = 'Street address is required.';
+    if (!pincode.trim() || !/^\d{6}$/.test(pincode.trim())) e.pincode = 'Valid 6-digit Pincode is required.';
     if (!preferredCause) e.preferredCause = 'Please select a cause.';
     if (!motivation.trim()) e.motivation = 'Please share your motivation.';
     return e;
@@ -142,11 +150,22 @@ export default function Volunteer({ user, setActiveTab }) {
     setIsSubmitting(true);
     try {
       const { error } = await db.registerVolunteer(
-        fullName, email, preferredCause, `Phone: ${phoneNumber}`, motivation
+        fullName,
+        email,
+        preferredCause,
+        `Phone: ${phoneNumber}`,
+        motivation,
+        { gender, address, pincode }
       );
       if (!error) {
         setSuccess(true);
-        setPhoneNumber(''); setMotivation(''); setCharCount(0); setPreferredCause('');
+        setPhoneNumber('');
+        setGender('');
+        setAddress('');
+        setPincode('');
+        setMotivation('');
+        setCharCount(0);
+        setPreferredCause('');
       } else {
         alert('Registration failed: ' + error.message);
       }
@@ -388,9 +407,30 @@ export default function Volunteer({ user, setActiveTab }) {
                         {errors.phoneNumber && <span className={styles.errorMsg}>{errors.phoneNumber}</span>}
                       </div>
 
-                      {/* Cause */}
+                      {/* Gender */}
                       <div className={styles.fieldGroup}>
-                        <label className={styles.fieldLabel} htmlFor="form-cause-select">Cause Preference</label>
+                        <label className={styles.fieldLabel} htmlFor="form-gender-select">Gender *</label>
+                        <div className={styles.selectWrap}>
+                          <select
+                            id="form-gender-select"
+                            className={`${styles.select} ${errors.gender ? styles.inputError : ''}`}
+                            value={gender}
+                            onChange={(e) => setGender(e.target.value)}
+                          >
+                            <option value="" disabled>Select Gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
+                            <option value="Prefer not to say">Prefer not to say</option>
+                          </select>
+                          <ChevronDown size={14} className={styles.selectChevron} />
+                        </div>
+                        {errors.gender && <span className={styles.errorMsg}>{errors.gender}</span>}
+                      </div>
+
+                      {/* Cause Preference */}
+                      <div className={styles.fieldGroup}>
+                        <label className={styles.fieldLabel} htmlFor="form-cause-select">Cause Preference *</label>
                         <div className={styles.selectWrap}>
                           <select
                             id="form-cause-select"
@@ -404,6 +444,41 @@ export default function Volunteer({ user, setActiveTab }) {
                           <ChevronDown size={14} className={styles.selectChevron} />
                         </div>
                         {errors.preferredCause && <span className={styles.errorMsg}>{errors.preferredCause}</span>}
+                      </div>
+
+                      {/* Pincode */}
+                      <div className={styles.fieldGroup}>
+                        <label className={styles.fieldLabel} htmlFor="form-pincode-input">Pincode *</label>
+                        <div className={styles.inputWrap}>
+                          <MapPin size={14} className={styles.inputIcon} />
+                          <input
+                            id="form-pincode-input"
+                            type="text"
+                            maxLength={6}
+                            className={`${styles.input} ${errors.pincode ? styles.inputError : ''}`}
+                            placeholder="6-digit PIN Code (e.g. 226001)"
+                            value={pincode}
+                            onChange={(e) => setPincode(e.target.value.replace(/\D/g, ''))}
+                          />
+                        </div>
+                        {errors.pincode && <span className={styles.errorMsg}>{errors.pincode}</span>}
+                      </div>
+
+                      {/* Address */}
+                      <div className={`${styles.fieldGroup} ${styles.fullWidth}`}>
+                        <label className={styles.fieldLabel} htmlFor="form-address-input">Street Address / Locality *</label>
+                        <div className={styles.inputWrap}>
+                          <MapPin size={14} className={styles.inputIcon} />
+                          <input
+                            id="form-address-input"
+                            type="text"
+                            className={`${styles.input} ${errors.address ? styles.inputError : ''}`}
+                            placeholder="House/Flat No., Building, Street Name, Area"
+                            value={address}
+                            onChange={(e) => setAddress(e.target.value)}
+                          />
+                        </div>
+                        {errors.address && <span className={styles.errorMsg}>{errors.address}</span>}
                       </div>
 
                       {/* Motivation */}

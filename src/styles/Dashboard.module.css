@@ -1,8 +1,16 @@
 .dashboardHeader {
-  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-  color: white;
+  background: radial-gradient(circle at top right, rgba(13, 148, 136, 0.12) 0%, transparent 60%),
+              linear-gradient(135deg, #f0fdfa 0%, #e0f2fe 50%, #fff7ed 100%);
+  color: var(--text-main);
   padding: 48px 0 24px 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid var(--border-color);
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+:global([data-theme='dark']) .dashboardHeader {
+  background: linear-gradient(135deg, #0b0f19 0%, #111827 100%);
+  color: #f3f4f6;
+  border-bottom-color: rgba(255, 255, 255, 0.1);
 }
 
 .welcomeRow {
@@ -24,13 +32,21 @@
   font-family: var(--font-display);
   font-size: 28px;
   font-weight: 700;
+  color: var(--text-main);
+}
+
+:global([data-theme='dark']) .welcomeTitle {
   color: #ffffff;
 }
 
 .welcomeSub {
   font-size: 14.5px;
-  color: #94a3b8;
+  color: var(--text-muted);
   max-width: 700px;
+}
+
+:global([data-theme='dark']) .welcomeSub {
+  color: #94a3b8;
 }
 
 /* Role Pills */
@@ -47,18 +63,36 @@
 }
 
 .roleAdmin {
+  background-color: #fef3c7;
+  color: #b45309;
+  border: 1px solid #fde68a;
+}
+
+:global([data-theme='dark']) .roleAdmin {
   background-color: rgba(245, 158, 11, 0.18);
   color: #fbbf24;
   border: 1px solid rgba(245, 158, 11, 0.4);
 }
 
 .roleCoordinator {
+  background-color: #e0f2fe;
+  color: #0369a1;
+  border: 1px solid #bae6fd;
+}
+
+:global([data-theme='dark']) .roleCoordinator {
   background-color: rgba(14, 165, 233, 0.18);
   color: #38bdf8;
   border: 1px solid rgba(14, 165, 233, 0.4);
 }
 
 .roleUser {
+  background-color: #d1fae5;
+  color: #047857;
+  border: 1px solid #a7f3d0;
+}
+
+:global([data-theme='dark']) .roleUser {
   background-color: rgba(16, 185, 129, 0.18);
   color: #34d399;
   border: 1px solid rgba(16, 185, 129, 0.4);
@@ -70,35 +104,87 @@
   gap: 10px;
   overflow-x: auto;
   padding-top: 16px;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid var(--border-color);
+}
+
+:global([data-theme='dark']) .portalTabsNav {
+  border-top-color: rgba(255, 255, 255, 0.08);
 }
 
 .portalTabBtn {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background-color: rgba(255, 255, 255, 0.06);
-  color: #cbd5e1;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background-color: var(--bg-card);
+  color: var(--text-main);
+  border: 1px solid var(--border-color);
   padding: 10px 18px;
   font-size: 13.5px;
   font-weight: 600;
   border-radius: var(--radius-sm);
   cursor: pointer;
   white-space: nowrap;
+  box-shadow: var(--shadow-sm);
   transition: all 0.15s ease-in-out;
 }
 
+:global([data-theme='dark']) .portalTabBtn {
+  background-color: rgba(255, 255, 255, 0.06);
+  color: #cbd5e1;
+  border-color: rgba(255, 255, 255, 0.12);
+  box-shadow: none;
+}
+
 .portalTabBtn:hover {
+  background-color: rgba(13, 148, 136, 0.08);
+  color: var(--primary-color);
+  border-color: rgba(13, 148, 136, 0.3);
+}
+
+:global([data-theme='dark']) .portalTabBtn:hover {
   background-color: rgba(255, 255, 255, 0.12);
   color: #ffffff;
 }
 
 .portalTabBtnActive {
-  background-color: #0056d2;
+  background: linear-gradient(135deg, var(--primary-color) 0%, #0056d2 100%);
+  color: #ffffff !important;
+  border-color: var(--primary-color) !important;
+  box-shadow: 0 4px 12px rgba(13, 148, 136, 0.3) !important;
+}
+
+.editProfileHeaderBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: var(--bg-card);
+  color: var(--text-main);
+  border: 1px solid var(--border-color);
+  padding: 10px 18px;
+  font-size: 13.5px;
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  white-space: nowrap;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.15s ease-in-out;
+}
+
+.editProfileHeaderBtn:hover {
+  background-color: rgba(13, 148, 136, 0.08);
+  color: var(--primary-color);
+  border-color: rgba(13, 148, 136, 0.3);
+}
+
+:global([data-theme='dark']) .editProfileHeaderBtn {
+  background-color: rgba(255, 255, 255, 0.12);
   color: #ffffff;
-  border-color: #0056d2;
-  box-shadow: 0 4px 12px rgba(0, 86, 210, 0.3);
+  border-color: rgba(255, 255, 255, 0.25);
+  box-shadow: none;
+}
+
+:global([data-theme='dark']) .editProfileHeaderBtn:hover {
+  background-color: rgba(255, 255, 255, 0.2);
 }
 
 .dashboardBody {
@@ -346,6 +432,95 @@
 .statusRejected {
   background-color: rgba(239, 68, 68, 0.1);
   color: #dc2626;
+}
+
+.statusResolved {
+  background-color: rgba(16, 185, 129, 0.12);
+  color: #059669;
+  border: 1px solid rgba(16, 185, 129, 0.25);
+}
+
+:global([data-theme='dark']) .statusResolved {
+  background-color: rgba(16, 185, 129, 0.2);
+  color: #34d399;
+  border-color: rgba(16, 185, 129, 0.4);
+}
+
+/* Contact Inbox Sub-Tabs */
+.subTabsBar {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 14px;
+  flex-wrap: wrap;
+}
+
+.subTabBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  font-size: 13.5px;
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-color);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.15s ease-in-out;
+}
+
+.subTabBtn:hover {
+  background-color: var(--bg-card);
+  color: var(--text-main);
+  border-color: var(--primary-color);
+}
+
+.subTabBtnActive {
+  background-color: var(--primary-color) !important;
+  color: #ffffff !important;
+  border-color: var(--primary-color) !important;
+  box-shadow: 0 2px 8px rgba(13, 148, 136, 0.25);
+}
+
+.subTabCountPill {
+  padding: 2px 8px;
+  border-radius: 9999px;
+  font-size: 11.5px;
+  font-weight: 700;
+  background-color: rgba(0, 0, 0, 0.08);
+  color: inherit;
+}
+
+:global([data-theme='dark']) .subTabCountPill {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+.subTabBtnActive .subTabCountPill {
+  background-color: rgba(255, 255, 255, 0.25) !important;
+  color: #ffffff !important;
+}
+
+.actionBtnManage {
+  background-color: rgba(13, 148, 136, 0.08);
+  color: var(--primary-color);
+  border: 1px solid rgba(13, 148, 136, 0.2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.15s ease;
+}
+
+.actionBtnManage:hover {
+  background-color: var(--primary-color);
+  color: #ffffff;
+  border-color: var(--primary-color);
 }
 
 .emptyState {

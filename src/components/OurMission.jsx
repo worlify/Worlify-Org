@@ -79,7 +79,7 @@ export default function OurMission({ setActiveTab }) {
               <div className={styles.iconWrapper} style={{ backgroundColor: 'rgba(249, 115, 22, 0.1)' }}>
                 <Eye size={28} color="var(--secondary-color)" />
               </div>
-              <h2 className={styles.valueTitle}>Our Long-term Vision</h2>
+              <h2 className={styles.valueTitle}>Our Vision</h2>
               <p className={styles.valueText}>
                 Worlify Foundation envisions a future where no one feels invisible, helpless, or abandoned. We are committed to wiping away tears caused by poverty, injustice, and lack of opportunity, and replacing them with hope and dignity. We believe every heart carries dreams worth protecting and every life deserves compassion and respect. Through education, care, and meaningful opportunities, we strive to heal broken confidence and light a path of hope for those living in darkness, building a society rooted in humanity, empathy, and shared progress.              </p>
             </div>
@@ -115,7 +115,6 @@ export default function OurMission({ setActiveTab }) {
                     {pillar.icon}
                   </div>
                   <div className={styles.pillarName}>{pillar.name}</div>
-                  <div className={styles.pillarDesc}>Click to view focus</div>
                 </div>
               );
             })}

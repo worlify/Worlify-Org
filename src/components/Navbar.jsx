@@ -269,58 +269,70 @@ export default function Navbar({ activeTab, setActiveTab, user, onLogout, isLoca
           </ul>
         </nav>
 
-        {/* Auth status action group - Desktop */}
-        <div className={styles.authGroup} id="auth-actions-group">
-          {user ? (
-            <>
-              <div
-                className={`${styles.avatarCircle} ${activeTab === 'dashboard' ? styles.activeAvatarCircle : ''}`}
-                onClick={() => handleNavClick('dashboard')}
-                id="nav-link-dashboard"
-                title={`Go to Dashboard (${user.first_name || user.email})`}
-              >
-                {getInitials()}
-              </div>
-              <button
-                className={styles.logoutBtn}
-                onClick={onLogout}
-                id="logout-btn"
-              >
-                <LogOut size={16} style={{ marginRight: '6px', verticalAlign: 'middle' }} />
-                Logout
-              </button>
-            </>
-          ) : (
-            <>
-              <button
-                className={styles.loginBtn}
-                onClick={() => handleNavClick('auth')}
-                id="login-btn"
-              >
-                Sign In
-              </button>
-            </>
-          )}
+        {/* Header Right Actions Container */}
+        <div className={styles.headerRightActions}>
+          {/* Auth status action group - Desktop */}
+          <div className={styles.authGroup} id="auth-actions-group">
+            {user ? (
+              <>
+                <div
+                  className={`${styles.avatarCircle} ${activeTab === 'dashboard' ? styles.activeAvatarCircle : ''}`}
+                  onClick={() => handleNavClick('dashboard')}
+                  id="nav-link-dashboard"
+                  title={`Go to Dashboard (${user.first_name || user.email})`}
+                >
+                  {getInitials()}
+                </div>
+                <button
+                  className={styles.logoutBtn}
+                  onClick={onLogout}
+                  id="logout-btn"
+                >
+                  <LogOut size={16} style={{ marginRight: '6px', verticalAlign: 'middle' }} />
+                  Logout
+                </button>
+              </>
+            ) : (
+              <>
+                <button
+                  className={styles.loginBtn}
+                  onClick={() => handleNavClick('auth')}
+                  id="login-btn"
+                >
+                  Sign In
+                </button>
+              </>
+            )}
 
-          {/* Core high-impact CTA button */}
+            {/* Core high-impact CTA button - Desktop */}
+            <button
+              className={styles.donateBtn}
+              onClick={() => handleNavClick('donate')}
+              id="quick-donate-btn"
+            >
+              Donate Now
+            </button>
+          </div>
+
+          {/* Mobile Header Donate Button (Always visible on mobile header bar) */}
           <button
-            className={styles.donateBtn}
+            className={styles.mobileHeaderDonateBtn}
             onClick={() => handleNavClick('donate')}
-            id="quick-donate-btn"
+            id="mobile-header-donate-btn"
           >
             Donate Now
           </button>
-        </div>
 
-        {/* Mobile responsive hamburger toggle button */}
-        <button
-          className={styles.hamburger}
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-          aria-label="Toggle Menu"
-          id="mobile-menu-toggle"
-        >
-          {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
+          {/* Mobile responsive hamburger toggle button */}
+          <button
+            className={styles.hamburger}
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label="Toggle Menu"
+            id="mobile-menu-toggle"
+          >
+            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile responsive menu drawer */}

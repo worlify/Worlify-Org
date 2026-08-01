@@ -218,8 +218,9 @@ const PAGE_META = {
 
 // Generate per-page metadata dynamically based on slug
 export async function generateMetadata({ params }) {
-  const slugArr = params?.slug || [];
-  const slugKey = slugArr.join('/');
+  const resolvedParams = await params;
+  const slugArr = resolvedParams?.slug || [];
+  const slugKey = Array.isArray(slugArr) ? slugArr.join('/') : '';
 
   const meta = PAGE_META[slugKey];
 
@@ -260,6 +261,9 @@ export async function generateMetadata({ params }) {
   };
 }
 
-export default function CatchAllPage() {
+export default async function CatchAllPage({ params }) {
+  if (params) {
+    await params;
+  }
   return <App />;
 }

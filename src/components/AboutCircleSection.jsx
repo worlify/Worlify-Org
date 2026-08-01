@@ -4,11 +4,8 @@ import React from 'react';
 import Image from 'next/image';
 import styles from '../styles/Home.module.css';
 
-// Import images from assets
-import ourStoryKids from '../assets/images/our_story_kids.jpg';
-import shikshaNaRuke from '../assets/images/shiksha_na_ruke.jpg';
-import sliderNew1 from '../assets/images/slider_new1.jpg';
-import sliderNew2 from '../assets/images/slider_new2.jpg';
+// Import circular causes image
+import aboutCausesCircle from '../assets/images/about_causes_circle.jpg';
 
 export default function AboutCircleSection({ setActiveTab }) {
   const handleDiscoverMore = () => {
@@ -24,55 +21,22 @@ export default function AboutCircleSection({ setActiveTab }) {
       <div className="container">
         <div className={styles.aboutCircleGrid}>
           
-          {/* Left Column: 4-Quadrant Circular Image Frame with Center Logo */}
+          {/* Left Column: Circular Image Frame with Center Red Icon */}
           <div className={styles.circleFrameWrapper}>
             <div className={styles.circleFrameContainer}>
-              {/* Quadrant 1: Top-Left */}
-              <div className={`${styles.quadrant} ${styles.quadrantTopLeft}`}>
+              <div className={styles.circleImageWrapper}>
                 <Image
-                  src={ourStoryKids}
-                  alt="Children receiving education and support"
+                  src={aboutCausesCircle}
+                  alt="Worlify Foundation Impact Pillars - Education, Health, Environment, Women Empowerment"
                   fill
-                  sizes="(max-width: 768px) 50vw, 220px"
-                  style={{ objectFit: 'cover' }}
-                />
-              </div>
-
-              {/* Quadrant 2: Top-Right */}
-              <div className={`${styles.quadrant} ${styles.quadrantTopRight}`}>
-                <Image
-                  src={shikshaNaRuke}
-                  alt="Education initiative for kids"
-                  fill
-                  sizes="(max-width: 768px) 50vw, 220px"
-                  style={{ objectFit: 'cover' }}
-                />
-              </div>
-
-              {/* Quadrant 3: Bottom-Left */}
-              <div className={`${styles.quadrant} ${styles.quadrantBottomLeft}`}>
-                <Image
-                  src={sliderNew1}
-                  alt="Community awareness campaign"
-                  fill
-                  sizes="(max-width: 768px) 50vw, 220px"
-                  style={{ objectFit: 'cover' }}
-                />
-              </div>
-
-              {/* Quadrant 4: Bottom-Right */}
-              <div className={`${styles.quadrant} ${styles.quadrantBottomRight}`}>
-                <Image
-                  src={sliderNew2}
-                  alt="Planting trees and environmental empowerment"
-                  fill
-                  sizes="(max-width: 768px) 50vw, 220px"
-                  style={{ objectFit: 'cover' }}
+                  priority
+                  sizes="(max-width: 968px) 320px, 440px"
+                  className={styles.circleImage}
                 />
               </div>
 
               {/* Center Overlapping White Circle Badge */}
-              <div className={styles.centerBadge}>
+              <div className={styles.centerBadge} title="Save Blood, Save Life">
                 <svg
                   viewBox="0 0 122.88 113.91"
                   className={styles.centerBadgeSvg}

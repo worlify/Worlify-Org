@@ -18,6 +18,7 @@
   max-width: 1400px;
   margin: 0 auto;
   padding: 0 16px;
+  position: relative;
 }
 
 /* Brand Logo (Left) */
@@ -279,6 +280,36 @@
   box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #0056d2;
 }
 
+.headerRightActions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.mobileHeaderDonateBtn {
+  display: none;
+  background-color: #0056d2;
+  color: #ffffff;
+  border: none;
+  padding: 8px 18px;
+  font-weight: 600;
+  font-size: 13px;
+  border-radius: 9999px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 86, 210, 0.2);
+  transition: all 0.15s ease-in-out;
+  white-space: nowrap;
+}
+
+.mobileHeaderDonateBtn:hover {
+  background-color: #0047b3;
+  box-shadow: 0 6px 14px rgba(0, 86, 210, 0.28);
+}
+
+.mobileHeaderDonateBtn:active {
+  background-color: #003d99;
+}
+
 /* Responsive Hamburger Toggle Button */
 .hamburger {
   display: none;
@@ -349,6 +380,23 @@
   .authGroup {
     display: none;
     /* Hide desktop auth actions */
+  }
+
+  .mobileHeaderDonateBtn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    left: 60%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+  }
+
+  .mobileHeaderDonateBtn:hover,
+  .mobileHeaderDonateBtn:active,
+  .mobileHeaderDonateBtn:focus {
+    transform: translate(-50%, -50%);
   }
 
   .hamburger {
@@ -528,6 +576,17 @@
   .activeMobileSubNavLink {
     color: #0056d2;
     font-weight: 600;
+  }
+}
+
+@media (max-width: 480px) {
+  .mobileHeaderDonateBtn {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+
+  .headerRightActions {
+    gap: 8px;
   }
 }
 

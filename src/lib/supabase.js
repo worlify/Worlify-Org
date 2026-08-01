@@ -122,11 +122,11 @@ class LocalDBService {
     if (!localStorage.getItem('worlify_donations')) {
       // Seed some initial demo donations to make the site look alive and active!
       const initialDonations = [
-        { id: '1', user_id: 'system', user_email: 'anonymous@helper.org', amount: 150, cause: 'Education', date: new Date(Date.now() - 86400000 * 2).toISOString() },
-        { id: '2', user_id: 'system', user_email: 'clean_seas@nature.com', amount: 500, cause: 'Environment', date: new Date(Date.now() - 86400000 * 5).toISOString() },
-        { id: '3', user_id: 'system', user_email: 'care_giver@health.org', amount: 250, cause: 'Healthcare', date: new Date(Date.now() - 86400000 * 7).toISOString() },
-        { id: '4', user_id: 'system', user_email: 'child_first@care.com', amount: 100, cause: 'Child Welfare', date: new Date(Date.now() - 86400000 * 10).toISOString() },
-        { id: '5', user_id: 'system', user_email: 'empower_her@women.org', amount: 350, cause: 'Women Empowerment', date: new Date(Date.now() - 86400000 * 12).toISOString() },
+        { id: '1', user_id: 'system', user_email: 'anonymous@helper.org', donor_name: 'Anonymous Donor', amount: 150, cause: 'Education', status: 'under_review', date: new Date(Date.now() - 86400000 * 2).toISOString() },
+        { id: '2', user_id: 'system', user_email: 'clean_seas@nature.com', donor_name: 'Clean Seas Org', amount: 500, cause: 'Environment', status: 'verified', date: new Date(Date.now() - 86400000 * 5).toISOString() },
+        { id: '3', user_id: 'system', user_email: 'care_giver@health.org', donor_name: 'Care Giver', amount: 250, cause: 'Healthcare', status: 'under_review', date: new Date(Date.now() - 86400000 * 7).toISOString() },
+        { id: '4', user_id: 'system', user_email: 'child_first@care.com', donor_name: 'Child First Foundation', amount: 100, cause: 'Child Welfare', status: 'verified', date: new Date(Date.now() - 86400000 * 10).toISOString() },
+        { id: '5', user_id: 'system', user_email: 'empower_her@women.org', donor_name: 'Empower Her NGO', amount: 350, cause: 'Women Empowerment', status: 'under_review', date: new Date(Date.now() - 86400000 * 12).toISOString() },
       ];
       localStorage.setItem('worlify_donations', JSON.stringify(initialDonations));
     }
@@ -428,7 +428,7 @@ class LocalDBService {
       donor_state: details.donor_state || null,
       donor_pan: details.donor_pan || null,
       frequency: details.frequency || 'one-time',
-      status: details.status || 'pending',
+      status: details.status || 'under_review',
       razorpay_ref: details.razorpay_ref || null,
       razorpay_payment_id: details.razorpay_payment_id || null,
       declaration: details.declaration !== undefined ? details.declaration : true,
@@ -1123,6 +1123,67 @@ class LocalDBService {
     donations = donations.filter(d => d.id !== donId);
     this._set('worlify_donations', donations);
     return { data: true, error: null };
+  }
+
+  // Update donation transaction details (status, cause, admin_notes)
+  async updateDonationDetails(donId, { status, cause, admin_notes }) {
+    const user = this.getCurrentUser();
+    if (!user || user.role !== 'admin') {
+      return { data: null, error: { message: 'Only Admins can update donation records' } };
+    }
+
+    const payload = {
+      status: status || 'under_review',
+      cause: cause || '',
+      admin_notes: admin_notes || null,
+      updated_at: new Date().toISOString()
+    };
+
+    if (supabase) {
+      const { data, error } = await supabase
+        .from('donations')
+        .update(payload)
+        .eq('id', donId)
+        .select();
+
+      if (error) {
+        console.error('Supabase updateDonationDetails error:', error);
+        return { data: null, error };
+      }
+
+      if (!data || data.length === 0) {
+        const rlsMsg =
+          'Update blocked by Supabase Row Level Security (RLS) policy on "donations" table. ' +
+          'Please execute the provided RLS policy SQL query in your Supabase SQL Editor to grant UPDATE access.';
+        console.warn(rlsMsg);
+        return { data: null, error: { message: rlsMsg } };
+      }
+
+      // Sync local storage cache
+      try {
+        let donations = this._get('worlify_donations');
+        const idx = donations.findIndex(d => d.id === donId);
+        if (idx !== -1) {
+          donations[idx] = { ...donations[idx], ...payload };
+          this._set('worlify_donations', donations);
+        }
+      } catch (_) {}
+
+      return { data: data[0], error: null };
+    }
+
+    await new Promise(resolve => setTimeout(resolve, 300));
+    let donations = this._get('worlify_donations');
+    let updatedItem = null;
+    donations = donations.map(d => {
+      if (d.id === donId) {
+        updatedItem = { ...d, ...payload };
+        return updatedItem;
+      }
+      return d;
+    });
+    this._set('worlify_donations', donations);
+    return { data: updatedItem ? [updatedItem] : null, error: null };
   }
 
   // Update user profile details

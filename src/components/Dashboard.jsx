@@ -180,6 +180,14 @@ export default function Dashboard({ user, onUserUpdate, setActiveTab }) {
   const [volunteerFormNotes, setVolunteerFormNotes] = useState('');
   const [isSavingVolunteerStatus, setIsSavingVolunteerStatus] = useState(false);
 
+  // Financial Donations Ledger state (Sub-Tabs & Detail View Modal/Form)
+  const [donationsSubTab, setDonationsSubTab] = useState('under_review');
+  const [selectedDonation, setSelectedDonation] = useState(null);
+  const [donationFormStatus, setDonationFormStatus] = useState('under_review');
+  const [donationFormCause, setDonationFormCause] = useState('');
+  const [donationFormNotes, setDonationFormNotes] = useState('');
+  const [isSavingDonation, setIsSavingDonation] = useState(false);
+
   // Sync profile form when user prop changes
   useEffect(() => {
     if (user) {
@@ -588,6 +596,50 @@ export default function Dashboard({ user, onUserUpdate, setActiveTab }) {
     }
   };
 
+  // Financial Donation Detail View & Status Update Handlers
+  const handleOpenDonationModal = (don) => {
+    setSelectedDonation(don);
+    setDonationFormStatus(don.status || 'under_review');
+    setDonationFormCause(don.cause || '');
+    setDonationFormNotes(don.admin_notes || '');
+  };
+
+  const handleCloseDonationModal = () => {
+    setSelectedDonation(null);
+    setDonationFormStatus('under_review');
+    setDonationFormCause('');
+    setDonationFormNotes('');
+  };
+
+  const handleSaveDonationDetails = async (e) => {
+    e.preventDefault();
+    if (!selectedDonation) return;
+
+    setIsSavingDonation(true);
+    setLoadingMessage('Updating donation transaction details & notes...');
+    try {
+      const payload = {
+        status: donationFormStatus,
+        cause: donationFormCause.trim(),
+        admin_notes: donationFormNotes.trim()
+      };
+      const { error } = await db.updateDonationDetails(selectedDonation.id, payload);
+      if (!error) {
+        showNotification(`Donation details updated successfully! Status set to "${donationFormStatus === 'verified' ? 'Verified' : donationFormStatus === 'under_review' ? 'Under Review' : 'Pending'}".`);
+        await loadDashboardData();
+        handleCloseDonationModal();
+      } else {
+        showNotification(error.message || 'Failed to update donation details.', 'error');
+      }
+    } catch (err) {
+      console.error('Error updating donation details:', err);
+      showNotification('An unexpected error occurred.', 'error');
+    } finally {
+      setIsSavingDonation(false);
+      setLoadingMessage('');
+    }
+  };
+
   const handleDeleteDonation = async (donId) => {
     if (!isAdmin) return;
     if (window.confirm('Delete this donation log?')) {
@@ -667,11 +719,20 @@ export default function Dashboard({ user, onUserUpdate, setActiveTab }) {
   );
   const paginatedMessages = filteredMessages.slice((pageMessages - 1) * pageSizeMessages, pageMessages * pageSizeMessages);
 
-  const filteredDonations = allDonations.filter(d =>
+  // Split donations by sub-tab status: Under Review vs Verified
+  const allUnderReviewDonations = allDonations.filter(d => (d.status || 'under_review') !== 'verified');
+  const allVerifiedDonations = allDonations.filter(d => d.status === 'verified');
+
+  const activeSubTabDonations = donationsSubTab === 'verified' ? allVerifiedDonations : allUnderReviewDonations;
+
+  const filteredDonations = activeSubTabDonations.filter(d =>
     !searchQuery ||
     (d.user_email || '').toLowerCase().includes(searchQuery.toLowerCase()) ||
     (d.donor_name || '').toLowerCase().includes(searchQuery.toLowerCase()) ||
-    (d.cause || '').toLowerCase().includes(searchQuery.toLowerCase())
+    (d.donor_phone || '').toLowerCase().includes(searchQuery.toLowerCase()) ||
+    (d.cause || '').toLowerCase().includes(searchQuery.toLowerCase()) ||
+    (d.razorpay_payment_id || d.razorpay_ref || '').toLowerCase().includes(searchQuery.toLowerCase()) ||
+    (d.admin_notes || '').toLowerCase().includes(searchQuery.toLowerCase())
   );
   const paginatedDonations = filteredDonations.slice((pageDonations - 1) * pageSizeDonations, pageDonations * pageSizeDonations);
 
@@ -1764,78 +1825,246 @@ export default function Dashboard({ user, onUserUpdate, setActiveTab }) {
 
           {/* TAB 6: FINANCIAL DONATIONS LEDGER (Admin Only) */}
           {isAdmin && activePortalTab === 'donations-ledger' && (
-            <div className={styles.recordCard}>
-              <div className={styles.tableHeaderRow}>
-                <div>
-                  <h3 className={styles.cardHeaderTitle} style={{ marginBottom: '4px', border: 'none', padding: 0 }}>
-                    <DollarSign size={22} color="#10b981" />
-                    Complete Financial Donations Ledger ({allDonations.length})
-                  </h3>
-                  <p style={{ fontSize: '13px', color: 'var(--text-muted)', margin: 0 }}>
-                    Admin Financial View: Total Raised ₹{allDonations.reduce((acc, c) => acc + Number(c.amount || 0), 0).toLocaleString()}
-                  </p>
-                </div>
-                <div className={styles.searchBox}>
-                  <Search size={16} color="var(--text-muted)" />
-                  <input
-                    type="text"
-                    placeholder="Search by donor or cause..."
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    className={styles.searchInput}
-                  />
-                </div>
-              </div>
-
-              {filteredDonations.length > 0 ? (
-                <>
-                  <div className={styles.tableContainer}>
-                    <table className={styles.table}>
-                      <thead>
-                        <tr>
-                          <th className={styles.th}>Date</th>
-                          <th className={styles.th}>Donor Email / Name</th>
-                          <th className={styles.th}>Cause</th>
-                          <th className={styles.th}>Amount</th>
-                          <th className={styles.th}>Razorpay Ref</th>
-                          <th className={styles.th}>Delete</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {paginatedDonations.map((don) => (
-                          <tr key={don.id}>
-                            <td className={styles.td}>{formatDate(don.date)}</td>
-                            <td className={styles.td}>
-                              <div style={{ fontWeight: '600' }}>{don.donor_name || 'Anonymous Donor'}</div>
-                              <div style={{ fontSize: '12px', color: 'var(--text-muted)' }}>{don.user_email || 'No Email'}</div>
-                            </td>
-                            <td className={styles.td} style={{ fontWeight: '600', color: 'var(--primary-color)' }}>{don.cause}</td>
-                            <td className={styles.td} style={{ fontWeight: '700', color: '#10b981' }}>₹{Number(don.amount).toLocaleString()}</td>
-                            <td className={styles.td} style={{ fontSize: '12px', fontFamily: 'monospace' }}>{don.razorpay_payment_id || don.razorpay_ref || 'N/A'}</td>
-                            <td className={styles.td}>
-                              <button className={styles.actionBtnDelete} onClick={() => handleDeleteDonation(don.id)}>
-                                <Trash2 size={16} />
-                              </button>
-                            </td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
+            selectedDonation ? (
+              /* DONATION TRANSACTION EDIT / READ FORM VIEW */
+              <div className={styles.recordCard}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '14px', marginBottom: '20px', paddingBottom: '16px', borderBottom: '1px solid var(--border-color)' }}>
+                  <button
+                    type="button"
+                    onClick={handleCloseDonationModal}
+                    style={{ display: 'flex', alignItems: 'center', gap: '6px', background: 'transparent', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-sm)', padding: '7px 14px', cursor: 'pointer', color: 'var(--text-muted)', fontSize: '13px', fontWeight: '600' }}
+                  >
+                    ← Back to Financial Ledger
+                  </button>
+                  <div>
+                    <h3 className={styles.cardHeaderTitle} style={{ margin: 0, border: 'none', padding: 0 }}>
+                      <DollarSign size={22} color="#10b981" />
+                      Donation Details: {selectedDonation.donor_name || 'Anonymous Donor'}
+                    </h3>
+                    <p style={{ margin: '2px 0 0', fontSize: '12px', color: 'var(--text-muted)' }}>
+                      Transaction Ref: <strong style={{ fontFamily: 'monospace' }}>{selectedDonation.razorpay_payment_id || selectedDonation.razorpay_ref || 'N/A'}</strong>
+                    </p>
                   </div>
-                  <PaginationControls
-                    currentPage={pageDonations}
-                    totalItems={filteredDonations.length}
-                    pageSize={pageSizeDonations}
-                    onPageChange={setPageDonations}
-                    onPageSizeChange={setPageSizeDonations}
-                  />
-                </>
-              ) : (
-                <div className={styles.emptyState}>
-                  <p>No financial donation logs found matching "{searchQuery}".</p>
                 </div>
-              )}
-            </div>
+
+                <form onSubmit={handleSaveDonationDetails} className={styles.profileForm}>
+                  {/* Read-Only Transaction Summary Cards */}
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '14px', marginBottom: '24px' }}>
+                    <div style={{ padding: '14px', borderRadius: 'var(--radius-sm)', background: 'var(--bg-card-subtle)', border: '1px solid var(--border-color)' }}>
+                      <div style={{ fontSize: '11px', fontWeight: '700', textTransform: 'uppercase', color: 'var(--text-muted)', marginBottom: '4px' }}>Donor Name</div>
+                      <div style={{ fontSize: '15px', fontWeight: '700', color: 'var(--text-main)' }}>{selectedDonation.donor_name || 'Anonymous Donor'}</div>
+                    </div>
+                    <div style={{ padding: '14px', borderRadius: 'var(--radius-sm)', background: 'var(--bg-card-subtle)', border: '1px solid var(--border-color)' }}>
+                      <div style={{ fontSize: '11px', fontWeight: '700', textTransform: 'uppercase', color: 'var(--text-muted)', marginBottom: '4px' }}>Email Address</div>
+                      <div style={{ fontSize: '14px', fontWeight: '600', color: 'var(--text-main)' }}>{selectedDonation.user_email || 'No Email'}</div>
+                    </div>
+                    <div style={{ padding: '14px', borderRadius: 'var(--radius-sm)', background: 'var(--bg-card-subtle)', border: '1px solid var(--border-color)' }}>
+                      <div style={{ fontSize: '11px', fontWeight: '700', textTransform: 'uppercase', color: 'var(--text-muted)', marginBottom: '4px' }}>Mobile Phone</div>
+                      <div style={{ fontSize: '14px', fontWeight: '600', color: 'var(--text-main)' }}>{selectedDonation.donor_phone || '—'}</div>
+                    </div>
+                    <div style={{ padding: '14px', borderRadius: 'var(--radius-sm)', background: 'rgba(16, 185, 129, 0.08)', border: '1px solid rgba(16, 185, 129, 0.2)' }}>
+                      <div style={{ fontSize: '11px', fontWeight: '700', textTransform: 'uppercase', color: '#059669', marginBottom: '4px' }}>Donation Amount</div>
+                      <div style={{ fontSize: '18px', fontWeight: '800', color: '#10b981' }}>₹{Number(selectedDonation.amount || 0).toLocaleString()}</div>
+                    </div>
+                    <div style={{ padding: '14px', borderRadius: 'var(--radius-sm)', background: 'var(--bg-card-subtle)', border: '1px solid var(--border-color)' }}>
+                      <div style={{ fontSize: '11px', fontWeight: '700', textTransform: 'uppercase', color: 'var(--text-muted)', marginBottom: '4px' }}>Date & Time</div>
+                      <div style={{ fontSize: '13px', fontWeight: '600', color: 'var(--text-main)' }}>{formatDateTime(selectedDonation.date)}</div>
+                    </div>
+                    <div style={{ padding: '14px', borderRadius: 'var(--radius-sm)', background: 'var(--bg-card-subtle)', border: '1px solid var(--border-color)' }}>
+                      <div style={{ fontSize: '11px', fontWeight: '700', textTransform: 'uppercase', color: 'var(--text-muted)', marginBottom: '4px' }}>PAN Card</div>
+                      <div style={{ fontSize: '14px', fontWeight: '700', fontFamily: 'monospace', color: 'var(--text-main)' }}>{selectedDonation.donor_pan || 'N/A'}</div>
+                    </div>
+                    <div style={{ padding: '14px', borderRadius: 'var(--radius-sm)', background: 'var(--bg-card-subtle)', border: '1px solid var(--border-color)', gridColumn: 'span 2' }}>
+                      <div style={{ fontSize: '11px', fontWeight: '700', textTransform: 'uppercase', color: 'var(--text-muted)', marginBottom: '4px' }}>Address & Location</div>
+                      <div style={{ fontSize: '13px', color: 'var(--text-main)' }}>
+                        {[selectedDonation.donor_address, selectedDonation.donor_city, selectedDonation.donor_state, selectedDonation.donor_pincode].filter(Boolean).join(', ') || 'No address provided'}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Admin Editable Fields */}
+                  <div className={styles.formGrid}>
+                    <div className={styles.formGroup}>
+                      <label className={styles.formLabel}>Transaction Status *</label>
+                      <select
+                        value={donationFormStatus}
+                        onChange={(e) => setDonationFormStatus(e.target.value)}
+                        className={styles.roleSelect}
+                        style={{ width: '100%', padding: '12px 14px', fontSize: '14px', fontWeight: '600' }}
+                      >
+                        <option value="under_review">⏳ Under Review (Default)</option>
+                        <option value="verified">✅ Verified (Approved)</option>
+                        <option value="pending">⚠️ Pending (Action Needed)</option>
+                      </select>
+                    </div>
+
+                    <div className={styles.formGroup}>
+                      <label className={styles.formLabel}>Cause / Program Designation *</label>
+                      <input
+                        type="text"
+                        value={donationFormCause}
+                        onChange={(e) => setDonationFormCause(e.target.value)}
+                        className={styles.formInput}
+                        placeholder="e.g. General Fund, Education, Healthcare..."
+                        required
+                      />
+                    </div>
+
+                    <div className={styles.formGroupFull}>
+                      <label className={styles.formLabel}>Admin Notes / Description against Transaction</label>
+                      <textarea
+                        rows={4}
+                        value={donationFormNotes}
+                        onChange={(e) => setDonationFormNotes(e.target.value)}
+                        className={styles.formInput}
+                        placeholder="Add admin notes, audit remarks, or verification comments against this transaction..."
+                        style={{ width: '100%', resize: 'vertical' }}
+                      />
+                    </div>
+                  </div>
+
+                  <div className={styles.profileActionRow} style={{ marginTop: '24px' }}>
+                    <button
+                      type="submit"
+                      className={styles.saveProfileBtn}
+                      disabled={isSavingDonation}
+                    >
+                      {isSavingDonation ? 'Saving Transaction Details...' : 'Save & Update Details'}
+                    </button>
+                    <button
+                      type="button"
+                      className={styles.cancelProfileBtn}
+                      onClick={handleCloseDonationModal}
+                      disabled={isSavingDonation}
+                    >
+                      Cancel & Go Back
+                    </button>
+                  </div>
+                </form>
+              </div>
+            ) : (
+              /* DONATIONS TABLE & SUB-TABS LIST VIEW */
+              <div className={styles.recordCard}>
+                <div className={styles.tableHeaderRow}>
+                  <div>
+                    <h3 className={styles.cardHeaderTitle} style={{ marginBottom: '4px', border: 'none', padding: 0 }}>
+                      <DollarSign size={22} color="#10b981" />
+                      Complete Financial Donations Ledger ({allDonations.length})
+                    </h3>
+                    <p style={{ fontSize: '13px', color: 'var(--text-muted)', margin: 0 }}>
+                      Admin Financial View: Total Raised ₹{allDonations.reduce((acc, c) => acc + Number(c.amount || 0), 0).toLocaleString()}
+                    </p>
+                  </div>
+                  <div className={styles.searchBox}>
+                    <Search size={16} color="var(--text-muted)" />
+                    <input
+                      type="text"
+                      placeholder="Search by donor, cause or ref..."
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                      className={styles.searchInput}
+                    />
+                  </div>
+                </div>
+
+                {/* Sub-Tabs: Under Review Transactions vs Verified Donations */}
+                <div className={styles.subTabsBar}>
+                  <button
+                    className={`${styles.subTabBtn} ${donationsSubTab === 'under_review' ? styles.subTabBtnActive : ''}`}
+                    onClick={() => {
+                      setDonationsSubTab('under_review');
+                      setPageDonations(1);
+                    }}
+                  >
+                    <Clock size={15} />
+                    Under Review Transactions
+                    <span className={styles.subTabCountPill}>{allUnderReviewDonations.length}</span>
+                  </button>
+
+                  <button
+                    className={`${styles.subTabBtn} ${donationsSubTab === 'verified' ? styles.subTabBtnActive : ''}`}
+                    onClick={() => {
+                      setDonationsSubTab('verified');
+                      setPageDonations(1);
+                    }}
+                  >
+                    <CheckCircle size={15} />
+                    Verified Donations
+                    <span className={styles.subTabCountPill}>{allVerifiedDonations.length}</span>
+                  </button>
+                </div>
+
+                {filteredDonations.length > 0 ? (
+                  <>
+                    <div className={styles.tableContainer}>
+                      <table className={styles.table}>
+                        <thead>
+                          <tr>
+                            <th className={styles.th}>Date</th>
+                            <th className={styles.th}>Donor Email / Name</th>
+                            <th className={styles.th}>Cause</th>
+                            <th className={styles.th}>Amount</th>
+                            <th className={styles.th}>Razorpay Ref</th>
+                            <th className={styles.th}>Status</th>
+                            <th className={styles.th}>Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {paginatedDonations.map((don) => (
+                            <tr key={don.id}>
+                              <td className={styles.td}>{formatDate(don.date)}</td>
+                              <td className={styles.td}>
+                                <div style={{ fontWeight: '600' }}>{don.donor_name || 'Anonymous Donor'}</div>
+                                <div style={{ fontSize: '12px', color: 'var(--text-muted)' }}>{don.user_email || 'No Email'}</div>
+                              </td>
+                              <td className={styles.td} style={{ fontWeight: '600', color: 'var(--primary-color)' }}>{don.cause}</td>
+                              <td className={styles.td} style={{ fontWeight: '700', color: '#10b981' }}>₹{Number(don.amount).toLocaleString()}</td>
+                              <td className={styles.td} style={{ fontSize: '12px', fontFamily: 'monospace' }}>{don.razorpay_payment_id || don.razorpay_ref || 'N/A'}</td>
+                              <td className={styles.td}>
+                                <span className={`${styles.statusBadge} ${don.status === 'verified' ? styles.statusResolved : styles.statusPending}`}>
+                                  {don.status === 'verified' ? '✅ Verified' : don.status === 'under_review' ? '⏳ Under Review' : '⚠️ Pending'}
+                                </span>
+                              </td>
+                              <td className={styles.td}>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                                  <button
+                                    className={styles.actionBtnManage}
+                                    onClick={() => handleOpenDonationModal(don)}
+                                    title="Read & Update Donation Details"
+                                    style={{ padding: '7px 10px' }}
+                                  >
+                                    <Eye size={15} />
+                                  </button>
+                                  <button
+                                    className={styles.actionBtnDelete}
+                                    onClick={() => handleDeleteDonation(don.id)}
+                                    title="Delete Donation Record"
+                                    style={{ padding: '7px 10px' }}
+                                  >
+                                    <Trash2 size={15} />
+                                  </button>
+                                </div>
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                    <PaginationControls
+                      currentPage={pageDonations}
+                      totalItems={filteredDonations.length}
+                      pageSize={pageSizeDonations}
+                      onPageChange={setPageDonations}
+                      onPageSizeChange={setPageSizeDonations}
+                    />
+                  </>
+                ) : (
+                  <div className={styles.emptyState}>
+                    <p>No {donationsSubTab === 'verified' ? 'verified' : 'under review'} donation logs found{searchQuery ? ` matching "${searchQuery}"` : ''}.</p>
+                  </div>
+                )}
+              </div>
+            )
           )}
 
           {/* TAB: USER EDIT INLINE FORM (replaces modal — Admin & Coordinator) */}

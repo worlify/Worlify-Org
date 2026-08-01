@@ -263,7 +263,7 @@ export default function Donate({ user, preloadedCause, clearPreload, setActiveTa
       donor_state: state.trim(),
       donor_pan: panNumber ? panNumber.trim().toUpperCase() : null,
       frequency: 'one-time',
-      status: 'pending',
+      status: 'under_review',
       declaration: isCitizenDeclared,
       razorpay_ref: 'Razorpay Checkout'
     };
@@ -297,7 +297,7 @@ export default function Donate({ user, preloadedCause, clearPreload, setActiveTa
         try {
           const { data, error } = await db.addDonation(currentAmount, selectedCause, email.trim(), {
             ...donationPayload,
-            status: 'completed',
+            status: 'under_review',
             razorpay_payment_id: paymentId,
             razorpay_ref: paymentId
           });

@@ -1468,7 +1468,6 @@ export default function Dashboard({ user, onUserUpdate, setActiveTab }) {
                             <th className={styles.th}>Location</th>
                             <th className={styles.th}>Status</th>
                             <th className={styles.th}>Action</th>
-                            {isAdmin && <th className={styles.th}>Delete</th>}
                           </tr>
                         </thead>
                         <tbody>
@@ -1495,23 +1494,29 @@ export default function Dashboard({ user, onUserUpdate, setActiveTab }) {
                                 </span>
                               </td>
                               <td className={styles.td}>
-                                <button
-                                  type="button"
-                                  className={styles.actionBtnEdit}
-                                  style={{ padding: '8px 10px', background: 'rgba(13, 148, 136, 0.08)', color: 'var(--primary-color)', borderColor: 'rgba(13, 148, 136, 0.2)' }}
-                                  onClick={() => handleOpenVolunteerModal(vol)}
-                                  title="View & Read Volunteer Details"
-                                >
-                                  <Eye size={16} />
-                                </button>
-                              </td>
-                              {isAdmin && (
-                                <td className={styles.td}>
-                                  <button className={styles.actionBtnDelete} onClick={() => handleDeleteVolunteer(vol.id)}>
-                                    <Trash2 size={16} />
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                                  <button
+                                    type="button"
+                                    className={styles.actionBtnManage}
+                                    onClick={() => handleOpenVolunteerModal(vol)}
+                                    title="View & Read Volunteer Details"
+                                    style={{ padding: '7px 10px' }}
+                                  >
+                                    <Eye size={15} />
                                   </button>
-                                </td>
-                              )}
+                                  {isAdmin && (
+                                    <button
+                                      type="button"
+                                      className={styles.actionBtnDelete}
+                                      onClick={() => handleDeleteVolunteer(vol.id)}
+                                      title="Delete Volunteer Record"
+                                      style={{ padding: '7px 10px' }}
+                                    >
+                                      <Trash2 size={15} />
+                                    </button>
+                                  )}
+                                </div>
+                              </td>
                             </tr>
                           ))}
                         </tbody>

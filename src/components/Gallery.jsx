@@ -24,7 +24,6 @@ import slider2 from '../assets/images/slider_new2.jpg';
 import slider3 from '../assets/images/slider3.jpg';
 import slider4 from '../assets/images/slider_new4.jpg';
 import lxmiDevi from '../assets/images/lxmina_devi.jpg';
-import rahulVerma from '../assets/images/rahul_kumar_verma.jpg';
 import brideKit from '../assets/images/bride_household_kit.png';
 import cattleFodder from '../assets/images/cattle_fodder_distribution.png';
 import elderlyFood from '../assets/images/elderly_food_ration.png';
@@ -53,17 +52,7 @@ export default function Gallery({ setActiveTab, setDonationPreload }) {
 
   // Master Gallery Dataset (25 High-Quality Photos for Pagination Testing)
   const galleryItems = useMemo(() => [
-    {
-      id: 1,
-      title: "Empowering Rural Girls Through STEM Education",
-      category: "Volunteers",
-      image: heroGirl,
-      description: "Providing public micro-scholarships & science lab kits to rural young women.",
-      views: "4.8k Views",
-      date: "June 2026",
-      fullStory: "Amara grew up in a rural village where access to science education was limited. Through Worlify's STEM Scholar program, she secured a full scholarship to study biotechnology at the Africa Biosciences Hub in Kigali. Today, she is lead researcher on a crop resistance project directly impacting over 10,000 farmers.",
-      location: "Kigali & Bihar Outposts"
-    },
+
     {
       id: 2,
       title: "Elderly Food Ration & Healthcare Support Drive",
@@ -209,17 +198,7 @@ export default function Gallery({ setActiveTab, setDonationPreload }) {
       fullStory: "Inaugurated solar-powered extraction rigs linked to sand filtration beds, delivering clean, chilled drinking water to community taps and dropping water-borne illnesses by 80%.",
       location: "Thar Desert Fringe"
     },
-    {
-      id: 17,
-      title: "Youth Career Counselling & Micro-Grants",
-      category: "Volunteers",
-      image: rahulVerma,
-      description: "Guiding first-generation college aspirants with entrance coaching & micro-grants.",
-      views: "3.5k Views",
-      date: "Oct 2025",
-      fullStory: "Providing high school graduates from low-income families with career mentorship, scholarship application help, and preparatory books for national technical entrance exams.",
-      location: "Ranchi Educational Hub"
-    },
+
     {
       id: 18,
       title: "Community Warm Blanket & Winter Aid Drive",
@@ -276,6 +255,7 @@ export default function Gallery({ setActiveTab, setDonationPreload }) {
       fullStory: "Over 500 children participated in an open-air painting workshop expressing their dreams for clean oceans, green forests, and equal access to education.",
       location: "Bhopal Cultural Center"
     },
+
     {
       id: 24,
       title: "Emergency Ambulance & Disaster Support Fleet",
@@ -353,12 +333,7 @@ export default function Gallery({ setActiveTab, setDonationPreload }) {
       fullStory: "Protecting community animals through free vaccination camps, health checkups, and emergency medical kits for local animal caregivers.",
       location: "District Care Center"
     },
-    {
-      id: 31,
-      title: "Animal Rehabilitation & Shelter Welfare Drive",
-      category: "Animal Welfare",
-      image: "/images/gallery/animal-welfare/animal_7.jpg"
-    },
+
     { id: 32, category: "Environment", image: "/images/gallery/environment/plantation_8.jpg" },
     { id: 33, category: "Environment", image: "/images/gallery/environment/plantation_13.jpg" },
     { id: 34, category: "Environment", image: "/images/gallery/environment/plantation_14.jpg" },

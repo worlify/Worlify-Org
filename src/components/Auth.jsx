@@ -18,6 +18,10 @@ export default function Auth({ onLoginSuccess }) {
   const [password, setPassword] = useState('');
   const [fullName, setFullName] = useState('');
 
+  // Show/hide password toggle per form
+  const [showSignInPassword, setShowSignInPassword] = useState(false);
+  const [showSignUpPassword, setShowSignUpPassword] = useState(false);
+
   // Feedback states
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
@@ -133,7 +137,10 @@ export default function Auth({ onLoginSuccess }) {
 
         {/* Auth Form Panel */}
         {activeTab === 'signin' ? (
-          <form onSubmit={handleSignIn} id="signin-form">
+          <form onSubmit={handleSignIn} id="signin-form" autoComplete="off">
+            {/* Hidden honeypot inputs — trick browsers into NOT autofilling the real fields */}
+            <input type="text" name="fake_user" style={{ display: 'none' }} readOnly tabIndex={-1} aria-hidden="true" />
+            <input type="password" name="fake_pass" style={{ display: 'none' }} readOnly tabIndex={-1} aria-hidden="true" />
             <div className={styles.inputGroup}>
               <label className={styles.label}>Email Address *</label>
               <input
@@ -142,7 +149,7 @@ export default function Auth({ onLoginSuccess }) {
                 placeholder="example@gmail.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                autoComplete="email"
+                autoComplete="off"
                 autoCapitalize="none"
                 autoCorrect="off"
                 inputMode="email"
@@ -153,16 +160,40 @@ export default function Auth({ onLoginSuccess }) {
 
             <div className={styles.inputGroup}>
               <label className={styles.label}>Password *</label>
-              <input
-                type="password"
-                className={styles.input}
-                placeholder="••••••••"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                autoComplete="current-password"
-                required
-                id="signin-password-input"
-              />
+              <div className={styles.passwordWrapper}>
+                <input
+                  type={showSignInPassword ? 'text' : 'password'}
+                  className={styles.input}
+                  placeholder="••••••••"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  autoComplete="off"
+                  required
+                  id="signin-password-input"
+                />
+                <button
+                  type="button"
+                  className={styles.eyeBtn}
+                  onClick={() => setShowSignInPassword(prev => !prev)}
+                  tabIndex={-1}
+                  aria-label={showSignInPassword ? 'Hide password' : 'Show password'}
+                  id="signin-toggle-password-btn"
+                >
+                  {showSignInPassword ? (
+                    // Eye-off icon
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/>
+                      <line x1="1" y1="1" x2="23" y2="23"/>
+                    </svg>
+                  ) : (
+                    // Eye icon
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                      <circle cx="12" cy="12" r="3"/>
+                    </svg>
+                  )}
+                </button>
+              </div>
             </div>
 
             <button
@@ -189,7 +220,11 @@ export default function Auth({ onLoginSuccess }) {
             </p>
           </form>
         ) : (
-          <form onSubmit={handleSignUp} id="signup-form">
+          <form onSubmit={handleSignUp} id="signup-form" autoComplete="off">
+            {/* Hidden honeypot inputs — trick browsers into NOT autofilling the real fields */}
+            <input type="text" name="fake_username" style={{ display: 'none' }} readOnly tabIndex={-1} aria-hidden="true" />
+            <input type="password" name="fake_password" style={{ display: 'none' }} readOnly tabIndex={-1} aria-hidden="true" />
+
             <div className={styles.inputGroup}>
               <label className={styles.label}>Full Name *</label>
               <input
@@ -198,6 +233,9 @@ export default function Auth({ onLoginSuccess }) {
                 placeholder="e.g. Jane Doe"
                 value={fullName}
                 onChange={(e) => setFullName(e.target.value)}
+                autoComplete="off"
+                autoCorrect="off"
+                autoCapitalize="words"
                 required
                 id="signup-name-input"
               />
@@ -211,7 +249,7 @@ export default function Auth({ onLoginSuccess }) {
                 placeholder="example@gmail.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                autoComplete="email"
+                autoComplete="off"
                 autoCapitalize="none"
                 autoCorrect="off"
                 inputMode="email"
@@ -222,16 +260,38 @@ export default function Auth({ onLoginSuccess }) {
 
             <div className={styles.inputGroup}>
               <label className={styles.label}>Secure Password (Min 6 chars) *</label>
-              <input
-                type="password"
-                className={styles.input}
-                placeholder="••••••••"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                autoComplete="new-password"
-                required
-                id="signup-password-input"
-              />
+              <div className={styles.passwordWrapper}>
+                <input
+                  type={showSignUpPassword ? 'text' : 'password'}
+                  className={styles.input}
+                  placeholder="••••••••"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  autoComplete="new-password"
+                  required
+                  id="signup-password-input"
+                />
+                <button
+                  type="button"
+                  className={styles.eyeBtn}
+                  onClick={() => setShowSignUpPassword(prev => !prev)}
+                  tabIndex={-1}
+                  aria-label={showSignUpPassword ? 'Hide password' : 'Show password'}
+                  id="signup-toggle-password-btn"
+                >
+                  {showSignUpPassword ? (
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/>
+                      <line x1="1" y1="1" x2="23" y2="23"/>
+                    </svg>
+                  ) : (
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                      <circle cx="12" cy="12" r="3"/>
+                    </svg>
+                  )}
+                </button>
+              </div>
             </div>
 
             <button

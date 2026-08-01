@@ -20,6 +20,7 @@ import Legal from './components/Legal';
 import Footer from './components/Footer';
 import KeysModal from './components/KeysModal';
 import FloatingActions from './components/FloatingActions';
+import Toast from './components/Toast';
 import { db, isLocalMode } from './lib/supabase';
 
 const VALID_TABS = [
@@ -120,6 +121,9 @@ export default function App() {
 
   // Supabase credentials configuration modal state
   const [keysModalOpen, setKeysModalOpen] = useState(false);
+
+  // Toast notification state
+  const [toast, setToast] = useState({ message: '', type: 'success' });
 
   // Loading state for recovery session check
   const [isLoadingSession, setIsLoadingSession] = useState(true);
@@ -356,6 +360,10 @@ export default function App() {
   const handleLoginSuccess = (userData) => {
     setUser(userData);
     setActiveTab('dashboard'); // Forward to dashboard
+    setToast({
+      message: `Welcome back, ${userData.first_name || 'Supporter'}! Signed in successfully.`,
+      type: 'success'
+    });
   };
 
   // Logout handler
@@ -365,11 +373,22 @@ export default function App() {
       if (!error) {
         setUser(null);
         setActiveTab('home'); // Send back home
+        setToast({
+          message: 'You have been logged out successfully. See you soon!',
+          type: 'info'
+        });
       } else {
-        alert('Logout failed: ' + error.message);
+        setToast({
+          message: 'Logout failed: ' + error.message,
+          type: 'error'
+        });
       }
     } catch (err) {
       console.error('Error during logout: ', err);
+      setToast({
+        message: 'An unexpected error occurred during logout.',
+        type: 'error'
+      });
     }
   };
 
@@ -447,6 +466,12 @@ export default function App() {
       }}
       id="worlify-root"
     >
+      {/* Toast Notification */}
+      <Toast
+        message={toast.message}
+        type={toast.type}
+        onClose={() => setToast({ message: '', type: 'success' })}
+      />
       {/* 1. Universal Site Navigation */}
       <Navbar
         activeTab={activeTab}
@@ -554,6 +579,7 @@ export default function App() {
         {activeTab === 'dashboard' && (
           <Dashboard
             user={user}
+            onUserUpdate={(updatedUser) => setUser(updatedUser)}
             setActiveTab={setActiveTab}
           />
         )}

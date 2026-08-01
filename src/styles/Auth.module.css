@@ -134,3 +134,39 @@
 .toggleLink:hover {
   text-decoration: underline;
 }
+
+/* Password show/hide toggle */
+.passwordWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.passwordWrapper .input {
+  width: 100%;
+  padding-right: 46px; /* make room for the eye button */
+}
+
+.eyeBtn {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  padding: 4px;
+  cursor: pointer;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: var(--transition-fast);
+  line-height: 0;
+}
+
+.eyeBtn:hover {
+  color: var(--primary-color);
+  background-color: rgba(13, 148, 136, 0.08);
+}
+

@@ -761,7 +761,7 @@
 
 .marqueeTextContainer {
   display: inline-flex;
-  animation: scrollMarquee 35s linear infinite;
+  animation: scrollMarquee 18s linear infinite;
 }
 
 .marqueeTextContainer:hover {

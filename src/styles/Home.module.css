@@ -24,11 +24,35 @@
 .heroSection {
   position: relative;
   height: 600px;
+  width: 100%;
   color: white;
   display: flex;
   align-items: center;
   overflow: hidden;
 }
+
+@media (max-width: 1024px) {
+  .heroSection {
+    height: 450px;
+  }
+}
+
+@media (max-width: 768px) {
+  .heroSection {
+    height: auto;
+    aspect-ratio: 16 / 9;
+    min-height: 220px;
+  }
+}
+
+@media (max-width: 480px) {
+  .heroSection {
+    height: auto;
+    aspect-ratio: 16 / 9;
+    min-height: 190px;
+  }
+}
+
 
 .heroSliderContainer {
   position: absolute;

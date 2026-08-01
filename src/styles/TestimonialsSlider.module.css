@@ -202,3 +202,54 @@
     padding: 2.25rem 1.25rem 1.5rem 1.25rem;
   }
 }
+
+/* ================================================================
+   DARK THEME OVERRIDES
+   ================================================================ */
+:global([data-theme='dark']) .testimonialsSection {
+  background-color: #0b0f19;
+}
+
+:global([data-theme='dark']) .mainHeading {
+  color: #38bdf8;
+}
+
+:global([data-theme='dark']) .subHeading {
+  color: #f87171;
+}
+
+:global([data-theme='dark']) .testimonialCard {
+  background-color: #111827;
+  border-color: rgba(248, 113, 113, 0.4);
+  box-shadow: 0 10px 24px -6px rgba(0, 0, 0, 0.4);
+}
+
+:global([data-theme='dark']) .testimonialCard:hover {
+  border-color: #f87171;
+  box-shadow: 0 18px 30px -8px rgba(230, 46, 46, 0.25);
+}
+
+:global([data-theme='dark']) .borderSegmentLeft,
+:global([data-theme='dark']) .borderSegmentRight {
+  background-color: rgba(248, 113, 113, 0.4);
+}
+
+:global([data-theme='dark']) .quoteAccentGroup {
+  background-color: #111827;
+}
+
+:global([data-theme='dark']) .quoteText {
+  color: #e2e8f0;
+}
+
+:global([data-theme='dark']) .authorSection {
+  border-top-color: #1f2937;
+}
+
+:global([data-theme='dark']) .authorName {
+  color: #38bdf8;
+}
+
+:global([data-theme='dark']) .authorRole {
+  color: #94a3b8;
+}

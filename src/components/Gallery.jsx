@@ -44,12 +44,19 @@ export default function Gallery({ setActiveTab, setDonationPreload }) {
   const touchStartX = useRef(0);
   const touchEndX = useRef(0);
 
+  // Helper to handle both Next.js imported image objects (.src) and static URL strings
+  const getImageSrc = (img) => {
+    if (!img) return '';
+    if (typeof img === 'object' && img.src) return img.src;
+    return img;
+  };
+
   // Master Gallery Dataset (25 High-Quality Photos for Pagination Testing)
   const galleryItems = useMemo(() => [
     {
       id: 1,
       title: "Empowering Rural Girls Through STEM Education",
-      category: "Education",
+      category: "Volunteers",
       image: heroGirl,
       description: "Providing public micro-scholarships & science lab kits to rural young women.",
       views: "4.8k Views",
@@ -79,21 +86,11 @@ export default function Gallery({ setActiveTab, setDonationPreload }) {
       fullStory: "High altitude isolation should never dictate health outcomes. Our custom-outfitted, all-terrain mobile clinic vans traverse challenging mountain roads weekly, providing free checkups and vital medication.",
       location: "Uttarakhand Hill Outposts"
     },
-    {
-      id: 4,
-      title: "Women's Micro-Enterprise & Craft Co-op",
-      category: "Women Empowerment",
-      image: lxmiDevi,
-      description: "Artisan tailoring workshops empowering rural women with economic independence.",
-      views: "5.4k Views",
-      date: "April 2026",
-      fullStory: "30 women graduated from artisan tailoring workshops to launch a self-sustaining cooperative. Equipped with sewing machines and raw fabrics, they now produce school uniforms for local districts.",
-      location: "Jaipur Rural Center"
-    },
+
     {
       id: 5,
       title: "Shiksha Na Ruke: Evening Learning Hubs",
-      category: "Education",
+      category: "Community Support",
       image: shikshaRuke,
       description: "Bridge courses & warm meals for 400+ underprivileged children after work hours.",
       views: "6.2k Views",
@@ -159,7 +156,7 @@ export default function Gallery({ setActiveTab, setDonationPreload }) {
     {
       id: 11,
       title: "Digital Literacy Laptop Labs for Rural Schools",
-      category: "Education",
+      category: "Community Support",
       image: slider2,
       description: "Solar-powered computer labs equipping rural primary schools with tech skills.",
       views: "4.3k Views",
@@ -167,17 +164,7 @@ export default function Gallery({ setActiveTab, setDonationPreload }) {
       fullStory: "Bridging the digital divide starts early. We established 10 solar-powered computer labs with 150 laptops, enabling over 2,000 rural students to gain typing, computer literacy, and internet access.",
       location: "Madhya Pradesh Villages"
     },
-    {
-      id: 12,
-      title: "Bride Household Rehabilitation Kit Drive",
-      category: "Women Empowerment",
-      image: brideKit,
-      description: "Assisting impoverished young women from destitute families with essential home starter kits.",
-      views: "3.7k Views",
-      date: "Dec 2025",
-      fullStory: "Underprivileged brides from poverty-stricken households received sewing machines, kitchen utensils, bedding, and dignity kits to help start their new family lives with self-respect.",
-      location: "Bundelkhand Region"
-    },
+
     {
       id: 13,
       title: "Elderly Health & Comprehensive Checkup Camp",
@@ -225,7 +212,7 @@ export default function Gallery({ setActiveTab, setDonationPreload }) {
     {
       id: 17,
       title: "Youth Career Counselling & Micro-Grants",
-      category: "Education",
+      category: "Volunteers",
       image: rahulVerma,
       description: "Guiding first-generation college aspirants with entrance coaching & micro-grants.",
       views: "3.5k Views",
@@ -266,17 +253,7 @@ export default function Gallery({ setActiveTab, setDonationPreload }) {
       fullStory: "Combating loneliness among seniors by establishing day recreation centers equipped with libraries, board games, yoga sessions, and daily community meals.",
       location: "Kolkata Suburbs"
     },
-    {
-      id: 21,
-      title: "Vocational Handicraft & Clay Pottery Workshop",
-      category: "Women Empowerment",
-      image: lxmiDevi,
-      description: "Preserving traditional artisan skills while training women in modern e-commerce sales.",
-      views: "3.8k Views",
-      date: "Apr 2025",
-      fullStory: "Connecting traditional women artisans directly with online marketplaces, eliminating middleman cuts and boosting monthly household income by 150%.",
-      location: "Kutch Cultural Zone"
-    },
+
     {
       id: 22,
       title: "Slum Sanitation & Clean Neighborhood Drive",
@@ -291,7 +268,7 @@ export default function Gallery({ setActiveTab, setDonationPreload }) {
     {
       id: 23,
       title: "Children's Art & Creative Expression Fest",
-      category: "Education",
+      category: "Volunteers",
       image: kidsStory,
       description: "Annual art competition & talent showcase celebrating creativity in primary school kids.",
       views: "4.9k Views",
@@ -382,24 +359,39 @@ export default function Gallery({ setActiveTab, setDonationPreload }) {
       category: "Animal Welfare",
       image: "/images/gallery/animal-welfare/animal_7.jpg"
     },
-    { id: 32, category: "Environment", image: "/images/gallery/environment/plantation_1.jpg" },
-    { id: 33, category: "Environment", image: "/images/gallery/environment/plantation_2.jpg" },
-    { id: 34, category: "Environment", image: "/images/gallery/environment/plantation_3.jpg" },
-    { id: 35, category: "Environment", image: "/images/gallery/environment/plantation_4.jpg" },
-    { id: 36, category: "Environment", image: "/images/gallery/environment/plantation_5.jpg" },
-    { id: 37, category: "Environment", image: "/images/gallery/environment/plantation_6.jpg" },
-    { id: 38, category: "Environment", image: "/images/gallery/environment/plantation_7.jpg" },
-    { id: 39, category: "Environment", image: "/images/gallery/environment/plantation_8.jpg" },
-    { id: 40, category: "Environment", image: "/images/gallery/environment/plantation_9.jpg" },
-    { id: 41, category: "Environment", image: "/images/gallery/environment/plantation_10.jpg" },
-    { id: 42, category: "Environment", image: "/images/gallery/environment/plantation_11.jpg" },
-    { id: 43, category: "Environment", image: "/images/gallery/environment/plantation_12.jpg" },
-    { id: 44, category: "Environment", image: "/images/gallery/environment/plantation_13.jpg" },
-    { id: 45, category: "Environment", image: "/images/gallery/environment/plantation_14.jpg" },
-    { id: 46, category: "Environment", image: "/images/gallery/environment/plantation_15.jpg" },
-    { id: 47, category: "Environment", image: "/images/gallery/environment/plantation_16.jpg" },
-    { id: 48, category: "Environment", image: "/images/gallery/environment/plantation_17.jpg" },
-    { id: 49, category: "Environment", image: "/images/gallery/environment/plantation_18.jpg" }
+    { id: 32, category: "Environment", image: "/images/gallery/environment/plantation_8.jpg" },
+    { id: 33, category: "Environment", image: "/images/gallery/environment/plantation_13.jpg" },
+    { id: 34, category: "Environment", image: "/images/gallery/environment/plantation_14.jpg" },
+    { id: 35, category: "Environment", image: "/images/gallery/environment/plantation_15.jpg" },
+    { id: 36, category: "Environment", image: "/images/gallery/environment/plantation_16.jpg" },
+    { id: 50, category: "Education", image: "/images/gallery/education/education_1.jpg" },
+    { id: 51, category: "Education", image: "/images/gallery/education/education_2.jpg" },
+    { id: 52, category: "Education", image: "/images/gallery/education/education_3.jpg" },
+    { id: 53, category: "Education", image: "/images/gallery/education/education_4.jpg" },
+    { id: 54, category: "Education", image: "/images/gallery/education/education_5.jpg" },
+    { id: 55, category: "Education", image: "/images/gallery/education/education_6.jpg" },
+    { id: 56, category: "Education", image: "/images/gallery/education/education_7.jpg" },
+    { id: 57, category: "Education", image: "/images/gallery/education/education_8.jpg" },
+    { id: 58, category: "Education", image: "/images/gallery/education/education_9.jpg" },
+    { id: 59, category: "Education", image: "/images/gallery/education/education_10.jpg" },
+    { id: 60, category: "Education", image: "/images/gallery/education/education_11.jpg" },
+    { id: 61, category: "Education", image: "/images/gallery/education/education_12.jpg" },
+    { id: 62, category: "Education", image: "/images/gallery/education/education_13.jpg" },
+    { id: 63, category: "Education", image: "/images/gallery/education/education_14.jpg" },
+    { id: 64, category: "Education", image: "/images/gallery/education/education_15.jpg" },
+    { id: 65, category: "Education", image: "/images/gallery/education/education_16.jpg" },
+    { id: 66, category: "Education", image: "/images/gallery/education/education_17.jpg" },
+    { id: 67, category: "Education", image: "/images/gallery/education/education_18.jpg" },
+    { id: 68, category: "Education", image: "/images/gallery/education/education_19.jpg" },
+    { id: 69, category: "Education", image: "/images/gallery/education/education_20.jpg" },
+    { id: 70, category: "Education", image: "/images/gallery/education/education_21.jpg" },
+    { id: 71, category: "Education", image: "/images/gallery/education/education_22.jpg" },
+    { id: 72, category: "Education", image: "/images/gallery/education/education_23.jpg" },
+    { id: 73, category: "Education", image: "/images/gallery/education/education_24.jpg" },
+    { id: 74, category: "Education", image: "/images/gallery/education/education_25.jpg" },
+    { id: 75, category: "Education", image: "/images/gallery/education/education_26.jpg" },
+    { id: 76, category: "Education", image: "/images/gallery/education/education_27.jpg" },
+    { id: 77, category: "Education", image: "/images/gallery/education/education_28.jpg" }
   ], []);
 
   // Category Filter Options
@@ -553,8 +545,8 @@ export default function Gallery({ setActiveTab, setDonationPreload }) {
                   {/* Curved Border Image Wrapper */}
                   <div className={styles.imageWrapper}>
                     <img
-                      src={item.image}
-                      alt={item.title}
+                      src={getImageSrc(item.image)}
+                      alt={item.title || "Worlify Memory"}
                       loading="lazy"
                       className={styles.galleryImg}
                     />
@@ -655,8 +647,8 @@ export default function Gallery({ setActiveTab, setDonationPreload }) {
 
               <div className={`${styles.modalImageWrapper} ${isZoomed ? styles.zoomed : ''}`}>
                 <img
-                  src={currentSelectedItem.image}
-                  alt={currentSelectedItem.title}
+                  src={getImageSrc(currentSelectedItem.image)}
+                  alt={currentSelectedItem.title || "Worlify Memory"}
                   className={styles.modalImg}
                 />
               </div>

@@ -1,7 +1,7 @@
 Add-Type -AssemblyName System.Drawing
 
 $baseDir = "c:\Users\DELL\Downloads\Worlify\worlify\public\images\gallery"
-$categories = @("environment", "animal-welfare")
+$categories = @("education", "environment", "animal-welfare")
 
 foreach ($cat in $categories) {
     $dir = Join-Path $baseDir $cat

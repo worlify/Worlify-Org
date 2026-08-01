@@ -1302,18 +1302,18 @@ export default function Dashboard({ user, onUserUpdate, setActiveTab }) {
               /* INLINE FORM PAGE FOR VOLUNTEER APPLICATION DETAILS & STATUS REVIEW */
               <div className={styles.recordCard}>
                 {/* Header with Back Button */}
-                <div style={{ display: 'flex', alignItems: 'center', gap: '14px', marginBottom: '24px', paddingBottom: '16px', borderBottom: '1px solid var(--border-color)' }}>
+                <div className={styles.detailHeader}>
                   <button
                     type="button"
                     onClick={handleCloseVolunteerModal}
-                    style={{ display: 'flex', alignItems: 'center', gap: '6px', background: 'transparent', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-sm)', padding: '8px 16px', cursor: 'pointer', color: 'var(--text-main)', fontSize: '13px', fontWeight: '600' }}
+                    className={styles.backBtn}
                   >
                     ← Back to Volunteer Registry
                   </button>
-                  <div>
+                  <div className={styles.detailTitleWrapper}>
                     <h3 className={styles.cardHeaderTitle} style={{ margin: 0, border: 'none', padding: 0 }}>
-                      <ClipboardList size={22} color="var(--primary-color)" />
-                      Volunteer Application Details & Form Page
+                      <ClipboardList size={22} color="var(--primary-color)" style={{ flexShrink: 0 }} />
+                      <span className={styles.detailHeaderHeadingText}>Volunteer Application Details & Form Page</span>
                     </h3>
                     <p style={{ margin: '2px 0 0', fontSize: '12.5px', color: 'var(--text-muted)' }}>
                       Review complete applicant information, cause selection, motivation statement, and add internal notes or status updates.
@@ -1545,18 +1545,18 @@ export default function Dashboard({ user, onUserUpdate, setActiveTab }) {
               /* INLINE FORM PAGE FOR CONTACT INQUIRY RESOLUTION */
               <div className={styles.recordCard}>
                 {/* Header with Back Button */}
-                <div style={{ display: 'flex', alignItems: 'center', gap: '14px', marginBottom: '24px', paddingBottom: '16px', borderBottom: '1px solid var(--border-color)' }}>
+                <div className={styles.detailHeader}>
                   <button
                     type="button"
                     onClick={handleCloseContactMsgModal}
-                    style={{ display: 'flex', alignItems: 'center', gap: '6px', background: 'transparent', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-sm)', padding: '8px 16px', cursor: 'pointer', color: 'var(--text-main)', fontSize: '13px', fontWeight: '600' }}
+                    className={styles.backBtn}
                   >
                     ← Back to Contact Inbox
                   </button>
-                  <div>
+                  <div className={styles.detailTitleWrapper}>
                     <h3 className={styles.cardHeaderTitle} style={{ margin: 0, border: 'none', padding: 0 }}>
-                      <Mail size={22} color="var(--primary-color)" />
-                      Contact Inquiry Details & Resolution Form
+                      <Mail size={22} color="var(--primary-color)" style={{ flexShrink: 0 }} />
+                      <span className={styles.detailHeaderHeadingText}>Contact Inquiry Details & Resolution Form</span>
                     </h3>
                     <p style={{ margin: '2px 0 0', fontSize: '12.5px', color: 'var(--text-muted)' }}>
                       Review sender information, inquiry message body, and update resolution status.
@@ -1833,55 +1833,55 @@ export default function Dashboard({ user, onUserUpdate, setActiveTab }) {
             selectedDonation ? (
               /* DONATION TRANSACTION EDIT / READ FORM VIEW */
               <div className={styles.recordCard}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '14px', marginBottom: '20px', paddingBottom: '16px', borderBottom: '1px solid var(--border-color)' }}>
+                <div className={styles.detailHeader}>
                   <button
                     type="button"
                     onClick={handleCloseDonationModal}
-                    style={{ display: 'flex', alignItems: 'center', gap: '6px', background: 'transparent', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-sm)', padding: '7px 14px', cursor: 'pointer', color: 'var(--text-muted)', fontSize: '13px', fontWeight: '600' }}
+                    className={styles.backBtn}
                   >
                     ← Back to Financial Ledger
                   </button>
-                  <div>
+                  <div className={styles.detailTitleWrapper}>
                     <h3 className={styles.cardHeaderTitle} style={{ margin: 0, border: 'none', padding: 0 }}>
-                      <DollarSign size={22} color="#10b981" />
-                      Donation Details: {selectedDonation.donor_name || 'Anonymous Donor'}
+                      <DollarSign size={22} color="#10b981" style={{ flexShrink: 0 }} />
+                      <span className={styles.detailHeaderHeadingText}>Donation Details: {selectedDonation.donor_name || 'Anonymous Donor'}</span>
                     </h3>
                     <p style={{ margin: '2px 0 0', fontSize: '12px', color: 'var(--text-muted)' }}>
-                      Transaction Ref: <strong style={{ fontFamily: 'monospace' }}>{selectedDonation.razorpay_payment_id || selectedDonation.razorpay_ref || 'N/A'}</strong>
+                      Transaction Ref: <strong style={{ fontFamily: 'monospace', wordBreak: 'break-all' }}>{selectedDonation.razorpay_payment_id || selectedDonation.razorpay_ref || 'N/A'}</strong>
                     </p>
                   </div>
                 </div>
 
                 <form onSubmit={handleSaveDonationDetails} className={styles.profileForm}>
                   {/* Read-Only Transaction Summary Cards */}
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '14px', marginBottom: '24px' }}>
-                    <div style={{ padding: '14px', borderRadius: 'var(--radius-sm)', background: 'var(--bg-card-subtle)', border: '1px solid var(--border-color)' }}>
-                      <div style={{ fontSize: '11px', fontWeight: '700', textTransform: 'uppercase', color: 'var(--text-muted)', marginBottom: '4px' }}>Donor Name</div>
-                      <div style={{ fontSize: '15px', fontWeight: '700', color: 'var(--text-main)' }}>{selectedDonation.donor_name || 'Anonymous Donor'}</div>
+                  <div className={styles.donationDetailGrid}>
+                    <div className={styles.detailInfoCard}>
+                      <div className={styles.detailInfoLabel}>Donor Name</div>
+                      <div className={styles.detailInfoValueBold}>{selectedDonation.donor_name || 'Anonymous Donor'}</div>
                     </div>
-                    <div style={{ padding: '14px', borderRadius: 'var(--radius-sm)', background: 'var(--bg-card-subtle)', border: '1px solid var(--border-color)' }}>
-                      <div style={{ fontSize: '11px', fontWeight: '700', textTransform: 'uppercase', color: 'var(--text-muted)', marginBottom: '4px' }}>Email Address</div>
-                      <div style={{ fontSize: '14px', fontWeight: '600', color: 'var(--text-main)' }}>{selectedDonation.user_email || 'No Email'}</div>
+                    <div className={styles.detailInfoCard}>
+                      <div className={styles.detailInfoLabel}>Email Address</div>
+                      <div className={styles.detailInfoValue}>{selectedDonation.user_email || 'No Email'}</div>
                     </div>
-                    <div style={{ padding: '14px', borderRadius: 'var(--radius-sm)', background: 'var(--bg-card-subtle)', border: '1px solid var(--border-color)' }}>
-                      <div style={{ fontSize: '11px', fontWeight: '700', textTransform: 'uppercase', color: 'var(--text-muted)', marginBottom: '4px' }}>Mobile Phone</div>
-                      <div style={{ fontSize: '14px', fontWeight: '600', color: 'var(--text-main)' }}>{selectedDonation.donor_phone || '—'}</div>
+                    <div className={styles.detailInfoCard}>
+                      <div className={styles.detailInfoLabel}>Mobile Phone</div>
+                      <div className={styles.detailInfoValue}>{selectedDonation.donor_phone || '—'}</div>
                     </div>
-                    <div style={{ padding: '14px', borderRadius: 'var(--radius-sm)', background: 'rgba(16, 185, 129, 0.08)', border: '1px solid rgba(16, 185, 129, 0.2)' }}>
-                      <div style={{ fontSize: '11px', fontWeight: '700', textTransform: 'uppercase', color: '#059669', marginBottom: '4px' }}>Donation Amount</div>
-                      <div style={{ fontSize: '18px', fontWeight: '800', color: '#10b981' }}>₹{Number(selectedDonation.amount || 0).toLocaleString()}</div>
+                    <div className={styles.detailInfoCardHighlight}>
+                      <div className={styles.detailInfoLabelHighlight}>Donation Amount</div>
+                      <div className={styles.detailInfoAmount}>₹{Number(selectedDonation.amount || 0).toLocaleString()}</div>
                     </div>
-                    <div style={{ padding: '14px', borderRadius: 'var(--radius-sm)', background: 'var(--bg-card-subtle)', border: '1px solid var(--border-color)' }}>
-                      <div style={{ fontSize: '11px', fontWeight: '700', textTransform: 'uppercase', color: 'var(--text-muted)', marginBottom: '4px' }}>Date & Time</div>
-                      <div style={{ fontSize: '13px', fontWeight: '600', color: 'var(--text-main)' }}>{formatDateTime(selectedDonation.date)}</div>
+                    <div className={styles.detailInfoCard}>
+                      <div className={styles.detailInfoLabel}>Date & Time</div>
+                      <div className={styles.detailInfoValue}>{formatDateTime(selectedDonation.date)}</div>
                     </div>
-                    <div style={{ padding: '14px', borderRadius: 'var(--radius-sm)', background: 'var(--bg-card-subtle)', border: '1px solid var(--border-color)' }}>
-                      <div style={{ fontSize: '11px', fontWeight: '700', textTransform: 'uppercase', color: 'var(--text-muted)', marginBottom: '4px' }}>PAN Card</div>
-                      <div style={{ fontSize: '14px', fontWeight: '700', fontFamily: 'monospace', color: 'var(--text-main)' }}>{selectedDonation.donor_pan || 'N/A'}</div>
+                    <div className={styles.detailInfoCard}>
+                      <div className={styles.detailInfoLabel}>PAN Card</div>
+                      <div className={styles.detailInfoValueMono}>{selectedDonation.donor_pan || 'N/A'}</div>
                     </div>
-                    <div style={{ padding: '14px', borderRadius: 'var(--radius-sm)', background: 'var(--bg-card-subtle)', border: '1px solid var(--border-color)', gridColumn: 'span 2' }}>
-                      <div style={{ fontSize: '11px', fontWeight: '700', textTransform: 'uppercase', color: 'var(--text-muted)', marginBottom: '4px' }}>Address & Location</div>
-                      <div style={{ fontSize: '13px', color: 'var(--text-main)' }}>
+                    <div className={`${styles.detailInfoCard} ${styles.gridSpanFull}`}>
+                      <div className={styles.detailInfoLabel}>Address & Location</div>
+                      <div className={styles.detailInfoValue}>
                         {[selectedDonation.donor_address, selectedDonation.donor_city, selectedDonation.donor_state, selectedDonation.donor_pincode].filter(Boolean).join(', ') || 'No address provided'}
                       </div>
                     </div>

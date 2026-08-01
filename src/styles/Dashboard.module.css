@@ -874,3 +874,155 @@
   align-items: center;
   justify-content: center;
 }
+
+/* Responsive Detail Views (Donation, Volunteer, Contact Inquiry Read Pages) */
+.detailHeader {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border-color);
+  flex-wrap: wrap;
+}
+
+.backBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  padding: 7px 14px;
+  cursor: pointer;
+  color: var(--text-muted);
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: all 0.15s ease;
+  flex-shrink: 0;
+}
+
+.backBtn:hover {
+  background: var(--bg-card-subtle);
+  color: var(--text-main);
+}
+
+.detailTitleWrapper {
+  min-width: 0;
+  flex: 1;
+}
+
+.detailHeaderHeadingText {
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+
+.donationDetailGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.detailInfoCard {
+  padding: 14px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-card-subtle);
+  border: 1px solid var(--border-color);
+  min-width: 0;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+
+.detailInfoCardHighlight {
+  padding: 14px;
+  border-radius: var(--radius-sm);
+  background: rgba(16, 185, 129, 0.08);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  min-width: 0;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+
+.gridSpanFull {
+  grid-column: 1 / -1;
+}
+
+.detailInfoLabel {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+  letter-spacing: 0.3px;
+}
+
+.detailInfoLabelHighlight {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #059669;
+  margin-bottom: 4px;
+  letter-spacing: 0.3px;
+}
+
+.detailInfoValue {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-main);
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+
+.detailInfoValueBold {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-main);
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+
+.detailInfoValueMono {
+  font-size: 14px;
+  font-weight: 700;
+  font-family: monospace;
+  color: var(--text-main);
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+
+.detailInfoAmount {
+  font-size: 18px;
+  font-weight: 800;
+  color: #10b981;
+}
+
+@media (max-width: 640px) {
+  .recordCard {
+    padding: 16px;
+    border-radius: var(--radius-sm);
+  }
+  .detailHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .backBtn {
+    align-self: flex-start;
+  }
+  .donationDetailGrid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .profileActionRow {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+  .profileActionRow button {
+    width: 100%;
+    justify-content: center;
+  }
+}
+

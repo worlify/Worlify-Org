@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
-import { 
-  X, 
-  ArrowRight, 
-  ChevronRight, 
-  ChevronLeft, 
-  ZoomIn, 
-  ZoomOut, 
+import {
+  X,
+  ArrowRight,
+  ChevronRight,
+  ChevronLeft,
+  ZoomIn,
+  ZoomOut,
   ChevronDown,
   Layers,
   Heart,
@@ -471,24 +471,24 @@ export default function Gallery({ setActiveTab, setDonationPreload }) {
 
   return (
     <div className={styles.galleryPage} id="gallery-page-root">
-      
+
       {/* 1. HEADER BANNER (Exact Match to User Reference Screenshot) */}
       <header className={styles.headerBanner} id="gallery-header-banner">
         <div className={styles.headerContainer}>
           <nav className={styles.breadcrumb} aria-label="Breadcrumb">
-            <span 
-              className={styles.breadcrumbLink} 
+            <span
+              className={styles.breadcrumbLink}
               onClick={() => setActiveTab && setActiveTab('home')}
               id="gallery-breadcrumb-home"
             >
               Home
             </span>
             <span className={styles.breadcrumbSeparator}>&gt;</span>
-            <span className={styles.breadcrumbActive}>Photo Galleries</span>
+            <span className={styles.breadcrumbActive}>Worlify Memories</span>
           </nav>
 
-          <h1 className={styles.bannerTitle}>Photo Galleries</h1>
-          
+          <h1 className={styles.bannerTitle}>Worlify Memories</h1>
+
           {/* Green accent line under the heading */}
           <div className={styles.greenAccentLine} />
         </div>
@@ -498,7 +498,7 @@ export default function Gallery({ setActiveTab, setDonationPreload }) {
       <section className={styles.toolbarSection} id="gallery-toolbar">
         <div className={styles.container}>
           <div className={styles.toolbarWrapper}>
-            
+
             {/* Category Pills */}
             <div className={styles.categoryPills}>
               {categories.map((cat) => (
@@ -524,14 +524,14 @@ export default function Gallery({ setActiveTab, setDonationPreload }) {
       {/* 3. GALLERY GRID (2 IMAGES IN A ROW WITH CURVED BORDERS & LAZY LOADING) */}
       <main className={styles.mainGridSection} id="gallery-grid-container">
         <div className={styles.container}>
-          
+
           {filteredItems.length === 0 ? (
             <div className={styles.noResults}>
               <Filter size={40} className={styles.noResultsIcon} />
               <h3>No photos found</h3>
               <p>We couldn't find any photos matching your current search or filter selection.</p>
-              <button 
-                type="button" 
+              <button
+                type="button"
                 className={styles.resetBtn}
                 onClick={() => {
                   setActiveFilter('All');
@@ -544,18 +544,18 @@ export default function Gallery({ setActiveTab, setDonationPreload }) {
           ) : (
             <div className={styles.twoColumnGrid}>
               {displayedItems.map((item, index) => (
-                <div 
-                  key={item.id} 
+                <div
+                  key={item.id}
                   className={styles.imageCard}
                   onClick={() => setSelectedItemIndex(index)}
                   id={`gallery-item-card-${item.id}`}
                 >
                   {/* Curved Border Image Wrapper */}
                   <div className={styles.imageWrapper}>
-                    <img 
-                      src={item.image} 
+                    <img
+                      src={item.image}
                       alt={item.title}
-                      loading="lazy" 
+                      loading="lazy"
                       className={styles.galleryImg}
                     />
                     <div className={styles.cardHoverOverlay}>
@@ -572,8 +572,8 @@ export default function Gallery({ setActiveTab, setDonationPreload }) {
           {/* 4. VIEW MORE BUTTON (+5 IMAGES ON EACH CLICK) */}
           {filteredItems.length > visibleCount && (
             <div className={styles.viewMoreContainer}>
-              <button 
-                type="button" 
+              <button
+                type="button"
                 className={styles.viewMoreBtn}
                 onClick={handleLoadMore}
                 id="gallery-view-more-btn"
@@ -599,7 +599,7 @@ export default function Gallery({ setActiveTab, setDonationPreload }) {
 
       {/* 5. LIGHTBOX MODAL */}
       {currentSelectedItem && (
-        <div 
+        <div
           className={styles.modalBackdrop}
           onClick={() => setSelectedItemIndex(null)}
           onTouchStart={handleTouchStart}
@@ -607,7 +607,7 @@ export default function Gallery({ setActiveTab, setDonationPreload }) {
           onTouchEnd={handleTouchEnd}
           id="gallery-lightbox-modal"
         >
-          <div 
+          <div
             className={styles.modalContainer}
             onClick={(e) => e.stopPropagation()}
           >
@@ -616,18 +616,18 @@ export default function Gallery({ setActiveTab, setDonationPreload }) {
               <div className={styles.modalTitleMeta}>
                 <span className={styles.modalCategory}>{currentSelectedItem.category}</span>
               </div>
-              
+
               <div className={styles.modalActions}>
-                <button 
-                  type="button" 
+                <button
+                  type="button"
                   className={styles.modalZoomBtn}
                   onClick={() => setIsZoomed(prev => !prev)}
                   title={isZoomed ? "Zoom Out" : "Zoom In"}
                 >
                   {isZoomed ? <ZoomOut size={18} /> : <ZoomIn size={18} />}
                 </button>
-                <button 
-                  type="button" 
+                <button
+                  type="button"
                   className={styles.modalCloseBtn}
                   onClick={() => {
                     setSelectedItemIndex(null);
@@ -643,8 +643,8 @@ export default function Gallery({ setActiveTab, setDonationPreload }) {
             {/* Modal Stage */}
             <div className={styles.modalStage}>
               {selectedItemIndex > 0 && (
-                <button 
-                  type="button" 
+                <button
+                  type="button"
                   className={`${styles.navBtn} ${styles.prevBtn}`}
                   onClick={handlePrevLightbox}
                   title="Previous Photo"
@@ -654,16 +654,16 @@ export default function Gallery({ setActiveTab, setDonationPreload }) {
               )}
 
               <div className={`${styles.modalImageWrapper} ${isZoomed ? styles.zoomed : ''}`}>
-                <img 
-                  src={currentSelectedItem.image} 
-                  alt={currentSelectedItem.title} 
+                <img
+                  src={currentSelectedItem.image}
+                  alt={currentSelectedItem.title}
                   className={styles.modalImg}
                 />
               </div>
 
               {selectedItemIndex < filteredItems.length - 1 && (
-                <button 
-                  type="button" 
+                <button
+                  type="button"
                   className={`${styles.navBtn} ${styles.nextBtn}`}
                   onClick={handleNextLightbox}
                   title="Next Photo"
@@ -676,8 +676,8 @@ export default function Gallery({ setActiveTab, setDonationPreload }) {
             {/* Modal Footer */}
             <div className={styles.modalFooter}>
               <div className={styles.modalCtaCol}>
-                <button 
-                  type="button" 
+                <button
+                  type="button"
                   className={styles.modalDonateBtn}
                   onClick={() => {
                     if (setDonationPreload) setDonationPreload(currentSelectedItem.category);

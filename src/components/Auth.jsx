@@ -427,7 +427,7 @@ export default function Auth({ onLoginSuccess }) {
               <img src={avatarBoy1} alt="User Boy 1" className={styles.avatarImg} />
             </div>
             <div className={styles.socialProofText}>
-              <div className={styles.proofHeadline}>2000+ Users</div>
+              <div className={styles.proofHeadline}>15000+ Users</div>
             </div>
           </div>
 

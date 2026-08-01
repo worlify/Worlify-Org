@@ -14,8 +14,8 @@ const CAUSES = [
 ];
 
 const STATS = [
-  { value: '12,000+', label: 'Lives Impacted', icon: Heart },
-  { value: '500+', label: 'Active Volunteers', icon: Users },
+  { value: '12,076+', label: 'Lives Impacted', icon: Heart },
+  { value: '546+', label: 'Active Volunteers', icon: Users },
   { value: '8', label: 'Focus Programmes', icon: Globe },
   { value: '8', label: 'Years of Service', icon: Clock },
 ];

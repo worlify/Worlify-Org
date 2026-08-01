@@ -1,13 +1,23 @@
 import React, { useState } from 'react';
 import { db, isLocalMode } from '../lib/supabase';
 import styles from '../styles/Auth.module.css';
+import logoImport from '../assets/images/logo.png';
+import avatarGirl1Import from '../assets/images/avatar_girl1.png';
+import avatarGirl2Import from '../assets/images/avatar_girl2.png';
+import avatarBoy1Import from '../assets/images/avatar_boy1.png';
+import { Mail, Lock, User, Eye, EyeOff, ShieldCheck } from 'lucide-react';
+
+// Safely extract image source strings for Next.js image imports
+const logo = logoImport?.src || logoImport;
+const avatarGirl1 = avatarGirl1Import?.src || avatarGirl1Import;
+const avatarGirl2 = avatarGirl2Import?.src || avatarGirl2Import;
+const avatarBoy1 = avatarBoy1Import?.src || avatarBoy1Import;
 
 /**
- * Auth Component
- * Multi-tab Sign In / Register module. Handles:
- * - Local fallback authentication (localStorage user profiles)
- * - Real Supabase Auth requests if keys are loaded
- * - Real-time error formatting
+ * Redesigned Auth Component
+ * Matches the requested modern glassmorphic layout:
+ * - Left Hero Panel: Ambient mesh gradient, translucent WORLIFY watermark, glossy 3D orb, Worlify Welfare Foundation title & subtext
+ * - Right Form Panel: Sleek input fields with icons, pill-shaped primary action button, Google sign-in, and bottom social proof avatar widget
  */
 export default function Auth({ onLoginSuccess }) {
   // Tabs: 'signin' or 'signup'
@@ -17,6 +27,7 @@ export default function Auth({ onLoginSuccess }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [fullName, setFullName] = useState('');
+  const [rememberMe, setRememberMe] = useState(false);
 
   // Show/hide password toggle per form
   const [showSignInPassword, setShowSignInPassword] = useState(false);
@@ -25,6 +36,10 @@ export default function Auth({ onLoginSuccess }) {
   // Feedback states
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
+  const [successMsg, setSuccessMsg] = useState('');
+  const [isForgotModalOpen, setIsForgotModalOpen] = useState(false);
+  const [forgotEmail, setForgotEmail] = useState('');
+  const [forgotSent, setForgotSent] = useState(false);
 
   // Handle Sign In submission
   const handleSignIn = async (e) => {
@@ -39,11 +54,11 @@ export default function Auth({ onLoginSuccess }) {
 
     setIsSubmitting(true);
     setErrorMsg('');
+    setSuccessMsg('');
     try {
       const { data, error } = await db.signIn(normalizedEmail, normalizedPassword);
 
       if (!error && data) {
-        // Authenticated successfully! Notify parent App
         onLoginSuccess(data.user);
       } else {
         setErrorMsg(error ? error.message : 'Invalid credentials. Please retry.');
@@ -74,11 +89,11 @@ export default function Auth({ onLoginSuccess }) {
 
     setIsSubmitting(true);
     setErrorMsg('');
+    setSuccessMsg('');
     try {
       const { data, error } = await db.signUp(normalizedEmail, normalizedPassword, fullName);
 
       if (!error && data) {
-        // Registered and auto logged in! Notify parent App
         onLoginSuccess(data.user);
       } else {
         setErrorMsg(error ? error.message : 'Registration failed.');
@@ -91,234 +106,387 @@ export default function Auth({ onLoginSuccess }) {
     }
   };
 
+  // Handle Forgot Password
+  const handleForgotPasswordSubmit = (e) => {
+    e.preventDefault();
+    if (!forgotEmail) return;
+    setForgotSent(true);
+  };
+
   return (
     <section className={styles.authSection} id="auth-section">
-      <div className={styles.authCard} id="auth-card">
-        {/* Auth title */}
-        <div className={styles.authHeader}>
-          <h2 className={styles.authTitle}>Supporter Portal</h2>
-          <p className={styles.authDesc}>
-            Join the Worlify network to log donations and track active volunteer status.
-          </p>
-        </div>
+      {/* Ambient Radial Glow Background */}
+      <div className={styles.ambientGlowContainer}>
+        <div className={`${styles.glowSphere} ${styles.glowSphere1}`}></div>
+        <div className={`${styles.glowSphere} ${styles.glowSphere2}`}></div>
+      </div>
 
-        {/* Tab triggers */}
-        <div className={styles.tabs} id="auth-tabs">
-          <button
-            type="button"
-            className={`${styles.tabBtn} ${activeTab === 'signin' ? styles.activeTabBtn : ''}`}
-            onClick={() => {
-              setActiveTab('signin');
-              setErrorMsg('');
-            }}
-            id="auth-tab-btn-signin"
-          >
-            Sign In
-          </button>
-          <button
-            type="button"
-            className={`${styles.tabBtn} ${activeTab === 'signup' ? styles.activeTabBtn : ''}`}
-            onClick={() => {
-              setActiveTab('signup');
-              setErrorMsg('');
-            }}
-            id="auth-tab-btn-signup"
-          >
-            Register
-          </button>
-        </div>
+      {/* Main 2-Panel Card */}
+      <div className={styles.authCardWrapper} id="auth-card">
 
-        {/* Error Feedback banner */}
-        {errorMsg && (
-          <div className={styles.errorBanner} id="auth-error-banner">
-            ⚠️ {errorMsg}
+        {/* LEFT PANEL: Branding & Visual Hero */}
+        <div className={styles.leftHeroCard}>
+          {/* Top Brand Tag */}
+          <div className={styles.leftHeaderTag}>
+            <span className={styles.badgeDot}></span>
+            <span>Worlify Members Portal</span>
           </div>
-        )}
 
-        {/* Auth Form Panel */}
-        {activeTab === 'signin' ? (
-          <form onSubmit={handleSignIn} id="signin-form" autoComplete="off">
-            {/* Hidden honeypot inputs — trick browsers into NOT autofilling the real fields */}
-            <input type="text" name="fake_user" style={{ display: 'none' }} readOnly tabIndex={-1} aria-hidden="true" />
-            <input type="password" name="fake_pass" style={{ display: 'none' }} readOnly tabIndex={-1} aria-hidden="true" />
-            <div className={styles.inputGroup}>
-              <label className={styles.label}>Email Address *</label>
-              <input
-                type="email"
-                className={styles.input}
-                placeholder="example@gmail.com"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                autoComplete="off"
-                autoCapitalize="none"
-                autoCorrect="off"
-                inputMode="email"
-                required
-                id="signin-email-input"
-              />
+          {/* Center 3D Glass Orb Graphic */}
+          <div className={styles.orbGraphicContainer}>
+            <div className={styles.glassOrb}>
+              <div className={styles.orbShineSpec}></div>
+              <div className={styles.orbInnerGlow}></div>
+              <img src={logo} alt="Worlify Logo" className={styles.orbLogoOverlay} />
             </div>
+          </div>
 
-            <div className={styles.inputGroup}>
-              <label className={styles.label}>Password *</label>
-              <div className={styles.passwordWrapper}>
-                <input
-                  type={showSignInPassword ? 'text' : 'password'}
-                  className={styles.input}
-                  placeholder="••••••••"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  autoComplete="off"
-                  required
-                  id="signin-password-input"
-                />
-                <button
-                  type="button"
-                  className={styles.eyeBtn}
-                  onClick={() => setShowSignInPassword(prev => !prev)}
-                  tabIndex={-1}
-                  aria-label={showSignInPassword ? 'Hide password' : 'Show password'}
-                  id="signin-toggle-password-btn"
-                >
-                  {showSignInPassword ? (
-                    // Eye-off icon
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/>
-                      <line x1="1" y1="1" x2="23" y2="23"/>
-                    </svg>
-                  ) : (
-                    // Eye icon
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-                      <circle cx="12" cy="12" r="3"/>
-                    </svg>
-                  )}
-                </button>
-              </div>
-            </div>
-
-            <button
-              type="submit"
-              className={styles.submitBtn}
-              disabled={isSubmitting}
-              id="signin-submit-btn"
-            >
-              {isSubmitting ? 'Authenticating Supporter...' : 'Access My Account'}
-            </button>
-
-            <p className={styles.togglePrompt}>
-              New to Worlify?{' '}
-              <span
-                className={styles.toggleLink}
-                onClick={() => {
-                  setActiveTab('signup');
-                  setErrorMsg('');
-                }}
-                id="switch-signup-link"
-              >
-                Register Here
-              </span>
+          {/* Bottom Branding Content */}
+          <div className={styles.heroBottomContent}>
+            <h2 className={styles.heroTitle}>
+              <span>WORLIFY WELFARE </span>
+              <span className={styles.titleSecondLine}>FOUNDATION</span>
+            </h2>
+            <p className={styles.heroDescription}>
+              Join hands to serve society, empower underprivileged communities, and drive meaningful social change together.
             </p>
-          </form>
-        ) : (
-          <form onSubmit={handleSignUp} id="signup-form" autoComplete="off">
-            {/* Hidden honeypot inputs — trick browsers into NOT autofilling the real fields */}
-            <input type="text" name="fake_username" style={{ display: 'none' }} readOnly tabIndex={-1} aria-hidden="true" />
-            <input type="password" name="fake_password" style={{ display: 'none' }} readOnly tabIndex={-1} aria-hidden="true" />
+          </div>
+        </div>
 
-            <div className={styles.inputGroup}>
-              <label className={styles.label}>Full Name *</label>
-              <input
-                type="text"
-                className={styles.input}
-                placeholder="e.g. Jane Doe"
-                value={fullName}
-                onChange={(e) => setFullName(e.target.value)}
-                autoComplete="off"
-                autoCorrect="off"
-                autoCapitalize="words"
-                required
-                id="signup-name-input"
-              />
-            </div>
+        {/* RIGHT PANEL: Authentication Form */}
+        <div className={styles.rightFormCard}>
+          <div>
 
-            <div className={styles.inputGroup}>
-              <label className={styles.label}>Email Address *</label>
-              <input
-                type="email"
-                className={styles.input}
-                placeholder="example@gmail.com"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                autoComplete="off"
-                autoCapitalize="none"
-                autoCorrect="off"
-                inputMode="email"
-                required
-                id="signup-email-input"
-              />
-            </div>
+            {/* Title & Subtitle */}
+            <h2 className={styles.formTitle}>
+              {activeTab === 'signin' ? 'Welcome Back' : 'Create Account'}
+            </h2>
+            <p className={styles.formSubtitle}>
+              {activeTab === 'signin'
+                ? 'Sign in to access your unified inbox'
+                : 'Register to join Worlify Welfare Foundation'}
+            </p>
 
-            <div className={styles.inputGroup}>
-              <label className={styles.label}>Secure Password (Min 6 chars) *</label>
-              <div className={styles.passwordWrapper}>
-                <input
-                  type={showSignUpPassword ? 'text' : 'password'}
-                  className={styles.input}
-                  placeholder="••••••••"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  autoComplete="new-password"
-                  required
-                  id="signup-password-input"
-                />
-                <button
-                  type="button"
-                  className={styles.eyeBtn}
-                  onClick={() => setShowSignUpPassword(prev => !prev)}
-                  tabIndex={-1}
-                  aria-label={showSignUpPassword ? 'Hide password' : 'Show password'}
-                  id="signup-toggle-password-btn"
-                >
-                  {showSignUpPassword ? (
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/>
-                      <line x1="1" y1="1" x2="23" y2="23"/>
-                    </svg>
-                  ) : (
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-                      <circle cx="12" cy="12" r="3"/>
-                    </svg>
-                  )}
-                </button>
-              </div>
-            </div>
-
-            <button
-              type="submit"
-              className={styles.submitBtn}
-              disabled={isSubmitting}
-              id="signup-submit-btn"
-            >
-              {isSubmitting ? 'Creating Secure Account...' : 'Register Secure Account'}
-            </button>
-
-            <p className={styles.togglePrompt}>
-              Already have an account?{' '}
-              <span
-                className={styles.toggleLink}
+            {/* Tab Triggers */}
+            <div className={styles.tabToggleRow} id="auth-tabs">
+              <button
+                type="button"
+                className={`${styles.tabToggleBtn} ${activeTab === 'signin' ? styles.tabToggleActive : ''}`}
                 onClick={() => {
                   setActiveTab('signin');
                   setErrorMsg('');
+                  setSuccessMsg('');
                 }}
-                id="switch-signin-link"
+                id="auth-tab-btn-signin"
               >
-                Login Here
-              </span>
+                Sign In
+              </button>
+              <button
+                type="button"
+                className={`${styles.tabToggleBtn} ${activeTab === 'signup' ? styles.tabToggleActive : ''}`}
+                onClick={() => {
+                  setActiveTab('signup');
+                  setErrorMsg('');
+                  setSuccessMsg('');
+                }}
+                id="auth-tab-btn-signup"
+              >
+                Sign Up
+              </button>
+            </div>
+
+            {/* Error Feedback Banner */}
+            {errorMsg && (
+              <div className={styles.errorBanner} id="auth-error-banner">
+                <span className={styles.errorIcon}>⚠️</span>
+                <span>{errorMsg}</span>
+              </div>
+            )}
+
+            {/* Success Feedback Banner */}
+            {successMsg && (
+              <div className={styles.successBanner}>
+                <span className={styles.successIcon}>✓</span>
+                <span>{successMsg}</span>
+              </div>
+            )}
+
+            {/* SIGN IN FORM */}
+            {activeTab === 'signin' ? (
+              <form onSubmit={handleSignIn} id="signin-form" autoComplete="off">
+                <input type="text" name="fake_user" style={{ display: 'none' }} readOnly tabIndex={-1} aria-hidden="true" />
+                <input type="password" name="fake_pass" style={{ display: 'none' }} readOnly tabIndex={-1} aria-hidden="true" />
+
+                <div className={styles.inputGroup}>
+                  <label className={styles.inputLabel}>Email</label>
+                  <div className={styles.inputWrapper}>
+                    <Mail className={styles.inputIconLeft} size={18} />
+                    <input
+                      type="email"
+                      className={styles.styledInput}
+                      placeholder="you@example.com"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      autoComplete="off"
+                      autoCapitalize="none"
+                      autoCorrect="off"
+                      inputMode="email"
+                      required
+                      id="signin-email-input"
+                    />
+                  </div>
+                </div>
+
+                <div className={styles.inputGroup}>
+                  <label className={styles.inputLabel}>Password</label>
+                  <div className={styles.inputWrapper}>
+                    <Lock className={styles.inputIconLeft} size={18} />
+                    <input
+                      type={showSignInPassword ? 'text' : 'password'}
+                      className={styles.styledInput}
+                      placeholder="••••••••"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      autoComplete="off"
+                      required
+                      id="signin-password-input"
+                    />
+                    <button
+                      type="button"
+                      className={styles.eyeToggleBtn}
+                      onClick={() => setShowSignInPassword(prev => !prev)}
+                      tabIndex={-1}
+                      aria-label={showSignInPassword ? 'Hide password' : 'Show password'}
+                      id="signin-toggle-password-btn"
+                    >
+                      {showSignInPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                    </button>
+                  </div>
+                </div>
+
+                {/* Checkbox & Forgot Password Row */}
+                <div className={styles.formOptionsRow}>
+                  <label className={styles.checkboxLabel}>
+                    <input
+                      type="checkbox"
+                      checked={rememberMe}
+                      onChange={(e) => setRememberMe(e.target.checked)}
+                      className={styles.customCheckbox}
+                    />
+                    <span>Remember me</span>
+                  </label>
+                  <button
+                    type="button"
+                    className={styles.forgotPassBtn}
+                    onClick={() => {
+                      setForgotEmail(email);
+                      setIsForgotModalOpen(true);
+                      setForgotSent(false);
+                    }}
+                  >
+                    Forgot Password?
+                  </button>
+                </div>
+
+                {/* Main Submit Pill Button */}
+                <button
+                  type="submit"
+                  className={styles.primaryPillBtn}
+                  disabled={isSubmitting}
+                  id="signin-submit-btn"
+                >
+                  {isSubmitting ? 'Authenticating...' : 'Sign In'}
+                </button>
+              </form>
+            ) : (
+              /* SIGN UP FORM */
+              <form onSubmit={handleSignUp} id="signup-form" autoComplete="off">
+                <input type="text" name="fake_username" style={{ display: 'none' }} readOnly tabIndex={-1} aria-hidden="true" />
+                <input type="password" name="fake_password" style={{ display: 'none' }} readOnly tabIndex={-1} aria-hidden="true" />
+
+                <div className={styles.inputGroup}>
+                  <label className={styles.inputLabel}>Full Name</label>
+                  <div className={styles.inputWrapper}>
+                    <User className={styles.inputIconLeft} size={18} />
+                    <input
+                      type="text"
+                      className={styles.styledInput}
+                      placeholder="e.g. Jane Doe"
+                      value={fullName}
+                      onChange={(e) => setFullName(e.target.value)}
+                      autoComplete="off"
+                      autoCorrect="off"
+                      autoCapitalize="words"
+                      required
+                      id="signup-name-input"
+                    />
+                  </div>
+                </div>
+
+                <div className={styles.inputGroup}>
+                  <label className={styles.inputLabel}>Email</label>
+                  <div className={styles.inputWrapper}>
+                    <Mail className={styles.inputIconLeft} size={18} />
+                    <input
+                      type="email"
+                      className={styles.styledInput}
+                      placeholder="you@example.com"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      autoComplete="off"
+                      autoCapitalize="none"
+                      autoCorrect="off"
+                      inputMode="email"
+                      required
+                      id="signup-email-input"
+                    />
+                  </div>
+                </div>
+
+                <div className={styles.inputGroup}>
+                  <label className={styles.inputLabel}>Password</label>
+                  <div className={styles.inputWrapper}>
+                    <Lock className={styles.inputIconLeft} size={18} />
+                    <input
+                      type={showSignUpPassword ? 'text' : 'password'}
+                      className={styles.styledInput}
+                      placeholder="••••••••"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      autoComplete="new-password"
+                      required
+                      id="signup-password-input"
+                    />
+                    <button
+                      type="button"
+                      className={styles.eyeToggleBtn}
+                      onClick={() => setShowSignUpPassword(prev => !prev)}
+                      tabIndex={-1}
+                      aria-label={showSignUpPassword ? 'Hide password' : 'Show password'}
+                      id="signup-toggle-password-btn"
+                    >
+                      {showSignUpPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                    </button>
+                  </div>
+                </div>
+
+                {/* Main Submit Pill Button */}
+                <button
+                  type="submit"
+                  className={styles.primaryPillBtn}
+                  disabled={isSubmitting}
+                  id="signup-submit-btn"
+                  style={{ marginTop: '12px' }}
+                >
+                  {isSubmitting ? 'Creating Account...' : 'Sign Up'}
+                </button>
+              </form>
+            )}
+
+            {/* Toggle Signin/Signup Link */}
+            <p className={styles.togglePrompt}>
+              {activeTab === 'signin' ? (
+                <>
+                  Don't have an account?{' '}
+                  <span
+                    className={styles.toggleLink}
+                    onClick={() => {
+                      setActiveTab('signup');
+                      setErrorMsg('');
+                      setSuccessMsg('');
+                    }}
+                    id="switch-signup-link"
+                  >
+                    Sign up
+                  </span>
+                </>
+              ) : (
+                <>
+                  Already have an account?{' '}
+                  <span
+                    className={styles.toggleLink}
+                    onClick={() => {
+                      setActiveTab('signin');
+                      setErrorMsg('');
+                      setSuccessMsg('');
+                    }}
+                    id="switch-signin-link"
+                  >
+                    Sign in
+                  </span>
+                </>
+              )}
             </p>
-          </form>
-        )}
+          </div>
+
+          {/* Social Proof Widget at Bottom of Right Card */}
+          <div className={styles.socialProofCard}>
+            <div className={styles.avatarStack}>
+              <img src={avatarGirl1} alt="User Girl 1" className={styles.avatarImg} />
+              <img src={avatarGirl2} alt="User Girl 2" className={styles.avatarImg} />
+              <img src={avatarBoy1} alt="User Boy 1" className={styles.avatarImg} />
+            </div>
+            <div className={styles.socialProofText}>
+              <div className={styles.proofHeadline}>2000+ Users</div>
+            </div>
+          </div>
+
+        </div>
       </div>
+
+      {/* Forgot Password Modal */}
+      {isForgotModalOpen && (
+        <div className={styles.modalOverlay} onClick={() => setIsForgotModalOpen(false)}>
+          <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
+            <h3 className={styles.modalTitle}>Reset Password</h3>
+            <p className={styles.modalSub}>
+              Enter your registered email address to receive password reset instructions.
+            </p>
+            {forgotSent ? (
+              <div className={styles.modalSuccess}>
+                ✓ Password reset link has been sent to <strong>{forgotEmail}</strong>. Please check your inbox.
+                <button
+                  type="button"
+                  className={styles.primaryPillBtn}
+                  style={{ marginTop: '16px' }}
+                  onClick={() => setIsForgotModalOpen(false)}
+                >
+                  Back to Sign In
+                </button>
+              </div>
+            ) : (
+              <form onSubmit={handleForgotPasswordSubmit}>
+                <div className={styles.inputGroup} style={{ marginTop: '14px' }}>
+                  <label className={styles.inputLabel}>Email Address</label>
+                  <div className={styles.inputWrapper}>
+                    <Mail className={styles.inputIconLeft} size={18} />
+                    <input
+                      type="email"
+                      className={styles.styledInput}
+                      placeholder="you@example.com"
+                      value={forgotEmail}
+                      onChange={(e) => setForgotEmail(e.target.value)}
+                      required
+                    />
+                  </div>
+                </div>
+                <div className={styles.modalBtnRow}>
+                  <button
+                    type="button"
+                    className={styles.cancelBtn}
+                    onClick={() => setIsForgotModalOpen(false)}
+                  >
+                    Cancel
+                  </button>
+                  <button type="submit" className={styles.primaryPillBtn}>
+                    Send Reset Link
+                  </button>
+                </div>
+              </form>
+            )}
+          </div>
+        </div>
+      )}
     </section>
   );
 }

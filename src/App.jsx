@@ -604,7 +604,7 @@ export default function App() {
       </main>
 
       {/* 3. Site-wide Footer */}
-      <Footer setActiveTab={setActiveTab} />
+      {activeTab !== 'auth' && <Footer setActiveTab={setActiveTab} />}
 
       {/* 4. Supabase Setup Guide Modal */}
       <KeysModal

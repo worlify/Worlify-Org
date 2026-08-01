@@ -338,6 +338,61 @@ class LocalDBService {
     return { data: this.currentSession, error: null };
   }
 
+  async signInWithGoogle(customEmail = '', customName = '') {
+    if (supabase) {
+      try {
+        const { data, error } = await supabase.auth.signInWithOAuth({
+          provider: 'google',
+          options: {
+            redirectTo: typeof window !== 'undefined' ? window.location.origin : undefined
+          }
+        });
+        if (!error && data && data.url) {
+          window.location.href = data.url;
+          return { data, error: null };
+        }
+      } catch (err) {
+        console.warn('Supabase OAuth error, falling back to local Google sign-in:', err);
+      }
+    }
+
+    // Mock / Local DB Google Sign In Implementation:
+    // If the user has not signed up yet, an account is automatically created in the database.
+    await new Promise(resolve => setTimeout(resolve, 500));
+
+    const googleEmail = (customEmail || 'google.supporter@gmail.com').trim().toLowerCase();
+    const fullName = (customName || 'Google Supporter').trim();
+    const nameParts = fullName.split(' ');
+    const firstName = nameParts[0] || 'Google';
+    const lastName = nameParts.slice(1).join(' ') || 'User';
+    const assignedRole = getInitialRoleForEmail(googleEmail);
+
+    const users = this._get('worlify_users');
+    let existingUser = users.find(u => normalizeEmail(u.email) === googleEmail);
+
+    if (!existingUser) {
+      // User is not signed up yet! Automatically create new user record in database
+      existingUser = {
+        id: 'usr_g_' + Math.random().toString(36).substr(2, 9),
+        email: googleEmail,
+        password: '',
+        first_name: firstName,
+        last_name: lastName,
+        role: assignedRole,
+        provider: 'google',
+        support: 0,
+        badges: ['Google Supporter'],
+        created_at: new Date().toISOString()
+      };
+      users.push(existingUser);
+      this._set('worlify_users', users);
+    }
+
+    this.currentSession = { user: existingUser };
+    this._set('worlify_session', this.currentSession);
+    return { data: this.currentSession, error: null };
+  }
+
   async signOut() {
     if (supabase) {
       try {

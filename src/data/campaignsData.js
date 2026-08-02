@@ -21,6 +21,10 @@ import annSevaNutritionChild from '../assets/images/ann_seva_nutrition_child.jpg
 import annSevaSweetDist1 from '../assets/images/ann_seva_sweet_dist_1.jpg';
 import annSevaSweetDist2 from '../assets/images/ann_seva_sweet_dist_2.jpg';
 import annSevaSweetDist3 from '../assets/images/ann_seva_sweet_dist_3.jpg';
+import nayiPehchaanClassroomVisit from '../assets/images/nayi_pehchaan_classroom_visit.jpg';
+import betiKiMuskanChildrenSmile from '../assets/images/beti_ki_muskan_children_smile.jpg';
+import jeevRakshaDogFeeding from '../assets/images/jeev_raksha_dog_feeding.jpg';
+import jeevandanMotherChild from '../assets/images/jeevandan_mother_child.jpg';
 import saharaHeroSupport from '../assets/images/sahara_hero_support.png';
 import elderlyWelfareCheck from '../assets/images/elderly_welfare_check.png';
 import homeRepairWidow from '../assets/images/home_repair_widow.png';
@@ -319,7 +323,7 @@ export const CAMPAIGNS_DATA = {
       { url: typeof slider2 === 'string' ? slider2 : slider2.src, caption: 'Vocational skill training center for women' },
       { url: typeof sliderNew2 === 'string' ? sliderNew2 : sliderNew2.src, caption: 'Computer literacy and digital workplace skills' },
       { url: typeof slider3 === 'string' ? slider3 : slider3.src, caption: 'Handicrafts and micro-entrepreneurship workshop' },
-      { url: typeof awardCeremony === 'string' ? awardCeremony : awardCeremony.src, caption: 'Certification distribution ceremony for graduates' }
+      { url: typeof nayiPehchaanClassroomVisit === 'string' ? nayiPehchaanClassroomVisit : nayiPehchaanClassroomVisit.src, caption: 'Skill training center classroom visit and mentorship interaction' }
     ],
     cta: {
       headline: 'Give Someone a Nayi Pehchaan (Self-Reliance)',
@@ -644,7 +648,7 @@ export const CAMPAIGNS_DATA = {
       { url: typeof animalFeedingNight === 'string' ? animalFeedingNight : animalFeedingNight.src, caption: 'Night stray animal feeding drive in urban areas' },
       { url: typeof animalRescueNight === 'string' ? animalRescueNight : animalRescueNight.src, caption: 'Street animal night rescue and feeding drive' },
       { url: typeof slider3 === 'string' ? slider3 : slider3.src, caption: 'Reflective collar installation drive for stray dogs' },
-      { url: typeof cattleFodderDistribution === 'string' ? cattleFodderDistribution : cattleFodderDistribution.src, caption: 'Cattle fodder distribution program' }
+      { url: typeof jeevRakshaDogFeeding === 'string' ? jeevRakshaDogFeeding : jeevRakshaDogFeeding.src, caption: 'Volunteers feeding street dogs during late night feeding rounds' }
     ],
     cta: {
       headline: 'Be a Guardian of Speechless Souls with Jeev Raksha',
@@ -709,7 +713,7 @@ export const CAMPAIGNS_DATA = {
       { url: typeof heroSchoolGirl === 'string' ? heroSchoolGirl : heroSchoolGirl.src, caption: 'Smiling girl student receiving new study materials' },
       { url: typeof shikshaNaRuke === 'string' ? shikshaNaRuke : shikshaNaRuke.src, caption: 'Interactive classroom and digital literacy session' },
       { url: typeof ourStoryKids === 'string' ? ourStoryKids : ourStoryKids.src, caption: 'After-school mentorship and leadership workshop' },
-      { url: typeof awardCeremony === 'string' ? awardCeremony : awardCeremony.src, caption: 'Merit scholarship and excellence certificate distribution' }
+      { url: typeof betiKiMuskanChildrenSmile === 'string' ? betiKiMuskanChildrenSmile : betiKiMuskanChildrenSmile.src, caption: 'Bringing joy and confident smiles to young girls and children' }
     ],
     cta: {
       headline: 'Bring a Smile to a Girl Child with Beti Ki Muskan',
@@ -774,7 +778,7 @@ export const CAMPAIGNS_DATA = {
       { url: typeof shikshaNaRuke === 'string' ? shikshaNaRuke : shikshaNaRuke.src, caption: 'Rural health checkup camp and doctor consultation' },
       { url: typeof sliderNew4 === 'string' ? sliderNew4 : sliderNew4.src, caption: 'Eye screening camp and free spectacle distribution' },
       { url: typeof jeevandanDonorBox === 'string' ? jeevandanDonorBox : jeevandanDonorBox.src, caption: 'Worlify Foundation volunteer with Jeevandan donation box' },
-      { url: typeof awardCeremony === 'string' ? awardCeremony : awardCeremony.src, caption: 'Felicitation of emergency blood donor champions' }
+      { url: typeof jeevandanMotherChild === 'string' ? jeevandanMotherChild : jeevandanMotherChild.src, caption: 'Mother and child receiving maternal & pediatric healthcare support' }
     ],
     cta: {
       headline: 'Give the Gift of Life with Jeevandan Health Campaign',

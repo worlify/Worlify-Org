@@ -11,6 +11,8 @@ import lxminaDevi from '../assets/images/lxmina_devi.jpg';
 import sliderNew1 from '../assets/images/slider_new1.jpg';
 import sliderNew2 from '../assets/images/slider_new2.jpg';
 import sliderNew4 from '../assets/images/slider_new4.jpg';
+import educationClassroomGirls from '../assets/images/education_classroom_girls.jpg';
+import povertyAlleviationGirlsSnacks from '../assets/images/poverty_alleviation_girls_snacks.jpg';
 
 export const CAUSES_DATA = {
   education: {
@@ -68,7 +70,7 @@ export const CAUSES_DATA = {
       { url: typeof shikshaNaRuke === 'string' ? shikshaNaRuke : shikshaNaRuke.src, caption: 'Digital classroom session in rural Bihar' },
       { url: typeof educationSuppliesDistribution === 'string' ? educationSuppliesDistribution : educationSuppliesDistribution.src, caption: 'Stationery and educational kit distribution for children' },
       { url: typeof ourStoryKids === 'string' ? ourStoryKids : ourStoryKids.src, caption: 'After-school mentorship and homework help' },
-      { url: typeof awardCeremony === 'string' ? awardCeremony : awardCeremony.src, caption: 'Annual scholarship distribution ceremony' }
+      { url: typeof educationClassroomGirls === 'string' ? educationClassroomGirls : educationClassroomGirls.src, caption: 'Joyful students in primary learning hub' }
     ],
     cta: {
       headline: 'Together We Can Educate The Next Generation',
@@ -130,8 +132,8 @@ export const CAUSES_DATA = {
     gallery: [
       { url: typeof sliderNew1 === 'string' ? sliderNew1 : sliderNew1.src, caption: 'Community meal distribution drive' },
       { url: typeof sliderNew2 === 'string' ? sliderNew2 : sliderNew2.src, caption: 'Healthy breakfast served to primary students' },
-      { url: 'https://images.unsplash.com/photo-1593113598332-cd288d649433?auto=format&fit=crop&q=80&w=800', caption: 'Monthly ration package delivery to elderly women' },
-      { url: typeof sliderNew4 === 'string' ? sliderNew4 : sliderNew4.src, caption: 'Volunteer team preparing fresh hot meals' }
+      { url: 'https://images.unsplash.com/photo-1593113598332-cd288d649433?auto=format&fit=crop&q=80&w=800', caption: 'Monthly ration package delivery campaign' },
+      { url: typeof sliderNew4 === 'string' ? sliderNew4 : sliderNew4.src, caption: 'Volunteer Team' }
     ],
     cta: {
       headline: 'No Child Should Ever Go To Bed Hungry',
@@ -507,7 +509,7 @@ export const CAUSES_DATA = {
     ],
     gallery: [
       { url: 'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&q=80&w=800', caption: 'Community empowerment and micro-grant distribution' },
-      { url: 'https://images.unsplash.com/photo-1593113598332-cd288d649433?auto=format&fit=crop&q=80&w=800', caption: 'Smallholder organic farming irrigation support' },
+      { url: typeof povertyAlleviationGirlsSnacks === 'string' ? povertyAlleviationGirlsSnacks : povertyAlleviationGirlsSnacks.src, caption: 'Nutrition and food pack distribution for underprivileged children' },
       { url: typeof sliderNew4 === 'string' ? sliderNew4 : sliderNew4.src, caption: 'Dignified housing construction in progress' },
       { url: 'https://images.unsplash.com/photo-1509099836639-18ba1795216d?auto=format&fit=crop&q=80&w=800', caption: 'Financial literacy camp for rural self-help groups' }
     ],

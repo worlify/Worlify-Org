@@ -10,6 +10,9 @@ import slider2 from '../assets/images/slider2.jpg';
 import slider3 from '../assets/images/slider3.jpg';
 import slider4 from '../assets/images/slider4.jpg';
 import elderlyFoodRation from '../assets/images/elderly_food_ration.png';
+import annSevaStall from '../assets/images/ann_seva_stall.jpg';
+import saharaMobileVan from '../assets/images/sahara_mobile_van.jpg';
+import apnaAashiyanaBranch from '../assets/images/apna_aashiyana_branch.jpg';
 import saharaHeroSupport from '../assets/images/sahara_hero_support.png';
 import elderlyWelfareCheck from '../assets/images/elderly_welfare_check.png';
 import homeRepairWidow from '../assets/images/home_repair_widow.png';
@@ -243,7 +246,7 @@ export const CAMPAIGNS_DATA = {
       { url: typeof sliderNew1 === 'string' ? sliderNew1 : sliderNew1.src, caption: 'Volunteers distributing fresh meals in community drives' },
       { url: typeof sliderNew2 === 'string' ? sliderNew2 : sliderNew2.src, caption: 'Nutritious lunch distribution for children' },
       { url: typeof sliderNew4 === 'string' ? sliderNew4 : sliderNew4.src, caption: 'Packaging hygienic dry ration kits' },
-      { url: typeof elderlyFoodRation === 'string' ? elderlyFoodRation : elderlyFoodRation.src, caption: 'Elderly beneficiary receiving monthly food ration' }
+      { url: typeof annSevaStall === 'string' ? annSevaStall : annSevaStall.src, caption: 'Worlify Foundation Ann Seva meal stall drive' }
     ],
     cta: {
       headline: 'Feed a Hungry Soul Today through Ann Seva',
@@ -336,7 +339,7 @@ export const CAMPAIGNS_DATA = {
       border: 'rgba(147, 51, 234, 0.25)',
       glow: 'rgba(147, 51, 234, 0.3)'
     },
-    heroImage: typeof saharaHeroSupport === 'string' ? saharaHeroSupport : saharaHeroSupport.src,
+    heroImage: typeof saharaMobileVan === 'string' ? saharaMobileVan : saharaMobileVan.src,
     howWeHelp: [
       {
         id: 'winter-warmth',
@@ -370,7 +373,7 @@ export const CAMPAIGNS_DATA = {
       { number: 24, suffix: '/7', label: 'Helpline Support', iconName: 'PhoneCall' }
     ],
     gallery: [
-      { url: typeof elderlyWelfareCheck === 'string' ? elderlyWelfareCheck : elderlyWelfareCheck.src, caption: 'Elderly welfare check and emergency aid delivery' },
+      { url: typeof saharaMobileVan === 'string' ? saharaMobileVan : saharaMobileVan.src, caption: 'Worlify Sahara mobile relief vehicle serving communities' },
       { url: typeof slider4 === 'string' ? slider4 : slider4.src, caption: 'Winter blanket distribution night drive' },
       { url: typeof sliderNew1 === 'string' ? sliderNew1 : sliderNew1.src, caption: 'Community support gathering and essential distribution' },
       { url: typeof ourStoryKids === 'string' ? ourStoryKids : ourStoryKids.src, caption: 'Warm winter clothing for underprivileged families' }
@@ -438,7 +441,7 @@ export const CAMPAIGNS_DATA = {
       { url: typeof slider3 === 'string' ? slider3 : slider3.src, caption: 'Shelter construction and tin roofing installation' },
       { url: typeof slider4 === 'string' ? slider4 : slider4.src, caption: 'Community shelter inspection and maintenance' },
       { url: typeof sliderNew4 === 'string' ? sliderNew4 : sliderNew4.src, caption: 'Solar lamp distribution for off-grid homes' },
-      { url: typeof homeRepairWidow === 'string' ? homeRepairWidow : homeRepairWidow.src, caption: 'Safe home repair completed for elderly widow' }
+      { url: typeof apnaAashiyanaBranch === 'string' ? apnaAashiyanaBranch : apnaAashiyanaBranch.src, caption: 'Worlify Welfare Foundation Apna Aashiyana shelter center' }
     ],
     cta: {
       headline: 'Help Build an Apna Aashiyana for a Homeless Family',

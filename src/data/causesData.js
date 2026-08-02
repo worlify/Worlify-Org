@@ -1,5 +1,10 @@
 import heroSchoolGirl from '../assets/images/hero_school_girl.png';
 import shikshaNaRuke from '../assets/images/shiksha_na_ruke.jpg';
+import educationSuppliesDistribution from '../assets/images/education_supplies_distribution.jpg';
+import dailyMealChild from '../assets/images/daily_meal_child.jpg';
+import animalRescueNight from '../assets/images/animal_rescue_night.jpg';
+import animalFeedingNight from '../assets/images/animal_feeding_night.jpg';
+import skillPlacementTeam from '../assets/images/skill_placement_team.jpg';
 import ourStoryKids from '../assets/images/our_story_kids.jpg';
 import awardCeremony from '../assets/images/award_ceremony.png';
 import lxminaDevi from '../assets/images/lxmina_devi.jpg';
@@ -61,7 +66,7 @@ export const CAUSES_DATA = {
     ],
     gallery: [
       { url: typeof shikshaNaRuke === 'string' ? shikshaNaRuke : shikshaNaRuke.src, caption: 'Digital classroom session in rural Bihar' },
-      { url: typeof heroSchoolGirl === 'string' ? heroSchoolGirl : heroSchoolGirl.src, caption: 'Primary school student with new study supplies' },
+      { url: typeof educationSuppliesDistribution === 'string' ? educationSuppliesDistribution : educationSuppliesDistribution.src, caption: 'Stationery and educational kit distribution for children' },
       { url: typeof ourStoryKids === 'string' ? ourStoryKids : ourStoryKids.src, caption: 'After-school mentorship and homework help' },
       { url: typeof awardCeremony === 'string' ? awardCeremony : awardCeremony.src, caption: 'Annual scholarship distribution ceremony' }
     ],
@@ -89,7 +94,7 @@ export const CAUSES_DATA = {
       border: 'rgba(234, 88, 12, 0.25)',
       glow: 'rgba(234, 88, 12, 0.3)'
     },
-    heroImage: typeof sliderNew1 === 'string' ? sliderNew1 : sliderNew1.src,
+    heroImage: typeof dailyMealChild === 'string' ? dailyMealChild : dailyMealChild.src,
     howWeHelp: [
       {
         id: 'warm-meals',
@@ -341,7 +346,7 @@ export const CAUSES_DATA = {
       border: 'rgba(146, 64, 14, 0.25)',
       glow: 'rgba(146, 64, 14, 0.3)'
     },
-    heroImage: 'https://images.unsplash.com/photo-1548767797-d8c844163c4c?auto=format&fit=crop&q=80&w=1000',
+    heroImage: typeof animalRescueNight === 'string' ? animalRescueNight : animalRescueNight.src,
     howWeHelp: [
       {
         id: 'animal-rescue',
@@ -375,10 +380,10 @@ export const CAUSES_DATA = {
       { number: 1, suffix: '', label: 'Animal Sanctuary', iconName: 'Home' }
     ],
     gallery: [
-      { url: 'https://images.unsplash.com/photo-1548767797-d8c844163c4c?auto=format&fit=crop&q=80&w=800', caption: 'Rescued dog receiving gentle medical treatment' },
+      { url: typeof animalFeedingNight === 'string' ? animalFeedingNight : animalFeedingNight.src, caption: 'Night stray animal feeding drive' },
       { url: 'https://images.unsplash.com/photo-1537151608828-ea2b11777ee8?auto=format&fit=crop&q=80&w=800', caption: 'Daily stray dog feeding drive in city' },
       { url: 'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&q=80&w=800', caption: 'Shelter cats receiving cozy care and food' },
-      { url: 'https://images.unsplash.com/photo-1555685812-4b943f1cb0eb?auto=format&fit=crop&q=80&w=800', caption: 'Injured bird being rehabilitated by vet team' }
+      { url: 'https://images.unsplash.com/photo-1555685812-4b943f1cb0eb?auto=format&fit=crop&q=80&w=800', caption: 'Injured animal being rehabilitated by vet team' }
     ],
     cta: {
       headline: 'Be A Guardian For Animals In Need',
@@ -404,7 +409,7 @@ export const CAUSES_DATA = {
       border: 'rgba(79, 70, 229, 0.25)',
       glow: 'rgba(79, 70, 229, 0.3)'
     },
-    heroImage: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&q=80&w=1000',
+    heroImage: typeof skillPlacementTeam === 'string' ? skillPlacementTeam : skillPlacementTeam.src,
     howWeHelp: [
       {
         id: 'vocational-training',

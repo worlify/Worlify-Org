@@ -23,14 +23,14 @@ export default function CauseHero({ causeData, setActiveTab, setDonationPreload 
       <div className={styles.container}>
         {/* Breadcrumb */}
         <nav className={styles.breadcrumb} aria-label="Breadcrumb">
-          <span 
+          <span
             className={styles.breadcrumbItem}
             onClick={() => setActiveTab('home')}
           >
             Home
           </span>
           <ChevronRight size={14} className={styles.breadcrumbSeparator} />
-          <span 
+          <span
             className={styles.breadcrumbItem}
             onClick={() => setActiveTab('causes')}
           >
@@ -54,13 +54,13 @@ export default function CauseHero({ causeData, setActiveTab, setDonationPreload 
             <p className={styles.heroDescription}>{description}</p>
 
             <div className={styles.heroActions}>
-              <button 
+              <button
                 className={styles.primaryBtn}
                 onClick={handleDonateClick}
               >
                 Donate Now <ArrowRight size={16} />
               </button>
-              <button 
+              <button
                 className={styles.secondaryBtn}
                 onClick={handleVolunteerClick}
               >
@@ -72,9 +72,9 @@ export default function CauseHero({ causeData, setActiveTab, setDonationPreload 
           {/* Right Visual Image */}
           <div className={styles.heroVisualWrapper}>
             <div className={styles.heroImageContainer}>
-              <img 
-                src={heroImage} 
-                alt={title} 
+              <img
+                src={heroImage}
+                alt={title}
                 className={styles.heroImage}
                 loading="eager"
               />
@@ -86,7 +86,7 @@ export default function CauseHero({ causeData, setActiveTab, setDonationPreload 
               </div>
               <div className={styles.badgeTextContainer}>
                 <span className={styles.badgeTextMain}>{badge}</span>
-                <span className={styles.badgeTextSub}>Verified Worlify Campaign</span>
+                <span className={styles.badgeTextSub}>Worlify Social Welfare Initiatives</span>
               </div>
             </div>
           </div>

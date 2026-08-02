@@ -438,10 +438,10 @@ export default function Gallery({ setActiveTab, setDonationPreload }) {
   // Category Filter Options
   const categories = ['All', 'Education', 'Health', 'Environment', 'Women Empowerment', 'Emergency Aid', 'Volunteers', 'Animal Welfare'];
 
-  // Filtered Items Logic (Excludes 5th image - index 4 - in all category views)
+  // Filtered Items Logic (Excludes 5th, 15th, 16th, 17th images in all category views)
   const filteredItems = useMemo(() => {
     const matched = galleryItems.filter(item => activeFilter === 'All' || item.category === activeFilter);
-    return matched.filter((_, index) => index !== 4);
+    return matched.filter((_, index) => ![4, 15, 16, 17].includes(index));
   }, [galleryItems, activeFilter]);
 
   // Displayed Items (Limited by visibleCount)

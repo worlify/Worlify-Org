@@ -389,7 +389,7 @@ export default function Donate({ user, preloadedCause, clearPreload, setActiveTa
             <span>80G Tax Exempted &amp; 12A Registered NGO India</span>
           </div>
           <h1 className={styles.heroHeading}>
-            Donate Online to <span className={styles.highlightText}>NGO India</span> — 80G Tax Exemption Benefits
+            Donate to <span className={styles.highlightText}>Worlify Foundation</span> — 80G Tax Exemption Benefits
           </h1>
           <p className={styles.heroSubheading}>
             Donate securely online to Worlify Foundation, a registered NGO based in Lucknow, Uttar Pradesh, India. Your contribution directly supports child education, free healthcare camps, food security (Ann Seva), and women empowerment with instant 80G tax deduction receipts.
@@ -444,39 +444,6 @@ export default function Donate({ user, preloadedCause, clearPreload, setActiveTa
         ) : (
           /* MAIN DONATION FORM CARD */
           <div className={styles.cardContainer} id="donation-form-card">
-            <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '10px' }}>
-              <button
-                type="button"
-                onClick={() => {
-                  setSubmittedDonation({
-                    amount: currentAmount || 1000,
-                    cause: selectedCause || 'General Fund',
-                    name: fullName.trim() || 'Rahul Verma',
-                    email: email.trim() || 'rahul.verma@example.com',
-                    phone: mobileNumber.trim() || '9876543210',
-                    address: address.trim() ? `${address.trim()}${city ? ', ' + city : ''}${state ? ', ' + state : ''}${pincode ? ' - ' + pincode : ''}` : 'Plot No 45, Sector 5, Gomti Nagar, Lucknow, UP - 226010',
-                    pan: panNumber ? panNumber.trim().toUpperCase() : 'ABCDE1234F',
-                    id: 'DON-SAMPLE80G',
-                    paymentId: 'PAY-SAMPLE80G99',
-                    date: new Date().toLocaleDateString('en-IN', { day: '2-digit', month: '2-digit', year: 'numeric' })
-                  });
-                  setIsSubmitted(true);
-                }}
-                style={{
-                  background: 'none',
-                  border: '1px dashed #0d5c3a',
-                  color: '#0d5c3a',
-                  fontSize: '12px',
-                  fontWeight: '600',
-                  padding: '6px 12px',
-                  borderRadius: '6px',
-                  cursor: 'pointer'
-                }}
-              >
-                👁️ Preview 80G Receipt Format
-              </button>
-            </div>
-
             {/* STEP 1: CHOOSE CAUSE */}
             <section className={styles.formSection}>
               <div className={styles.sectionHeader}>

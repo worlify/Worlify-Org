@@ -18,3 +18,8 @@ View your app in AI Studio: https://ai.studio/apps/82e37ee4-48af-419f-80f0-16b60
 2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
 3. Run the app:
    `npm run dev`
+
+## 📘 Developer Guide & Project Architecture
+
+For a complete breakdown of folder structure, pages, data flow, routing, and 80G donation workflow, check out the **[PROJECT_FLOW.md](PROJECT_FLOW.md)** guide.
+

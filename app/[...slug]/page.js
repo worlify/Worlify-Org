@@ -173,7 +173,7 @@ const PAGE_META = {
 
   // ─── Key Action Pages ────────────────────────────────────────────────────────
   'donate': {
-    title: 'Donate Online to NGO India — 80G Tax Exemption | Worlify Foundation',
+    title: 'Donate to Worlify Foundation — 80G Tax Exemption',
     description:
       'Donate securely online to Worlify Foundation, a registered NGO in India. Support education, healthcare, nutrition, and environmental causes. Get 80G tax exemption certificate instantly. UPI, cards & net banking accepted.',
     canonical: `${BASE_URL}/donate`,

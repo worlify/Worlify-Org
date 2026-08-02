@@ -20,6 +20,7 @@ import TestimonialsSlider from './TestimonialsSlider';
 
 // Import local generated assets
 import homeHeroAward from '../assets/images/home_hero_award_presentation.jpg';
+import homeHeroAwardGroup from '../assets/images/home_hero_award_group.jpg';
 import slider1 from '../assets/images/slider1.jpg';
 import slider2 from '../assets/images/slider2.jpg';
 import slider3 from '../assets/images/slider3.jpg';
@@ -85,6 +86,7 @@ export default function Home({ setActiveTab, setDonationPreload, isLocalMode }) 
   // sliding backgrounds representing education and community support
   const heroImages = [
     homeHeroAward.src || homeHeroAward,
+    homeHeroAwardGroup.src || homeHeroAwardGroup,
     slider1.src || slider1,
     slider2.src || slider2,
     slider3.src || slider3,

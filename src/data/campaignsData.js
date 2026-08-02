@@ -14,6 +14,8 @@ import annSevaStall from '../assets/images/ann_seva_stall.jpg';
 import saharaMobileVan from '../assets/images/sahara_mobile_van.jpg';
 import apnaAashiyanaBranch from '../assets/images/apna_aashiyana_branch.jpg';
 import jeevandanDonorBox from '../assets/images/jeevandan_donor_box.jpg';
+import animalRescueNight from '../assets/images/animal_rescue_night.jpg';
+import animalFeedingNight from '../assets/images/animal_feeding_night.jpg';
 import saharaHeroSupport from '../assets/images/sahara_hero_support.png';
 import elderlyWelfareCheck from '../assets/images/elderly_welfare_check.png';
 import homeRepairWidow from '../assets/images/home_repair_widow.png';
@@ -600,7 +602,7 @@ export const CAMPAIGNS_DATA = {
       border: 'rgba(2, 132, 199, 0.25)',
       glow: 'rgba(2, 132, 199, 0.3)'
     },
-    heroImage: typeof sliderNew2 === 'string' ? sliderNew2 : sliderNew2.src,
+    heroImage: typeof animalRescueNight === 'string' ? animalRescueNight : animalRescueNight.src,
     howWeHelp: [
       {
         id: 'vet-vans',
@@ -634,8 +636,8 @@ export const CAMPAIGNS_DATA = {
       { number: 365, suffix: ' Days', label: 'Active Rescue Van', iconName: 'Clock' }
     ],
     gallery: [
-      { url: typeof sliderNew2 === 'string' ? sliderNew2 : sliderNew2.src, caption: 'Rescue team attending an injured stray animal' },
-      { url: typeof sliderNew1 === 'string' ? sliderNew1 : sliderNew1.src, caption: 'Street animal feeding drive in urban hubs' },
+      { url: typeof animalFeedingNight === 'string' ? animalFeedingNight : animalFeedingNight.src, caption: 'Night stray animal feeding drive in urban areas' },
+      { url: typeof animalRescueNight === 'string' ? animalRescueNight : animalRescueNight.src, caption: 'Street animal night rescue and feeding drive' },
       { url: typeof slider3 === 'string' ? slider3 : slider3.src, caption: 'Reflective collar installation drive for stray dogs' },
       { url: typeof cattleFodderDistribution === 'string' ? cattleFodderDistribution : cattleFodderDistribution.src, caption: 'Cattle fodder distribution program' }
     ],

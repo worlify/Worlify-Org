@@ -31,6 +31,9 @@ import elderlyWelfare from '../assets/images/elderly_welfare_check.png';
 import homeRepair from '../assets/images/home_repair_widow.png';
 import saharaHero from '../assets/images/sahara_hero_support.png';
 import seniorMedicine from '../assets/images/senior_medicine_distribution.png';
+import galleryAward from '../assets/images/gallery_award_presentation.jpg';
+import galleryPlantation from '../assets/images/gallery_tree_plantation.jpg';
+import kioskBooth from '../assets/images/worlify_kiosk_booth.jpg';
 
 export default function Gallery({ setActiveTab, setDonationPreload }) {
   // Filter & Pagination States
@@ -54,26 +57,26 @@ export default function Gallery({ setActiveTab, setDonationPreload }) {
   const galleryItems = useMemo(() => [
 
     {
-      id: 2,
-      title: "Elderly Food Ration & Healthcare Support Drive",
-      category: "Senior Care",
-      image: elderlyFood,
-      description: "Monthly nutritious ration distribution and wellness checks for abandoned senior citizens.",
-      views: "3.9k Views",
-      date: "May 2026",
-      fullStory: "Our Project Sahara ensures destitute elderly citizens receive monthly dry ration boxes, essential vitamin supplements, and weekly door-step nurse visits across suburban informal settlements.",
-      location: "Varanasi & Kanpur Shelters"
+      id: 1,
+      title: "Amity Euphoria 2026 Honor & Award Ceremony",
+      category: "Volunteers",
+      image: galleryAward,
+      description: "Recognizing outstanding youth leadership and social impact contributions.",
+      views: "8.5k Views",
+      date: "Feb 2026",
+      fullStory: "Worlify Foundation leadership receiving the honor award at Amity Euphoria 2026 for outstanding community service, youth mobilization, and social welfare drives.",
+      location: "Amity University, Lucknow"
     },
     {
-      id: 3,
-      title: "Mobile Medical Units in High Altitude Hamlets",
-      category: "Health",
-      image: seniorMedicine,
-      description: "Custom-outfitted all-terrain clinics delivering vaccines & medicine to remote hamlets.",
-      views: "3.1k Views",
+      id: 2,
+      title: "Community Green Canopy & Tree Plantation Drive",
+      category: "Environment",
+      image: galleryPlantation,
+      description: "Planting native saplings and nurturing green spaces with student volunteers.",
+      views: "7.2k Views",
       date: "May 2026",
-      fullStory: "High altitude isolation should never dictate health outcomes. Our custom-outfitted, all-terrain mobile clinic vans traverse challenging mountain roads weekly, providing free checkups and vital medication.",
-      location: "Uttarakhand Hill Outposts"
+      fullStory: "Volunteers and environmental enthusiasts coming together to plant native saplings and install watering setups to ensure sustainable green growth across community compounds.",
+      location: "Lucknow Green Drive"
     },
 
     {
@@ -133,14 +136,14 @@ export default function Gallery({ setActiveTab, setDonationPreload }) {
     },
     {
       id: 10,
-      title: "Cattle Fodder & Stray Livestock Care Drive",
-      category: "Animal Welfare",
-      image: "/images/gallery/animal-welfare/animal_1.jpg",
-      description: "Providing fresh fodder, medical treatment, and shelter support for distressed animals.",
-      views: "3.3k Views",
+      title: "Worlify Foundation Awareness & Community Kiosk",
+      category: "Community Support",
+      image: kioskBooth,
+      description: "Mobile awareness kiosk spreading education, women empowerment, & child welfare mission.",
+      views: "5.8k Views",
       date: "Jan 2026",
-      fullStory: "During extreme heatwaves, farm animals and stray livestock suffer severe dehydration. Our mobile animal care vans distributed 10 tons of nutritious fodder and veterinary care across 12 villages.",
-      location: "Mathura Rural Shelter"
+      fullStory: "Our custom Worlify Foundation awareness & community kiosk provides direct consultation, donation guidance, and information on child education, women empowerment, and social welfare programs.",
+      location: "Lucknow City Center"
     },
     {
       id: 11,

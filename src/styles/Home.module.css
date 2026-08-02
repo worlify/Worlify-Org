@@ -23,36 +23,29 @@
 /* 1. Hero Cover Banner */
 .heroSection {
   position: relative;
-  height: 600px;
   width: 100%;
+  height: auto;
+  aspect-ratio: 1.5 / 1;
   color: white;
   display: flex;
   align-items: center;
   overflow: hidden;
-}
-
-@media (max-width: 1024px) {
-  .heroSection {
-    height: 450px;
-  }
+  background-color: #0b0f19;
 }
 
 @media (max-width: 768px) {
   .heroSection {
-    height: auto;
-    aspect-ratio: 16 / 9;
-    min-height: 220px;
+    aspect-ratio: 1.5 / 1;
+    min-height: 240px;
   }
 }
 
 @media (max-width: 480px) {
   .heroSection {
-    height: auto;
-    aspect-ratio: 16 / 9;
-    min-height: 190px;
+    aspect-ratio: 1.5 / 1;
+    min-height: 200px;
   }
 }
-
 
 .heroSliderContainer {
   position: absolute;
@@ -64,25 +57,25 @@
   z-index: 0;
 }
 
-.heroSlide {
-  position: absolute;
-  top: 0;
-  left: 0;
+.heroSliderTrack {
+  display: flex;
   width: 100%;
   height: 100%;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  opacity: 0;
-  transition: opacity 1.2s ease-in-out, transform 6.2s ease;
-  transform: scale(1.04);
-  filter: contrast(1.05) brightness(1.02) saturate(1.05);
+  transition: transform 0.7s cubic-bezier(0.25, 1, 0.5, 1);
+  will-change: transform;
 }
 
-.activeHeroSlide {
-  opacity: 1;
-  transform: scale(1);
-  z-index: 1;
+.heroSlide {
+  flex: 0 0 100%;
+  width: 100%;
+  height: 100%;
+  background-size: 100% 100%;
+  background-position: center center;
+  background-repeat: no-repeat;
+  image-rendering: -webkit-optimize-contrast;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  transform: translateZ(0);
 }
 
 .heroOverlay {

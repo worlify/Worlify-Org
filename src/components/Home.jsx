@@ -10,8 +10,7 @@ import {
   ShieldCheck, 
   Users,
   Flame,
-  Award,
-  ChevronRight
+  Award
 } from 'lucide-react';
 import { db } from '../lib/supabase';
 import styles from '../styles/Home.module.css';
@@ -20,12 +19,12 @@ import AboutCircleSection from './AboutCircleSection';
 import TestimonialsSlider from './TestimonialsSlider';
 
 // Import local generated assets
+import slider1 from '../assets/images/slider1.jpg';
 import slider2 from '../assets/images/slider2.jpg';
 import slider3 from '../assets/images/slider3.jpg';
 import slider4 from '../assets/images/slider4.jpg';
-import slider_new1 from '../assets/images/slider_new1.jpg';
-import slider_new2 from '../assets/images/slider_new2.jpg';
-import slider_new4 from '../assets/images/slider_new4.jpg';
+import slider5 from '../assets/images/slider5.jpg';
+import slider6 from '../assets/images/slider6.jpg';
 
 export default function Home({ setActiveTab, setDonationPreload, isLocalMode }) {
   // Live stats dynamically updated by db if available
@@ -84,12 +83,12 @@ export default function Home({ setActiveTab, setDonationPreload, isLocalMode }) 
 
   // sliding backgrounds representing education and community support
   const heroImages = [
+    slider1.src || slider1,
     slider2.src || slider2,
     slider3.src || slider3,
     slider4.src || slider4,
-    slider_new1.src || slider_new1,
-    slider_new2.src || slider_new2,
-    slider_new4.src || slider_new4
+    slider5.src || slider5,
+    slider6.src || slider6
   ];
 
   const [currentHeroIndex, setCurrentHeroIndex] = useState(0);
@@ -112,23 +111,28 @@ export default function Home({ setActiveTab, setDonationPreload, isLocalMode }) 
           Worlify Foundation — NGO India | Education, Healthcare &amp; Community Welfare in Lucknow, Uttar Pradesh
         </h1>
 
-        {/* Dynamic sliding background images */}
+        {/* Dynamic sliding track for sharp non-zooming slide transitions */}
         <div className={styles.heroSliderContainer} role="img" aria-label="Community impact photos from Worlify Foundation NGO programmes across India">
-          {heroImages.map((imgUrl, idx) => (
-            <div
-              key={idx}
-              className={`${styles.heroSlide} ${currentHeroIndex === idx ? styles.activeHeroSlide : ''}`}
-              style={{ backgroundImage: `url(${imgUrl})` }}
-              aria-label={[
-                'Children receiving education support from Worlify Foundation NGO',
-                'Healthcare camp organized by Worlify Foundation in rural India',
-                'Food distribution drive by Worlify Foundation NGO India',
-                'Skill development training by Worlify Foundation Lucknow',
-                'Environmental action and tree plantation by Worlify NGO',
-                'Community welfare program by Worlify Foundation NGO India'
-              ][idx]}
-            />
-          ))}
+          <div 
+            className={styles.heroSliderTrack}
+            style={{ transform: `translateX(-${currentHeroIndex * 100}%)` }}
+          >
+            {heroImages.map((imgUrl, idx) => (
+              <div
+                key={idx}
+                className={styles.heroSlide}
+                style={{ backgroundImage: `url(${imgUrl})` }}
+                aria-label={[
+                  'Cultural dance performance and community celebration by Worlify Foundation children',
+                  'Worlify Welfare Foundation branch building at Kasimpur Biruha, Lucknow',
+                  'Worlify Jan Kalyan Rath mobile healthcare and welfare vehicle',
+                  'Worlify Foundation team receiving recognition award',
+                  'Tree plantation drive organized by Worlify Welfare Foundation',
+                  'Worlify Foundation team at AMIPHORIA 2026 Amity University Lucknow'
+                ][idx]}
+              />
+            ))}
+          </div>
         </div>
       </section>
 

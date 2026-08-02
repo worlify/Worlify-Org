@@ -34,6 +34,13 @@ import seniorMedicine from '../assets/images/senior_medicine_distribution.png';
 import galleryAward from '../assets/images/gallery_award_presentation.jpg';
 import galleryPlantation from '../assets/images/gallery_tree_plantation.jpg';
 import kioskBooth from '../assets/images/worlify_kiosk_booth.jpg';
+import volunteersTeam1 from '../assets/images/gallery_volunteers_team_1.jpg';
+import volunteersTeam2 from '../assets/images/gallery_volunteers_team_2.jpg';
+import womenMotherChild from '../assets/images/women_empowerment_mother_child.jpg';
+import womenAward1 from '../assets/images/women_empowerment_award_1.jpg';
+import womenArtisanStall from '../assets/images/women_empowerment_artisan_stall.jpg';
+import womenAward2 from '../assets/images/women_empowerment_award_2.jpg';
+import womenOutreach from '../assets/images/women_empowerment_outreach.jpg';
 
 export default function Gallery({ setActiveTab, setDonationPreload }) {
   // Filter & Pagination States
@@ -55,6 +62,62 @@ export default function Gallery({ setActiveTab, setDonationPreload }) {
 
   // Master Gallery Dataset (25 High-Quality Photos for Pagination Testing)
   const galleryItems = useMemo(() => [
+
+    {
+      id: 81,
+      title: "Maternal Health & Child Healthcare Support",
+      category: "Women Empowerment",
+      image: womenMotherChild,
+      description: "Supporting young mothers with maternal healthcare consultations & child nutrition kits.",
+      views: "5.4k Views",
+      date: "Jan 2026",
+      fullStory: "Providing free maternal health consultations, iron supplements, and pediatric checkups for young mothers and toddlers in underserved communities.",
+      location: "Worlify Health Outreach"
+    },
+    {
+      id: 82,
+      title: "Women Achievers Recognition & Award Drive",
+      category: "Women Empowerment",
+      image: womenAward1,
+      description: "Honoring grassroots female change-makers and self-help group leaders.",
+      views: "6.1k Views",
+      date: "Feb 2026",
+      fullStory: "Recognizing outstanding women leaders for their dedicated service, community leadership, and social welfare contributions.",
+      location: "Lucknow Convention Center"
+    },
+    {
+      id: 83,
+      title: "Women Artisan Stall & Micro-Entrepreneurship Market",
+      category: "Women Empowerment",
+      image: womenArtisanStall,
+      description: "Promoting handcrafted products and jewelry made by self-reliant women artisans.",
+      views: "7.8k Views",
+      date: "Feb 2026",
+      fullStory: "Empowering women artisans by setting up direct retail kiosks and community exhibitions to showcase handcrafted bangles, textiles, and artisanal crafts.",
+      location: "Worlify Artisan Mela"
+    },
+    {
+      id: 84,
+      title: "Female Leadership & Self-Reliance Certificate Honor",
+      category: "Women Empowerment",
+      image: womenAward2,
+      description: "Awarding skill development completion certificates to aspiring women entrepreneurs.",
+      views: "4.9k Views",
+      date: "Feb 2026",
+      fullStory: "Felicitation ceremony awarding vocational training and business management completion certificates to rural female entrepreneurs.",
+      location: "Worlify Training Hub"
+    },
+    {
+      id: 85,
+      title: "Women Welfare Rights & Community Outreach Drive",
+      category: "Women Empowerment",
+      image: womenOutreach,
+      description: "Spreading legal rights awareness and social welfare scheme enrollment for women.",
+      views: "5.7k Views",
+      date: "March 2026",
+      fullStory: "Field coordinators engaging with local women to raise awareness about health rights, financial literacy, and government empowerment initiatives.",
+      location: "Worlify Field Outreach"
+    },
 
     {
       id: 1,
@@ -103,14 +166,25 @@ export default function Gallery({ setActiveTab, setDonationPreload }) {
     },
     {
       id: 7,
-      title: "National Volunteer Leadership Summit",
+      title: "Grassroots Volunteer Donation Mobilization Drive",
       category: "Volunteers",
-      image: awardCeremony,
-      description: "Honoring 300+ grassroots change-makers for outstanding humanitarian field service.",
-      views: "7.5k Views",
+      image: volunteersTeam1,
+      description: "Dedicated female volunteer team organizing and packing community donation kits.",
+      views: "6.8k Views",
       date: "March 2026",
-      fullStory: "Our annual summit gathered 300+ field volunteers across 16 states. Outstanding youth organizers were honored with the Golden Heart Fellowship awards for driving over 50,000 community service hours.",
-      location: "New Delhi Convention Hall"
+      fullStory: "Our passionate team of youth volunteers organizing care packages, clothing drives, and essential items to bring relief to underprivileged families in local communities.",
+      location: "Worlify Community Hub"
+    },
+    {
+      id: 71,
+      title: "Youth Volunteer Field Logistics & Relief Distribution",
+      category: "Volunteers",
+      image: volunteersTeam2,
+      description: "Student volunteers preparing care hampers & supply boxes for community drives.",
+      views: "7.1k Views",
+      date: "March 2026",
+      fullStory: "Volunteers actively coordinating logistics, packaging essential supplies, and loading distribution boxes for outreach programs across urban slum settlements.",
+      location: "Worlify Distribution Center"
     },
     {
       id: 8,
@@ -160,7 +234,7 @@ export default function Gallery({ setActiveTab, setDonationPreload }) {
     {
       id: 13,
       title: "Elderly Health & Comprehensive Checkup Camp",
-      category: "Senior Care",
+      category: "Health",
       image: elderlyWelfare,
       description: "Free blood sugar, vision, and cardiology checkups for vulnerable senior citizens.",
       views: "4.6k Views",
@@ -227,7 +301,7 @@ export default function Gallery({ setActiveTab, setDonationPreload }) {
     {
       id: 20,
       title: "Senior Citizen Friendship & Recreation Center",
-      category: "Senior Care",
+      category: "Community Support",
       image: elderlyWelfare,
       description: "Creating safe community day centers with board games, books, and social companionship.",
       views: "3.4k Views",
@@ -246,17 +320,6 @@ export default function Gallery({ setActiveTab, setDonationPreload }) {
       date: "May 2025",
       fullStory: "Youth volunteers conducted waste cleanup drives, distributed color-coded recycling bins, and disinfected communal drainage lines serving over 3,000 residents.",
       location: "Mumbai Suburban Slums"
-    },
-    {
-      id: 23,
-      title: "Children's Art & Creative Expression Fest",
-      category: "Volunteers",
-      image: kidsStory,
-      description: "Annual art competition & talent showcase celebrating creativity in primary school kids.",
-      views: "4.9k Views",
-      date: "Jun 2025",
-      fullStory: "Over 500 children participated in an open-air painting workshop expressing their dreams for clean oceans, green forests, and equal access to education.",
-      location: "Bhopal Cultural Center"
     },
 
     {
@@ -373,11 +436,12 @@ export default function Gallery({ setActiveTab, setDonationPreload }) {
   ], []);
 
   // Category Filter Options
-  const categories = ['All', 'Education', 'Health', 'Environment', 'Women Empowerment', 'Senior Care', 'Emergency Aid', 'Volunteers', 'Animal Welfare'];
+  const categories = ['All', 'Education', 'Health', 'Environment', 'Women Empowerment', 'Emergency Aid', 'Volunteers', 'Animal Welfare'];
 
-  // Filtered Items Logic
+  // Filtered Items Logic (Excludes 5th image - index 4 - in all category views)
   const filteredItems = useMemo(() => {
-    return galleryItems.filter(item => activeFilter === 'All' || item.category === activeFilter);
+    const matched = galleryItems.filter(item => activeFilter === 'All' || item.category === activeFilter);
+    return matched.filter((_, index) => index !== 4);
   }, [galleryItems, activeFilter]);
 
   // Displayed Items (Limited by visibleCount)

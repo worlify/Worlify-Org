@@ -246,3 +246,11 @@ img {
   to   { opacity: 1;    }
 }
 
+/* Print utility rule for 1-page receipt printing */
+@media print {
+  nav, header, footer, button {
+    display: none !important;
+  }
+}
+
+

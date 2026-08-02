@@ -20,6 +20,7 @@ import {
   ChevronRight
 } from 'lucide-react';
 import styles from '../styles/Donate.module.css';
+import Receipt80G from './Receipt80G';
 
 const PRESET_AMOUNTS = [250, 500, 1000, 1500, 3000, 5000, 10000, 20000, 40000];
 
@@ -309,12 +310,14 @@ export default function Donate({ user, preloadedCause, clearPreload, setActiveTa
           setSubmittedDonation({
             amount: currentAmount,
             cause: selectedCause,
-            name: fullName,
-            email: email,
-            pan: panNumber ? panNumber.toUpperCase() : null,
+            name: fullName.trim(),
+            email: email.trim(),
+            phone: mobileNumber.trim(),
+            address: `${address.trim()}${city ? ', ' + city : ''}${state ? ', ' + state : ''}${pincode ? ' - ' + pincode : ''}`,
+            pan: panNumber ? panNumber.trim().toUpperCase() : '',
             id: paymentId || (data && data[0] ? data[0].id : 'DON-' + Date.now().toString().slice(-6)),
-            paymentId: paymentId,
-            date: new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })
+            paymentId: paymentId || ('PAY-' + Date.now().toString().slice(-8)),
+            date: new Date().toLocaleDateString('en-IN', { day: '2-digit', month: '2-digit', year: 'numeric' })
           });
 
           setIsSubmitted(true);
@@ -407,35 +410,8 @@ export default function Donate({ user, preloadedCause, clearPreload, setActiveTa
               Your contribution of <strong>₹{submittedDonation?.amount?.toLocaleString('en-IN')}</strong> towards <strong>{submittedDonation?.cause}</strong> has been successfully received and verified via Razorpay.
             </p>
 
-            <div className={styles.summaryBox}>
-              <div className={styles.summaryRow}>
-                <span>Payment Reference ID:</span>
-                <code>{submittedDonation?.paymentId || submittedDonation?.id}</code>
-              </div>
-              <div className={styles.summaryRow}>
-                <span>Amount Paid:</span>
-                <strong>₹{submittedDonation?.amount?.toLocaleString('en-IN')}</strong>
-              </div>
-              <div className={styles.summaryRow}>
-                <span>Donor Name:</span>
-                <strong>{submittedDonation?.name}</strong>
-              </div>
-              <div className={styles.summaryRow}>
-                <span>Email Address:</span>
-                <strong>{submittedDonation?.email}</strong>
-              </div>
-              {submittedDonation?.pan && (
-                <div className={styles.summaryRow}>
-                  <span>PAN (80G Tax Receipt):</span>
-                  <strong>{submittedDonation?.pan}</strong>
-                </div>
-              )}
-              {submittedDonation?.date && (
-                <div className={styles.summaryRow}>
-                  <span>Date:</span>
-                  <strong>{submittedDonation?.date}</strong>
-                </div>
-              )}
+            <div style={{ margin: '24px 0' }}>
+              <Receipt80G donationData={submittedDonation} />
             </div>
 
             <div className={styles.postPayActions}>
@@ -468,6 +444,38 @@ export default function Donate({ user, preloadedCause, clearPreload, setActiveTa
         ) : (
           /* MAIN DONATION FORM CARD */
           <div className={styles.cardContainer} id="donation-form-card">
+            <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '10px' }}>
+              <button
+                type="button"
+                onClick={() => {
+                  setSubmittedDonation({
+                    amount: currentAmount || 1000,
+                    cause: selectedCause || 'General Fund',
+                    name: fullName.trim() || 'Rahul Verma',
+                    email: email.trim() || 'rahul.verma@example.com',
+                    phone: mobileNumber.trim() || '9876543210',
+                    address: address.trim() ? `${address.trim()}${city ? ', ' + city : ''}${state ? ', ' + state : ''}${pincode ? ' - ' + pincode : ''}` : 'Plot No 45, Sector 5, Gomti Nagar, Lucknow, UP - 226010',
+                    pan: panNumber ? panNumber.trim().toUpperCase() : 'ABCDE1234F',
+                    id: 'DON-SAMPLE80G',
+                    paymentId: 'PAY-SAMPLE80G99',
+                    date: new Date().toLocaleDateString('en-IN', { day: '2-digit', month: '2-digit', year: 'numeric' })
+                  });
+                  setIsSubmitted(true);
+                }}
+                style={{
+                  background: 'none',
+                  border: '1px dashed #0d5c3a',
+                  color: '#0d5c3a',
+                  fontSize: '12px',
+                  fontWeight: '600',
+                  padding: '6px 12px',
+                  borderRadius: '6px',
+                  cursor: 'pointer'
+                }}
+              >
+                👁️ Preview 80G Receipt Format
+              </button>
+            </div>
 
             {/* STEP 1: CHOOSE CAUSE */}
             <section className={styles.formSection}>

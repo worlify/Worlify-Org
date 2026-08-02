@@ -1,0 +1,260 @@
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap');
+
+/* Screen Container & Wrapper */
+.receiptWrapper {
+  width: 100%;
+  max-width: 820px;
+  margin: 0 auto;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  padding: 30px;
+  color: #1a1a1a;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  box-sizing: border-box;
+}
+
+.receiptPaper {
+  background: #ffffff;
+  border: 1px solid #dcdcdc;
+  padding: 32px 36px;
+  box-sizing: border-box;
+  position: relative;
+}
+
+/* Header Section */
+.headerSection {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.logoImg {
+  height: 54px;
+  width: auto;
+  object-fit: contain;
+  margin-bottom: 8px;
+}
+
+.title {
+  font-family: 'Inter', sans-serif;
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: #0b1f3a;
+  margin: 6px 0 4px 0;
+  text-transform: uppercase;
+}
+
+.subTitle {
+  font-size: 13px;
+  font-weight: 700;
+  color: #222222;
+  margin-bottom: 4px;
+}
+
+.addressLine {
+  font-size: 11.5px;
+  color: #333333;
+  line-height: 1.4;
+}
+
+.contactLine {
+  font-size: 11.5px;
+  color: #333333;
+  margin-top: 2px;
+}
+
+.contactLine a {
+  color: #0d5c3a;
+  text-decoration: underline;
+}
+
+/* Registration Grid / Header Details */
+.metaGrid {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-top: 28px;
+  margin-bottom: 28px;
+  padding-bottom: 12px;
+}
+
+.receiptTag {
+  font-size: 17px;
+  font-weight: 600;
+  color: #111111;
+  text-decoration: underline;
+}
+
+.complianceBlock {
+  font-size: 13px;
+  font-weight: 600;
+  color: #222222;
+  line-height: 1.75;
+  text-align: right;
+  font-family: monospace, 'Courier New', Courier;
+}
+
+.complianceRow {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+}
+
+.compNo {
+  min-width: 250px;
+  text-align: left;
+}
+
+.compDate {
+  text-align: right;
+}
+
+/* Fill-in-the-blanks Body */
+.bodyContent {
+  font-size: 14px;
+  line-height: 2.2;
+  color: #111111;
+  margin-top: 10px;
+  margin-bottom: 40px;
+}
+
+.lineRow {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.fillValue {
+  font-weight: 700;
+  color: #0b1f3a;
+  padding: 0 8px;
+  border-bottom: 1px dotted #444444;
+  display: inline-block;
+  min-width: 60px;
+}
+
+.dotsFlex {
+  flex: 1;
+  border-bottom: 1px dotted #555555;
+  margin-left: 6px;
+  height: 14px;
+}
+
+.inlineGroup {
+  display: inline-flex;
+  align-items: baseline;
+  margin-right: 18px;
+}
+
+.blankDots {
+  border-bottom: 1px dotted #555555;
+  display: inline-block;
+  min-width: 120px;
+  margin: 0 4px;
+  height: 14px;
+}
+
+/* Signatures & Footer */
+.signatureSection {
+  margin-top: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-top: 15px;
+
+}
+
+.leftNotice {
+  font-size: 13px;
+  color: #222222;
+  font-style: italic;
+  text-decoration: underline;
+  padding-bottom: 4px;
+}
+
+.rightSignBox {
+  text-align: center;
+  min-width: 220px;
+}
+
+.digitalSignature {
+  font-family: 'Great Vibes', cursive;
+  font-size: 30px;
+  color: #0f2c59;
+  line-height: 1;
+  margin-bottom: 4px;
+  font-weight: 500;
+  user-select: none;
+}
+
+.signLine {
+  border-top: 1px solid #333333;
+  padding-top: 4px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #222222;
+}
+
+.footerBanner {
+  margin-top: 40px;
+  text-align: center;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #222222;
+  border-top: 1px solid #eeeeee;
+  padding-top: 14px;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   PRINT MEDIA STYLES - Isolated 1-Page Printing
+   ───────────────────────────────────────────────────────────── */
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 10mm 12mm 10mm 12mm;
+  }
+
+  .receiptWrapper {
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    background: transparent !important;
+  }
+
+  .receiptPaper {
+    border: 1px solid #000000 !important;
+    padding: 24px 28px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .title {
+    color: #000000 !important;
+  }
+
+  .fillValue {
+    color: #000000 !important;
+    border-bottom: 1px dotted #000000 !important;
+  }
+
+  .dotsFlex, .blankDots {
+    border-bottom: 1px dotted #000000 !important;
+  }
+
+  .digitalSignature {
+    color: #000000 !important;
+  }
+
+  .signLine {
+    border-top: 1px solid #000000 !important;
+  }
+}
+
+

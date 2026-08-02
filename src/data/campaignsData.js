@@ -13,6 +13,7 @@ import elderlyFoodRation from '../assets/images/elderly_food_ration.png';
 import annSevaStall from '../assets/images/ann_seva_stall.jpg';
 import saharaMobileVan from '../assets/images/sahara_mobile_van.jpg';
 import apnaAashiyanaBranch from '../assets/images/apna_aashiyana_branch.jpg';
+import jeevandanDonorBox from '../assets/images/jeevandan_donor_box.jpg';
 import saharaHeroSupport from '../assets/images/sahara_hero_support.png';
 import elderlyWelfareCheck from '../assets/images/elderly_welfare_check.png';
 import homeRepairWidow from '../assets/images/home_repair_widow.png';
@@ -729,7 +730,7 @@ export const CAMPAIGNS_DATA = {
       border: 'rgba(8, 145, 178, 0.25)',
       glow: 'rgba(8, 145, 178, 0.3)'
     },
-    heroImage: typeof shikshaNaRuke === 'string' ? shikshaNaRuke : shikshaNaRuke.src,
+    heroImage: typeof jeevandanDonorBox === 'string' ? jeevandanDonorBox : jeevandanDonorBox.src,
     howWeHelp: [
       {
         id: 'free-camps',
@@ -765,7 +766,7 @@ export const CAMPAIGNS_DATA = {
     gallery: [
       { url: typeof shikshaNaRuke === 'string' ? shikshaNaRuke : shikshaNaRuke.src, caption: 'Rural health checkup camp and doctor consultation' },
       { url: typeof sliderNew4 === 'string' ? sliderNew4 : sliderNew4.src, caption: 'Eye screening camp and free spectacle distribution' },
-      { url: typeof seniorMedicineDistribution === 'string' ? seniorMedicineDistribution : seniorMedicineDistribution.src, caption: 'Senior citizen receiving free monthly prescription medicines' },
+      { url: typeof jeevandanDonorBox === 'string' ? jeevandanDonorBox : jeevandanDonorBox.src, caption: 'Worlify Foundation volunteer with Jeevandan donation box' },
       { url: typeof awardCeremony === 'string' ? awardCeremony : awardCeremony.src, caption: 'Felicitation of emergency blood donor champions' }
     ],
     cta: {

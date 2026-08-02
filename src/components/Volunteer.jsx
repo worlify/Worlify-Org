@@ -198,8 +198,8 @@ export default function Volunteer({ user, setActiveTab }) {
           </div>
 
           <h1 className={styles.heroH1}>
-            Volunteer with <span className={styles.heroGradientText}>NGO India</span><br />
-            Make a Real Difference in Lucknow
+            Volunteer with <span className={styles.heroGradientText}>Worlify Foundation</span><br />
+            Make a Real Difference in Society
           </h1>
 
           <p className={styles.heroP}>

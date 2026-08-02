@@ -200,7 +200,7 @@ export default function Gallery({ setActiveTab, setDonationPreload }) {
     {
       id: 9,
       title: "Pediatric Primary School Health & Dental Camp",
-      category: "Health",
+      category: "Community Support",
       image: kidsStory,
       description: "Free pediatric screenings, prescription glasses & dental hygiene kits for 1,200 kids.",
       views: "5.1k Views",
@@ -234,7 +234,7 @@ export default function Gallery({ setActiveTab, setDonationPreload }) {
     {
       id: 13,
       title: "Elderly Health & Comprehensive Checkup Camp",
-      category: "Health",
+      category: "Community Support",
       image: elderlyWelfare,
       description: "Free blood sugar, vision, and cardiology checkups for vulnerable senior citizens.",
       views: "4.6k Views",
@@ -290,7 +290,7 @@ export default function Gallery({ setActiveTab, setDonationPreload }) {
     {
       id: 19,
       title: "Girl Child Nutrition & Growth Monitoring Camp",
-      category: "Health",
+      category: "Community Support",
       image: heroGirl,
       description: "Fighting anemia & malnutrition in rural adolescent girls with fortified dietary supplements.",
       views: "4.2k Views",
@@ -325,7 +325,7 @@ export default function Gallery({ setActiveTab, setDonationPreload }) {
     {
       id: 24,
       title: "Emergency Ambulance & Disaster Support Fleet",
-      category: "Health",
+      category: "Emergency Aid",
       image: seniorMedicine,
       description: "24/7 free emergency patient transport for rural patients needing hospital ICU care.",
       views: "5.1k Views",
@@ -436,7 +436,7 @@ export default function Gallery({ setActiveTab, setDonationPreload }) {
   ], []);
 
   // Category Filter Options
-  const categories = ['All', 'Education', 'Health', 'Environment', 'Women Empowerment', 'Emergency Aid', 'Volunteers', 'Animal Welfare'];
+  const categories = ['All', 'Education', 'Environment', 'Women Empowerment', 'Emergency Aid', 'Volunteers', 'Animal Welfare'];
 
   // Filtered Items Logic (Excludes 5th, 15th-18th, 20th images in all category views)
   const filteredItems = useMemo(() => {

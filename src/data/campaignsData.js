@@ -16,6 +16,11 @@ import apnaAashiyanaBranch from '../assets/images/apna_aashiyana_branch.jpg';
 import jeevandanDonorBox from '../assets/images/jeevandan_donor_box.jpg';
 import animalRescueNight from '../assets/images/animal_rescue_night.jpg';
 import animalFeedingNight from '../assets/images/animal_feeding_night.jpg';
+import padhagaFruitsTeaching from '../assets/images/padhaga_fruits_teaching.jpg';
+import annSevaNutritionChild from '../assets/images/ann_seva_nutrition_child.jpg';
+import annSevaSweetDist1 from '../assets/images/ann_seva_sweet_dist_1.jpg';
+import annSevaSweetDist2 from '../assets/images/ann_seva_sweet_dist_2.jpg';
+import annSevaSweetDist3 from '../assets/images/ann_seva_sweet_dist_3.jpg';
 import saharaHeroSupport from '../assets/images/sahara_hero_support.png';
 import elderlyWelfareCheck from '../assets/images/elderly_welfare_check.png';
 import homeRepairWidow from '../assets/images/home_repair_widow.png';
@@ -184,7 +189,7 @@ export const CAMPAIGNS_DATA = {
       { url: typeof heroSchoolGirl === 'string' ? heroSchoolGirl : heroSchoolGirl.src, caption: 'Smiling student receiving new study material' },
       { url: typeof shikshaNaRuke === 'string' ? shikshaNaRuke : shikshaNaRuke.src, caption: 'Interactive learning session in primary hub' },
       { url: typeof ourStoryKids === 'string' ? ourStoryKids : ourStoryKids.src, caption: 'After-school mentorship and homework guidance' },
-      { url: typeof awardCeremony === 'string' ? awardCeremony : awardCeremony.src, caption: 'Annual scholarship distribution event' }
+      { url: typeof padhagaFruitsTeaching === 'string' ? padhagaFruitsTeaching : padhagaFruitsTeaching.src, caption: 'Volunteers conducting interactive educational chart session for children' }
     ],
     cta: {
       headline: 'Support Padhaga Har Baccha Campaign',
@@ -212,7 +217,7 @@ export const CAMPAIGNS_DATA = {
       border: 'rgba(234, 88, 12, 0.25)',
       glow: 'rgba(234, 88, 12, 0.3)'
     },
-    heroImage: typeof sliderNew1 === 'string' ? sliderNew1 : sliderNew1.src,
+    heroImage: typeof annSevaNutritionChild === 'string' ? annSevaNutritionChild : annSevaNutritionChild.src,
     howWeHelp: [
       {
         id: 'daily-kitchens',
@@ -246,9 +251,9 @@ export const CAMPAIGNS_DATA = {
       { number: 365, suffix: ' Days', label: 'Active Kitchens', iconName: 'Clock' }
     ],
     gallery: [
-      { url: typeof sliderNew1 === 'string' ? sliderNew1 : sliderNew1.src, caption: 'Volunteers distributing fresh meals in community drives' },
-      { url: typeof sliderNew2 === 'string' ? sliderNew2 : sliderNew2.src, caption: 'Nutritious lunch distribution for children' },
-      { url: typeof sliderNew4 === 'string' ? sliderNew4 : sliderNew4.src, caption: 'Packaging hygienic dry ration kits' },
+      { url: typeof annSevaSweetDist1 === 'string' ? annSevaSweetDist1 : annSevaSweetDist1.src, caption: 'Volunteer food distribution drive at community gathering' },
+      { url: typeof annSevaSweetDist2 === 'string' ? annSevaSweetDist2 : annSevaSweetDist2.src, caption: 'Distributing traditional sweets and meals to visitors' },
+      { url: typeof annSevaSweetDist3 === 'string' ? annSevaSweetDist3 : annSevaSweetDist3.src, caption: 'Sharing food and blessings in neighborhood Ann Seva drive' },
       { url: typeof annSevaStall === 'string' ? annSevaStall : annSevaStall.src, caption: 'Worlify Foundation Ann Seva meal stall drive' }
     ],
     cta: {
